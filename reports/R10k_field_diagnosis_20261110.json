@@ -1,0 +1,535 @@
+{
+  "schema": "NXL_R10K_FIELD_DIAGNOSIS1",
+  "camera_test_completed": true,
+  "frame_drop_fixed": false,
+  "inherent_hardware_limit_proven": false,
+  "camera_or_SD_modified_by_this_analysis": false,
+  "local_acquired_files_verified": 132,
+  "module_manifest_SHA256": "9520ef07921048a541110f6538582f7223975aef7e46345158e6e6e7fd6ac176",
+  "stage": "VIDEO_STAGE_1794297821_432",
+  "comparison": [
+    {
+      "mode": "原生 DCI24",
+      "epoch": 5,
+      "file": "SAM_0417.MP4",
+      "driver": "0x1818",
+      "steady_window_s": [
+        13.201600001,
+        31.600800001000003
+      ],
+      "observed_valid_frames": 441,
+      "new_frames_per_s": 23.967912345920574,
+      "forwarded_per_s": 23.967912345920574,
+      "HEVC_outputs_per_s": 23.967912345920574,
+      "commit_to_start_IRQ_ms": 0.07615637537066108,
+      "commit_to_final_IRQ_ms": 33.100529565672424,
+      "start_to_final_IRQ_ms": 33.02437319030176,
+      "final_IRQ_to_callback_us": 5.31929181929182,
+      "callback_to_next_commit_ms": 8.56111285539857,
+      "commit_to_next_commit_ms": 41.666961712890284,
+      "last_new_frames": 491,
+      "last_added_frames": 0,
+      "file_frames": 491,
+      "decoded_frames": 491,
+      "video_seconds": 20.458333333333332,
+      "audio_seconds": 20.458666666666666,
+      "audio_minus_video_seconds": 0.0003333333333337407,
+      "encoded_frames_per_audio_second": 23.99960896767466,
+      "new_frames_per_audio_second": 23.99960896767466,
+      "video_payload_Mbps_per_video_PTS": 69.84241270875762,
+      "video_payload_Mbps_per_audio_wall_time": 69.84127476538058,
+      "actual_keyframe_period_frames": 12
+    },
+    {
+      "mode": "原生 UHD29.97",
+      "epoch": 11,
+      "file": "SAM_0418.MP4",
+      "driver": "0x1919",
+      "steady_window_s": [
+        66.2008,
+        85.402
+      ],
+      "observed_valid_frames": 582,
+      "new_frames_per_s": 29.947836127090177,
+      "forwarded_per_s": 29.947836127090177,
+      "HEVC_outputs_per_s": 29.99938145605247,
+      "commit_to_start_IRQ_ms": 0.07299570446735396,
+      "commit_to_final_IRQ_ms": 31.181905035685965,
+      "start_to_final_IRQ_ms": 31.10890933121861,
+      "final_IRQ_to_callback_us": 5.545070050224689,
+      "callback_to_next_commit_ms": 2.176751850383294,
+      "commit_to_next_commit_ms": 33.36420195611948,
+      "last_new_frames": 641,
+      "last_added_frames": 0,
+      "file_frames": 641,
+      "decoded_frames": 641,
+      "video_seconds": 21.388033333333333,
+      "audio_seconds": 21.397333333333332,
+      "audio_minus_video_seconds": 0.009299999999999642,
+      "encoded_frames_per_audio_second": 29.957003988035893,
+      "new_frames_per_audio_second": 29.957003988035893,
+      "video_payload_Mbps_per_video_PTS": 69.57542401436316,
+      "video_payload_Mbps_per_audio_wall_time": 69.54518419740778,
+      "actual_keyframe_period_frames": 15
+    },
+    {
+      "mode": "全宽 UHD29.97",
+      "epoch": 18,
+      "file": "SAM_0419.MP4",
+      "driver": "0x1717",
+      "steady_window_s": [
+        121.2016,
+        138.7024
+      ],
+      "observed_valid_frames": 288,
+      "new_frames_per_s": 22.66767411884973,
+      "forwarded_per_s": 24.945553135694926,
+      "HEVC_outputs_per_s": 24.945553135694926,
+      "commit_to_start_IRQ_ms": 0.030118189102564103,
+      "commit_to_final_IRQ_ms": 43.61443883547008,
+      "start_to_final_IRQ_ms": 43.58432064636752,
+      "final_IRQ_to_callback_us": 6.080528846153846,
+      "callback_to_next_commit_ms": 0.4696887973137973,
+      "commit_to_next_commit_ms": 44.16953708791209,
+      "last_new_frames": 446,
+      "last_added_frames": 45,
+      "file_frames": 491,
+      "decoded_frames": 491,
+      "video_seconds": 16.383033333333334,
+      "audio_seconds": 19.669333333333334,
+      "audio_minus_video_seconds": 3.2863000000000007,
+      "encoded_frames_per_audio_second": 24.962716919739695,
+      "new_frames_per_audio_second": 22.67489154013015,
+      "video_payload_Mbps_per_video_PTS": 79.704209436185,
+      "video_payload_Mbps_per_audio_wall_time": 66.38744170281996,
+      "actual_keyframe_period_frames": 15
+    }
+  ],
+  "sustained_baseline": {
+    "ordinary_frames": 258,
+    "ordinary_HW_ms": {
+      "n": 258,
+      "mean": 42.36289400715563,
+      "median": 42.30048076923077,
+      "p95": 45.48923076923077,
+      "min": 36.503,
+      "max": 46.04580769230769
+    },
+    "ordinary_cycle_ms": {
+      "n": 225,
+      "mean": 42.87227572649573,
+      "median": 42.83376923076923,
+      "p95": 45.935307692307696,
+      "min": 36.94707692307692,
+      "max": 46.46830769230769
+    },
+    "peak_frames": 30,
+    "peak_HW_ms": {
+      "n": 30,
+      "mean": 54.37772435897436,
+      "median": 54.18298076923077,
+      "p95": 57.36323076923077,
+      "min": 49.495615384615384,
+      "max": 58.98626923076923
+    },
+    "phase": 5,
+    "sample_formula_matches": 36,
+    "per_phase": [
+      {
+        "phase": 0,
+        "n": 30,
+        "HW_ms": {
+          "n": 30,
+          "mean": 43.08475512820513,
+          "median": 43.20057692307692,
+          "p95": 44.9435,
+          "min": 38.263653846153844,
+          "max": 45.74503846153846
+        },
+        "SRAM_two": 9
+      },
+      {
+        "phase": 1,
+        "n": 28,
+        "HW_ms": {
+          "n": 28,
+          "mean": 42.111560439560435,
+          "median": 42.28432692307692,
+          "p95": 44.48630769230769,
+          "min": 38.529423076923074,
+          "max": 44.71184615384615
+        },
+        "SRAM_two": 7
+      },
+      {
+        "phase": 2,
+        "n": 28,
+        "HW_ms": {
+          "n": 28,
+          "mean": 41.62683379120879,
+          "median": 41.680326923076926,
+          "p95": 43.369461538461536,
+          "min": 37.52342307692307,
+          "max": 44.598038461538465
+        },
+        "SRAM_two": 6
+      },
+      {
+        "phase": 3,
+        "n": 29,
+        "HW_ms": {
+          "n": 29,
+          "mean": 41.41976392572944,
+          "median": 41.65280769230769,
+          "p95": 43.02776923076923,
+          "min": 36.765,
+          "max": 44.41238461538462
+        },
+        "SRAM_two": 6
+      },
+      {
+        "phase": 4,
+        "n": 30,
+        "HW_ms": {
+          "n": 30,
+          "mean": 42.03861794871795,
+          "median": 42.11365384615385,
+          "p95": 44.12223076923077,
+          "min": 36.503,
+          "max": 44.14211538461539
+        },
+        "SRAM_two": 12
+      },
+      {
+        "phase": 5,
+        "n": 30,
+        "HW_ms": {
+          "n": 30,
+          "mean": 54.37772435897436,
+          "median": 54.18298076923077,
+          "p95": 57.36323076923077,
+          "min": 49.495615384615384,
+          "max": 58.98626923076923
+        },
+        "SRAM_two": 15
+      },
+      {
+        "phase": 6,
+        "n": 29,
+        "HW_ms": {
+          "n": 29,
+          "mean": 44.94410344827586,
+          "median": 45.16869230769231,
+          "p95": 46.01688461538461,
+          "min": 41.449615384615385,
+          "max": 46.04580769230769
+        },
+        "SRAM_two": 12
+      },
+      {
+        "phase": 7,
+        "n": 28,
+        "HW_ms": {
+          "n": 28,
+          "mean": 41.211906593406596,
+          "median": 41.03109615384615,
+          "p95": 43.400076923076924,
+          "min": 38.358961538461536,
+          "max": 43.53019230769231
+        },
+        "SRAM_two": 9
+      },
+      {
+        "phase": 8,
+        "n": 27,
+        "HW_ms": {
+          "n": 27,
+          "mean": 42.49873789173789,
+          "median": 42.798115384615386,
+          "p95": 44.18376923076923,
+          "min": 39.07711538461538,
+          "max": 45.14938461538461
+        },
+        "SRAM_two": 8
+      },
+      {
+        "phase": 9,
+        "n": 29,
+        "HW_ms": {
+          "n": 29,
+          "mean": 42.251688328912465,
+          "median": 42.40353846153846,
+          "p95": 44.06876923076923,
+          "min": 38.8555,
+          "max": 44.21269230769231
+        },
+        "SRAM_two": 8
+      }
+    ],
+    "limitation": "Sequence-mod10 is local to this trace generation, not a fixed firmware constant. Sampling changes to500ms and loses ring entries; these are descriptive retained-frame statistics, not a controlled A/B effect."
+  },
+  "IRQ43_cadence": [
+    {
+      "epoch": 5,
+      "input_period_ms": 41.666666666666664,
+      "pairs": 440,
+      "observed_first_event_delta_ms": {
+        "n": 440,
+        "mean": 41.66693505244755,
+        "median": 41.665653846153845,
+        "p95": 41.960653846153846,
+        "min": 40.763653846153844,
+        "max": 42.568423076923075
+      },
+      "absolute_period_residual_ms": {
+        "n": 440,
+        "mean": 0.11303266317016304,
+        "median": 0.03566025641025661,
+        "p95": 0.5278333333333336,
+        "min": 0.0003589743589742511,
+        "max": 0.9030128205128207
+      },
+      "period_count_matches": 440,
+      "period_multiples": {
+        "1": 440
+      },
+      "event_counts": {
+        "1": 441
+      }
+    },
+    {
+      "epoch": 11,
+      "input_period_ms": 33.36666666666667,
+      "pairs": 581,
+      "observed_first_event_delta_ms": {
+        "n": 581,
+        "mean": 33.363938964649805,
+        "median": 33.35711538461538,
+        "p95": 33.460153846153844,
+        "min": 32.307115384615386,
+        "max": 34.110461538461536
+      },
+      "absolute_period_residual_ms": {
+        "n": 581,
+        "mean": 0.08659949688865352,
+        "median": 0.06275641025641221,
+        "p95": 0.4070512820512846,
+        "min": 0.0003589743589742511,
+        "max": 1.059551282051281
+      },
+      "period_count_matches": 581,
+      "period_multiples": {
+        "1": 581
+      },
+      "event_counts": {
+        "1": 582
+      }
+    },
+    {
+      "epoch": 15,
+      "input_period_ms": 33.36666666666667,
+      "pairs": 83,
+      "observed_first_event_delta_ms": {
+        "n": 83,
+        "mean": 38.320709916589436,
+        "median": 33.3495,
+        "p95": 66.04357692307693,
+        "min": 31.83503846153846,
+        "max": 66.54588461538462
+      },
+      "absolute_period_residual_ms": {
+        "n": 83,
+        "mean": 0.5113744207599628,
+        "median": 0.3296282051282091,
+        "p95": 1.7334871794871773,
+        "min": 0.0005897435897423975,
+        "max": 2.0480641025640978
+      },
+      "period_count_matches": 83,
+      "period_multiples": {
+        "1": 70,
+        "2": 13
+      },
+      "event_counts": {
+        "1": 84,
+        "2": 15,
+        "0": 15
+      }
+    },
+    {
+      "epoch": 18,
+      "input_period_ms": 33.36666666666667,
+      "pairs": 252,
+      "observed_first_event_delta_ms": {
+        "n": 252,
+        "mean": 44.077694902319905,
+        "median": 33.589615384615385,
+        "p95": 66.70915384615384,
+        "min": 32.16984615384615,
+        "max": 67.12884615384615
+      },
+      "absolute_period_residual_ms": {
+        "n": 252,
+        "mean": 0.341437372812373,
+        "median": 0.18612179487179503,
+        "p95": 1.5232179487179494,
+        "min": 5.128205128812624e-05,
+        "max": 1.714679487179481
+      },
+      "period_count_matches": 252,
+      "period_multiples": {
+        "1": 171,
+        "2": 81
+      },
+      "event_counts": {
+        "1": 196,
+        "2": 92
+      }
+    },
+    {
+      "epoch": 19,
+      "input_period_ms": 33.36666666666667,
+      "pairs": 21,
+      "observed_first_event_delta_ms": {
+        "n": 21,
+        "mean": 40.867694139194136,
+        "median": 33.36773076923077,
+        "p95": 65.02765384615384,
+        "min": 32.93126923076923,
+        "max": 65.28288461538462
+      },
+      "absolute_period_residual_ms": {
+        "n": 21,
+        "mean": 0.47273565323565475,
+        "median": 0.06208974358974473,
+        "p95": 1.8046410256410326,
+        "min": 0.00020512820513118868,
+        "max": 1.8163717948717988
+      },
+      "period_count_matches": 21,
+      "period_multiples": {
+        "1": 16,
+        "2": 5
+      },
+      "event_counts": {
+        "1": 22,
+        "2": 10,
+        "0": 8
+      }
+    }
+  ],
+  "EP_matched_steady": [
+    {
+      "epoch": 5,
+      "samples": 92,
+      "mode": "0x1818",
+      "stride": 720,
+      "bit_depth": 8,
+      "RDMA_control1": "0x100",
+      "WDMA_control1": "0x31"
+    },
+    {
+      "epoch": 11,
+      "samples": 96,
+      "mode": "0x1919",
+      "stride": 720,
+      "bit_depth": 8,
+      "RDMA_control1": "0x100",
+      "WDMA_control1": "0x31"
+    },
+    {
+      "epoch": 15,
+      "samples": 19,
+      "mode": "0x1717",
+      "stride": 720,
+      "bit_depth": 8,
+      "RDMA_control1": "0x100",
+      "WDMA_control1": "0x31"
+    },
+    {
+      "epoch": 18,
+      "samples": 36,
+      "mode": "0x1717",
+      "stride": 720,
+      "bit_depth": 8,
+      "RDMA_control1": "0x100",
+      "WDMA_control1": "0x31"
+    },
+    {
+      "epoch": 19,
+      "samples": 5,
+      "mode": "0x1717",
+      "stride": 720,
+      "bit_depth": 8,
+      "RDMA_control1": "0x100",
+      "WDMA_control1": "0x31"
+    }
+  ],
+  "recorder": {
+    "samples": 661,
+    "elapsed_s": 149.700800001,
+    "CPU_percent": 0.35484112309116017,
+    "max_sample_ms": 13.2,
+    "deadline_misses": 0,
+    "reason_flags": "0x20",
+    "period_counts": {
+      "200": 602,
+      "500": 59
+    },
+    "first_500ms_sample_s": 120.702,
+    "retained_frames": 2092,
+    "valid_frames": 2088,
+    "missing_trace_sequences": 200
+  },
+  "findings": [
+    "Native DCI has33.10ms commit-to-final-IRQ inside a41.67ms cycle; full width has43.61ms with only~0.47ms post-callback gap. No fixed24p scheduler cap is demonstrated.",
+    "Full width returns to~33ms before/after recording without a different saved DMA control/clock configuration. Recording-associated sustained slowdown is after CS0-start and before final-IRQ observation.",
+    "The720-stride EP branch is present in matched stable native DCI, native UHD and full width. No new unique full-width-recording branch is established; no active EP bypass/disable A/B was performed.",
+    "Full width has446new+45added=491encoded frames, exactly matching native source totals and decoded MP4. Fixed30p video timestamps compress video duration relative to the audio wall clock.",
+    "The IRQ43 timing/multiplicity fits input cadence. Two events in a slower request are not evidence of a failed SRAM-load retry.",
+    "The sustained ordinary-frame gap remains after excluding the ten-frame peak. A peak-only change cannot restore30newfps.",
+    "DDR bandwidth contention and internal IPC/EP/HEVC backpressure remain unresolved. No passive latched-pending hit, per-block progress, or actual concurrent DDR bandwidth measurement establishes which one is causal."
+  ],
+  "next_discriminating_work": [
+    "Match native/full-width encoder target bitrate as a controlled comparison (this capture is70 vs80Mbps). Keep geometry,420output,blue-edge recipe and clocks fixed.",
+    "Resolve original per-stage completion routing and instrument actual IPC DMA/core completion, EP main WDMA2 output completion, encoder submit/complete with the same clock and frame/buffer identity; distinguish within-frame pipeline stretching from output-credit backpressure.",
+    "Trace the existing720-stride consumer before considering an auxiliary-path disable control. Nonzero snapshots and address proximity alone do not authorize a causal claim or unsafe DMA disable.",
+    "Keep10-frame duplicate-off as auxiliary causality test only; do not substitute duplicate suppression or timestamp edits for restoring new-frame throughput."
+  ],
+  "parser_limitations": [
+    "HAL+0x78 is currently named intra_period, but is1 while actual bitstream keyframe periods are12/15; do not interpret it as GOP without original consumer proof.",
+    "HAL width/height/FPS fields contain transitional uninitialized values at movie startup although two reads match. Use verified stable dimensions and actual MP4; do not diagnose them as a camera geometry change.",
+    "Native SRAM IRQ normally follows CS0-start in this capture. SRAM-to-start negative values reflect event order; do not call this pre-start parameter waiting.",
+    "Adaptive500ms sampling starts near the full-width recording and overwrites some eight-slot entries. Sequence gaps are observer loss; ordinary/phase analyses must report sampling coverage."
+  ],
+  "evidence_SHA256": {
+    "DCIM/305PHOTO/SAM_0417.MP4": "a1760e45f49e5c001032c0fde9b72ca6f0efe19b883ec20a15cf394b3b18d850",
+    "DCIM/305PHOTO/SAM_0418.MP4": "69a60d03d4bb4d2ff96d9467589de7bef3500c13288f740602850bbbc859478b",
+    "DCIM/305PHOTO/SAM_0419.MP4": "420e0afdf068316995ed7bbcd80b9ae5065845451deb8636a51f498199010224",
+    "NXDEMO51/VIDEO_STAGE_1794297821_432/counts.bin": "e88f2019f2737970271c3abf62b51f7d1e8776478557ea8123c869c2209c3653",
+    "NXDEMO51/VIDEO_STAGE_1794297821_432/DONE": "c8e0734c830aad00f04c9bfdc845d8ac9c1f0458b583de887a7abab545694457",
+    "NXDEMO51/VIDEO_STAGE_1794297821_432/READY": "6d73cece7f32b275f422f19fff7baf8c9a3934b9f2de21c6012bc9c0a522e848"
+  },
+  "IRQ43_firmware_summary": {
+    "P7_SHA256": "f8e417cb5b55768851ba7e2b8017d3a98dc0b0c8444cc0a5061265cc08dbbf7f",
+    "actual_IRQ43_handler": "0x801cd8b8",
+    "actual_start_handler": "0x801cdf4c",
+    "actual_done_handler": "0x801cdf6c",
+    "parent_vtable": "0x80592110",
+    "parent_handler": "0x801cdbb0",
+    "all_context_parent_states": {
+      "3": 360,
+      "2": 1
+    },
+    "facts": [
+      "View initialization0x801cdd9c registers0x43->0x801cd8b8 and0x47->0x801cd898.",
+      "Video handler0x801cd8b8 forwards(event=1,arg=-2) to parent virtual+0x4c. It does not wait for SRAM loading.",
+      "Observed parent state low byte is3 for all342 contexts in the selected steady-mode epochs. Across all361 contexts,360are state3 and one transition is state2. At state3,event1 forwards to virtual+0x18, a notifier0x801c9be4.",
+      "Explicit SRAM wait0x801dd028 is a separate original path: temporarily registers0x43->0x801dc944, starts update, waits for event, then unregisters0x43.",
+      "Another Still SRAM registration uses ipc_ctrl_sram_load_callback at0x801aed5c. A name on that path does not identify the function currently installed in video.",
+      "The negative argument alone is not evidence of a failing frame: all healthy native DCI/UHD samples have the same installed handler and parent state.",
+      "IRQ43 remains an SRAM-update-associated raw event. Neither its first timestamp nor multiplicity measures time spent stalled loading a table."
+    ]
+  },
+  "publication_scope": "Derived conclusions, comparison table and chart only. Original videos/photos/firmware/raw logs/RAM are not published."
+}

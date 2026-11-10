@@ -7,7 +7,7 @@
 - **SRW**：自动初始化 → BayerStill → LDC → 可选 EP 3D LUT → JPEG，复用一次申请的 192MiB 工作区；源片白平衡、颜色矩阵、C0 19 点 Gamma 和 JPEG 量化表已接入。
 - **镜头矫正**：16–50mm Power Zoom，531 个 MakerNote 焦距码档位；含原生锚点和离线插值，未宣称每一档都与原厂像素等价。
 - **全宽 4K**：全宽 UD 路径结合缩放 setup 输出 3840×2160，80Mbps、8 位 HEVC 4:2:0。用户已确认视角，蓝边已在 R10c 修复；**真实稳定 29.97p 尚未实现，持续掉帧仍在定位**。“6.5K”描述全宽输入链研究，不表示相机输出 6.5K 视频，也不单凭读出窗口断言每个感光点均参与。
-- **R10k**：原生 DCI24、原生 UHD30、全宽 UHD30 使用同一套硬件启动／装载／开帧／完成事件计时。电脑验证通过；相机测试待进行。
+- **R10k 实测完成**：原生 DCI24／UHD30 的提交→完成中断约 33.10／31.18ms；全宽 UHD 录像为 43.61ms，普通帧仍约 42.36ms。720 步幅 EP 支路在三种模式中均存在；掉帧尚未修复，DDR 争用与内部反压仍未分开。详见 [本轮诊断报告](reports/R10k_field_diagnosis_20261110.txt) 和 [对比图](reports/R10k_field_diagnosis_20261110.png)。
 - **EP 复核已合并**：同一记录器以双读、IPC 活动头和模式夹取采集辅助 RDMA1／WDMA1 两个配置 bank，关联原生 EP 中断总数和三模式稳态计时。采用被动通路对照；尚无已确认的独立关闭入口，**未实现 EP bypass 开／关 A/B**，也未宣称修复掉帧。
 
 ## 上游与致谢
@@ -49,6 +49,7 @@ python -X utf8 work/build_r10k.py menu
 - [PDF 交接](docs/HANDOFF_20261110.pdf)
 - [当前状态与 EP 复核修订](docs/CURRENT_STATUS.md)
 - [R10k 合并测试步骤](docs/R10k_TEST_STEPS.txt)
+- [R10k 三模式与 EP 回读实测结论](reports/R10k_field_diagnosis_20261110.txt) · [对照表](reports/R10k_field_diagnosis_20261110.csv) · [图表](reports/R10k_field_diagnosis_20261110.png) · [关键结论 JSON](reports/R10k_field_diagnosis_20261110.json)
 - [R10j 历史测试步骤](docs/R10j_TEST_STEPS.txt)
 - [R10i 持续掉帧结论](reports/R10i_BUS_QOS_ABA与周期阻塞诊断_20261110.txt)
 
