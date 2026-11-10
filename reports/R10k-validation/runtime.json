@@ -1,0 +1,174 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "name": "nxl-demo-front.arm",
+      "exit": 0,
+      "stdout": "NXL_DEMO_FRONT=0.3.6-demo50; R8A_STAGE_CHANNEL_ONE_PROCESS_SRW_LUT_JPEG; SHARED192_BANK2; FAST_RAM_HANDOFF; MANUAL_BOOT_INIT; RELEASE_R8I_BLACK_PROFILE_A028; RELEASE_R9N_FULLWIDTH_POWER\n",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "54": 1,
+        "146": 1,
+        "248": 1
+      },
+      "hardware_tested": false
+    },
+    {
+      "name": "nxl-init-pipeline.arm",
+      "exit": 0,
+      "stdout": "NXL_DEMO_FRONT=0.3.6-demo50; R8E_COLD_CONFIGURATION_TRIAL; SHARED192; ORIGINAL_CONFIG_BEFORE_START; OWNED_EP_REFERENCE; RELEASE_R8I_BLACK_PROFILE_A028; RELEASE_R9N_FULLWIDTH_POWER\n",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "54": 1,
+        "146": 1,
+        "248": 1
+      },
+      "hardware_tested": false
+    },
+    {
+      "name": "nxl-demo-post.arm",
+      "exit": 0,
+      "stdout": "NXL_RAW422_POST=0.4.0-demo51-422; NATIVE_LUT_JPEG_SHARED192; NV16_NO_CHROMA_AVERAGING; FINAL_CHECK_DELEGATION_R6\n",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "54": 1,
+        "146": 1,
+        "248": 1
+      },
+      "hardware_tested": false
+    },
+    {
+      "name": "nxl-session-rearm.arm",
+      "exit": 0,
+      "stdout": "NXL_SESSION_REARM=0.4.0-demo51-422; READONLY_REARM_R7O; RESOURCE_FACTS_PROOF3; DIAGNOSTIC_RECEIVE_SEMANTICS; RETIREMENT_BEFORE_INITIALIZATION; OPERATION_PROGRESS3; NO_CAP_RELEASE\n",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "54": 1,
+        "146": 1,
+        "248": 1
+      },
+      "hardware_tested": false
+    },
+    {
+      "name": "nxl-oem-restore.arm",
+      "exit": 0,
+      "stdout": "NXL_OEM_RESTORE=0.4.0-demo51-422; OEM_LIVEVIEW_RESTORE_R5; RO_MMIO_WORD_READ_R7; READONLY_IDLE_FINISH_R8A\n",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "54": 1,
+        "146": 1,
+        "248": 1
+      },
+      "hardware_tested": false
+    },
+    {
+      "name": "nxl-lens-watch.arm",
+      "exit": 0,
+      "stdout": "NXLENSWATCH8 R9u MANUAL_ONLY PHYSICAL_USB_EXIT; full-width PP6/19 / native MV_UD power8 / first-frame counters / sensor window / movie buffer / LDC / Gamma19; bounded; own lock; read-only\n",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "369": 1,
+        "6": 1021,
+        "54": 1,
+        "146": 1,
+        "248": 1
+      },
+      "hardware_tested": false
+    },
+    {
+      "name": "nxl-owned-ep.arm",
+      "exit": 0,
+      "stdout": "NXEPOWNED1 R9g durable EP peer audit; typed admission rejection; native reference/selector/return unchanged\n",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "54": 1,
+        "146": 1,
+        "248": 1
+      },
+      "hardware_tested": false
+    },
+    {
+      "name": "nxl-video-mode.arm",
+      "exit": 0,
+      "stdout": "NXL_VIDEO_MODE=R9s; NX500_1.12; NATIVE_UHD30_2997; UHD_DC_PRO80; RO_SHARED_PREFERENCES; GUARDED_PROCESS_RAM; NO_FLASH\n",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "54": 1,
+        "146": 1,
+        "248": 1
+      },
+      "hardware_tested": false
+    },
+    {
+      "name": "nxl-video-fullwidth.arm",
+      "exit": 0,
+      "stdout": "NXL_VIDEO_FULLWIDTH=R10j; NATIVE_DCI_UHD_FLOW_TIMING; TRACE_ONLY_OPERATION; NX1_LDC_UHD_BOUNDARY_3846_2168; NATIVE_HIGH_LOW_STAGE_TIMING; PAIRED_IPC_LDC_STREAM_POLICY; NATIVE_SETUP_BOUNDARY_SCALED_BACKEND; ORIGINAL_UD_METHODS_INTACT; NX500_1.12; PP19_RAW12_6496_3644_TO_NATIVE_3840_2160; NATIVE_MV_UD_POWER8; NATIVE_SCALER_E005; GUARDED_BOUNDARY; BOOT_RESIDENT_IDLE_TMC_LEASE; ATOMIC_ARM_BRANCH_ENTRIES; TRANSIENT_CAP_2M; NO_FLASH\n",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "54": 1,
+        "146": 1,
+        "248": 1
+      },
+      "hardware_tested": false
+    },
+    {
+      "name": "nxl-usb-guard.arm",
+      "exit": 0,
+      "stdout": "NXL_USB_GUARD=R9u; NX5001.12; NATIVE_PHYSICAL_JACK; EVENT_DIAGNOSTICS_ONLY; VERIFIED_LAST_GOOD; SAME_INODE_TRUNCATION_RECOVERY; NO_DEFAULTS; NO_USB_SYSFS_WRITES; NO_DAEMON_RESTART\n",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "54": 1,
+        "146": 1,
+        "248": 1
+      },
+      "hardware_tested": false
+    },
+    {
+      "name": "nxl-video-probe.arm",
+      "exit": 0,
+      "stdout": "NXL_VIDEO_PROBE=R10k; READ_ONLY_SAMPLING; PAIRED_HW_STATUS; BOUNDED_PENDING_FOLLOWUPS; THREE_MODE_NATIVE_FLOW; BOOKMARKS_ONLY; EP_AUX_READBACK_MATCHED_FRAMES; NO_DEVICE_WRITES; NO_MPTOP_OPEN; DDR_A_ACTUAL_SYSFS_5S; TMPFS_BUFFER; IDLE_EXPORT; 5HZ_ADAPTIVE; NO_PTRACE_NO_IOCTL_NO_SD_HOTPATH; PAIRED_IPC_EP_PROGRESS; PINNED_MODE_PHASE_DMA_DDR; TARGET_FPS_AND_NATIVE_GLOBALS\n",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "54": 1,
+        "146": 1,
+        "248": 1
+      },
+      "hardware_tested": false
+    },
+    {
+      "name": "source_plan_hash_CRC_and_capacity",
+      "plan_sha256": "9e0e625e61b86eea0d9db87b1f5954622b2d3152eca7d5cdd529c64e7d48c188",
+      "cap_bytes": 201326592
+    }
+  ],
+  "original_ABI_ELF": [
+    {
+      "name": "nxl-hw-worker.arm",
+      "dependencies": [
+        "libudd5.so",
+        "libc.so.6"
+      ],
+      "sha256": "ebe69dd291f2a637fb65ae4b59c3d9062360a2828744a526fbc8e08bf62ca375"
+    },
+    {
+      "name": "nxl-menu",
+      "dependencies": [
+        "libc.so.6",
+        "libX11.so.6"
+      ],
+      "sha256": "8fc6a02d4498f686e893bb933deff8ce36aea7dc60516234263eb1e5e75e1c93"
+    }
+  ],
+  "hardware_tested": false
+}

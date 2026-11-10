@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "actual_production_capture": "<LOCAL_PROJECT_ROOT>\\work\\r10k-ep-flow\\validation\\current\\path-reader\\74d9cae293\\mnt\\mmc\\NXDEMO51\\VIDEO_STAGE_test\\counts.bin",
+  "hardware_tested": false,
+  "cases": [
+    {
+      "case": "bad-magic",
+      "rejected": "Invalid EP readback extension"
+    },
+    {
+      "case": "changed-unavailable-group",
+      "rejected": "Changed unavailable EP DMA group"
+    },
+    {
+      "case": "group-detail-disagree",
+      "rejected": "EP change mask disagreement"
+    },
+    {
+      "case": "coherent-header-disagree",
+      "rejected": "EP frame-header coherence mismatch"
+    },
+    {
+      "case": "legacy-real-captures-not-reinterpreted-as-EP-tests",
+      "passed": true
+    },
+    {
+      "case": "R10j-schema6-flow-capture-backwards-compatible-without-EP-fabrication",
+      "passed": true
+    }
+  ],
+  "zero_configuration_distinct_from_unavailable": true
+}

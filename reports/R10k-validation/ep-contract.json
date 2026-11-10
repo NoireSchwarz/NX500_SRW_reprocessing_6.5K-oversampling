@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "actual_ARM": true,
+  "production_source_included": true,
+  "hardware_tested": false,
+  "result": {
+    "exit": 0,
+    "stdout": "PASS actual EP capture: bounded ranges, 20 field races, failed reads, frame/mode changes and missing prerequisites\n",
+    "modeled_syscalls": {
+      "983045": 1,
+      "256": 1,
+      "54": 1,
+      "146": 1,
+      "248": 1
+    },
+    "hardware_tested": false
+  },
+  "source_sha256": "3c0c0c58581c21f9055bd0b33f3558f34abe25b41970900e540234fbd11078d7",
+  "capture_sha256": "0dd334691e3653e5b3ca22fc024b694a0b6424a08ebae7615c4c18e9ebac93e2",
+  "scope": "Exact read ranges and no timer/ACK admission; all20 per-field races; unavailable groups; full live-header change; mode change; missing prerequisites; no camera device access."
+}

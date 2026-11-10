@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "archive": "NX500_R10k_EP_Flow_full.zip",
+  "download": "C:\\Users\\qwer0\\Documents\\Codex\\NX500_R10k_EP_Flow_full.zip",
+  "sha256": "a7329827df2d864b141e869624f125aa7970f9e62f7cc75029b9b82a381810c6",
+  "bytes": 38677327,
+  "zip_entries": 3307,
+  "module_files": 64,
+  "identity_pins": 47,
+  "Windows_native_extraction_verified": true,
+  "RTOS_fullwidth_SRW_USB_blue_unchanged_from_R10j": true,
+  "sample_schema": 7,
+  "sample_record_bytes": 1280,
+  "header_bytes": 16384,
+  "sampler_RAM_bytes": 7696384,
+  "EP_readback_reopened": true,
+  "EP_aux_disable_AB_implemented": false,
+  "no_hot_SD_writes": true,
+  "no_new_device_writes": true,
+  "frame_drop_fixed": false,
+  "camera_hardware_tested": false,
+  "SD_deployed": false
+}

@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "base_release": "R10j",
+  "frozen_binaries": {
+    "nxl-demo-front.arm": "9dab6328eea7843242bb00df05bd2bb452a14700333e3209916fb55abf1f0148",
+    "nxl-demo-post.arm": "10a618d15df00ca6a8a91af63aacc2841905df6a084b0c473f585f9a28ef9c67",
+    "nxl-hw-controller.arm": "2190d935d3cd38f13ad24679cbd0e6596fab861e76ed680754117edcceebf014",
+    "nxl-hw-worker.arm": "f5eb3612b61e36298318a758514992710e7e5784d635d5f74e37f5b55f1b7fa3",
+    "nxl-init-pipeline.arm": "9051829f9265fdf61f089d386fbab0112d09254bb485463c7057999afb075107",
+    "nxl-init-test.arm": "7706a4667e6d71e6288a5e6e853680e83c4d854b9d8ed4487ed40fa700e1d074",
+    "nxl-init-watch.arm": "53dce4d8760a4323499a305431ce36d3df0241476c87fca5a8e6b0b11a8567c8",
+    "nxl-lens-watch.arm": "d1eef31e7fab89e0d440bea14997f88121f0959bede9c4d27292ec0009814a67",
+    "nxl-owned-ep.arm": "15f24175e1f4d1e246ce3333a2eb0a384a4d07660c380625fdced88cf5d6b95f",
+    "nxl-usb-guard.arm": "61bf59b3bf4ccba775525e40024d0a42b86cffd22a1b94d9a431a8102f266918",
+    "nxl-video-fullwidth.arm": "fc33e55ae72f1ff99cc1e868b767caff0666bdac4f44fcd01de0378a47596bbb",
+    "nxl-video-mode.arm": "d99d69b91d4bf929c0748a50d3703ef3303761fc3868b9f972b88fbcc5145629"
+  },
+  "RTOS_timing_and_fullwidth_contract_byte_identical": true,
+  "blue_recipe_byte_identical": true,
+  "source_SRW_USB_engines_preserved": true,
+  "new_device_writes": false,
+  "new_extra_frame_allocation": false,
+  "new_host_RAM_bytes": 768000,
+  "host_RAM_bytes": 7696384,
+  "record_schema": 7,
+  "record_bytes": 1280,
+  "camera_hardware_tested": false,
+  "source_sha256": "3c0c0c58581c21f9055bd0b33f3558f34abe25b41970900e540234fbd11078d7",
+  "binary_sha256": "1a0948430131e3011bc1702e410557e83691338ed2cbd208c5ddd39868c878d4"
+}

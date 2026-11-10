@@ -1,0 +1,43 @@
+{
+  "format": "P49_CC_IMPLEMENTATION_CHECK1",
+  "hardware_tested": false,
+  "camera_calls": 0,
+  "integration_pending": true,
+  "source_sha256": {
+    "src/param_dma_contract.h": "7f256c5851b6a22b0d854e86175b97e5ff61c619d8c185adb2a9a69e28b07094",
+    "src/rtos_cc.inc": "023b62387f643027430716124006a5f68d05e220e3120ee1c234b2199360d594",
+    "src/cc_contract.h": "dc570362f3caa5316bb0926ab0feb5b2ced570598a9ee4d5049326802642f2a8",
+    "tests/test_param_dma_contract.c": "b6cfe4633bc84180f67531f2f185fe0ef05cf4bc01fe126124d958d89983f986",
+    "tests/p49_cc_reachability.c": "3f271e6141a676c1e6e6ab135e138feb2c8aef0ee6d9ac0056619cc743fd25e3"
+  },
+  "host_contract_test": {
+    "passed": true,
+    "invalid_records_rejected": 2437
+  },
+  "arm_forced_reachability_compile": {
+    "passed": true,
+    "relocations_allowed": [
+      3,
+      28,
+      29,
+      42
+    ],
+    "text_param_bytes": 2380,
+    "text_cc_bytes": 7204,
+    "text_stop_bytes": 5744
+  },
+  "original_arm_models": [
+    "purple-evidence-review/cc-active/completion/sram-completion-replay.json",
+    "purple-evidence-review/cc-active/cache/parameter-mapping-replay.json"
+  ],
+  "limits": [
+    "Factory fallback performs no new parameter DMA or IRQ registration.",
+    "Source CC activation is blocked until initial parameter-channel drain is proved.",
+    "No fresh camera hardware test or pixel adoption claim.",
+    "Parent integrates factory audit with cc_source_reloaded=0 handoff."
+  ],
+  "blocking_initial_state_boundary": "OEM event67 has no bank/generation. Initial channel drain before arm must be established; idle7/commandbit4clear alone is insufficient.",
+  "profile": "SKIPPED_FACTORY_CC",
+  "source_cc_reloaded": false,
+  "experimental_activation_blocked": true
+}

@@ -7,8 +7,8 @@
 - **SRW**：自动初始化 → BayerStill → LDC → 可选 EP 3D LUT → JPEG，复用一次申请的 192MiB 工作区；源片白平衡、颜色矩阵、C0 19 点 Gamma 和 JPEG 量化表已接入。
 - **镜头矫正**：16–50mm Power Zoom，531 个 MakerNote 焦距码档位；含原生锚点和离线插值，未宣称每一档都与原厂像素等价。
 - **全宽 4K**：全宽 UD 路径结合缩放 setup 输出 3840×2160，80Mbps、8 位 HEVC 4:2:0。用户已确认视角，蓝边已在 R10c 修复；**真实稳定 29.97p 尚未实现，持续掉帧仍在定位**。“6.5K”描述全宽输入链研究，不表示相机输出 6.5K 视频，也不单凭读出窗口断言每个感光点均参与。
-- **R10j**：原生 DCI24、原生 UHD30、全宽 UHD30 使用同一套硬件启动／装载／开帧／完成事件计时。电脑验证通过；相机测试待进行。
-- **EP 复核**：用户要求将此前排除的 EP 回读候选重新纳入，与三模式对照合并；目前进行中，未标记为已实现或已修复。
+- **R10k**：原生 DCI24、原生 UHD30、全宽 UHD30 使用同一套硬件启动／装载／开帧／完成事件计时。电脑验证通过；相机测试待进行。
+- **EP 复核已合并**：同一记录器以双读、IPC 活动头和模式夹取采集辅助 RDMA1／WDMA1 两个配置 bank，关联原生 EP 中断总数和三模式稳态计时。采用被动通路对照；尚无已确认的独立关闭入口，**未实现 EP bypass 开／关 A/B**，也未宣称修复掉帧。
 
 ## 上游与致谢
 
@@ -23,8 +23,8 @@
 
 | 路径 | 内容 |
 | --- | --- |
-| `work/r10j-frame-flow/` | 当前 R10j 源码：菜单、Linux 与 RTOS 前后段、资源契约、LDC／JPEG、视频诊断、测试代码 |
-| `work/*r10j*.py`、`work/r10j_timing.S` | 本轮构建、ARM 回放与打包入口 |
+| `work/r10k-ep-flow/` | 当前 R10k 源码：菜单、Linux 与 RTOS 前后段、资源契约、LDC／JPEG、视频诊断、测试代码 |
+| `work/*r10k*.py`、`work/r10j_timing.S` | 本轮构建、ARM 回放与打包入口；RTOS 计时代码与 R10j 相同 |
 | `docs/` | 开发交接、当前状态和测试步骤 |
 | `reports/` | 实机结论摘要与电脑验证记录；两者明确区分 |
 
@@ -35,12 +35,11 @@
 ```powershell
 python -X utf8 work/build_r10j_timing.py
 python -X utf8 work/build_r10j_rtos.py
-python -X utf8 work/build_r10j.py probe
-python -X utf8 work/build_r10j.py fullwidth
-python -X utf8 work/build_r10j.py menu
+python -X utf8 work/build_r10k.py probe
+python -X utf8 work/build_r10k.py menu
 ```
 
-现有研究脚本沿用原工作目录布局：工具链放在 `work/tooling/`，自行取得的 NX500 1.12 `P7.bin` 放在 `work/firmware/`。完整历史回归和发布脚本还依赖本地历史包、原始夹具、对照固件及 LUT 资源，仓库不伪装成不带这些输入也可全部执行。具体依赖、固件散列与验证边界见交接文档。
+现有研究脚本沿用原工作目录布局：工具链放在 `work/tooling/`，自行取得的 NX500 1.12 `P7.bin` 放在 `work/firmware/`。完整历史回归和发布脚本还依赖本地历史包、原始夹具、对照固件及 LUT 资源，仓库不伪装成不带这些输入也可全部执行。具体依赖、固件散列与验证边界见交接文档。R10k 的全宽和 RTOS 二进制冻结为 R10j；完整发布仍需本地封存的 R10j 基线包。
 
 源码目录不是可直接复制到 SD 卡的完整安装包；相机部署使用经过清单与身份核验的发布包。
 
@@ -49,7 +48,8 @@ python -X utf8 work/build_r10j.py menu
 - [开发交接正文](docs/HANDOFF_20261110.txt)
 - [PDF 交接](docs/HANDOFF_20261110.pdf)
 - [当前状态与 EP 复核修订](docs/CURRENT_STATUS.md)
-- [R10j 测试步骤](docs/R10j_TEST_STEPS.txt)
+- [R10k 合并测试步骤](docs/R10k_TEST_STEPS.txt)
+- [R10j 历史测试步骤](docs/R10j_TEST_STEPS.txt)
 - [R10i 持续掉帧结论](reports/R10i_BUS_QOS_ABA与周期阻塞诊断_20261110.txt)
 
 交接中的“EP 已排除”是当时根据用户说明记录的历史状态；用户随后撤回该判断，当前以 `docs/CURRENT_STATUS.md` 为准。尚未证明 NX500 的不可改变硬件上限；单一 QoS 候选无效也不能排除全部 DDR／内部握手因素。

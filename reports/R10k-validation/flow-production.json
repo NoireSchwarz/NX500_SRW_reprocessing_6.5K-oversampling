@@ -1,0 +1,2668 @@
+{
+  "passed": true,
+  "actual_ARM": true,
+  "hardware_tested": false,
+  "samples": 275,
+  "frames": 1652,
+  "EP_readback_groups": [
+    {
+      "epoch": 0,
+      "driver_mode": "0x1818",
+      "IPC_preset": "0xe004",
+      "source_state": 1,
+      "steady_window_s": [
+        1.00009,
+        16.80007
+      ],
+      "observed_samples": 45,
+      "retained_samples": 34,
+      "configuration_signatures": {
+        "RDMA1_bank0": [
+          {
+            "stride_bytes": 0,
+            "format_stride": "0x0",
+            "control0": "0x0",
+            "control1": "0x0",
+            "samples": 34
+          }
+        ],
+        "WDMA1_bank0": [
+          {
+            "stride_bytes": 0,
+            "format_stride": "0x0",
+            "control0": "0x0",
+            "control1": "0x0",
+            "samples": 34
+          }
+        ],
+        "RDMA1_bank1": [
+          {
+            "stride_bytes": 0,
+            "format_stride": "0x0",
+            "control0": "0x0",
+            "control1": "0x0",
+            "samples": 34
+          }
+        ],
+        "WDMA1_bank1": [
+          {
+            "stride_bytes": 0,
+            "format_stride": "0x0",
+            "control0": "0x0",
+            "control1": "0x0",
+            "samples": 34
+          }
+        ]
+      },
+      "native_rates": {
+        "MMF_new_per_s": {
+          "samples": 32,
+          "seconds": 6.400000000000003,
+          "weighted_mean": 0.0
+        },
+        "source_forwarded_per_s": {
+          "samples": 32,
+          "seconds": 6.400000000000003,
+          "weighted_mean": 0.0
+        },
+        "HEVC_successful_outputs_per_s": {
+          "samples": 32,
+          "seconds": 6.400000000000003,
+          "weighted_mean": 0.0
+        },
+        "IRQ_EP_A_per_s": {
+          "samples": 32,
+          "seconds": 6.400000000000003,
+          "weighted_mean": 0.0
+        },
+        "IRQ_EP_B_per_s": {
+          "samples": 32,
+          "seconds": 6.400000000000003,
+          "weighted_mean": 0.0
+        },
+        "IRQ_EP_DMA_per_s": {
+          "samples": 32,
+          "seconds": 6.400000000000003,
+          "weighted_mean": 0.0
+        }
+      },
+      "matched_mode_frame_timing": {
+        "hardware_to_IRQ_ms": {
+          "n": 204,
+          "mean": 28.846153846153847,
+          "median": 28.846153846153847,
+          "max": 28.846153846153847
+        },
+        "cycle_ms": {
+          "n": 204,
+          "mean": 33.36669230769231,
+          "median": 33.36669230769231,
+          "max": 33.36669230769231
+        },
+        "IRQ_to_callback_ms": {
+          "n": 204,
+          "mean": 0.0038461538461538464,
+          "median": 0.0038461538461538464,
+          "max": 0.0038461538461538464
+        },
+        "start_to_final_IRQ_ms": {
+          "n": 204,
+          "mean": 28.834615384615386,
+          "median": 28.834615384615386,
+          "max": 28.834615384615386
+        }
+      }
+    },
+    {
+      "epoch": 0,
+      "driver_mode": "0x1818",
+      "IPC_preset": "0xe004",
+      "source_state": 2,
+      "steady_window_s": [
+        5.20007,
+        12.00007
+      ],
+      "observed_samples": 45,
+      "retained_samples": 35,
+      "configuration_signatures": {
+        "RDMA1_bank0": [
+          {
+            "stride_bytes": 720,
+            "format_stride": "0x2d0051",
+            "control0": "0x8000000",
+            "control1": "0x100",
+            "samples": 35
+          }
+        ],
+        "WDMA1_bank0": [
+          {
+            "stride_bytes": 720,
+            "format_stride": "0x2d0051",
+            "control0": "0x8000000",
+            "control1": "0x100",
+            "samples": 35
+          }
+        ],
+        "RDMA1_bank1": [
+          {
+            "stride_bytes": 720,
+            "format_stride": "0x2d0051",
+            "control0": "0x8000000",
+            "control1": "0x100",
+            "samples": 35
+          }
+        ],
+        "WDMA1_bank1": [
+          {
+            "stride_bytes": 720,
+            "format_stride": "0x2d0051",
+            "control0": "0x8000000",
+            "control1": "0x100",
+            "samples": 35
+          }
+        ]
+      },
+      "native_rates": {
+        "MMF_new_per_s": {
+          "samples": 34,
+          "seconds": 6.800000000000003,
+          "weighted_mean": 0.0
+        },
+        "source_forwarded_per_s": {
+          "samples": 34,
+          "seconds": 6.800000000000003,
+          "weighted_mean": 29.999999999999986
+        },
+        "HEVC_successful_outputs_per_s": {
+          "samples": 34,
+          "seconds": 6.800000000000003,
+          "weighted_mean": 29.999999999999986
+        },
+        "IRQ_EP_A_per_s": {
+          "samples": 34,
+          "seconds": 6.800000000000003,
+          "weighted_mean": 0.0
+        },
+        "IRQ_EP_B_per_s": {
+          "samples": 34,
+          "seconds": 6.800000000000003,
+          "weighted_mean": 0.0
+        },
+        "IRQ_EP_DMA_per_s": {
+          "samples": 34,
+          "seconds": 6.800000000000003,
+          "weighted_mean": 0.0
+        }
+      },
+      "matched_mode_frame_timing": {
+        "hardware_to_IRQ_ms": {
+          "n": 210,
+          "mean": 28.846153846153847,
+          "median": 28.846153846153847,
+          "max": 28.846153846153847
+        },
+        "cycle_ms": {
+          "n": 210,
+          "mean": 33.36669230769231,
+          "median": 33.36669230769231,
+          "max": 33.36669230769231
+        },
+        "IRQ_to_callback_ms": {
+          "n": 210,
+          "mean": 0.0038461538461538464,
+          "median": 0.0038461538461538464,
+          "max": 0.0038461538461538464
+        },
+        "start_to_final_IRQ_ms": {
+          "n": 210,
+          "mean": 28.834615384615386,
+          "median": 28.834615384615386,
+          "max": 28.834615384615386
+        }
+      }
+    },
+    {
+      "epoch": 1,
+      "driver_mode": "0x1919",
+      "IPC_preset": "0xe004",
+      "source_state": 1,
+      "steady_window_s": [
+        19.00007,
+        34.80007
+      ],
+      "observed_samples": 45,
+      "retained_samples": 35,
+      "configuration_signatures": {
+        "RDMA1_bank0": [
+          {
+            "stride_bytes": 0,
+            "format_stride": "0x0",
+            "control0": "0x0",
+            "control1": "0x0",
+            "samples": 35
+          }
+        ],
+        "WDMA1_bank0": [
+          {
+            "stride_bytes": 0,
+            "format_stride": "0x0",
+            "control0": "0x0",
+            "control1": "0x0",
+            "samples": 35
+          }
+        ],
+        "RDMA1_bank1": [
+          {
+            "stride_bytes": 0,
+            "format_stride": "0x0",
+            "control0": "0x0",
+            "control1": "0x0",
+            "samples": 35
+          }
+        ],
+        "WDMA1_bank1": [
+          {
+            "stride_bytes": 0,
+            "format_stride": "0x0",
+            "control0": "0x0",
+            "control1": "0x0",
+            "samples": 35
+          }
+        ]
+      },
+      "native_rates": {
+        "MMF_new_per_s": {
+          "samples": 33,
+          "seconds": 6.600000000000003,
+          "weighted_mean": 0.0
+        },
+        "source_forwarded_per_s": {
+          "samples": 33,
+          "seconds": 6.600000000000003,
+          "weighted_mean": 0.0
+        },
+        "HEVC_successful_outputs_per_s": {
+          "samples": 33,
+          "seconds": 6.600000000000003,
+          "weighted_mean": 0.0
+        },
+        "IRQ_EP_A_per_s": {
+          "samples": 33,
+          "seconds": 6.600000000000003,
+          "weighted_mean": 0.0
+        },
+        "IRQ_EP_B_per_s": {
+          "samples": 33,
+          "seconds": 6.600000000000003,
+          "weighted_mean": 0.0
+        },
+        "IRQ_EP_DMA_per_s": {
+          "samples": 33,
+          "seconds": 6.600000000000003,
+          "weighted_mean": 0.0
+        }
+      },
+      "matched_mode_frame_timing": {
+        "hardware_to_IRQ_ms": {
+          "n": 210,
+          "mean": 28.846153846153847,
+          "median": 28.846153846153847,
+          "max": 28.846153846153847
+        },
+        "cycle_ms": {
+          "n": 210,
+          "mean": 33.36669230769231,
+          "median": 33.36669230769231,
+          "max": 33.36669230769231
+        },
+        "IRQ_to_callback_ms": {
+          "n": 210,
+          "mean": 0.0038461538461538464,
+          "median": 0.0038461538461538464,
+          "max": 0.0038461538461538464
+        },
+        "start_to_final_IRQ_ms": {
+          "n": 210,
+          "mean": 28.834615384615386,
+          "median": 28.834615384615386,
+          "max": 28.834615384615386
+        }
+      }
+    },
+    {
+      "epoch": 1,
+      "driver_mode": "0x1919",
+      "IPC_preset": "0xe004",
+      "source_state": 2,
+      "steady_window_s": [
+        23.20007,
+        30.00007
+      ],
+      "observed_samples": 45,
+      "retained_samples": 35,
+      "configuration_signatures": {
+        "RDMA1_bank0": [
+          {
+            "stride_bytes": 720,
+            "format_stride": "0x2d0051",
+            "control0": "0x8000000",
+            "control1": "0x100",
+            "samples": 35
+          }
+        ],
+        "WDMA1_bank0": [
+          {
+            "stride_bytes": 720,
+            "format_stride": "0x2d0051",
+            "control0": "0x8000000",
+            "control1": "0x100",
+            "samples": 35
+          }
+        ],
+        "RDMA1_bank1": [
+          {
+            "stride_bytes": 720,
+            "format_stride": "0x2d0051",
+            "control0": "0x8000000",
+            "control1": "0x100",
+            "samples": 35
+          }
+        ],
+        "WDMA1_bank1": [
+          {
+            "stride_bytes": 720,
+            "format_stride": "0x2d0051",
+            "control0": "0x8000000",
+            "control1": "0x100",
+            "samples": 35
+          }
+        ]
+      },
+      "native_rates": {
+        "MMF_new_per_s": {
+          "samples": 34,
+          "seconds": 6.800000000000003,
+          "weighted_mean": 0.0
+        },
+        "source_forwarded_per_s": {
+          "samples": 34,
+          "seconds": 6.800000000000003,
+          "weighted_mean": 29.999999999999986
+        },
+        "HEVC_successful_outputs_per_s": {
+          "samples": 34,
+          "seconds": 6.800000000000003,
+          "weighted_mean": 29.999999999999986
+        },
+        "IRQ_EP_A_per_s": {
+          "samples": 34,
+          "seconds": 6.800000000000003,
+          "weighted_mean": 0.0
+        },
+        "IRQ_EP_B_per_s": {
+          "samples": 34,
+          "seconds": 6.800000000000003,
+          "weighted_mean": 0.0
+        },
+        "IRQ_EP_DMA_per_s": {
+          "samples": 34,
+          "seconds": 6.800000000000003,
+          "weighted_mean": 0.0
+        }
+      },
+      "matched_mode_frame_timing": {
+        "hardware_to_IRQ_ms": {
+          "n": 210,
+          "mean": 28.846153846153847,
+          "median": 28.846153846153847,
+          "max": 28.846153846153847
+        },
+        "cycle_ms": {
+          "n": 210,
+          "mean": 33.36669230769231,
+          "median": 33.36669230769231,
+          "max": 33.36669230769231
+        },
+        "IRQ_to_callback_ms": {
+          "n": 210,
+          "mean": 0.0038461538461538464,
+          "median": 0.0038461538461538464,
+          "max": 0.0038461538461538464
+        },
+        "start_to_final_IRQ_ms": {
+          "n": 210,
+          "mean": 28.834615384615386,
+          "median": 28.834615384615386,
+          "max": 28.834615384615386
+        }
+      }
+    },
+    {
+      "epoch": 2,
+      "driver_mode": "0x1717",
+      "IPC_preset": "0xe005",
+      "source_state": 1,
+      "steady_window_s": [
+        37.00007,
+        53.80007
+      ],
+      "observed_samples": 50,
+      "retained_samples": 40,
+      "configuration_signatures": {
+        "RDMA1_bank0": [
+          {
+            "stride_bytes": 0,
+            "format_stride": "0x0",
+            "control0": "0x0",
+            "control1": "0x0",
+            "samples": 40
+          }
+        ],
+        "WDMA1_bank0": [
+          {
+            "stride_bytes": 0,
+            "format_stride": "0x0",
+            "control0": "0x0",
+            "control1": "0x0",
+            "samples": 40
+          }
+        ],
+        "RDMA1_bank1": [
+          {
+            "stride_bytes": 0,
+            "format_stride": "0x0",
+            "control0": "0x0",
+            "control1": "0x0",
+            "samples": 40
+          }
+        ],
+        "WDMA1_bank1": [
+          {
+            "stride_bytes": 0,
+            "format_stride": "0x0",
+            "control0": "0x0",
+            "control1": "0x0",
+            "samples": 40
+          }
+        ]
+      },
+      "native_rates": {
+        "MMF_new_per_s": {
+          "samples": 38,
+          "seconds": 7.600000000000004,
+          "weighted_mean": 0.0
+        },
+        "source_forwarded_per_s": {
+          "samples": 38,
+          "seconds": 7.600000000000004,
+          "weighted_mean": 0.0
+        },
+        "HEVC_successful_outputs_per_s": {
+          "samples": 38,
+          "seconds": 7.600000000000004,
+          "weighted_mean": 0.0
+        },
+        "IRQ_EP_A_per_s": {
+          "samples": 38,
+          "seconds": 7.600000000000004,
+          "weighted_mean": 0.0
+        },
+        "IRQ_EP_B_per_s": {
+          "samples": 38,
+          "seconds": 7.600000000000004,
+          "weighted_mean": 0.0
+        },
+        "IRQ_EP_DMA_per_s": {
+          "samples": 38,
+          "seconds": 7.600000000000004,
+          "weighted_mean": 0.0
+        }
+      },
+      "matched_mode_frame_timing": {
+        "hardware_to_IRQ_ms": {
+          "n": 240,
+          "mean": 28.846153846153847,
+          "median": 28.846153846153847,
+          "max": 28.846153846153847
+        },
+        "cycle_ms": {
+          "n": 240,
+          "mean": 33.36669230769231,
+          "median": 33.36669230769231,
+          "max": 33.36669230769231
+        },
+        "IRQ_to_callback_ms": {
+          "n": 240,
+          "mean": 0.0038461538461538464,
+          "median": 0.0038461538461538464,
+          "max": 0.0038461538461538464
+        },
+        "start_to_final_IRQ_ms": {
+          "n": 240,
+          "mean": 28.834615384615386,
+          "median": 28.834615384615386,
+          "max": 28.834615384615386
+        }
+      }
+    },
+    {
+      "epoch": 2,
+      "driver_mode": "0x1717",
+      "IPC_preset": "0xe005",
+      "source_state": 2,
+      "steady_window_s": [
+        41.20007,
+        48.00007
+      ],
+      "observed_samples": 45,
+      "retained_samples": 35,
+      "configuration_signatures": {
+        "RDMA1_bank0": [
+          {
+            "stride_bytes": 720,
+            "format_stride": "0x2d0051",
+            "control0": "0x8000000",
+            "control1": "0x100",
+            "samples": 35
+          }
+        ],
+        "WDMA1_bank0": [
+          {
+            "stride_bytes": 720,
+            "format_stride": "0x2d0051",
+            "control0": "0x8000000",
+            "control1": "0x100",
+            "samples": 35
+          }
+        ],
+        "RDMA1_bank1": [
+          {
+            "stride_bytes": 720,
+            "format_stride": "0x2d0051",
+            "control0": "0x8000000",
+            "control1": "0x100",
+            "samples": 35
+          }
+        ],
+        "WDMA1_bank1": [
+          {
+            "stride_bytes": 720,
+            "format_stride": "0x2d0051",
+            "control0": "0x8000000",
+            "control1": "0x100",
+            "samples": 35
+          }
+        ]
+      },
+      "native_rates": {
+        "MMF_new_per_s": {
+          "samples": 34,
+          "seconds": 6.800000000000003,
+          "weighted_mean": 0.0
+        },
+        "source_forwarded_per_s": {
+          "samples": 34,
+          "seconds": 6.800000000000003,
+          "weighted_mean": 29.999999999999986
+        },
+        "HEVC_successful_outputs_per_s": {
+          "samples": 34,
+          "seconds": 6.800000000000003,
+          "weighted_mean": 29.999999999999986
+        },
+        "IRQ_EP_A_per_s": {
+          "samples": 34,
+          "seconds": 6.800000000000003,
+          "weighted_mean": 0.0
+        },
+        "IRQ_EP_B_per_s": {
+          "samples": 34,
+          "seconds": 6.800000000000003,
+          "weighted_mean": 0.0
+        },
+        "IRQ_EP_DMA_per_s": {
+          "samples": 34,
+          "seconds": 6.800000000000003,
+          "weighted_mean": 0.0
+        }
+      },
+      "matched_mode_frame_timing": {
+        "hardware_to_IRQ_ms": {
+          "n": 210,
+          "mean": 28.846153846153847,
+          "median": 28.846153846153847,
+          "max": 28.846153846153847
+        },
+        "cycle_ms": {
+          "n": 210,
+          "mean": 33.36669230769231,
+          "median": 33.36669230769231,
+          "max": 33.36669230769231
+        },
+        "IRQ_to_callback_ms": {
+          "n": 210,
+          "mean": 0.0038461538461538464,
+          "median": 0.0038461538461538464,
+          "max": 0.0038461538461538464
+        },
+        "start_to_final_IRQ_ms": {
+          "n": 210,
+          "mean": 28.834615384615386,
+          "median": 28.834615384615386,
+          "max": 28.834615384615386
+        }
+      }
+    }
+  ],
+  "EP_readback_samples": 275,
+  "mode_groups": [
+    {
+      "epoch": 0,
+      "driver_mode": "0x1818",
+      "IPC_preset": "0xe004",
+      "source_state": 1,
+      "steady_window_s": [
+        1.00009,
+        16.80007
+      ],
+      "frames": 204,
+      "statistics": {
+        "hardware_to_IRQ_ms": {
+          "n": 204,
+          "mean": 28.846153846153847,
+          "median": 28.846153846153847,
+          "p95": 28.846153846153847,
+          "max": 28.846153846153847
+        },
+        "hardware_to_SRAM_IRQ_ms": {
+          "n": 204,
+          "mean": 0.0038461538461538464,
+          "median": 0.0038461538461538464,
+          "p95": 0.0038461538461538464,
+          "max": 0.0038461538461538464
+        },
+        "hardware_to_start_IRQ_ms": {
+          "n": 204,
+          "mean": 0.011538461538461539,
+          "median": 0.011538461538461539,
+          "p95": 0.011538461538461539,
+          "max": 0.011538461538461539
+        },
+        "SRAM_to_start_IRQ_ms": {
+          "n": 204,
+          "mean": 0.007692307692307693,
+          "median": 0.007692307692307693,
+          "p95": 0.007692307692307693,
+          "max": 0.007692307692307693
+        },
+        "start_to_final_IRQ_ms": {
+          "n": 204,
+          "mean": 28.834615384615386,
+          "median": 28.834615384615386,
+          "p95": 28.834615384615386,
+          "max": 28.834615384615386
+        },
+        "SRAM_to_final_IRQ_ms": {
+          "n": 204,
+          "mean": 28.842307692307692,
+          "median": 28.842307692307692,
+          "p95": 28.842307692307692,
+          "max": 28.842307692307692
+        },
+        "IRQ_to_callback_ms": {
+          "n": 204,
+          "mean": 0.0038461538461538464,
+          "median": 0.0038461538461538464,
+          "p95": 0.0038461538461538464,
+          "max": 0.0038461538461538464
+        },
+        "cycle_ms": {
+          "n": 204,
+          "mean": 33.36669230769231,
+          "median": 33.36669230769231,
+          "p95": 33.36669230769231,
+          "max": 33.36669230769231
+        }
+      },
+      "event_count_histograms": {
+        "hardware": {
+          "1": 204
+        },
+        "SRAM_load": {
+          "1": 204
+        },
+        "CS0_start": {
+          "1": 204
+        },
+        "final_IRQ": {
+          "1": 204
+        }
+      }
+    },
+    {
+      "epoch": 0,
+      "driver_mode": "0x1818",
+      "IPC_preset": "0xe004",
+      "source_state": 2,
+      "steady_window_s": [
+        5.20007,
+        12.00007
+      ],
+      "frames": 210,
+      "statistics": {
+        "hardware_to_IRQ_ms": {
+          "n": 210,
+          "mean": 28.846153846153847,
+          "median": 28.846153846153847,
+          "p95": 28.846153846153847,
+          "max": 28.846153846153847
+        },
+        "hardware_to_SRAM_IRQ_ms": {
+          "n": 210,
+          "mean": 0.0038461538461538464,
+          "median": 0.0038461538461538464,
+          "p95": 0.0038461538461538464,
+          "max": 0.0038461538461538464
+        },
+        "hardware_to_start_IRQ_ms": {
+          "n": 210,
+          "mean": 0.011538461538461539,
+          "median": 0.011538461538461539,
+          "p95": 0.011538461538461539,
+          "max": 0.011538461538461539
+        },
+        "SRAM_to_start_IRQ_ms": {
+          "n": 210,
+          "mean": 0.007692307692307693,
+          "median": 0.007692307692307693,
+          "p95": 0.007692307692307693,
+          "max": 0.007692307692307693
+        },
+        "start_to_final_IRQ_ms": {
+          "n": 210,
+          "mean": 28.834615384615386,
+          "median": 28.834615384615386,
+          "p95": 28.834615384615386,
+          "max": 28.834615384615386
+        },
+        "SRAM_to_final_IRQ_ms": {
+          "n": 210,
+          "mean": 28.842307692307692,
+          "median": 28.842307692307692,
+          "p95": 28.842307692307692,
+          "max": 28.842307692307692
+        },
+        "IRQ_to_callback_ms": {
+          "n": 210,
+          "mean": 0.0038461538461538464,
+          "median": 0.0038461538461538464,
+          "p95": 0.0038461538461538464,
+          "max": 0.0038461538461538464
+        },
+        "cycle_ms": {
+          "n": 210,
+          "mean": 33.36669230769231,
+          "median": 33.36669230769231,
+          "p95": 33.36669230769231,
+          "max": 33.36669230769231
+        }
+      },
+      "event_count_histograms": {
+        "hardware": {
+          "1": 210
+        },
+        "SRAM_load": {
+          "1": 210
+        },
+        "CS0_start": {
+          "1": 210
+        },
+        "final_IRQ": {
+          "1": 210
+        }
+      }
+    },
+    {
+      "epoch": 1,
+      "driver_mode": "0x1919",
+      "IPC_preset": "0xe004",
+      "source_state": 1,
+      "steady_window_s": [
+        19.00007,
+        34.80007
+      ],
+      "frames": 210,
+      "statistics": {
+        "hardware_to_IRQ_ms": {
+          "n": 210,
+          "mean": 28.846153846153847,
+          "median": 28.846153846153847,
+          "p95": 28.846153846153847,
+          "max": 28.846153846153847
+        },
+        "hardware_to_SRAM_IRQ_ms": {
+          "n": 210,
+          "mean": 0.0038461538461538464,
+          "median": 0.0038461538461538464,
+          "p95": 0.0038461538461538464,
+          "max": 0.0038461538461538464
+        },
+        "hardware_to_start_IRQ_ms": {
+          "n": 210,
+          "mean": 0.011538461538461539,
+          "median": 0.011538461538461539,
+          "p95": 0.011538461538461539,
+          "max": 0.011538461538461539
+        },
+        "SRAM_to_start_IRQ_ms": {
+          "n": 210,
+          "mean": 0.007692307692307693,
+          "median": 0.007692307692307693,
+          "p95": 0.007692307692307693,
+          "max": 0.007692307692307693
+        },
+        "start_to_final_IRQ_ms": {
+          "n": 210,
+          "mean": 28.834615384615386,
+          "median": 28.834615384615386,
+          "p95": 28.834615384615386,
+          "max": 28.834615384615386
+        },
+        "SRAM_to_final_IRQ_ms": {
+          "n": 210,
+          "mean": 28.842307692307692,
+          "median": 28.842307692307692,
+          "p95": 28.842307692307692,
+          "max": 28.842307692307692
+        },
+        "IRQ_to_callback_ms": {
+          "n": 210,
+          "mean": 0.0038461538461538464,
+          "median": 0.0038461538461538464,
+          "p95": 0.0038461538461538464,
+          "max": 0.0038461538461538464
+        },
+        "cycle_ms": {
+          "n": 210,
+          "mean": 33.36669230769231,
+          "median": 33.36669230769231,
+          "p95": 33.36669230769231,
+          "max": 33.36669230769231
+        }
+      },
+      "event_count_histograms": {
+        "hardware": {
+          "1": 210
+        },
+        "SRAM_load": {
+          "1": 210
+        },
+        "CS0_start": {
+          "1": 210
+        },
+        "final_IRQ": {
+          "1": 210
+        }
+      }
+    },
+    {
+      "epoch": 1,
+      "driver_mode": "0x1919",
+      "IPC_preset": "0xe004",
+      "source_state": 2,
+      "steady_window_s": [
+        23.20007,
+        30.00007
+      ],
+      "frames": 210,
+      "statistics": {
+        "hardware_to_IRQ_ms": {
+          "n": 210,
+          "mean": 28.846153846153847,
+          "median": 28.846153846153847,
+          "p95": 28.846153846153847,
+          "max": 28.846153846153847
+        },
+        "hardware_to_SRAM_IRQ_ms": {
+          "n": 210,
+          "mean": 0.0038461538461538464,
+          "median": 0.0038461538461538464,
+          "p95": 0.0038461538461538464,
+          "max": 0.0038461538461538464
+        },
+        "hardware_to_start_IRQ_ms": {
+          "n": 210,
+          "mean": 0.011538461538461539,
+          "median": 0.011538461538461539,
+          "p95": 0.011538461538461539,
+          "max": 0.011538461538461539
+        },
+        "SRAM_to_start_IRQ_ms": {
+          "n": 210,
+          "mean": 0.007692307692307693,
+          "median": 0.007692307692307693,
+          "p95": 0.007692307692307693,
+          "max": 0.007692307692307693
+        },
+        "start_to_final_IRQ_ms": {
+          "n": 210,
+          "mean": 28.834615384615386,
+          "median": 28.834615384615386,
+          "p95": 28.834615384615386,
+          "max": 28.834615384615386
+        },
+        "SRAM_to_final_IRQ_ms": {
+          "n": 210,
+          "mean": 28.842307692307692,
+          "median": 28.842307692307692,
+          "p95": 28.842307692307692,
+          "max": 28.842307692307692
+        },
+        "IRQ_to_callback_ms": {
+          "n": 210,
+          "mean": 0.0038461538461538464,
+          "median": 0.0038461538461538464,
+          "p95": 0.0038461538461538464,
+          "max": 0.0038461538461538464
+        },
+        "cycle_ms": {
+          "n": 210,
+          "mean": 33.36669230769231,
+          "median": 33.36669230769231,
+          "p95": 33.36669230769231,
+          "max": 33.36669230769231
+        }
+      },
+      "event_count_histograms": {
+        "hardware": {
+          "1": 210
+        },
+        "SRAM_load": {
+          "1": 210
+        },
+        "CS0_start": {
+          "1": 210
+        },
+        "final_IRQ": {
+          "1": 210
+        }
+      }
+    },
+    {
+      "epoch": 2,
+      "driver_mode": "0x1717",
+      "IPC_preset": "0xe005",
+      "source_state": 1,
+      "steady_window_s": [
+        37.00007,
+        53.80007
+      ],
+      "frames": 240,
+      "statistics": {
+        "hardware_to_IRQ_ms": {
+          "n": 240,
+          "mean": 28.846153846153847,
+          "median": 28.846153846153847,
+          "p95": 28.846153846153847,
+          "max": 28.846153846153847
+        },
+        "hardware_to_SRAM_IRQ_ms": {
+          "n": 240,
+          "mean": 0.0038461538461538464,
+          "median": 0.0038461538461538464,
+          "p95": 0.0038461538461538464,
+          "max": 0.0038461538461538464
+        },
+        "hardware_to_start_IRQ_ms": {
+          "n": 240,
+          "mean": 0.011538461538461539,
+          "median": 0.011538461538461539,
+          "p95": 0.011538461538461539,
+          "max": 0.011538461538461539
+        },
+        "SRAM_to_start_IRQ_ms": {
+          "n": 240,
+          "mean": 0.007692307692307693,
+          "median": 0.007692307692307693,
+          "p95": 0.007692307692307693,
+          "max": 0.007692307692307693
+        },
+        "start_to_final_IRQ_ms": {
+          "n": 240,
+          "mean": 28.834615384615386,
+          "median": 28.834615384615386,
+          "p95": 28.834615384615386,
+          "max": 28.834615384615386
+        },
+        "SRAM_to_final_IRQ_ms": {
+          "n": 240,
+          "mean": 28.842307692307692,
+          "median": 28.842307692307692,
+          "p95": 28.842307692307692,
+          "max": 28.842307692307692
+        },
+        "IRQ_to_callback_ms": {
+          "n": 240,
+          "mean": 0.0038461538461538464,
+          "median": 0.0038461538461538464,
+          "p95": 0.0038461538461538464,
+          "max": 0.0038461538461538464
+        },
+        "cycle_ms": {
+          "n": 240,
+          "mean": 33.36669230769231,
+          "median": 33.36669230769231,
+          "p95": 33.36669230769231,
+          "max": 33.36669230769231
+        }
+      },
+      "event_count_histograms": {
+        "hardware": {
+          "1": 240
+        },
+        "SRAM_load": {
+          "1": 240
+        },
+        "CS0_start": {
+          "1": 240
+        },
+        "final_IRQ": {
+          "1": 240
+        }
+      }
+    },
+    {
+      "epoch": 2,
+      "driver_mode": "0x1717",
+      "IPC_preset": "0xe005",
+      "source_state": 2,
+      "steady_window_s": [
+        41.20007,
+        48.00007
+      ],
+      "frames": 210,
+      "statistics": {
+        "hardware_to_IRQ_ms": {
+          "n": 210,
+          "mean": 28.846153846153847,
+          "median": 28.846153846153847,
+          "p95": 28.846153846153847,
+          "max": 28.846153846153847
+        },
+        "hardware_to_SRAM_IRQ_ms": {
+          "n": 210,
+          "mean": 0.0038461538461538464,
+          "median": 0.0038461538461538464,
+          "p95": 0.0038461538461538464,
+          "max": 0.0038461538461538464
+        },
+        "hardware_to_start_IRQ_ms": {
+          "n": 210,
+          "mean": 0.011538461538461539,
+          "median": 0.011538461538461539,
+          "p95": 0.011538461538461539,
+          "max": 0.011538461538461539
+        },
+        "SRAM_to_start_IRQ_ms": {
+          "n": 210,
+          "mean": 0.007692307692307693,
+          "median": 0.007692307692307693,
+          "p95": 0.007692307692307693,
+          "max": 0.007692307692307693
+        },
+        "start_to_final_IRQ_ms": {
+          "n": 210,
+          "mean": 28.834615384615386,
+          "median": 28.834615384615386,
+          "p95": 28.834615384615386,
+          "max": 28.834615384615386
+        },
+        "SRAM_to_final_IRQ_ms": {
+          "n": 210,
+          "mean": 28.842307692307692,
+          "median": 28.842307692307692,
+          "p95": 28.842307692307692,
+          "max": 28.842307692307692
+        },
+        "IRQ_to_callback_ms": {
+          "n": 210,
+          "mean": 0.0038461538461538464,
+          "median": 0.0038461538461538464,
+          "p95": 0.0038461538461538464,
+          "max": 0.0038461538461538464
+        },
+        "cycle_ms": {
+          "n": 210,
+          "mean": 33.36669230769231,
+          "median": 33.36669230769231,
+          "p95": 33.36669230769231,
+          "max": 33.36669230769231
+        }
+      },
+      "event_count_histograms": {
+        "hardware": {
+          "1": 210
+        },
+        "SRAM_load": {
+          "1": 210
+        },
+        "CS0_start": {
+          "1": 210
+        },
+        "final_IRQ": {
+          "1": 210
+        }
+      }
+    }
+  ],
+  "pinned_modes": {
+    "schema": "NXL_PINNED_HW_PHASE1",
+    "capacity": 16,
+    "overflow": false,
+    "records": [
+      {
+        "generation": 1,
+        "phase": "preview",
+        "mark": 0,
+        "elapsed_s": 2.2,
+        "DMA_status": 1,
+        "driver": "0x1818",
+        "scene": "0x1908",
+        "IPC_preset": "0xe004",
+        "native_sequence_before": 78,
+        "native_sequence_after": 78,
+        "DMA_registers": {
+          "0x20810908": "0x0",
+          "0x2081090c": "0x0",
+          "0x20810910": "0x0",
+          "0x20810914": "0x0",
+          "0x2081091c": "0x0",
+          "0x20810924": "0x0",
+          "0x20810980": "0x0",
+          "0x20810984": "0x0",
+          "0x20810988": "0x0",
+          "0x2081098c": "0x0",
+          "0x20810994": "0x0",
+          "0x2081099c": "0x0",
+          "0x20810a08": "0x0",
+          "0x20810a0c": "0x0",
+          "0x20810a10": "0x0",
+          "0x20810a14": "0x0",
+          "0x20810a1c": "0x0",
+          "0x20810a24": "0x0",
+          "0x20810a80": "0x0",
+          "0x20810a84": "0x0",
+          "0x20810a88": "0x0",
+          "0x20810a8c": "0x0",
+          "0x20810a94": "0x0",
+          "0x20810a9c": "0x0",
+          "0x20810b08": "0x0",
+          "0x20810b0c": "0x0",
+          "0x20810b10": "0x0",
+          "0x20810b14": "0x0",
+          "0x20810b1c": "0x0",
+          "0x20810b24": "0x0",
+          "0x20810b80": "0x0",
+          "0x20810b84": "0x0",
+          "0x20810b88": "0x0",
+          "0x20810b8c": "0x0",
+          "0x20810b94": "0x0",
+          "0x20810b9c": "0x0",
+          "0x20810c08": "0x0",
+          "0x20810c0c": "0x0",
+          "0x20810c10": "0x0",
+          "0x20810c14": "0x0",
+          "0x20810c1c": "0x0",
+          "0x20810c24": "0x0",
+          "0x20810c80": "0x0",
+          "0x20810c84": "0x0",
+          "0x20810c88": "0x0",
+          "0x20810c8c": "0x0",
+          "0x20810c94": "0x0",
+          "0x20810c9c": "0x0",
+          "0x20821300": "0x0",
+          "0x20821304": "0x0",
+          "0x20821308": "0x0",
+          "0x2082130c": "0x0",
+          "0x20821310": "0x0",
+          "0x20821400": "0x0",
+          "0x20821404": "0x0",
+          "0x20821408": "0x0",
+          "0x2082140c": "0x0",
+          "0x20821410": "0x0",
+          "0x20821500": "0x0",
+          "0x20821504": "0x0",
+          "0x20821508": "0x0",
+          "0x2082150c": "0x0",
+          "0x20821510": "0x0",
+          "0x20821600": "0x0",
+          "0x20821604": "0x0",
+          "0x20821608": "0x0",
+          "0x2082160c": "0x0",
+          "0x20821610": "0x0",
+          "0x20821380": "0x0",
+          "0x20821384": "0x0",
+          "0x20821388": "0x0",
+          "0x2082138c": "0x0",
+          "0x20821390": "0x0",
+          "0x20821480": "0x0",
+          "0x20821484": "0x0",
+          "0x20821488": "0x0",
+          "0x2082148c": "0x0",
+          "0x20821490": "0x0",
+          "0x20821580": "0x0",
+          "0x20821584": "0x0",
+          "0x20821588": "0x0",
+          "0x2082158c": "0x0",
+          "0x20821590": "0x0",
+          "0x20821680": "0x0",
+          "0x20821684": "0x0",
+          "0x20821688": "0x0",
+          "0x2082168c": "0x0",
+          "0x20821690": "0x0",
+          "0x20821700": "0x0",
+          "0x20821704": "0x0",
+          "0x20821708": "0x0",
+          "0x2082170c": "0x0",
+          "0x20821710": "0x0",
+          "0x20821800": "0x0",
+          "0x20821804": "0x0",
+          "0x20821808": "0x0",
+          "0x2082180c": "0x0",
+          "0x20821810": "0x0",
+          "0x20821900": "0x0",
+          "0x20821904": "0x0",
+          "0x20821908": "0x0",
+          "0x2082190c": "0x0",
+          "0x20821910": "0x0",
+          "0x20821a00": "0x0",
+          "0x20821a04": "0x0",
+          "0x20821a08": "0x0",
+          "0x20821a0c": "0x0",
+          "0x20821a10": "0x0",
+          "0x20821780": "0x0",
+          "0x20821784": "0x0",
+          "0x20821788": "0x0",
+          "0x2082178c": "0x0",
+          "0x20821790": "0x0",
+          "0x20821880": "0x0",
+          "0x20821884": "0x0",
+          "0x20821888": "0x0",
+          "0x2082188c": "0x0",
+          "0x20821890": "0x0",
+          "0x20821980": "0x0",
+          "0x20821984": "0x0",
+          "0x20821988": "0x0",
+          "0x2082198c": "0x0",
+          "0x20821990": "0x0",
+          "0x20821a80": "0x0",
+          "0x20821a84": "0x0",
+          "0x20821a88": "0x0",
+          "0x20821a8c": "0x0",
+          "0x20821a90": "0x0",
+          "0x20821000": "0x0",
+          "0x20821048": "0x0",
+          "0x20821114": "0x0",
+          "0x20821214": "0x0",
+          "0x20810308": "0x0",
+          "0x20810310": "0x0",
+          "0x20810314": "0x0",
+          "0x20810128": "0x0"
+        },
+        "DMA_changed_during_read": [],
+        "DDR_readback_status": 3,
+        "DDR_A_readback_Hz": 0,
+        "clock_status": 1,
+        "clock_selector_words": [
+          "0x500",
+          "0x501",
+          "0x502",
+          "0x503",
+          "0x504",
+          "0x505",
+          "0x506",
+          "0x507",
+          "0x508"
+        ]
+      },
+      {
+        "generation": 2,
+        "phase": "recording-progress",
+        "mark": 0,
+        "elapsed_s": 6.2,
+        "DMA_status": 1,
+        "driver": "0x1818",
+        "scene": "0x1908",
+        "IPC_preset": "0xe004",
+        "native_sequence_before": 198,
+        "native_sequence_after": 198,
+        "DMA_registers": {
+          "0x20810908": "0x0",
+          "0x2081090c": "0x0",
+          "0x20810910": "0x0",
+          "0x20810914": "0x0",
+          "0x2081091c": "0x0",
+          "0x20810924": "0x0",
+          "0x20810980": "0x0",
+          "0x20810984": "0x0",
+          "0x20810988": "0x0",
+          "0x2081098c": "0x0",
+          "0x20810994": "0x0",
+          "0x2081099c": "0x0",
+          "0x20810a08": "0x0",
+          "0x20810a0c": "0x0",
+          "0x20810a10": "0x0",
+          "0x20810a14": "0x0",
+          "0x20810a1c": "0x0",
+          "0x20810a24": "0x0",
+          "0x20810a80": "0x0",
+          "0x20810a84": "0x0",
+          "0x20810a88": "0x0",
+          "0x20810a8c": "0x0",
+          "0x20810a94": "0x0",
+          "0x20810a9c": "0x0",
+          "0x20810b08": "0x0",
+          "0x20810b0c": "0x0",
+          "0x20810b10": "0x0",
+          "0x20810b14": "0x0",
+          "0x20810b1c": "0x0",
+          "0x20810b24": "0x0",
+          "0x20810b80": "0x0",
+          "0x20810b84": "0x0",
+          "0x20810b88": "0x0",
+          "0x20810b8c": "0x0",
+          "0x20810b94": "0x0",
+          "0x20810b9c": "0x0",
+          "0x20810c08": "0x0",
+          "0x20810c0c": "0x0",
+          "0x20810c10": "0x0",
+          "0x20810c14": "0x0",
+          "0x20810c1c": "0x0",
+          "0x20810c24": "0x0",
+          "0x20810c80": "0x0",
+          "0x20810c84": "0x0",
+          "0x20810c88": "0x0",
+          "0x20810c8c": "0x0",
+          "0x20810c94": "0x0",
+          "0x20810c9c": "0x0",
+          "0x20821300": "0x0",
+          "0x20821304": "0x0",
+          "0x20821308": "0x0",
+          "0x2082130c": "0x0",
+          "0x20821310": "0x0",
+          "0x20821400": "0xb1000000",
+          "0x20821404": "0xb1047040",
+          "0x20821408": "0x2d0051",
+          "0x2082140c": "0x8000000",
+          "0x20821410": "0x100",
+          "0x20821500": "0x0",
+          "0x20821504": "0x0",
+          "0x20821508": "0x0",
+          "0x2082150c": "0x0",
+          "0x20821510": "0x0",
+          "0x20821600": "0x0",
+          "0x20821604": "0x0",
+          "0x20821608": "0x0",
+          "0x2082160c": "0x0",
+          "0x20821610": "0x0",
+          "0x20821380": "0x0",
+          "0x20821384": "0x0",
+          "0x20821388": "0x0",
+          "0x2082138c": "0x0",
+          "0x20821390": "0x0",
+          "0x20821480": "0xb1200000",
+          "0x20821484": "0xb1247040",
+          "0x20821488": "0x2d0051",
+          "0x2082148c": "0x8000000",
+          "0x20821490": "0x100",
+          "0x20821580": "0x0",
+          "0x20821584": "0x0",
+          "0x20821588": "0x0",
+          "0x2082158c": "0x0",
+          "0x20821590": "0x0",
+          "0x20821680": "0x0",
+          "0x20821684": "0x0",
+          "0x20821688": "0x0",
+          "0x2082168c": "0x0",
+          "0x20821690": "0x0",
+          "0x20821700": "0x0",
+          "0x20821704": "0x0",
+          "0x20821708": "0x0",
+          "0x2082170c": "0x0",
+          "0x20821710": "0x0",
+          "0x20821800": "0xb1100000",
+          "0x20821804": "0xb1147040",
+          "0x20821808": "0x2d0051",
+          "0x2082180c": "0x8000000",
+          "0x20821810": "0x100",
+          "0x20821900": "0x0",
+          "0x20821904": "0x0",
+          "0x20821908": "0x0",
+          "0x2082190c": "0x0",
+          "0x20821910": "0x0",
+          "0x20821a00": "0x0",
+          "0x20821a04": "0x0",
+          "0x20821a08": "0x0",
+          "0x20821a0c": "0x0",
+          "0x20821a10": "0x0",
+          "0x20821780": "0x0",
+          "0x20821784": "0x0",
+          "0x20821788": "0x0",
+          "0x2082178c": "0x0",
+          "0x20821790": "0x0",
+          "0x20821880": "0xb1300000",
+          "0x20821884": "0xb1347040",
+          "0x20821888": "0x2d0051",
+          "0x2082188c": "0x8000000",
+          "0x20821890": "0x100",
+          "0x20821980": "0x0",
+          "0x20821984": "0x0",
+          "0x20821988": "0x0",
+          "0x2082198c": "0x0",
+          "0x20821990": "0x0",
+          "0x20821a80": "0x0",
+          "0x20821a84": "0x0",
+          "0x20821a88": "0x0",
+          "0x20821a8c": "0x0",
+          "0x20821a90": "0x0",
+          "0x20821000": "0x0",
+          "0x20821048": "0x0",
+          "0x20821114": "0x0",
+          "0x20821214": "0x0",
+          "0x20810308": "0x0",
+          "0x20810310": "0x0",
+          "0x20810314": "0x0",
+          "0x20810128": "0x0"
+        },
+        "DMA_changed_during_read": [],
+        "DDR_readback_status": 3,
+        "DDR_A_readback_Hz": 0,
+        "clock_status": 1,
+        "clock_selector_words": [
+          "0x500",
+          "0x501",
+          "0x502",
+          "0x503",
+          "0x504",
+          "0x505",
+          "0x506",
+          "0x507",
+          "0x508"
+        ]
+      },
+      {
+        "generation": 3,
+        "phase": "preview",
+        "mark": 0,
+        "elapsed_s": 15.2,
+        "DMA_status": 1,
+        "driver": "0x1818",
+        "scene": "0x1908",
+        "IPC_preset": "0xe004",
+        "native_sequence_before": 468,
+        "native_sequence_after": 468,
+        "DMA_registers": {
+          "0x20810908": "0x0",
+          "0x2081090c": "0x0",
+          "0x20810910": "0x0",
+          "0x20810914": "0x0",
+          "0x2081091c": "0x0",
+          "0x20810924": "0x0",
+          "0x20810980": "0x0",
+          "0x20810984": "0x0",
+          "0x20810988": "0x0",
+          "0x2081098c": "0x0",
+          "0x20810994": "0x0",
+          "0x2081099c": "0x0",
+          "0x20810a08": "0x0",
+          "0x20810a0c": "0x0",
+          "0x20810a10": "0x0",
+          "0x20810a14": "0x0",
+          "0x20810a1c": "0x0",
+          "0x20810a24": "0x0",
+          "0x20810a80": "0x0",
+          "0x20810a84": "0x0",
+          "0x20810a88": "0x0",
+          "0x20810a8c": "0x0",
+          "0x20810a94": "0x0",
+          "0x20810a9c": "0x0",
+          "0x20810b08": "0x0",
+          "0x20810b0c": "0x0",
+          "0x20810b10": "0x0",
+          "0x20810b14": "0x0",
+          "0x20810b1c": "0x0",
+          "0x20810b24": "0x0",
+          "0x20810b80": "0x0",
+          "0x20810b84": "0x0",
+          "0x20810b88": "0x0",
+          "0x20810b8c": "0x0",
+          "0x20810b94": "0x0",
+          "0x20810b9c": "0x0",
+          "0x20810c08": "0x0",
+          "0x20810c0c": "0x0",
+          "0x20810c10": "0x0",
+          "0x20810c14": "0x0",
+          "0x20810c1c": "0x0",
+          "0x20810c24": "0x0",
+          "0x20810c80": "0x0",
+          "0x20810c84": "0x0",
+          "0x20810c88": "0x0",
+          "0x20810c8c": "0x0",
+          "0x20810c94": "0x0",
+          "0x20810c9c": "0x0",
+          "0x20821300": "0x0",
+          "0x20821304": "0x0",
+          "0x20821308": "0x0",
+          "0x2082130c": "0x0",
+          "0x20821310": "0x0",
+          "0x20821400": "0x0",
+          "0x20821404": "0x0",
+          "0x20821408": "0x0",
+          "0x2082140c": "0x0",
+          "0x20821410": "0x0",
+          "0x20821500": "0x0",
+          "0x20821504": "0x0",
+          "0x20821508": "0x0",
+          "0x2082150c": "0x0",
+          "0x20821510": "0x0",
+          "0x20821600": "0x0",
+          "0x20821604": "0x0",
+          "0x20821608": "0x0",
+          "0x2082160c": "0x0",
+          "0x20821610": "0x0",
+          "0x20821380": "0x0",
+          "0x20821384": "0x0",
+          "0x20821388": "0x0",
+          "0x2082138c": "0x0",
+          "0x20821390": "0x0",
+          "0x20821480": "0x0",
+          "0x20821484": "0x0",
+          "0x20821488": "0x0",
+          "0x2082148c": "0x0",
+          "0x20821490": "0x0",
+          "0x20821580": "0x0",
+          "0x20821584": "0x0",
+          "0x20821588": "0x0",
+          "0x2082158c": "0x0",
+          "0x20821590": "0x0",
+          "0x20821680": "0x0",
+          "0x20821684": "0x0",
+          "0x20821688": "0x0",
+          "0x2082168c": "0x0",
+          "0x20821690": "0x0",
+          "0x20821700": "0x0",
+          "0x20821704": "0x0",
+          "0x20821708": "0x0",
+          "0x2082170c": "0x0",
+          "0x20821710": "0x0",
+          "0x20821800": "0x0",
+          "0x20821804": "0x0",
+          "0x20821808": "0x0",
+          "0x2082180c": "0x0",
+          "0x20821810": "0x0",
+          "0x20821900": "0x0",
+          "0x20821904": "0x0",
+          "0x20821908": "0x0",
+          "0x2082190c": "0x0",
+          "0x20821910": "0x0",
+          "0x20821a00": "0x0",
+          "0x20821a04": "0x0",
+          "0x20821a08": "0x0",
+          "0x20821a0c": "0x0",
+          "0x20821a10": "0x0",
+          "0x20821780": "0x0",
+          "0x20821784": "0x0",
+          "0x20821788": "0x0",
+          "0x2082178c": "0x0",
+          "0x20821790": "0x0",
+          "0x20821880": "0x0",
+          "0x20821884": "0x0",
+          "0x20821888": "0x0",
+          "0x2082188c": "0x0",
+          "0x20821890": "0x0",
+          "0x20821980": "0x0",
+          "0x20821984": "0x0",
+          "0x20821988": "0x0",
+          "0x2082198c": "0x0",
+          "0x20821990": "0x0",
+          "0x20821a80": "0x0",
+          "0x20821a84": "0x0",
+          "0x20821a88": "0x0",
+          "0x20821a8c": "0x0",
+          "0x20821a90": "0x0",
+          "0x20821000": "0x0",
+          "0x20821048": "0x0",
+          "0x20821114": "0x0",
+          "0x20821214": "0x0",
+          "0x20810308": "0x0",
+          "0x20810310": "0x0",
+          "0x20810314": "0x0",
+          "0x20810128": "0x0"
+        },
+        "DMA_changed_during_read": [],
+        "DDR_readback_status": 3,
+        "DDR_A_readback_Hz": 0,
+        "clock_status": 1,
+        "clock_selector_words": [
+          "0x500",
+          "0x501",
+          "0x502",
+          "0x503",
+          "0x504",
+          "0x505",
+          "0x506",
+          "0x507",
+          "0x508"
+        ]
+      },
+      {
+        "generation": 4,
+        "phase": "preview",
+        "mark": 0,
+        "elapsed_s": 20.2,
+        "DMA_status": 1,
+        "driver": "0x1919",
+        "scene": "0x1908",
+        "IPC_preset": "0xe004",
+        "native_sequence_before": 618,
+        "native_sequence_after": 618,
+        "DMA_registers": {
+          "0x20810908": "0x0",
+          "0x2081090c": "0x0",
+          "0x20810910": "0x0",
+          "0x20810914": "0x0",
+          "0x2081091c": "0x0",
+          "0x20810924": "0x0",
+          "0x20810980": "0x0",
+          "0x20810984": "0x0",
+          "0x20810988": "0x0",
+          "0x2081098c": "0x0",
+          "0x20810994": "0x0",
+          "0x2081099c": "0x0",
+          "0x20810a08": "0x0",
+          "0x20810a0c": "0x0",
+          "0x20810a10": "0x0",
+          "0x20810a14": "0x0",
+          "0x20810a1c": "0x0",
+          "0x20810a24": "0x0",
+          "0x20810a80": "0x0",
+          "0x20810a84": "0x0",
+          "0x20810a88": "0x0",
+          "0x20810a8c": "0x0",
+          "0x20810a94": "0x0",
+          "0x20810a9c": "0x0",
+          "0x20810b08": "0x0",
+          "0x20810b0c": "0x0",
+          "0x20810b10": "0x0",
+          "0x20810b14": "0x0",
+          "0x20810b1c": "0x0",
+          "0x20810b24": "0x0",
+          "0x20810b80": "0x0",
+          "0x20810b84": "0x0",
+          "0x20810b88": "0x0",
+          "0x20810b8c": "0x0",
+          "0x20810b94": "0x0",
+          "0x20810b9c": "0x0",
+          "0x20810c08": "0x0",
+          "0x20810c0c": "0x0",
+          "0x20810c10": "0x0",
+          "0x20810c14": "0x0",
+          "0x20810c1c": "0x0",
+          "0x20810c24": "0x0",
+          "0x20810c80": "0x0",
+          "0x20810c84": "0x0",
+          "0x20810c88": "0x0",
+          "0x20810c8c": "0x0",
+          "0x20810c94": "0x0",
+          "0x20810c9c": "0x0",
+          "0x20821300": "0x0",
+          "0x20821304": "0x0",
+          "0x20821308": "0x0",
+          "0x2082130c": "0x0",
+          "0x20821310": "0x0",
+          "0x20821400": "0x0",
+          "0x20821404": "0x0",
+          "0x20821408": "0x0",
+          "0x2082140c": "0x0",
+          "0x20821410": "0x0",
+          "0x20821500": "0x0",
+          "0x20821504": "0x0",
+          "0x20821508": "0x0",
+          "0x2082150c": "0x0",
+          "0x20821510": "0x0",
+          "0x20821600": "0x0",
+          "0x20821604": "0x0",
+          "0x20821608": "0x0",
+          "0x2082160c": "0x0",
+          "0x20821610": "0x0",
+          "0x20821380": "0x0",
+          "0x20821384": "0x0",
+          "0x20821388": "0x0",
+          "0x2082138c": "0x0",
+          "0x20821390": "0x0",
+          "0x20821480": "0x0",
+          "0x20821484": "0x0",
+          "0x20821488": "0x0",
+          "0x2082148c": "0x0",
+          "0x20821490": "0x0",
+          "0x20821580": "0x0",
+          "0x20821584": "0x0",
+          "0x20821588": "0x0",
+          "0x2082158c": "0x0",
+          "0x20821590": "0x0",
+          "0x20821680": "0x0",
+          "0x20821684": "0x0",
+          "0x20821688": "0x0",
+          "0x2082168c": "0x0",
+          "0x20821690": "0x0",
+          "0x20821700": "0x0",
+          "0x20821704": "0x0",
+          "0x20821708": "0x0",
+          "0x2082170c": "0x0",
+          "0x20821710": "0x0",
+          "0x20821800": "0x0",
+          "0x20821804": "0x0",
+          "0x20821808": "0x0",
+          "0x2082180c": "0x0",
+          "0x20821810": "0x0",
+          "0x20821900": "0x0",
+          "0x20821904": "0x0",
+          "0x20821908": "0x0",
+          "0x2082190c": "0x0",
+          "0x20821910": "0x0",
+          "0x20821a00": "0x0",
+          "0x20821a04": "0x0",
+          "0x20821a08": "0x0",
+          "0x20821a0c": "0x0",
+          "0x20821a10": "0x0",
+          "0x20821780": "0x0",
+          "0x20821784": "0x0",
+          "0x20821788": "0x0",
+          "0x2082178c": "0x0",
+          "0x20821790": "0x0",
+          "0x20821880": "0x0",
+          "0x20821884": "0x0",
+          "0x20821888": "0x0",
+          "0x2082188c": "0x0",
+          "0x20821890": "0x0",
+          "0x20821980": "0x0",
+          "0x20821984": "0x0",
+          "0x20821988": "0x0",
+          "0x2082198c": "0x0",
+          "0x20821990": "0x0",
+          "0x20821a80": "0x0",
+          "0x20821a84": "0x0",
+          "0x20821a88": "0x0",
+          "0x20821a8c": "0x0",
+          "0x20821a90": "0x0",
+          "0x20821000": "0x0",
+          "0x20821048": "0x0",
+          "0x20821114": "0x0",
+          "0x20821214": "0x0",
+          "0x20810308": "0x0",
+          "0x20810310": "0x0",
+          "0x20810314": "0x0",
+          "0x20810128": "0x0"
+        },
+        "DMA_changed_during_read": [],
+        "DDR_readback_status": 3,
+        "DDR_A_readback_Hz": 0,
+        "clock_status": 1,
+        "clock_selector_words": [
+          "0x500",
+          "0x501",
+          "0x502",
+          "0x503",
+          "0x504",
+          "0x505",
+          "0x506",
+          "0x507",
+          "0x508"
+        ]
+      },
+      {
+        "generation": 5,
+        "phase": "recording-progress",
+        "mark": 0,
+        "elapsed_s": 24.2,
+        "DMA_status": 1,
+        "driver": "0x1919",
+        "scene": "0x1908",
+        "IPC_preset": "0xe004",
+        "native_sequence_before": 738,
+        "native_sequence_after": 738,
+        "DMA_registers": {
+          "0x20810908": "0x0",
+          "0x2081090c": "0x0",
+          "0x20810910": "0x0",
+          "0x20810914": "0x0",
+          "0x2081091c": "0x0",
+          "0x20810924": "0x0",
+          "0x20810980": "0x0",
+          "0x20810984": "0x0",
+          "0x20810988": "0x0",
+          "0x2081098c": "0x0",
+          "0x20810994": "0x0",
+          "0x2081099c": "0x0",
+          "0x20810a08": "0x0",
+          "0x20810a0c": "0x0",
+          "0x20810a10": "0x0",
+          "0x20810a14": "0x0",
+          "0x20810a1c": "0x0",
+          "0x20810a24": "0x0",
+          "0x20810a80": "0x0",
+          "0x20810a84": "0x0",
+          "0x20810a88": "0x0",
+          "0x20810a8c": "0x0",
+          "0x20810a94": "0x0",
+          "0x20810a9c": "0x0",
+          "0x20810b08": "0x0",
+          "0x20810b0c": "0x0",
+          "0x20810b10": "0x0",
+          "0x20810b14": "0x0",
+          "0x20810b1c": "0x0",
+          "0x20810b24": "0x0",
+          "0x20810b80": "0x0",
+          "0x20810b84": "0x0",
+          "0x20810b88": "0x0",
+          "0x20810b8c": "0x0",
+          "0x20810b94": "0x0",
+          "0x20810b9c": "0x0",
+          "0x20810c08": "0x0",
+          "0x20810c0c": "0x0",
+          "0x20810c10": "0x0",
+          "0x20810c14": "0x0",
+          "0x20810c1c": "0x0",
+          "0x20810c24": "0x0",
+          "0x20810c80": "0x0",
+          "0x20810c84": "0x0",
+          "0x20810c88": "0x0",
+          "0x20810c8c": "0x0",
+          "0x20810c94": "0x0",
+          "0x20810c9c": "0x0",
+          "0x20821300": "0x0",
+          "0x20821304": "0x0",
+          "0x20821308": "0x0",
+          "0x2082130c": "0x0",
+          "0x20821310": "0x0",
+          "0x20821400": "0xb1000000",
+          "0x20821404": "0xb1047040",
+          "0x20821408": "0x2d0051",
+          "0x2082140c": "0x8000000",
+          "0x20821410": "0x100",
+          "0x20821500": "0x0",
+          "0x20821504": "0x0",
+          "0x20821508": "0x0",
+          "0x2082150c": "0x0",
+          "0x20821510": "0x0",
+          "0x20821600": "0x0",
+          "0x20821604": "0x0",
+          "0x20821608": "0x0",
+          "0x2082160c": "0x0",
+          "0x20821610": "0x0",
+          "0x20821380": "0x0",
+          "0x20821384": "0x0",
+          "0x20821388": "0x0",
+          "0x2082138c": "0x0",
+          "0x20821390": "0x0",
+          "0x20821480": "0xb1200000",
+          "0x20821484": "0xb1247040",
+          "0x20821488": "0x2d0051",
+          "0x2082148c": "0x8000000",
+          "0x20821490": "0x100",
+          "0x20821580": "0x0",
+          "0x20821584": "0x0",
+          "0x20821588": "0x0",
+          "0x2082158c": "0x0",
+          "0x20821590": "0x0",
+          "0x20821680": "0x0",
+          "0x20821684": "0x0",
+          "0x20821688": "0x0",
+          "0x2082168c": "0x0",
+          "0x20821690": "0x0",
+          "0x20821700": "0x0",
+          "0x20821704": "0x0",
+          "0x20821708": "0x0",
+          "0x2082170c": "0x0",
+          "0x20821710": "0x0",
+          "0x20821800": "0xb1100000",
+          "0x20821804": "0xb1147040",
+          "0x20821808": "0x2d0051",
+          "0x2082180c": "0x8000000",
+          "0x20821810": "0x100",
+          "0x20821900": "0x0",
+          "0x20821904": "0x0",
+          "0x20821908": "0x0",
+          "0x2082190c": "0x0",
+          "0x20821910": "0x0",
+          "0x20821a00": "0x0",
+          "0x20821a04": "0x0",
+          "0x20821a08": "0x0",
+          "0x20821a0c": "0x0",
+          "0x20821a10": "0x0",
+          "0x20821780": "0x0",
+          "0x20821784": "0x0",
+          "0x20821788": "0x0",
+          "0x2082178c": "0x0",
+          "0x20821790": "0x0",
+          "0x20821880": "0xb1300000",
+          "0x20821884": "0xb1347040",
+          "0x20821888": "0x2d0051",
+          "0x2082188c": "0x8000000",
+          "0x20821890": "0x100",
+          "0x20821980": "0x0",
+          "0x20821984": "0x0",
+          "0x20821988": "0x0",
+          "0x2082198c": "0x0",
+          "0x20821990": "0x0",
+          "0x20821a80": "0x0",
+          "0x20821a84": "0x0",
+          "0x20821a88": "0x0",
+          "0x20821a8c": "0x0",
+          "0x20821a90": "0x0",
+          "0x20821000": "0x0",
+          "0x20821048": "0x0",
+          "0x20821114": "0x0",
+          "0x20821214": "0x0",
+          "0x20810308": "0x0",
+          "0x20810310": "0x0",
+          "0x20810314": "0x0",
+          "0x20810128": "0x0"
+        },
+        "DMA_changed_during_read": [],
+        "DDR_readback_status": 3,
+        "DDR_A_readback_Hz": 0,
+        "clock_status": 1,
+        "clock_selector_words": [
+          "0x500",
+          "0x501",
+          "0x502",
+          "0x503",
+          "0x504",
+          "0x505",
+          "0x506",
+          "0x507",
+          "0x508"
+        ]
+      },
+      {
+        "generation": 6,
+        "phase": "preview",
+        "mark": 0,
+        "elapsed_s": 33.2,
+        "DMA_status": 1,
+        "driver": "0x1919",
+        "scene": "0x1908",
+        "IPC_preset": "0xe004",
+        "native_sequence_before": 1008,
+        "native_sequence_after": 1008,
+        "DMA_registers": {
+          "0x20810908": "0x0",
+          "0x2081090c": "0x0",
+          "0x20810910": "0x0",
+          "0x20810914": "0x0",
+          "0x2081091c": "0x0",
+          "0x20810924": "0x0",
+          "0x20810980": "0x0",
+          "0x20810984": "0x0",
+          "0x20810988": "0x0",
+          "0x2081098c": "0x0",
+          "0x20810994": "0x0",
+          "0x2081099c": "0x0",
+          "0x20810a08": "0x0",
+          "0x20810a0c": "0x0",
+          "0x20810a10": "0x0",
+          "0x20810a14": "0x0",
+          "0x20810a1c": "0x0",
+          "0x20810a24": "0x0",
+          "0x20810a80": "0x0",
+          "0x20810a84": "0x0",
+          "0x20810a88": "0x0",
+          "0x20810a8c": "0x0",
+          "0x20810a94": "0x0",
+          "0x20810a9c": "0x0",
+          "0x20810b08": "0x0",
+          "0x20810b0c": "0x0",
+          "0x20810b10": "0x0",
+          "0x20810b14": "0x0",
+          "0x20810b1c": "0x0",
+          "0x20810b24": "0x0",
+          "0x20810b80": "0x0",
+          "0x20810b84": "0x0",
+          "0x20810b88": "0x0",
+          "0x20810b8c": "0x0",
+          "0x20810b94": "0x0",
+          "0x20810b9c": "0x0",
+          "0x20810c08": "0x0",
+          "0x20810c0c": "0x0",
+          "0x20810c10": "0x0",
+          "0x20810c14": "0x0",
+          "0x20810c1c": "0x0",
+          "0x20810c24": "0x0",
+          "0x20810c80": "0x0",
+          "0x20810c84": "0x0",
+          "0x20810c88": "0x0",
+          "0x20810c8c": "0x0",
+          "0x20810c94": "0x0",
+          "0x20810c9c": "0x0",
+          "0x20821300": "0x0",
+          "0x20821304": "0x0",
+          "0x20821308": "0x0",
+          "0x2082130c": "0x0",
+          "0x20821310": "0x0",
+          "0x20821400": "0x0",
+          "0x20821404": "0x0",
+          "0x20821408": "0x0",
+          "0x2082140c": "0x0",
+          "0x20821410": "0x0",
+          "0x20821500": "0x0",
+          "0x20821504": "0x0",
+          "0x20821508": "0x0",
+          "0x2082150c": "0x0",
+          "0x20821510": "0x0",
+          "0x20821600": "0x0",
+          "0x20821604": "0x0",
+          "0x20821608": "0x0",
+          "0x2082160c": "0x0",
+          "0x20821610": "0x0",
+          "0x20821380": "0x0",
+          "0x20821384": "0x0",
+          "0x20821388": "0x0",
+          "0x2082138c": "0x0",
+          "0x20821390": "0x0",
+          "0x20821480": "0x0",
+          "0x20821484": "0x0",
+          "0x20821488": "0x0",
+          "0x2082148c": "0x0",
+          "0x20821490": "0x0",
+          "0x20821580": "0x0",
+          "0x20821584": "0x0",
+          "0x20821588": "0x0",
+          "0x2082158c": "0x0",
+          "0x20821590": "0x0",
+          "0x20821680": "0x0",
+          "0x20821684": "0x0",
+          "0x20821688": "0x0",
+          "0x2082168c": "0x0",
+          "0x20821690": "0x0",
+          "0x20821700": "0x0",
+          "0x20821704": "0x0",
+          "0x20821708": "0x0",
+          "0x2082170c": "0x0",
+          "0x20821710": "0x0",
+          "0x20821800": "0x0",
+          "0x20821804": "0x0",
+          "0x20821808": "0x0",
+          "0x2082180c": "0x0",
+          "0x20821810": "0x0",
+          "0x20821900": "0x0",
+          "0x20821904": "0x0",
+          "0x20821908": "0x0",
+          "0x2082190c": "0x0",
+          "0x20821910": "0x0",
+          "0x20821a00": "0x0",
+          "0x20821a04": "0x0",
+          "0x20821a08": "0x0",
+          "0x20821a0c": "0x0",
+          "0x20821a10": "0x0",
+          "0x20821780": "0x0",
+          "0x20821784": "0x0",
+          "0x20821788": "0x0",
+          "0x2082178c": "0x0",
+          "0x20821790": "0x0",
+          "0x20821880": "0x0",
+          "0x20821884": "0x0",
+          "0x20821888": "0x0",
+          "0x2082188c": "0x0",
+          "0x20821890": "0x0",
+          "0x20821980": "0x0",
+          "0x20821984": "0x0",
+          "0x20821988": "0x0",
+          "0x2082198c": "0x0",
+          "0x20821990": "0x0",
+          "0x20821a80": "0x0",
+          "0x20821a84": "0x0",
+          "0x20821a88": "0x0",
+          "0x20821a8c": "0x0",
+          "0x20821a90": "0x0",
+          "0x20821000": "0x0",
+          "0x20821048": "0x0",
+          "0x20821114": "0x0",
+          "0x20821214": "0x0",
+          "0x20810308": "0x0",
+          "0x20810310": "0x0",
+          "0x20810314": "0x0",
+          "0x20810128": "0x0"
+        },
+        "DMA_changed_during_read": [],
+        "DDR_readback_status": 3,
+        "DDR_A_readback_Hz": 0,
+        "clock_status": 1,
+        "clock_selector_words": [
+          "0x500",
+          "0x501",
+          "0x502",
+          "0x503",
+          "0x504",
+          "0x505",
+          "0x506",
+          "0x507",
+          "0x508"
+        ]
+      },
+      {
+        "generation": 7,
+        "phase": "preview",
+        "mark": 0,
+        "elapsed_s": 38.2,
+        "DMA_status": 1,
+        "driver": "0x1717",
+        "scene": "0x1908",
+        "IPC_preset": "0xe005",
+        "native_sequence_before": 1158,
+        "native_sequence_after": 1158,
+        "DMA_registers": {
+          "0x20810908": "0x0",
+          "0x2081090c": "0x0",
+          "0x20810910": "0x0",
+          "0x20810914": "0x0",
+          "0x2081091c": "0x0",
+          "0x20810924": "0x0",
+          "0x20810980": "0x0",
+          "0x20810984": "0x0",
+          "0x20810988": "0x0",
+          "0x2081098c": "0x0",
+          "0x20810994": "0x0",
+          "0x2081099c": "0x0",
+          "0x20810a08": "0x0",
+          "0x20810a0c": "0x0",
+          "0x20810a10": "0x0",
+          "0x20810a14": "0x0",
+          "0x20810a1c": "0x0",
+          "0x20810a24": "0x0",
+          "0x20810a80": "0x0",
+          "0x20810a84": "0x0",
+          "0x20810a88": "0x0",
+          "0x20810a8c": "0x0",
+          "0x20810a94": "0x0",
+          "0x20810a9c": "0x0",
+          "0x20810b08": "0x0",
+          "0x20810b0c": "0x0",
+          "0x20810b10": "0x0",
+          "0x20810b14": "0x0",
+          "0x20810b1c": "0x0",
+          "0x20810b24": "0x0",
+          "0x20810b80": "0x0",
+          "0x20810b84": "0x0",
+          "0x20810b88": "0x0",
+          "0x20810b8c": "0x0",
+          "0x20810b94": "0x0",
+          "0x20810b9c": "0x0",
+          "0x20810c08": "0x0",
+          "0x20810c0c": "0x0",
+          "0x20810c10": "0x0",
+          "0x20810c14": "0x0",
+          "0x20810c1c": "0x0",
+          "0x20810c24": "0x0",
+          "0x20810c80": "0x0",
+          "0x20810c84": "0x0",
+          "0x20810c88": "0x0",
+          "0x20810c8c": "0x0",
+          "0x20810c94": "0x0",
+          "0x20810c9c": "0x0",
+          "0x20821300": "0x0",
+          "0x20821304": "0x0",
+          "0x20821308": "0x0",
+          "0x2082130c": "0x0",
+          "0x20821310": "0x0",
+          "0x20821400": "0x0",
+          "0x20821404": "0x0",
+          "0x20821408": "0x0",
+          "0x2082140c": "0x0",
+          "0x20821410": "0x0",
+          "0x20821500": "0x0",
+          "0x20821504": "0x0",
+          "0x20821508": "0x0",
+          "0x2082150c": "0x0",
+          "0x20821510": "0x0",
+          "0x20821600": "0x0",
+          "0x20821604": "0x0",
+          "0x20821608": "0x0",
+          "0x2082160c": "0x0",
+          "0x20821610": "0x0",
+          "0x20821380": "0x0",
+          "0x20821384": "0x0",
+          "0x20821388": "0x0",
+          "0x2082138c": "0x0",
+          "0x20821390": "0x0",
+          "0x20821480": "0x0",
+          "0x20821484": "0x0",
+          "0x20821488": "0x0",
+          "0x2082148c": "0x0",
+          "0x20821490": "0x0",
+          "0x20821580": "0x0",
+          "0x20821584": "0x0",
+          "0x20821588": "0x0",
+          "0x2082158c": "0x0",
+          "0x20821590": "0x0",
+          "0x20821680": "0x0",
+          "0x20821684": "0x0",
+          "0x20821688": "0x0",
+          "0x2082168c": "0x0",
+          "0x20821690": "0x0",
+          "0x20821700": "0x0",
+          "0x20821704": "0x0",
+          "0x20821708": "0x0",
+          "0x2082170c": "0x0",
+          "0x20821710": "0x0",
+          "0x20821800": "0x0",
+          "0x20821804": "0x0",
+          "0x20821808": "0x0",
+          "0x2082180c": "0x0",
+          "0x20821810": "0x0",
+          "0x20821900": "0x0",
+          "0x20821904": "0x0",
+          "0x20821908": "0x0",
+          "0x2082190c": "0x0",
+          "0x20821910": "0x0",
+          "0x20821a00": "0x0",
+          "0x20821a04": "0x0",
+          "0x20821a08": "0x0",
+          "0x20821a0c": "0x0",
+          "0x20821a10": "0x0",
+          "0x20821780": "0x0",
+          "0x20821784": "0x0",
+          "0x20821788": "0x0",
+          "0x2082178c": "0x0",
+          "0x20821790": "0x0",
+          "0x20821880": "0x0",
+          "0x20821884": "0x0",
+          "0x20821888": "0x0",
+          "0x2082188c": "0x0",
+          "0x20821890": "0x0",
+          "0x20821980": "0x0",
+          "0x20821984": "0x0",
+          "0x20821988": "0x0",
+          "0x2082198c": "0x0",
+          "0x20821990": "0x0",
+          "0x20821a80": "0x0",
+          "0x20821a84": "0x0",
+          "0x20821a88": "0x0",
+          "0x20821a8c": "0x0",
+          "0x20821a90": "0x0",
+          "0x20821000": "0x0",
+          "0x20821048": "0x0",
+          "0x20821114": "0x0",
+          "0x20821214": "0x0",
+          "0x20810308": "0x0",
+          "0x20810310": "0x0",
+          "0x20810314": "0x0",
+          "0x20810128": "0x0"
+        },
+        "DMA_changed_during_read": [],
+        "DDR_readback_status": 3,
+        "DDR_A_readback_Hz": 0,
+        "clock_status": 1,
+        "clock_selector_words": [
+          "0x500",
+          "0x501",
+          "0x502",
+          "0x503",
+          "0x504",
+          "0x505",
+          "0x506",
+          "0x507",
+          "0x508"
+        ]
+      },
+      {
+        "generation": 8,
+        "phase": "recording-progress",
+        "mark": 0,
+        "elapsed_s": 42.2,
+        "DMA_status": 1,
+        "driver": "0x1717",
+        "scene": "0x1908",
+        "IPC_preset": "0xe005",
+        "native_sequence_before": 1278,
+        "native_sequence_after": 1278,
+        "DMA_registers": {
+          "0x20810908": "0x0",
+          "0x2081090c": "0x0",
+          "0x20810910": "0x0",
+          "0x20810914": "0x0",
+          "0x2081091c": "0x0",
+          "0x20810924": "0x0",
+          "0x20810980": "0x0",
+          "0x20810984": "0x0",
+          "0x20810988": "0x0",
+          "0x2081098c": "0x0",
+          "0x20810994": "0x0",
+          "0x2081099c": "0x0",
+          "0x20810a08": "0x0",
+          "0x20810a0c": "0x0",
+          "0x20810a10": "0x0",
+          "0x20810a14": "0x0",
+          "0x20810a1c": "0x0",
+          "0x20810a24": "0x0",
+          "0x20810a80": "0x0",
+          "0x20810a84": "0x0",
+          "0x20810a88": "0x0",
+          "0x20810a8c": "0x0",
+          "0x20810a94": "0x0",
+          "0x20810a9c": "0x0",
+          "0x20810b08": "0x0",
+          "0x20810b0c": "0x0",
+          "0x20810b10": "0x0",
+          "0x20810b14": "0x0",
+          "0x20810b1c": "0x0",
+          "0x20810b24": "0x0",
+          "0x20810b80": "0x0",
+          "0x20810b84": "0x0",
+          "0x20810b88": "0x0",
+          "0x20810b8c": "0x0",
+          "0x20810b94": "0x0",
+          "0x20810b9c": "0x0",
+          "0x20810c08": "0x0",
+          "0x20810c0c": "0x0",
+          "0x20810c10": "0x0",
+          "0x20810c14": "0x0",
+          "0x20810c1c": "0x0",
+          "0x20810c24": "0x0",
+          "0x20810c80": "0x0",
+          "0x20810c84": "0x0",
+          "0x20810c88": "0x0",
+          "0x20810c8c": "0x0",
+          "0x20810c94": "0x0",
+          "0x20810c9c": "0x0",
+          "0x20821300": "0x0",
+          "0x20821304": "0x0",
+          "0x20821308": "0x0",
+          "0x2082130c": "0x0",
+          "0x20821310": "0x0",
+          "0x20821400": "0xb1000000",
+          "0x20821404": "0xb1047040",
+          "0x20821408": "0x2d0051",
+          "0x2082140c": "0x8000000",
+          "0x20821410": "0x100",
+          "0x20821500": "0x0",
+          "0x20821504": "0x0",
+          "0x20821508": "0x0",
+          "0x2082150c": "0x0",
+          "0x20821510": "0x0",
+          "0x20821600": "0x0",
+          "0x20821604": "0x0",
+          "0x20821608": "0x0",
+          "0x2082160c": "0x0",
+          "0x20821610": "0x0",
+          "0x20821380": "0x0",
+          "0x20821384": "0x0",
+          "0x20821388": "0x0",
+          "0x2082138c": "0x0",
+          "0x20821390": "0x0",
+          "0x20821480": "0xb1200000",
+          "0x20821484": "0xb1247040",
+          "0x20821488": "0x2d0051",
+          "0x2082148c": "0x8000000",
+          "0x20821490": "0x100",
+          "0x20821580": "0x0",
+          "0x20821584": "0x0",
+          "0x20821588": "0x0",
+          "0x2082158c": "0x0",
+          "0x20821590": "0x0",
+          "0x20821680": "0x0",
+          "0x20821684": "0x0",
+          "0x20821688": "0x0",
+          "0x2082168c": "0x0",
+          "0x20821690": "0x0",
+          "0x20821700": "0x0",
+          "0x20821704": "0x0",
+          "0x20821708": "0x0",
+          "0x2082170c": "0x0",
+          "0x20821710": "0x0",
+          "0x20821800": "0xb1100000",
+          "0x20821804": "0xb1147040",
+          "0x20821808": "0x2d0051",
+          "0x2082180c": "0x8000000",
+          "0x20821810": "0x100",
+          "0x20821900": "0x0",
+          "0x20821904": "0x0",
+          "0x20821908": "0x0",
+          "0x2082190c": "0x0",
+          "0x20821910": "0x0",
+          "0x20821a00": "0x0",
+          "0x20821a04": "0x0",
+          "0x20821a08": "0x0",
+          "0x20821a0c": "0x0",
+          "0x20821a10": "0x0",
+          "0x20821780": "0x0",
+          "0x20821784": "0x0",
+          "0x20821788": "0x0",
+          "0x2082178c": "0x0",
+          "0x20821790": "0x0",
+          "0x20821880": "0xb1300000",
+          "0x20821884": "0xb1347040",
+          "0x20821888": "0x2d0051",
+          "0x2082188c": "0x8000000",
+          "0x20821890": "0x100",
+          "0x20821980": "0x0",
+          "0x20821984": "0x0",
+          "0x20821988": "0x0",
+          "0x2082198c": "0x0",
+          "0x20821990": "0x0",
+          "0x20821a80": "0x0",
+          "0x20821a84": "0x0",
+          "0x20821a88": "0x0",
+          "0x20821a8c": "0x0",
+          "0x20821a90": "0x0",
+          "0x20821000": "0x0",
+          "0x20821048": "0x0",
+          "0x20821114": "0x0",
+          "0x20821214": "0x0",
+          "0x20810308": "0x0",
+          "0x20810310": "0x0",
+          "0x20810314": "0x0",
+          "0x20810128": "0x0"
+        },
+        "DMA_changed_during_read": [],
+        "DDR_readback_status": 3,
+        "DDR_A_readback_Hz": 0,
+        "clock_status": 1,
+        "clock_selector_words": [
+          "0x500",
+          "0x501",
+          "0x502",
+          "0x503",
+          "0x504",
+          "0x505",
+          "0x506",
+          "0x507",
+          "0x508"
+        ]
+      },
+      {
+        "generation": 9,
+        "phase": "preview",
+        "mark": 0,
+        "elapsed_s": 51.2,
+        "DMA_status": 1,
+        "driver": "0x1717",
+        "scene": "0x1908",
+        "IPC_preset": "0xe005",
+        "native_sequence_before": 1548,
+        "native_sequence_after": 1548,
+        "DMA_registers": {
+          "0x20810908": "0x0",
+          "0x2081090c": "0x0",
+          "0x20810910": "0x0",
+          "0x20810914": "0x0",
+          "0x2081091c": "0x0",
+          "0x20810924": "0x0",
+          "0x20810980": "0x0",
+          "0x20810984": "0x0",
+          "0x20810988": "0x0",
+          "0x2081098c": "0x0",
+          "0x20810994": "0x0",
+          "0x2081099c": "0x0",
+          "0x20810a08": "0x0",
+          "0x20810a0c": "0x0",
+          "0x20810a10": "0x0",
+          "0x20810a14": "0x0",
+          "0x20810a1c": "0x0",
+          "0x20810a24": "0x0",
+          "0x20810a80": "0x0",
+          "0x20810a84": "0x0",
+          "0x20810a88": "0x0",
+          "0x20810a8c": "0x0",
+          "0x20810a94": "0x0",
+          "0x20810a9c": "0x0",
+          "0x20810b08": "0x0",
+          "0x20810b0c": "0x0",
+          "0x20810b10": "0x0",
+          "0x20810b14": "0x0",
+          "0x20810b1c": "0x0",
+          "0x20810b24": "0x0",
+          "0x20810b80": "0x0",
+          "0x20810b84": "0x0",
+          "0x20810b88": "0x0",
+          "0x20810b8c": "0x0",
+          "0x20810b94": "0x0",
+          "0x20810b9c": "0x0",
+          "0x20810c08": "0x0",
+          "0x20810c0c": "0x0",
+          "0x20810c10": "0x0",
+          "0x20810c14": "0x0",
+          "0x20810c1c": "0x0",
+          "0x20810c24": "0x0",
+          "0x20810c80": "0x0",
+          "0x20810c84": "0x0",
+          "0x20810c88": "0x0",
+          "0x20810c8c": "0x0",
+          "0x20810c94": "0x0",
+          "0x20810c9c": "0x0",
+          "0x20821300": "0x0",
+          "0x20821304": "0x0",
+          "0x20821308": "0x0",
+          "0x2082130c": "0x0",
+          "0x20821310": "0x0",
+          "0x20821400": "0x0",
+          "0x20821404": "0x0",
+          "0x20821408": "0x0",
+          "0x2082140c": "0x0",
+          "0x20821410": "0x0",
+          "0x20821500": "0x0",
+          "0x20821504": "0x0",
+          "0x20821508": "0x0",
+          "0x2082150c": "0x0",
+          "0x20821510": "0x0",
+          "0x20821600": "0x0",
+          "0x20821604": "0x0",
+          "0x20821608": "0x0",
+          "0x2082160c": "0x0",
+          "0x20821610": "0x0",
+          "0x20821380": "0x0",
+          "0x20821384": "0x0",
+          "0x20821388": "0x0",
+          "0x2082138c": "0x0",
+          "0x20821390": "0x0",
+          "0x20821480": "0x0",
+          "0x20821484": "0x0",
+          "0x20821488": "0x0",
+          "0x2082148c": "0x0",
+          "0x20821490": "0x0",
+          "0x20821580": "0x0",
+          "0x20821584": "0x0",
+          "0x20821588": "0x0",
+          "0x2082158c": "0x0",
+          "0x20821590": "0x0",
+          "0x20821680": "0x0",
+          "0x20821684": "0x0",
+          "0x20821688": "0x0",
+          "0x2082168c": "0x0",
+          "0x20821690": "0x0",
+          "0x20821700": "0x0",
+          "0x20821704": "0x0",
+          "0x20821708": "0x0",
+          "0x2082170c": "0x0",
+          "0x20821710": "0x0",
+          "0x20821800": "0x0",
+          "0x20821804": "0x0",
+          "0x20821808": "0x0",
+          "0x2082180c": "0x0",
+          "0x20821810": "0x0",
+          "0x20821900": "0x0",
+          "0x20821904": "0x0",
+          "0x20821908": "0x0",
+          "0x2082190c": "0x0",
+          "0x20821910": "0x0",
+          "0x20821a00": "0x0",
+          "0x20821a04": "0x0",
+          "0x20821a08": "0x0",
+          "0x20821a0c": "0x0",
+          "0x20821a10": "0x0",
+          "0x20821780": "0x0",
+          "0x20821784": "0x0",
+          "0x20821788": "0x0",
+          "0x2082178c": "0x0",
+          "0x20821790": "0x0",
+          "0x20821880": "0x0",
+          "0x20821884": "0x0",
+          "0x20821888": "0x0",
+          "0x2082188c": "0x0",
+          "0x20821890": "0x0",
+          "0x20821980": "0x0",
+          "0x20821984": "0x0",
+          "0x20821988": "0x0",
+          "0x2082198c": "0x0",
+          "0x20821990": "0x0",
+          "0x20821a80": "0x0",
+          "0x20821a84": "0x0",
+          "0x20821a88": "0x0",
+          "0x20821a8c": "0x0",
+          "0x20821a90": "0x0",
+          "0x20821000": "0x0",
+          "0x20821048": "0x0",
+          "0x20821114": "0x0",
+          "0x20821214": "0x0",
+          "0x20810308": "0x0",
+          "0x20810310": "0x0",
+          "0x20810314": "0x0",
+          "0x20810128": "0x0"
+        },
+        "DMA_changed_during_read": [],
+        "DDR_readback_status": 3,
+        "DDR_A_readback_Hz": 0,
+        "clock_status": 1,
+        "clock_selector_words": [
+          "0x500",
+          "0x501",
+          "0x502",
+          "0x503",
+          "0x504",
+          "0x505",
+          "0x506",
+          "0x507",
+          "0x508"
+        ]
+      }
+    ],
+    "interpretation": "Mode/source/recording context stable for2seconds; append-only16-phase evidence, overflow explicit. Configuration snapshots are not bandwidth."
+  },
+  "contexts_retained": 275,
+  "target_writes": [],
+  "hot_SD_writes": [],
+  "backward_compatible_actual_captures": [
+    {
+      "path": "<LOCAL_PROJECT_ROOT>\\work\\r10h-field-evidence\\NXDEMO51\\VIDEO_STAGE_1794256921_432\\counts.bin",
+      "samples": 810
+    },
+    {
+      "path": "<LOCAL_PROJECT_ROOT>\\work\\r10i-field-evidence\\NXDEMO51\\VIDEO_STAGE_1794262238_432\\counts.bin",
+      "samples": 604
+    }
+  ],
+  "corruption_rejected": true,
+  "binary_sha256": "1a0948430131e3011bc1702e410557e83691338ed2cbd208c5ddd39868c878d4",
+  "source_sha256": "3c0c0c58581c21f9055bd0b33f3558f34abe25b41970900e540234fbd11078d7",
+  "limits": "Production ARM sampler over three modeled mode/preview/record transitions.\nSynthetic register/time values validate capture/decoding, not camera performance.\n"
+}

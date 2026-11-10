@@ -1,0 +1,66 @@
+#include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include "../../common/video_fullwidth_contract.h"
+#include "../../common/video_fullwidth_observation.h"
+#include "../../common/video_runtime_observation.h"
+#include "../../base/nx-lut-lite/src/video_menu_state.h"
+static uint32_t code_model[VFW_BLOCK_COUNT][160],tmc_model[VFW_TMC_BYTES/4];
+static void legacy_blocks(void){for(unsigned i=0;i<VFW_BLOCK_COUNT;i++)memcpy(code_model[i],vfw_stock(vfw_blocks+i),vfw_blocks[i].bytes);memset(tmc_model,0,sizeof tmc_model);}
+static struct vfw_snapshot model;static struct vfw_ipc_route model_route;static unsigned writes,fail_write,cache_calls,fail_cache;static int quiet_ok=1;
+static int read_model(void*c,uint32_t at,void*out,unsigned n){(void)c;uint32_t word=0;
+ for(unsigned i=0;i<VFW_BLOCK_COUNT;i++)if(at>=vfw_blocks[i].address&&(uint64_t)at+n<=vfw_blocks[i].address+vfw_blocks[i].bytes){memcpy(out,(unsigned char*)code_model[i]+at-vfw_blocks[i].address,n);return 1;}
+ if(at==VFW_TMC_DATA&&n==VFW_TMC_BYTES){memcpy(out,tmc_model,n);return 1;}
+ if(at==VFW_IPC_INIT_WORD&&n==8){memcpy(out,&model_route,8);return 1;}
+ if(at==VFW_LCAC_MASK_WORD)word=model_route.lcac_mask;else if(at==VFW_LCAC_OR_WORD)word=model_route.lcac_or;else if(at==VFW_LDC_POLICY_WORD)word=model_route.ldc_policy;else if(at==VFW_BACKEND_ROOT)word=VFW_BACKEND_VTABLE;else if(at==VFW_BACKEND_ROOT+0xd6c)word=0x82300000;else if(at==0x82300000)word=VFW_QHD_VTABLE;else if(at==VFW_BACKEND_WORD)word=model_route.backend;else if(at==VFW_ROOT)word=model.root;else if(at==model.root)word=VFW_FRONT_VTABLE;else if(at==model.root+0x26c)word=VFW_PROFILE_MANAGER;else if(at==model.root+0x270)word=model.vector;else if(at==model.root+0x274)word=22;else if(at==model.vector+24)word=model.profile6;else if(at==model.vector+76)word=model.profile19;
+ else if(at==model.profile6&&n==192){memcpy(out,model.full,n);return 1;}else if(at==model.profile19&&n==192){memcpy(out,model.crop,n);return 1;}
+ else if(at==VFW_IPC_SETUP_WORD)word=model.ipc_setup;else if(at==0x813ebf60u)word=model.native_ipc_preset;else if(at==VFW_MAP_WORD)word=model.mapping;else if(at==VFW_DRIVER)word=VFW_DRIVER_VTABLE;else if(at==VFW_DRIVER+8)word=model.driver_modes;else if(at==VFW_WORK_META&&n==20){memcpy(out,model.work,n);return 1;}else if(at==VFW_SRC_META&&n==20){memcpy(out,model.src,n);return 1;}else if(at==VFW_WORK_TABLE)word=model.work_frame;else if(at==VFW_SRC_TABLE)word=model.src_frame;
+ else if(at==VFW_POWER_ROOT)word=model.power_manager;
+ else if(at==model.power_manager&&n==24){uint32_t v[6]={VFW_POWER_MANAGER_VTABLE,1,model.power_current,model.power_video,0,model.power_current};memcpy(out,v,n);return 1;}
+ else if(at==model.power_video&&n==28){uint32_t v[7]={VFW_POWER_VIDEO_VTABLE,0,1,0,0,0,model.power_ops};memcpy(out,v,n);return 1;}
+ else if(at==model.power_ops&&n==16){uint32_t v[4]={VFW_POWER_OPS_VTABLE,1,model.power_entries,8};memcpy(out,v,n);return 1;}
+ else if(at==model.power_entries&&n==96){memcpy(out,model.power_operations,n);return 1;}
+ else if(at==VFW_POWER_ROWS+8*40&&n==40){memcpy(out,model.scene_full,n);return 1;}
+ else if(at==VFW_POWER_ROWS+9*40&&n==40){memcpy(out,model.scene_crop,n);return 1;}else return 0;
+ if(n!=4)return 0;memcpy(out,&word,4);return 1;
+}
+static int write_model(void*c,uint32_t at,uint32_t value){(void)c;if(++writes==fail_write)return 0;
+ if(at>=VFW_TMC_DATA&&at<VFW_TMC_DATA+VFW_TMC_BYTES){tmc_model[(at-VFW_TMC_DATA)/4]=value;return 1;}
+ for(unsigned i=0;i<VFW_BLOCK_COUNT;i++)if(at>=vfw_blocks[i].address&&at<vfw_blocks[i].address+vfw_blocks[i].bytes){code_model[i][(at-vfw_blocks[i].address)/4]=value;int full=1;for(unsigned j=1;j<VFW_BLOCK_COUNT;j++)full&=!memcmp(code_model[j],vfw_full_code(vfw_blocks+j),vfw_blocks[j].bytes);model_route.blocks=full?(!memcmp(code_model[0],vfw_full_code(vfw_blocks),vfw_blocks[0].bytes)?1u:2u):0u;return 1;}if(at==VFW_LCAC_MASK_WORD){model_route.lcac_mask=value;return 1;}if(at==VFW_LCAC_OR_WORD){model_route.lcac_or=value;return 1;}if(at==VFW_LDC_POLICY_WORD){model_route.ldc_policy=value;return 1;}if(at==VFW_BACKEND_WORD){model_route.backend=value;return 1;}if(at==VFW_IPC_INIT_WORD){model_route.init=value;return 1;}if(at==VFW_IPC_UPDATE_WORD){model_route.update=value;return 1;}if(at==VFW_MAP_WORD){model.mapping=value;return 1;}if(at==VFW_IPC_SETUP_WORD){model.ipc_setup=value;return 1;}if(at==model.power_scene_word){model.power_operations[4]=value;return 1;}for(unsigned i=0;i<6;i++)if(at==model.profile19+vfw_offsets[i]){model.crop[vfw_offsets[i]/4]=value;return 1;}assert(0);return 0;}
+static int cache_model(void*c,uint32_t at,unsigned n){(void)c;int extra=at==(VFW_TMC_DATA&~63u)&&n==320u;for(unsigned i=0;i<VFW_BLOCK_COUNT;i++){uint32_t a=vfw_blocks[i].address&~63u;extra|=at==a&&n==((vfw_blocks[i].address-a+vfw_blocks[i].bytes+63u)&~63u);}
+ assert(extra||(at==(model.profile19&~63u)&&n==256)||(at==(VFW_LCAC_MASK_WORD&~63u)&&n==64)||(at==(VFW_LDC_POLICY_WORD&~63u)&&n==64)||(at==(VFW_BACKEND_WORD&~63u)&&n==64)||(at==(VFW_MAP_WORD&~63u)&&n==64)||(at==(VFW_IPC_SETUP_WORD&~63u)&&n==64)||(at==(model.power_scene_word&~63u)&&n==64));return++cache_calls!=fail_cache;}
+static int quiet_model(void*c){(void)c;return quiet_ok;}
+static void reset(void){legacy_blocks();memset(&model,0,sizeof model);model_route=(struct vfw_ipc_route){VFW_IPC_INIT_CROP,VFW_IPC_UPDATE_CROP,VFW_BACKEND_UD,0x82300000,VFW_LDC_POLICY_UD,VFW_LCAC_MASK_STOCK,VFW_LCAC_OR_STOCK,0};model.root=0x82010000;model.vector=0x82020000;model.profile6=0x82030000;model.profile19=0x82040000;model.mapping=VFW_MAP_CROP;model.ipc_setup=VFW_IPC_SETUP_CROP;model.native_ipc_preset=0xe001;model.full[0]=VFW_FULL_VTABLE;model.crop[0]=VFW_CROP_VTABLE;model.full[4]=model.crop[4]=VFW_IMAGE_VTABLE;model.full[1]=model.crop[1]=1;model.full[20]=model.crop[20]=0x00010402;model.driver_modes=17|(17<<8);model.work_frame=VFW_WORK_FRAME;model.src_frame=VFW_SRC_FRAME;for(unsigned i=0;i<6;i++){model.full[vfw_offsets[i]/4]=vfw_native_full[i];model.crop[vfw_offsets[i]/4]=vfw_crop[i];}model.power_manager=0x82050000;model.power_video=0x82060000;model.power_ops=0x82070000;model.power_entries=0x82080000;model.power_scene_word=0x82080010;model.power_current=0x82090000;
+ const uint32_t operations[24]={0x20000,0x0,0x1,0x20001,0x9,0x5,0x20002,0xb,0x5,0x20003,0xa,0x5,0x20004,0x16,0x5,0x20005,0x19,0x19,0x20006,0x6,0x2,0x20007,0x17,0x5};const uint32_t full[10]={0x0,0x30,0x3,0x60,0x60,0x6,0x60,0x60,0x5,0x3},crop[10]={0x0,0x20,0x3,0x20,0x66,0x3,0x30,0x20,0x5,0x3};memcpy(model.power_operations,operations,sizeof operations);memcpy(model.scene_full,full,sizeof full);memcpy(model.scene_crop,crop,sizeof crop);
+writes=fail_write=cache_calls=fail_cache=0;quiet_ok=1;}
+static uint32_t runtime_counters[4]={100,90,120,120};static unsigned clock_reads,change_clock;
+static int runtime_read(void*c,uint32_t at,void*out,unsigned n){(void)c;if(n!=4)return 0;uint32_t value;
+ if(at==VFW_DRIVER+8)value=23u|(23u<<8);else if(at==0x813f1b30u)value=8;else{
+  unsigned i;for(i=0;i<4;i++)if(at==vfr_counter[i]){value=runtime_counters[i];goto found;}
+  for(i=0;i<9;i++)if(at==vfr_clock[i]){value=model.scene_full[i+1];if(change_clock&&++clock_reads==10)value^=0x10;goto found;}return 0;
+ }found:memcpy(out,&value,4);return 1;
+}
+int main(void){
+ const struct vfw_ops ops={NULL,read_model,write_model,cache_model,quiet_model};struct vfw_reply result;
+ /* Replay the exact nine 664-byte camera snapshots which R9n refused. */
+ FILE*field=fopen("/field-before-profiles.bin","rb");assert(field);unsigned field_count=0;struct vfw_snapshot saved;
+ while(fread(&saved,1,664,field)==664){saved.ipc_setup=VFW_IPC_SETUP_CROP;saved.native_ipc_preset=0xe001;assert(vfw_mode(&saved)==VFW_STOCK&&vfw_budget(&saved)&&saved.driver_modes==0x0d0du&&saved.power_current==saved.power_video&&vfw_quiet(&saved));field_count++;}
+ assert(field_count==9&&feof(field)&&!ferror(field)&&!fclose(field));
+ reset();model.power_current=model.power_video;model.driver_modes=0x0d0d;assert(vfw_transaction(&ops,VFW_APPLY,&result)&&result.writes==327);assert(vfw_transaction(&ops,VFW_RESTORE,&result)&&result.writes==112);
+ for(unsigned mode=23;mode<=25;mode++)for(unsigned side=0;side<2;side++){reset();model.power_current=model.power_video;model.driver_modes=side?(13u|(mode<<8)):(mode|(13u<<8));assert(!vfw_transaction(&ops,VFW_APPLY,&result)&&result.status==VFW_MOVIE_ACTIVE&&!writes);}
+ for(unsigned side=0;side<2;side++){reset();model.power_current=model.power_video;(side?model.src:model.work)[0]=0xa4b40000u;assert(!vfw_transaction(&ops,VFW_APPLY,&result)&&result.status==VFW_MOVIE_ACTIVE&&!writes);}
+ for(unsigned fail=1;fail<=327;fail++){reset();fail_write=fail;struct vfw_snapshot before=model;struct vfw_ipc_route route_before=model_route;assert(!vfw_transaction(&ops,VFW_APPLY,&result)&&result.status==VFW_WRITE_FAILED&&result.rollback_verified&&model_route.init==VFW_IPC_INIT_CROP&&model_route.update==VFW_IPC_UPDATE_CROP&&!memcmp(&model,&before,sizeof model)&&model_route.init==route_before.init&&model_route.update==route_before.update&&model_route.backend==route_before.backend&&model_route.ldc_policy==route_before.ldc_policy&&model_route.lcac_mask==route_before.lcac_mask&&model_route.lcac_or==route_before.lcac_or&&model_route.blocks==result.block_after);}
+ for(unsigned fail=1;fail<=23;fail++){reset();fail_cache=fail;struct vfw_snapshot before=model;struct vfw_ipc_route route_before=model_route;assert(!vfw_transaction(&ops,VFW_APPLY,&result)&&result.status==VFW_CACHE_FAILED&&result.rollback_verified&&model_route.init==VFW_IPC_INIT_CROP&&model_route.update==VFW_IPC_UPDATE_CROP&&!memcmp(&model,&before,sizeof model)&&model_route.init==route_before.init&&model_route.update==route_before.update&&model_route.backend==route_before.backend&&model_route.ldc_policy==route_before.ldc_policy&&model_route.lcac_mask==route_before.lcac_mask&&model_route.lcac_or==route_before.lcac_or&&model_route.blocks==result.block_after);}
+ reset();assert(vfw_transaction(&ops,VFW_APPLY,&result)&&result.writes==327&&vfw_mode(&model)==VFW_FULL);unsigned count=writes;assert(vfw_transaction(&ops,VFW_APPLY,&result)&&writes==count&&!result.writes);assert(vfw_transaction(&ops,VFW_RESTORE,&result)&&vfw_mode(&model)==VFW_STOCK);
+ reset();assert(vfw_transaction(&ops,VFW_APPLY,&result));legacy_blocks();model_route.blocks=0;model.crop[0x1c/4]=6480u;assert(vfw_route_mode(&model,&model_route)==VFW_LEGACY_WIDTH);assert(vfw_transaction(&ops,VFW_APPLY,&result)&&result.before==VFW_LEGACY_WIDTH&&model.crop[0x1c/4]==6496u);
+ reset();assert(vfw_transaction(&ops,VFW_APPLY,&result)&&model_route.ldc_policy==VFW_LDC_POLICY_SCALE&&result.ldc_policy_before==VFW_LDC_POLICY_UD&&result.ldc_policy_after==VFW_LDC_POLICY_SCALE);
+ legacy_blocks();model_route.blocks=0;model_route.ldc_policy=VFW_LDC_POLICY_UD;model_route.lcac_mask=VFW_LCAC_MASK_STOCK;model_route.lcac_or=VFW_LCAC_OR_STOCK;assert(vfw_route_mode(&model,&model_route)==VFW_LEGACY_LDC);assert(vfw_transaction(&ops,VFW_APPLY,&result)&&result.before==VFW_LEGACY_LDC&&result.writes==327&&model_route.ldc_policy==VFW_LDC_POLICY_SCALE);assert(vfw_transaction(&ops,VFW_RESTORE,&result)&&model_route.ldc_policy==VFW_LDC_POLICY_UD);
+ /* Historical OEM size/count words remain populated after video teardown. */
+ reset();model.work[1]=VFW_WORK_FRAME;model.work[2]=1;model.work[3]=3;model.src[1]=VFW_SRC_FRAME;model.src[3]=10;assert(vfw_transaction(&ops,VFW_APPLY,&result));
+ reset();quiet_ok=0;assert(!vfw_transaction(&ops,VFW_APPLY,&result)&&!writes);quiet_ok=1;model.driver_modes=25|(25<<8);assert(!vfw_transaction(&ops,VFW_APPLY,&result)&&result.status==VFW_MOVIE_ACTIVE&&!writes);
+ uint32_t*t=calloc(45056u*4u,4);assert(t&&vfw_returned(t,45056,45056,1000));t[4*990]=0x23;t[4*990+1]=200;assert(!vfw_returned(t,45056,44856,1000));memset(t,0,45056u*16u);assert(!vfw_returned(t,45056,45055,1000));t[4*200+1]=7;assert(!vfw_returned(t,45056,45056,1000));free(t);
+ struct nxl_video_status status;const char*valid="NXL_VIDEO_MODE1\nstate=FULL\nwidth=3840\nheight=2160\nrecording_or_capture=0\nreason=FULLWIDTH_APPLIED_RESELECT_NATIVE_UHD\nend=NXL_VIDEO_MODE_END1\n";assert(nxl_video_parse(valid,&status)&&status.mode==3);assert(!nxl_video_parse("NXL_VIDEO_MODE1\nstate=FULL\nwidth=2560\nheight=1440\nrecording_or_capture=0\nreason=BAD\nend=NXL_VIDEO_MODE_END1\n",&status));
+ reset();struct vfo_sample obs;assert(vfo_capture(read_model,NULL,&obs)&&obs.status==1&&obs.hash==vfw_hash(&obs,sizeof obs-8));FILE*f=fopen("/video-observations.bin","wx");assert(f&&fwrite(&obs,1,sizeof obs,f)==sizeof obs);assert(vfw_transaction(&ops,VFW_APPLY,&result)&&vfo_capture(read_model,NULL,&obs)&&fwrite(&obs,1,sizeof obs,f)==sizeof obs&&!fclose(f));struct vfr_sample rt;assert(vfr_capture(runtime_read,NULL,&rt)&&rt.status==1&&rt.mask==15);
+ FILE*rf=fopen("/video-runtime-observations.bin","wx");assert(rf&&fwrite(&rt,1,sizeof rt,rf)==sizeof rt);for(unsigned i=0;i<4;i++)runtime_counters[i]++;assert(vfr_capture(runtime_read,NULL,&rt)&&fwrite(&rt,1,sizeof rt,rf)==sizeof rt&&!fclose(rf));clock_reads=0;change_clock=1;assert(!vfr_capture(runtime_read,NULL,&rt)&&rt.status==2);
+ puts("PASS nine actual R9n refusal snapshots, idle preview with video power context, six active-driver and two movie-buffer refusals, fifteen partial-store rollbacks, seven cache failures and R9y LDC migration, idempotence and observer checksums.");return 0;
+}
