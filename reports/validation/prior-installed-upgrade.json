@@ -1,0 +1,580 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "name": "exact_r9u_package_raw_manifest",
+      "exit": 0,
+      "manifest_sha256": "0b59929f4ce6c71f71eea4249b4101008053ced5a5e5a0c170ea471063ab3d2b",
+      "raw_binary_pipe": true,
+      "all_module_hashes_verified": true
+    },
+    {
+      "name": "complete_installer_r10i-hardware-qos-full-v1_success",
+      "exit": 0,
+      "all_old_state_and_journals_preserved": true,
+      "device_endpoints_modeled": true
+    },
+    {
+      "name": "complete_installer_r10i-hardware-qos-full-v1_active_fullwidth",
+      "exit": 1,
+      "all_old_state_and_journals_preserved": true,
+      "device_endpoints_modeled": true
+    },
+    {
+      "name": "complete_installer_r10i-hardware-qos-full-v1_active_usbguard",
+      "exit": 1,
+      "all_old_state_and_journals_preserved": true,
+      "device_endpoints_modeled": true
+    },
+    {
+      "name": "complete_installer_r10i-hardware-qos-full-v1_active_probe",
+      "exit": 1,
+      "all_old_state_and_journals_preserved": true,
+      "device_endpoints_modeled": true
+    },
+    {
+      "name": "complete_installer_stock-firmware_success",
+      "exit": 0,
+      "all_old_state_and_journals_preserved": true,
+      "device_endpoints_modeled": true
+    }
+  ],
+  "hardware_tested": false,
+  "scope": "Exact R10j raw byte audit before fixture changes; actual staged installer fresh stock install and predecessor R10i upgrade; active fullwidth guard; OS/native endpoints modeled, no camera writes.",
+  "raw_package_audit": {
+    "passed": true,
+    "module_files": 64,
+    "camera_text_files": 88,
+    "checks": [
+      {
+        "file": "nx-lut-demo/module.manifest",
+        "bytes": 5384,
+        "CR_bytes": 0,
+        "LF_bytes": 64
+      },
+      {
+        "file": "nx-lut-demo/ownership/index.sha256",
+        "bytes": 4689,
+        "CR_bytes": 0,
+        "LF_bytes": 60
+      },
+      {
+        "file": "nx-lut-demo/ownership/r10a.manifest",
+        "bytes": 5384,
+        "CR_bytes": 0,
+        "LF_bytes": 64
+      },
+      {
+        "file": "nx-lut-demo/ownership/r10b.manifest",
+        "bytes": 5384,
+        "CR_bytes": 0,
+        "LF_bytes": 64
+      },
+      {
+        "file": "nx-lut-demo/ownership/r10c.manifest",
+        "bytes": 5384,
+        "CR_bytes": 0,
+        "LF_bytes": 64
+      },
+      {
+        "file": "nx-lut-demo/ownership/r10d.manifest",
+        "bytes": 5384,
+        "CR_bytes": 0,
+        "LF_bytes": 64
+      },
+      {
+        "file": "nx-lut-demo/ownership/r10e.manifest",
+        "bytes": 5384,
+        "CR_bytes": 0,
+        "LF_bytes": 64
+      },
+      {
+        "file": "nx-lut-demo/ownership/r10f.manifest",
+        "bytes": 5384,
+        "CR_bytes": 0,
+        "LF_bytes": 64
+      },
+      {
+        "file": "nx-lut-demo/ownership/r10g.manifest",
+        "bytes": 5384,
+        "CR_bytes": 0,
+        "LF_bytes": 64
+      },
+      {
+        "file": "nx-lut-demo/ownership/r10h.manifest",
+        "bytes": 5384,
+        "CR_bytes": 0,
+        "LF_bytes": 64
+      },
+      {
+        "file": "nx-lut-demo/ownership/r10i.manifest",
+        "bytes": 5384,
+        "CR_bytes": 0,
+        "LF_bytes": 64
+      },
+      {
+        "file": "nx-lut-demo/ownership/r7c.manifest",
+        "bytes": 3312,
+        "CR_bytes": 0,
+        "LF_bytes": 40
+      },
+      {
+        "file": "nx-lut-demo/ownership/r7e.manifest",
+        "bytes": 3312,
+        "CR_bytes": 0,
+        "LF_bytes": 40
+      },
+      {
+        "file": "nx-lut-demo/ownership/r7f.manifest",
+        "bytes": 3312,
+        "CR_bytes": 0,
+        "LF_bytes": 40
+      },
+      {
+        "file": "nx-lut-demo/ownership/r7g.manifest",
+        "bytes": 3485,
+        "CR_bytes": 0,
+        "LF_bytes": 42
+      },
+      {
+        "file": "nx-lut-demo/ownership/r7h.manifest",
+        "bytes": 3485,
+        "CR_bytes": 0,
+        "LF_bytes": 42
+      },
+      {
+        "file": "nx-lut-demo/ownership/r7i.manifest",
+        "bytes": 3485,
+        "CR_bytes": 0,
+        "LF_bytes": 42
+      },
+      {
+        "file": "nx-lut-demo/ownership/r7j.manifest",
+        "bytes": 3485,
+        "CR_bytes": 0,
+        "LF_bytes": 42
+      },
+      {
+        "file": "nx-lut-demo/ownership/r7k.manifest",
+        "bytes": 3485,
+        "CR_bytes": 0,
+        "LF_bytes": 42
+      },
+      {
+        "file": "nx-lut-demo/ownership/r7l.manifest",
+        "bytes": 3485,
+        "CR_bytes": 0,
+        "LF_bytes": 42
+      },
+      {
+        "file": "nx-lut-demo/ownership/r7m.manifest",
+        "bytes": 3485,
+        "CR_bytes": 0,
+        "LF_bytes": 42
+      },
+      {
+        "file": "nx-lut-demo/ownership/r7n.manifest",
+        "bytes": 3572,
+        "CR_bytes": 0,
+        "LF_bytes": 43
+      },
+      {
+        "file": "nx-lut-demo/ownership/r7o.manifest",
+        "bytes": 3572,
+        "CR_bytes": 0,
+        "LF_bytes": 43
+      },
+      {
+        "file": "nx-lut-demo/ownership/r8n.manifest",
+        "bytes": 4685,
+        "CR_bytes": 0,
+        "LF_bytes": 56
+      },
+      {
+        "file": "nx-lut-demo/ownership/r8o.manifest",
+        "bytes": 4685,
+        "CR_bytes": 0,
+        "LF_bytes": 56
+      },
+      {
+        "file": "nx-lut-demo/ownership/r8p.manifest",
+        "bytes": 4685,
+        "CR_bytes": 0,
+        "LF_bytes": 56
+      },
+      {
+        "file": "nx-lut-demo/ownership/r8q.manifest",
+        "bytes": 4685,
+        "CR_bytes": 0,
+        "LF_bytes": 56
+      },
+      {
+        "file": "nx-lut-demo/ownership/r8r.manifest",
+        "bytes": 4685,
+        "CR_bytes": 0,
+        "LF_bytes": 56
+      },
+      {
+        "file": "nx-lut-demo/ownership/r8s.manifest",
+        "bytes": 4685,
+        "CR_bytes": 0,
+        "LF_bytes": 56
+      },
+      {
+        "file": "nx-lut-demo/ownership/r8t.manifest",
+        "bytes": 4685,
+        "CR_bytes": 0,
+        "LF_bytes": 56
+      },
+      {
+        "file": "nx-lut-demo/ownership/r8u.manifest",
+        "bytes": 4685,
+        "CR_bytes": 0,
+        "LF_bytes": 56
+      },
+      {
+        "file": "nx-lut-demo/ownership/r8v.manifest",
+        "bytes": 4685,
+        "CR_bytes": 0,
+        "LF_bytes": 56
+      },
+      {
+        "file": "nx-lut-demo/ownership/r8w.manifest",
+        "bytes": 4685,
+        "CR_bytes": 0,
+        "LF_bytes": 56
+      },
+      {
+        "file": "nx-lut-demo/ownership/r8x.manifest",
+        "bytes": 4685,
+        "CR_bytes": 0,
+        "LF_bytes": 56
+      },
+      {
+        "file": "nx-lut-demo/ownership/r8y.manifest",
+        "bytes": 4685,
+        "CR_bytes": 0,
+        "LF_bytes": 56
+      },
+      {
+        "file": "nx-lut-demo/ownership/r8z.manifest",
+        "bytes": 4685,
+        "CR_bytes": 0,
+        "LF_bytes": 56
+      },
+      {
+        "file": "nx-lut-demo/ownership/r9a.manifest",
+        "bytes": 4685,
+        "CR_bytes": 0,
+        "LF_bytes": 56
+      },
+      {
+        "file": "nx-lut-demo/ownership/r9b.manifest",
+        "bytes": 4685,
+        "CR_bytes": 0,
+        "LF_bytes": 56
+      },
+      {
+        "file": "nx-lut-demo/ownership/r9c.manifest",
+        "bytes": 4685,
+        "CR_bytes": 0,
+        "LF_bytes": 56
+      },
+      {
+        "file": "nx-lut-demo/ownership/r9d.manifest",
+        "bytes": 4685,
+        "CR_bytes": 0,
+        "LF_bytes": 56
+      },
+      {
+        "file": "nx-lut-demo/ownership/r9e.manifest",
+        "bytes": 4685,
+        "CR_bytes": 0,
+        "LF_bytes": 56
+      },
+      {
+        "file": "nx-lut-demo/ownership/r9f.manifest",
+        "bytes": 4685,
+        "CR_bytes": 0,
+        "LF_bytes": 56
+      },
+      {
+        "file": "nx-lut-demo/ownership/r9g.manifest",
+        "bytes": 4685,
+        "CR_bytes": 0,
+        "LF_bytes": 56
+      },
+      {
+        "file": "nx-lut-demo/ownership/r9h.manifest",
+        "bytes": 4685,
+        "CR_bytes": 0,
+        "LF_bytes": 56
+      },
+      {
+        "file": "nx-lut-demo/ownership/r9i.manifest",
+        "bytes": 4685,
+        "CR_bytes": 0,
+        "LF_bytes": 56
+      },
+      {
+        "file": "nx-lut-demo/ownership/r9j.manifest",
+        "bytes": 4941,
+        "CR_bytes": 0,
+        "LF_bytes": 59
+      },
+      {
+        "file": "nx-lut-demo/ownership/r9k.manifest",
+        "bytes": 4941,
+        "CR_bytes": 0,
+        "LF_bytes": 59
+      },
+      {
+        "file": "nx-lut-demo/ownership/r9l.manifest",
+        "bytes": 4941,
+        "CR_bytes": 0,
+        "LF_bytes": 59
+      },
+      {
+        "file": "nx-lut-demo/ownership/r9m.manifest",
+        "bytes": 5034,
+        "CR_bytes": 0,
+        "LF_bytes": 60
+      },
+      {
+        "file": "nx-lut-demo/ownership/r9n.manifest",
+        "bytes": 5034,
+        "CR_bytes": 0,
+        "LF_bytes": 60
+      },
+      {
+        "file": "nx-lut-demo/ownership/r9o.manifest",
+        "bytes": 5034,
+        "CR_bytes": 0,
+        "LF_bytes": 60
+      },
+      {
+        "file": "nx-lut-demo/ownership/r9p.manifest",
+        "bytes": 5034,
+        "CR_bytes": 0,
+        "LF_bytes": 60
+      },
+      {
+        "file": "nx-lut-demo/ownership/r9q.manifest",
+        "bytes": 5034,
+        "CR_bytes": 0,
+        "LF_bytes": 60
+      },
+      {
+        "file": "nx-lut-demo/ownership/r9r.manifest",
+        "bytes": 5034,
+        "CR_bytes": 0,
+        "LF_bytes": 60
+      },
+      {
+        "file": "nx-lut-demo/ownership/r9s.manifest",
+        "bytes": 5034,
+        "CR_bytes": 0,
+        "LF_bytes": 60
+      },
+      {
+        "file": "nx-lut-demo/ownership/r9t.manifest",
+        "bytes": 5121,
+        "CR_bytes": 0,
+        "LF_bytes": 61
+      },
+      {
+        "file": "nx-lut-demo/ownership/r9u.manifest",
+        "bytes": 5121,
+        "CR_bytes": 0,
+        "LF_bytes": 61
+      },
+      {
+        "file": "nx-lut-demo/ownership/r9v.manifest",
+        "bytes": 5384,
+        "CR_bytes": 0,
+        "LF_bytes": 64
+      },
+      {
+        "file": "nx-lut-demo/ownership/r9w.manifest",
+        "bytes": 5384,
+        "CR_bytes": 0,
+        "LF_bytes": 64
+      },
+      {
+        "file": "nx-lut-demo/ownership/r9x.manifest",
+        "bytes": 5384,
+        "CR_bytes": 0,
+        "LF_bytes": 64
+      },
+      {
+        "file": "nx-lut-demo/ownership/r9y.manifest",
+        "bytes": 5384,
+        "CR_bytes": 0,
+        "LF_bytes": 64
+      },
+      {
+        "file": "nx-lut-demo/ownership/r9z.manifest",
+        "bytes": 5384,
+        "CR_bytes": 0,
+        "LF_bytes": 64
+      },
+      {
+        "file": "install.sh",
+        "bytes": 4490,
+        "CR_bytes": 0,
+        "LF_bytes": 85
+      },
+      {
+        "file": "nx-lut-demo/deploy.sh",
+        "bytes": 32551,
+        "CR_bytes": 0,
+        "LF_bytes": 517
+      },
+      {
+        "file": "nx-lut-demo/nx-lut-lite/auto-init-capture.sh",
+        "bytes": 3148,
+        "CR_bytes": 0,
+        "LF_bytes": 62
+      },
+      {
+        "file": "nx-lut-demo/nx-lut-lite/auto-init.sh",
+        "bytes": 7184,
+        "CR_bytes": 0,
+        "LF_bytes": 125
+      },
+      {
+        "file": "nx-lut-demo/nx-lut-lite/bluetoothd-wrapper.sh",
+        "bytes": 417,
+        "CR_bytes": 0,
+        "LF_bytes": 10
+      },
+      {
+        "file": "nx-lut-demo/nx-lut-lite/bt-start.sh",
+        "bytes": 3122,
+        "CR_bytes": 0,
+        "LF_bytes": 83
+      },
+      {
+        "file": "nx-lut-demo/nx-lut-lite/diagnose.sh",
+        "bytes": 2721,
+        "CR_bytes": 0,
+        "LF_bytes": 61
+      },
+      {
+        "file": "nx-lut-demo/nx-lut-lite/handoff-watch.sh",
+        "bytes": 1560,
+        "CR_bytes": 0,
+        "LF_bytes": 37
+      },
+      {
+        "file": "nx-lut-demo/nx-lut-lite/install.sh",
+        "bytes": 172,
+        "CR_bytes": 0,
+        "LF_bytes": 4
+      },
+      {
+        "file": "nx-lut-demo/nx-lut-lite/lens-capture.sh",
+        "bytes": 2394,
+        "CR_bytes": 0,
+        "LF_bytes": 52
+      },
+      {
+        "file": "nx-lut-demo/nx-lut-lite/lut.sh",
+        "bytes": 12270,
+        "CR_bytes": 0,
+        "LF_bytes": 260
+      },
+      {
+        "file": "nx-lut-demo/nx-lut-lite/memory-test.sh",
+        "bytes": 45881,
+        "CR_bytes": 0,
+        "LF_bytes": 750
+      },
+      {
+        "file": "nx-lut-demo/nx-lut-lite/menu.sh",
+        "bytes": 280,
+        "CR_bytes": 0,
+        "LF_bytes": 8
+      },
+      {
+        "file": "nx-lut-demo/nx-lut-lite/process.sh",
+        "bytes": 2863,
+        "CR_bytes": 0,
+        "LF_bytes": 69
+      },
+      {
+        "file": "nx-lut-demo/nx-lut-lite/progress.sh",
+        "bytes": 517,
+        "CR_bytes": 0,
+        "LF_bytes": 10
+      },
+      {
+        "file": "nx-lut-demo/nx-lut-lite/rearm-session.sh",
+        "bytes": 7583,
+        "CR_bytes": 0,
+        "LF_bytes": 114
+      },
+      {
+        "file": "nx-lut-demo/nx-lut-lite/restore-camera.sh",
+        "bytes": 4522,
+        "CR_bytes": 0,
+        "LF_bytes": 81
+      },
+      {
+        "file": "nx-lut-demo/nx-lut-lite/start.sh",
+        "bytes": 741,
+        "CR_bytes": 0,
+        "LF_bytes": 16
+      },
+      {
+        "file": "nx-lut-demo/nx-lut-lite/trace.sh",
+        "bytes": 3138,
+        "CR_bytes": 0,
+        "LF_bytes": 77
+      },
+      {
+        "file": "nx-lut-demo/nx-lut-lite/uninstall.sh",
+        "bytes": 155,
+        "CR_bytes": 0,
+        "LF_bytes": 4
+      },
+      {
+        "file": "nx-lut-demo/nx-lut-lite/video-mode.sh",
+        "bytes": 2560,
+        "CR_bytes": 0,
+        "LF_bytes": 51
+      },
+      {
+        "file": "nx-lut-demo/nx-lut-lite/video-probe.sh",
+        "bytes": 3243,
+        "CR_bytes": 0,
+        "LF_bytes": 64
+      },
+      {
+        "file": "nx-lut-demo/nx-lut-lite/integration/EV_AEL.sh",
+        "bytes": 93,
+        "CR_bytes": 0,
+        "LF_bytes": 3
+      },
+      {
+        "file": "nx-lut-demo/nx-lut-lite/integration/EV_MOBILE.sh",
+        "bytes": 249,
+        "CR_bytes": 0,
+        "LF_bytes": 5
+      },
+      {
+        "file": "nx-lut-demo/nx-lut-lite/integration/install-keyscan.sh",
+        "bytes": 1073,
+        "CR_bytes": 0,
+        "LF_bytes": 19
+      },
+      {
+        "file": "nx-lut-demo/nx-lut-lite/integration/remove-keyscan.sh",
+        "bytes": 359,
+        "CR_bytes": 0,
+        "LF_bytes": 10
+      }
+    ],
+    "raw_byte_checks": true
+  }
+}

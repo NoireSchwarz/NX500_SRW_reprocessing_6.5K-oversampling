@@ -1,0 +1,11 @@
+#!/usr/bin/env python3
+"""Static ARM soft-float build, same pinned Zig0.13/musl runtime as p23a."""
+from pathlib import Path
+import argparse,os,subprocess,hashlib,json
+p=argparse.ArgumentParser();p.add_argument('--zig',type=Path,required=True);p.add_argument('--cross-runtime',type=Path,required=True);p.add_argument('--source',type=Path);p.add_argument('--output',type=Path);a=p.parse_args()
+root=Path(__file__).resolve().parents[1];build=root/'build';build.mkdir(exist_ok=True);zig=a.zig.resolve();sysroot=a.cross_runtime.resolve()/'arm-linux-musleabi';lib=zig.parent/'lib';source=(a.source or root/'src/nxl-native-front.c').resolve();target=(a.output or root/'bin/nxl-allocprobe.arm').resolve();target.parent.mkdir(parents=True,exist_ok=True)
+runtime={n:sysroot/'lib'/n for n in ['crt1.o','crti.o','crtn.o','libc.a']};runtime['libgcc.a']=next((a.cross_runtime.resolve()/'lib/gcc/arm-linux-musleabi').glob('*/libgcc.a'))
+obj=build/(source.stem+'.o');env=dict(os.environ,TMPDIR=str(build.resolve()));command=[str(zig),'clang','-target','arm-linux-musleabi','-mcpu=cortex-a9','-mfloat-abi=soft','-marm','-nostdinc','-O2','-fno-vectorize','-fno-slp-vectorize','-fno-stack-protector','-fno-pic','-fno-pie','-Wall','-Wextra','-Werror','-Wno-misleading-indentation','-Wno-unused-function','-isystem',str(lib/'include'),'-isystem',str(sysroot/'include'),'-I',str(root/'src'),'-I',str(root/'tests'),'-c',str(source),'-o',str(obj)]
+subprocess.run(command,env=env,check=True);subprocess.run([str(zig),'ld.lld','-m','armelf_linux_eabi','-static','-e','_start','-z','noexecstack','--build-id=none','--strip-all','-o',str(target),str(runtime['crt1.o']),str(runtime['crti.o']),str(obj),'--start-group',str(runtime['libc.a']),str(runtime['libgcc.a']),'--end-group',str(runtime['crtn.o'])],env=env,check=True)
+manifest={'source':source.name,'source_sha256':hashlib.sha256(source.read_bytes()).hexdigest(),'binary':target.name,'binary_sha256':hashlib.sha256(target.read_bytes()).hexdigest(),'binary_bytes':target.stat().st_size,'runtime':{n:hashlib.sha256(f.read_bytes()).hexdigest() for n,f in runtime.items()},'hardware_tested':False}
+(root/'results').mkdir(exist_ok=True);(root/'results'/(source.stem+'-build.json')).write_text(json.dumps(manifest,indent=2)+'\n');print('Built',target.name,'bytes',target.stat().st_size)

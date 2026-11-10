@@ -1,0 +1,156 @@
+[
+ {
+  "id": "fuji_provia100f",
+  "name": "Fuji Provia 100F",
+  "tone": "自然均衡，色彩清晰。",
+  "scene": "适合旅行、风景与日常记录。",
+  "group": "landscape"
+ },
+ {
+  "id": "kodak_portra400",
+  "name": "Kodak Portra 400",
+  "tone": "柔和暖调，色彩较为克制。",
+  "scene": "适合人像、生活与柔和光线。",
+  "group": "portrait"
+ },
+ {
+  "id": "mono_hp5",
+  "name": "Ilford HP5",
+  "tone": "经典黑白，明暗层次鲜明。",
+  "scene": "适合街拍、人像与纪实。",
+  "group": "mono"
+ },
+ {
+  "id": "fuji_400h",
+  "name": "Fuji Pro 400H",
+  "tone": "清爽浅色，柔和低饱和。",
+  "scene": "适合户外人像、花草与浅色衣物。",
+  "group": "portrait"
+ },
+ {
+  "id": "fuji_astia100f",
+  "name": "Fuji Astia 100F",
+  "tone": "自然柔和，色彩与层次均衡。",
+  "scene": "适合人像、旅行与日常记录。",
+  "group": "portrait"
+ },
+ {
+  "id": "fuji_classicchrome",
+  "name": "Fuji Classic Chrome",
+  "tone": "低饱和配色，复古纪实感。",
+  "scene": "适合街拍、城市与阴天。",
+  "group": "retro"
+ },
+ {
+  "id": "fuji_eterna500",
+  "name": "Fuji Eterna 500",
+  "tone": "柔和偏冷，低调电影感。",
+  "scene": "适合城市、室内与傍晚。",
+  "group": "cinema"
+ },
+ {
+  "id": "fuji_velvia50",
+  "name": "Fuji Velvia 50",
+  "tone": "浓郁鲜明，突出绿色与蓝色。",
+  "scene": "适合山水、树木与蓝天。",
+  "group": "landscape"
+ },
+ {
+  "id": "kodak_gold200",
+  "name": "Kodak Gold 200",
+  "tone": "暖黄配色，怀旧负片感。",
+  "scene": "适合阳光、咖啡馆与日常。",
+  "group": "retro"
+ },
+ {
+  "id": "kodak_ektar100",
+  "name": "Kodak Ektar 100",
+  "tone": "浓郁彩色，画面较为鲜明。",
+  "scene": "适合建筑、旅行与彩色物件。",
+  "group": "landscape"
+ },
+ {
+  "id": "kodak_2383",
+  "name": "Kodak 2383",
+  "tone": "电影印片配色，明暗层次分明。",
+  "scene": "适合人物、街景与傍晚。",
+  "group": "cinema"
+ },
+ {
+  "id": "film_cinestill",
+  "name": "CineStill",
+  "tone": "夜景冷暖配色，不生成光晕。",
+  "scene": "适合招牌、霓虹与夜间街景。",
+  "group": "cinema"
+ },
+ {
+  "id": "pentax_satobi",
+  "name": "Pentax Satobi",
+  "tone": "低饱和暖调，褪色复古感。",
+  "scene": "适合老街、旧建筑与午后。",
+  "group": "retro"
+ },
+ {
+  "id": "ricoh_retro",
+  "name": "Ricoh Retro",
+  "tone": "偏暖的怀旧随拍配色。",
+  "scene": "适合散步、室内与小物。",
+  "group": "retro"
+ },
+ {
+  "id": "mono_acros",
+  "name": "Acros",
+  "tone": "清晰黑白，突出明暗结构。",
+  "scene": "适合街拍、人像与建筑。",
+  "group": "mono"
+ },
+ {
+  "id": "kodak_5207_apx",
+  "name": "Kodak 5207 (近似)",
+  "tone": "清爽自然，带柔和电影配色。",
+  "scene": "适合日光人像、街景与旅行。",
+  "group": "cinema"
+ },
+ {
+  "id": "kodak_5219_apx",
+  "name": "Kodak 5219 (近似)",
+  "tone": "冷暖对比，柔和的电影负片感。",
+  "scene": "适合室内、夜景与傍晚人像。",
+  "group": "cinema"
+ },
+ {
+  "id": "gold200_warm100_apx",
+  "name": "Gold 200 暖调 100% (近似)",
+  "tone": "完整暖调，偏金黄的怀旧色彩。",
+  "scene": "适合阳光、人像与日常随拍。",
+  "group": "retro"
+ },
+ {
+  "id": "gold200_warm30_apx",
+  "name": "Gold 200 轻暖 30% (近似)",
+  "tone": "三成暖调，保留较多原色。",
+  "scene": "适合日常、人像与浅色场景。",
+  "group": "retro"
+ },
+ {
+  "id": "portrait_5207_gold30_apx",
+  "name": "5207 + Gold 30% 人像 (近似)",
+  "tone": "5207 风格叠加三成金色暖调。",
+  "scene": "合成为一张，适合柔和光人像。",
+  "group": "portrait"
+ },
+ {
+  "id": "portrait_5207_gold30_skin_apx",
+  "name": "5207 + Gold + 肤色 (近似)",
+  "tone": "暖调人像配方，加肤色优化。",
+  "scene": "适合人像，同色物体也可能变化。",
+  "group": "portrait"
+ },
+ {
+  "id": "ejay_skin_native",
+  "name": "EJAY 肤色优化",
+  "tone": "肤色配色优化，不含电影暖调。",
+  "scene": "先试单层效果，同色物体也会变化。",
+  "group": "portrait"
+ }
+]

@@ -1,0 +1,6 @@
+#!/usr/bin/env python3
+"""Build read-only R7 session resource diagnostic; no pixel/native binaries changed."""
+from pathlib import Path
+import argparse,subprocess,sys
+p=argparse.ArgumentParser();p.add_argument('--zig',type=Path,required=True);p.add_argument('--cross-runtime',type=Path,required=True);a=p.parse_args();r=Path(__file__).resolve().parents[1]
+subprocess.run([sys.executable,str(r/'tools/build_front.py'),'--zig',str(a.zig),'--cross-runtime',str(a.cross_runtime),'--source',str(r/'src/nxl-session-rearm.c'),'--output',str(r/'bin/nxl-session-rearm.arm')],check=True)

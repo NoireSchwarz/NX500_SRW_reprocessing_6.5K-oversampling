@@ -1,0 +1,30 @@
+/* SPDX-License-Identifier: AGPL-3.0-only. Read-only native configuration/status whitelist.
+ * Status uses explicit acknowledgement in OEM ISR; no clear-on-read probing.
+ * Header: magic,slot,nonce,complete,event,status,entrySP,chain_valid,bit,pending,source,kind.
+ * Pending is the original ISR local REMAINING mask at callback, not its initial mask. */
+#ifndef P39_DIAGNOSTICS_H
+#define P39_DIAGNOSTICS_H
+#define P39_DIAG_READS 78u
+static const uint32_t p39_diag_addresses[P39_DIAG_READS]={
+ 0x817d7b48u, 0x817d7b4cu, 0x817d7b50u, 0x817d7b54u,
+ 0x817d7b58u, 0x817d7b5cu, 0x817d7b60u, 0x817d7b64u,
+ 0x817d7b68u, 0x817d7b90u, 0x817d7b94u, 0x817d7b98u,
+ 0x817d7b9cu, 0x817d7ba0u, 0x817d7ba4u, 0x817d7ba8u,
+ 0x817d7bacu, 0x817d7bb0u, 0x817e09d0u, 0x817e0a14u,
+ 0x817e0a18u, 0x817e0a1cu, 0x817e0a20u, 0x817e0a24u,
+ 0x817e0a28u, 0x817e0a2cu, 0x817e0a30u, 0x817e0a34u,
+ 0x817e0a38u, 0x817e0a3cu, 0x817e0a40u, 0x817e0a44u,
+ 0x817e0a48u, 0x817e0a4cu, 0x20810304u, 0x20810308u,
+ 0x20810314u, 0x20810328u, 0x2081032cu, 0x20810330u,
+ 0x20810340u, 0x20810344u, 0x20810348u, 0x20810358u,
+ 0x2081035cu, 0x20810370u, 0x20810374u, 0x20810390u,
+ 0x20810394u, 0x20810398u, 0x20810b08u, 0x20810b0cu,
+ 0x20810b10u, 0x20810b14u, 0x20810b18u, 0x20810b1cu,
+ 0x20810b20u, 0x20810b24u, 0x20810b28u, 0x20810c08u,
+ 0x20810c0cu, 0x20810c10u, 0x20810c14u, 0x20810c18u,
+ 0x20810c1cu, 0x20810c20u, 0x20810c24u, 0x20810c28u,
+ 0x20810408u, 0x2081040cu, 0x20810410u, 0x20810414u,
+ 0x20810418u, 0x20810458u, 0x2081045cu, 0x20810460u,
+ 0x20810464u, 0x20810468u,
+};
+#endif

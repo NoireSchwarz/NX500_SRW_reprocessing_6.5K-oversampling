@@ -1,0 +1,449 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "case": "DCI-UHD-fullwidth-same-five-boundaries",
+      "mode": "0x1717",
+      "latch": false,
+      "record": [
+        1,
+        1026000,
+        1030000,
+        1040000,
+        2100000,
+        2102600,
+        352387343
+      ],
+      "max_atomic_instructions": 60
+    },
+    {
+      "case": "DCI-UHD-fullwidth-same-five-boundaries",
+      "mode": "0x1717",
+      "latch": true,
+      "record": [
+        1,
+        1026000,
+        1030000,
+        1040000,
+        2100000,
+        2102600,
+        352387343
+      ],
+      "max_atomic_instructions": 60
+    },
+    {
+      "case": "DCI-UHD-fullwidth-same-five-boundaries",
+      "mode": "0x1717",
+      "latch": false,
+      "record": [
+        1,
+        1026000,
+        1030000,
+        1040000,
+        2100000,
+        2102600,
+        352387343
+      ],
+      "max_atomic_instructions": 60
+    },
+    {
+      "case": "DCI-UHD-fullwidth-same-five-boundaries",
+      "mode": "0x1717",
+      "latch": true,
+      "record": [
+        1,
+        1026000,
+        1030000,
+        1040000,
+        2100000,
+        2102600,
+        352387343
+      ],
+      "max_atomic_instructions": 60
+    },
+    {
+      "case": "DCI-UHD-fullwidth-same-five-boundaries",
+      "mode": "0x1818",
+      "latch": false,
+      "record": [
+        1,
+        1026000,
+        1030000,
+        1040000,
+        2100000,
+        2102600,
+        352387343
+      ],
+      "max_atomic_instructions": 60
+    },
+    {
+      "case": "DCI-UHD-fullwidth-same-five-boundaries",
+      "mode": "0x1818",
+      "latch": true,
+      "record": [
+        1,
+        1026000,
+        1030000,
+        1040000,
+        2100000,
+        2102600,
+        352387343
+      ],
+      "max_atomic_instructions": 60
+    },
+    {
+      "case": "DCI-UHD-fullwidth-same-five-boundaries",
+      "mode": "0x1818",
+      "latch": false,
+      "record": [
+        1,
+        1026000,
+        1030000,
+        1040000,
+        2100000,
+        2102600,
+        352387343
+      ],
+      "max_atomic_instructions": 60
+    },
+    {
+      "case": "DCI-UHD-fullwidth-same-five-boundaries",
+      "mode": "0x1818",
+      "latch": true,
+      "record": [
+        1,
+        1026000,
+        1030000,
+        1040000,
+        2100000,
+        2102600,
+        352387343
+      ],
+      "max_atomic_instructions": 60
+    },
+    {
+      "case": "DCI-UHD-fullwidth-same-five-boundaries",
+      "mode": "0x1919",
+      "latch": false,
+      "record": [
+        1,
+        1026000,
+        1030000,
+        1040000,
+        2100000,
+        2102600,
+        352387343
+      ],
+      "max_atomic_instructions": 60
+    },
+    {
+      "case": "DCI-UHD-fullwidth-same-five-boundaries",
+      "mode": "0x1919",
+      "latch": true,
+      "record": [
+        1,
+        1026000,
+        1030000,
+        1040000,
+        2100000,
+        2102600,
+        352387343
+      ],
+      "max_atomic_instructions": 60
+    },
+    {
+      "case": "DCI-UHD-fullwidth-same-five-boundaries",
+      "mode": "0x1919",
+      "latch": false,
+      "record": [
+        1,
+        1026000,
+        1030000,
+        1040000,
+        2100000,
+        2102600,
+        352387343
+      ],
+      "max_atomic_instructions": 60
+    },
+    {
+      "case": "DCI-UHD-fullwidth-same-five-boundaries",
+      "mode": "0x1919",
+      "latch": true,
+      "record": [
+        1,
+        1026000,
+        1030000,
+        1040000,
+        2100000,
+        2102600,
+        352387343
+      ],
+      "max_atomic_instructions": 60
+    },
+    {
+      "case": "1200-native-clock-wrap-frames",
+      "latch": false,
+      "completed": 1200,
+      "retained": [
+        [
+          1193,
+          1034037592,
+          1034037992,
+          1034038992,
+          1034814992,
+          1034817592,
+          352387343
+        ],
+        [
+          1194,
+          1034905126,
+          1034905526,
+          1034906526,
+          1035682526,
+          1035685126,
+          352387343
+        ],
+        [
+          1195,
+          1035772660,
+          1035773060,
+          1035774060,
+          1036550060,
+          1036552660,
+          352387343
+        ],
+        [
+          1196,
+          1036640194,
+          1036640594,
+          1036641594,
+          1037417594,
+          1037420194,
+          352387343
+        ],
+        [
+          1197,
+          1037507728,
+          1037508128,
+          1037509128,
+          1038285128,
+          1038287728,
+          352387343
+        ],
+        [
+          1198,
+          1038375262,
+          1038375662,
+          1038376662,
+          1039152662,
+          1039155262,
+          352387343
+        ],
+        [
+          1199,
+          1039242796,
+          1039243196,
+          1039244196,
+          1040020196,
+          1040022796,
+          352387343
+        ],
+        [
+          1200,
+          1040110330,
+          1040110730,
+          1040111730,
+          1040887730,
+          1040890330,
+          352387343
+        ]
+      ],
+      "max_atomic_instructions": 60
+    },
+    {
+      "case": "1200-native-clock-wrap-frames",
+      "latch": true,
+      "completed": 1200,
+      "retained": [
+        [
+          1193,
+          1034037592,
+          1034037992,
+          1034038992,
+          1034814992,
+          1034817592,
+          352387343
+        ],
+        [
+          1194,
+          1034905126,
+          1034905526,
+          1034906526,
+          1035682526,
+          1035685126,
+          352387343
+        ],
+        [
+          1195,
+          1035772660,
+          1035773060,
+          1035774060,
+          1036550060,
+          1036552660,
+          352387343
+        ],
+        [
+          1196,
+          1036640194,
+          1036640594,
+          1036641594,
+          1037417594,
+          1037420194,
+          352387343
+        ],
+        [
+          1197,
+          1037507728,
+          1037508128,
+          1037509128,
+          1038285128,
+          1038287728,
+          352387343
+        ],
+        [
+          1198,
+          1038375262,
+          1038375662,
+          1038376662,
+          1039152662,
+          1039155262,
+          352387343
+        ],
+        [
+          1199,
+          1039242796,
+          1039243196,
+          1039244196,
+          1040020196,
+          1040022796,
+          352387343
+        ],
+        [
+          1200,
+          1040110330,
+          1040110730,
+          1040111730,
+          1040887730,
+          1040890330,
+          352387343
+        ]
+      ],
+      "max_atomic_instructions": 60
+    },
+    {
+      "case": "only-three-verified-mode-pairs-qualified",
+      "passed": true
+    },
+    {
+      "case": "original-all-three-conditional-STR-and-register-CPSR-stack-ABI",
+      "passed": true
+    },
+    {
+      "case": "coalesced-event-times-are-one-observation-not-event-order",
+      "record": [
+        1,
+        200,
+        500,
+        500,
+        500,
+        600,
+        352387471
+      ]
+    },
+    {
+      "case": "event-counts-saturate-explicit-at-three-or-more",
+      "record": [
+        1,
+        200,
+        300,
+        300,
+        500,
+        600,
+        1023475983
+      ]
+    },
+    {
+      "case": "first-final-observation-and-single-publish-on-callback",
+      "record": [
+        1,
+        200,
+        0,
+        0,
+        500,
+        600,
+        16843279
+      ]
+    },
+    {
+      "case": "cancelled-request-explicit-not-silent-loss",
+      "record": [
+        1,
+        200,
+        0,
+        0,
+        0,
+        0,
+        16842771
+      ]
+    },
+    {
+      "case": "other-controller-not-claimed",
+      "record": [
+        1,
+        300,
+        0,
+        0,
+        500,
+        600,
+        16843023
+      ]
+    },
+    {
+      "case": "sequence-wrap-skips-zero",
+      "record": [
+        1,
+        200,
+        0,
+        0,
+        500,
+        600,
+        16843023
+      ]
+    },
+    {
+      "case": "actual-original-IRQ-dispatch-ACK-and-callback-path",
+      "record": [
+        1,
+        1026000,
+        0,
+        0,
+        2100000,
+        2102600,
+        16843023
+      ],
+      "native_ACK": [
+        4,
+        0
+      ]
+    }
+  ],
+  "code_hashes": [
+    "632ad26b08edd3cc24bc62ddd1dca475ed02e0bd7cce20844b6a1a1e071b7bcc",
+    "34fd44e42c790edb493b4cb536b14910a90a71492b1dd2ec1c304cd926888353"
+  ],
+  "ring_bytes": 256,
+  "capacity": 8,
+  "native_string_logger_preserved": true,
+  "hardware_tested": false
+}

@@ -1,0 +1,1908 @@
+{
+  "passed": true,
+  "binary_sha256": "dc8111f3e7e4aa358631101dde2966acda16a6844aa568aba2c4ca06d3210177",
+  "source_sha256": "a9fefe930d847046f626455168bc6b2289b9852c2cf0d33301b8501cc09f6f14",
+  "cases": [
+    {
+      "name": "normal-ready",
+      "exit": 0,
+      "stdout": "NXL_VIDEO_PROBE1\nstate=OFF\nreason=TRACE_READY_TO_ARM\nreport=\nsamples=0\nperiod_ms=200\nend=NXL_VIDEO_PROBE_END1\n",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "5": 5,
+        "221": 5,
+        "3": 3,
+        "6": 5,
+        "45": 2,
+        "192": 3,
+        "217": 4,
+        "85": 2,
+        "91": 2,
+        "54": 1,
+        "146": 2,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [],
+      "target_opens": []
+    },
+    {
+      "name": "collect-stop-idle-publish",
+      "exit": 0,
+      "stdout": "",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "369": 1,
+        "6": 1085,
+        "397": 13,
+        "196": 8,
+        "199": 7,
+        "5": 63,
+        "221": 59,
+        "197": 3,
+        "143": 1,
+        "3": 126,
+        "45": 2,
+        "192": 33,
+        "217": 22,
+        "85": 4,
+        "91": 32,
+        "266": 1,
+        "39": 1,
+        "175": 111,
+        "174": 8,
+        "403": 36,
+        "263": 36,
+        "20": 6,
+        "194": 1,
+        "180": 12,
+        "322": 6,
+        "4": 5,
+        "38": 1,
+        "265": 10,
+        "118": 2,
+        "327": 2,
+        "329": 2,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/READY",
+          69,
+          0,
+          false
+        ],
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/counts-e4f9b44b-123.part",
+          16384,
+          10,
+          true
+        ],
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/counts-e4f9b44b-123.part",
+          5760,
+          10,
+          true
+        ],
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/DONE-e4f9b44b-123.part",
+          106,
+          10,
+          true
+        ]
+      ],
+      "target_opens": [
+        [
+          "/dev/mem",
+          1708032
+        ],
+        [
+          "/proc/247/mem",
+          655360
+        ]
+      ]
+    },
+    {
+      "name": "idempotent-saved-stop",
+      "exit": 0,
+      "stdout": "NXL_VIDEO_PROBE1\nstate=OFF\nreason=TRACE_SAVED\nreport=/mnt/mmc/NXDEMO51/VIDEO_STAGE_test\nsamples=5\nperiod_ms=200\nend=NXL_VIDEO_PROBE_END1\n",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "397": 3,
+        "196": 2,
+        "199": 3,
+        "5": 3,
+        "221": 3,
+        "3": 1,
+        "6": 3,
+        "197": 1,
+        "143": 3,
+        "192": 1,
+        "54": 1,
+        "146": 2,
+        "91": 1,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [],
+      "target_opens": []
+    },
+    {
+      "name": "saved-off-status",
+      "exit": 0,
+      "stdout": "NXL_VIDEO_PROBE1\nstate=OFF\nreason=TRACE_SAVED\nreport=/mnt/mmc/NXDEMO51/VIDEO_STAGE_test\nsamples=5\nperiod_ms=200\nend=NXL_VIDEO_PROBE_END1\n",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "397": 3,
+        "196": 2,
+        "199": 3,
+        "5": 3,
+        "221": 3,
+        "3": 1,
+        "6": 3,
+        "197": 1,
+        "192": 1,
+        "143": 2,
+        "54": 1,
+        "146": 2,
+        "91": 1,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [],
+      "target_opens": []
+    },
+    {
+      "name": "repeat-start-after-save",
+      "exit": 0,
+      "stdout": "",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "369": 1,
+        "6": 1088,
+        "397": 13,
+        "196": 7,
+        "199": 8,
+        "5": 65,
+        "221": 62,
+        "3": 127,
+        "197": 4,
+        "192": 34,
+        "143": 3,
+        "91": 33,
+        "45": 2,
+        "217": 22,
+        "85": 4,
+        "266": 1,
+        "39": 1,
+        "175": 111,
+        "174": 8,
+        "403": 36,
+        "263": 36,
+        "20": 6,
+        "194": 1,
+        "180": 12,
+        "322": 6,
+        "4": 5,
+        "38": 1,
+        "10": 1,
+        "265": 10,
+        "118": 2,
+        "327": 2,
+        "329": 2,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test2/READY",
+          69,
+          0,
+          false
+        ],
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test2/counts-be5e6c0d-123.part",
+          16384,
+          10,
+          true
+        ],
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test2/counts-be5e6c0d-123.part",
+          5760,
+          10,
+          true
+        ],
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test2/DONE-be5e6c0d-123.part",
+          106,
+          10,
+          true
+        ]
+      ],
+      "target_opens": [
+        [
+          "/dev/mem",
+          1708032
+        ],
+        [
+          "/proc/247/mem",
+          655360
+        ]
+      ]
+    },
+    {
+      "name": "usb-retains-RAM",
+      "exit": 0,
+      "stdout": "",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "369": 1,
+        "6": 1054,
+        "397": 10,
+        "196": 8,
+        "199": 6,
+        "5": 35,
+        "221": 31,
+        "197": 2,
+        "143": 1,
+        "3": 107,
+        "45": 2,
+        "192": 24,
+        "217": 6,
+        "85": 2,
+        "91": 23,
+        "266": 1,
+        "39": 1,
+        "175": 111,
+        "174": 8,
+        "403": 27,
+        "263": 27,
+        "20": 4,
+        "194": 1,
+        "180": 12,
+        "322": 1,
+        "4": 2,
+        "38": 1,
+        "265": 5,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/READY",
+          68,
+          0,
+          false
+        ]
+      ],
+      "target_opens": [
+        [
+          "/dev/mem",
+          1708032
+        ],
+        [
+          "/proc/247/mem",
+          655360
+        ]
+      ]
+    },
+    {
+      "name": "usb-pending-status",
+      "exit": 0,
+      "stdout": "NXL_VIDEO_PROBE1\nstate=PENDING\nreason=TRACE_RAM_PENDING\nreport=/mnt/mmc/NXDEMO51/VIDEO_STAGE_test\nsamples=5\nperiod_ms=200\nend=NXL_VIDEO_PROBE_END1\n",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "397": 3,
+        "196": 2,
+        "199": 3,
+        "5": 3,
+        "221": 3,
+        "3": 1,
+        "6": 3,
+        "197": 1,
+        "192": 1,
+        "143": 2,
+        "54": 1,
+        "146": 2,
+        "91": 1,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [],
+      "target_opens": []
+    },
+    {
+      "name": "usb-new-start-refused",
+      "exit": 1,
+      "stdout": "TRACE_PENDING_SAVE_FIRST\n",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "369": 1,
+        "6": 1024,
+        "397": 4,
+        "196": 3,
+        "199": 4,
+        "5": 3,
+        "221": 3,
+        "3": 1,
+        "197": 1,
+        "192": 1,
+        "143": 2,
+        "91": 1,
+        "146": 1,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [],
+      "target_opens": []
+    },
+    {
+      "name": "USB-connected-pending-save-refused",
+      "exit": 1,
+      "stdout": "NXL_VIDEO_PROBE1\nstate=PENDING\nreason=TRACE_SAVE_PENDING_STOP_VIDEO\nreport=/mnt/mmc/NXDEMO51/VIDEO_STAGE_test\nsamples=5\nperiod_ms=200\nend=NXL_VIDEO_PROBE_END1\n",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "397": 3,
+        "196": 2,
+        "199": 3,
+        "5": 6,
+        "221": 6,
+        "3": 3,
+        "6": 6,
+        "197": 1,
+        "143": 3,
+        "192": 3,
+        "45": 2,
+        "217": 2,
+        "85": 2,
+        "91": 2,
+        "54": 1,
+        "146": 2,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [],
+      "target_opens": []
+    },
+    {
+      "name": "usb-recover-on-idle-current-camera",
+      "exit": 0,
+      "stdout": "NXL_VIDEO_PROBE1\nstate=OFF\nreason=TRACE_SAVED\nreport=/mnt/mmc/NXDEMO51/VIDEO_STAGE_test\nsamples=5\nperiod_ms=200\nend=NXL_VIDEO_PROBE_END1\n",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "397": 6,
+        "196": 2,
+        "199": 4,
+        "5": 13,
+        "221": 13,
+        "3": 8,
+        "6": 16,
+        "197": 2,
+        "143": 3,
+        "192": 5,
+        "45": 2,
+        "217": 4,
+        "85": 2,
+        "91": 4,
+        "20": 2,
+        "322": 5,
+        "403": 1,
+        "263": 1,
+        "4": 3,
+        "118": 2,
+        "327": 2,
+        "329": 2,
+        "54": 1,
+        "146": 2,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/counts-06d554f5-123.part",
+          16384,
+          0,
+          false
+        ],
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/counts-06d554f5-123.part",
+          5760,
+          0,
+          false
+        ],
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/DONE-06d554f5-123.part",
+          106,
+          0,
+          false
+        ]
+      ],
+      "target_opens": []
+    },
+    {
+      "name": "unknown_usb-retains-RAM",
+      "exit": 0,
+      "stdout": "",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "369": 1,
+        "6": 1053,
+        "397": 10,
+        "196": 8,
+        "199": 6,
+        "5": 34,
+        "221": 30,
+        "197": 2,
+        "143": 1,
+        "3": 106,
+        "45": 2,
+        "192": 24,
+        "217": 6,
+        "85": 2,
+        "91": 23,
+        "266": 1,
+        "39": 1,
+        "175": 111,
+        "174": 8,
+        "403": 27,
+        "263": 27,
+        "20": 4,
+        "194": 1,
+        "180": 12,
+        "322": 1,
+        "4": 2,
+        "38": 1,
+        "265": 5,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/READY",
+          69,
+          0,
+          false
+        ]
+      ],
+      "target_opens": [
+        [
+          "/dev/mem",
+          1708032
+        ],
+        [
+          "/proc/247/mem",
+          655360
+        ]
+      ]
+    },
+    {
+      "name": "unknown_usb-pending-status",
+      "exit": 0,
+      "stdout": "NXL_VIDEO_PROBE1\nstate=PENDING\nreason=TRACE_RAM_PENDING\nreport=/mnt/mmc/NXDEMO51/VIDEO_STAGE_test\nsamples=5\nperiod_ms=200\nend=NXL_VIDEO_PROBE_END1\n",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "397": 3,
+        "196": 2,
+        "199": 3,
+        "5": 3,
+        "221": 3,
+        "3": 1,
+        "6": 3,
+        "197": 1,
+        "192": 1,
+        "143": 2,
+        "54": 1,
+        "146": 2,
+        "91": 1,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [],
+      "target_opens": []
+    },
+    {
+      "name": "unknown_usb-new-start-refused",
+      "exit": 1,
+      "stdout": "TRACE_PENDING_SAVE_FIRST\n",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "369": 1,
+        "6": 1024,
+        "397": 4,
+        "196": 3,
+        "199": 4,
+        "5": 3,
+        "221": 3,
+        "3": 1,
+        "197": 1,
+        "192": 1,
+        "143": 2,
+        "91": 1,
+        "146": 1,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [],
+      "target_opens": []
+    },
+    {
+      "name": "unknown_usb-recover-on-idle-current-camera",
+      "exit": 0,
+      "stdout": "NXL_VIDEO_PROBE1\nstate=OFF\nreason=TRACE_SAVED\nreport=/mnt/mmc/NXDEMO51/VIDEO_STAGE_test\nsamples=5\nperiod_ms=200\nend=NXL_VIDEO_PROBE_END1\n",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "397": 6,
+        "196": 2,
+        "199": 4,
+        "5": 13,
+        "221": 13,
+        "3": 8,
+        "6": 16,
+        "197": 2,
+        "143": 3,
+        "192": 5,
+        "45": 2,
+        "217": 4,
+        "85": 2,
+        "91": 4,
+        "20": 2,
+        "322": 5,
+        "403": 1,
+        "263": 1,
+        "4": 3,
+        "118": 2,
+        "327": 2,
+        "329": 2,
+        "54": 1,
+        "146": 2,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/counts-7127dd79-123.part",
+          16384,
+          0,
+          false
+        ],
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/counts-7127dd79-123.part",
+          5760,
+          0,
+          false
+        ],
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/DONE-7127dd79-123.part",
+          106,
+          0,
+          false
+        ]
+      ],
+      "target_opens": []
+    },
+    {
+      "name": "camera_gone-retains-RAM",
+      "exit": 0,
+      "stdout": "",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "369": 1,
+        "6": 1055,
+        "397": 10,
+        "196": 8,
+        "199": 6,
+        "5": 36,
+        "221": 32,
+        "197": 2,
+        "143": 1,
+        "3": 108,
+        "45": 2,
+        "192": 24,
+        "217": 6,
+        "85": 2,
+        "91": 23,
+        "266": 1,
+        "39": 1,
+        "175": 111,
+        "174": 8,
+        "403": 27,
+        "263": 27,
+        "20": 4,
+        "194": 1,
+        "180": 12,
+        "322": 1,
+        "4": 2,
+        "38": 1,
+        "265": 5,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/READY",
+          69,
+          0,
+          false
+        ]
+      ],
+      "target_opens": [
+        [
+          "/dev/mem",
+          1708032
+        ],
+        [
+          "/proc/247/mem",
+          655360
+        ]
+      ]
+    },
+    {
+      "name": "camera_gone-pending-status",
+      "exit": 0,
+      "stdout": "NXL_VIDEO_PROBE1\nstate=PENDING\nreason=TRACE_RAM_PENDING\nreport=/mnt/mmc/NXDEMO51/VIDEO_STAGE_test\nsamples=5\nperiod_ms=200\nend=NXL_VIDEO_PROBE_END1\n",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "397": 3,
+        "196": 2,
+        "199": 3,
+        "5": 3,
+        "221": 3,
+        "3": 1,
+        "6": 3,
+        "197": 1,
+        "192": 1,
+        "143": 2,
+        "54": 1,
+        "146": 2,
+        "91": 1,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [],
+      "target_opens": []
+    },
+    {
+      "name": "camera_gone-new-start-refused",
+      "exit": 1,
+      "stdout": "TRACE_PENDING_SAVE_FIRST\n",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "369": 1,
+        "6": 1024,
+        "397": 4,
+        "196": 3,
+        "199": 4,
+        "5": 3,
+        "221": 3,
+        "3": 1,
+        "197": 1,
+        "192": 1,
+        "143": 2,
+        "91": 1,
+        "146": 1,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [],
+      "target_opens": []
+    },
+    {
+      "name": "camera_gone-recover-on-idle-current-camera",
+      "exit": 0,
+      "stdout": "NXL_VIDEO_PROBE1\nstate=OFF\nreason=TRACE_SAVED\nreport=/mnt/mmc/NXDEMO51/VIDEO_STAGE_test\nsamples=5\nperiod_ms=200\nend=NXL_VIDEO_PROBE_END1\n",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "397": 6,
+        "196": 2,
+        "199": 4,
+        "5": 13,
+        "221": 13,
+        "3": 8,
+        "6": 16,
+        "197": 2,
+        "143": 3,
+        "192": 5,
+        "45": 2,
+        "217": 4,
+        "85": 2,
+        "91": 4,
+        "20": 2,
+        "322": 5,
+        "403": 1,
+        "263": 1,
+        "4": 3,
+        "118": 2,
+        "327": 2,
+        "329": 2,
+        "54": 1,
+        "146": 2,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/counts-93037d24-123.part",
+          16384,
+          0,
+          false
+        ],
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/counts-93037d24-123.part",
+          5760,
+          0,
+          false
+        ],
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/DONE-93037d24-123.part",
+          106,
+          0,
+          false
+        ]
+      ],
+      "target_opens": []
+    },
+    {
+      "name": "non-RAM-devshm-refused",
+      "exit": 1,
+      "stdout": "TRACE_RAM_FILESYSTEM_UNAVAILABLE\n",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "369": 1,
+        "6": 1027,
+        "397": 6,
+        "196": 5,
+        "199": 4,
+        "5": 7,
+        "221": 6,
+        "197": 1,
+        "143": 1,
+        "3": 3,
+        "45": 2,
+        "192": 3,
+        "217": 4,
+        "85": 2,
+        "91": 2,
+        "266": 1,
+        "146": 1,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [],
+      "target_opens": []
+    },
+    {
+      "name": "broad-recorder-lease-refused",
+      "exit": 1,
+      "stdout": "TRACE_OTHER_RECORDER_ACTIVE\n",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "369": 1,
+        "6": 1022,
+        "397": 5,
+        "196": 4,
+        "199": 4,
+        "5": 2,
+        "221": 1,
+        "197": 1,
+        "143": 1,
+        "146": 1,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [],
+      "target_opens": []
+    },
+    {
+      "name": "READY-failure-no-stuck-registry",
+      "exit": 1,
+      "stdout": "TRACE_REGISTRY_OR_READY_FAILED\n",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "369": 1,
+        "6": 1040,
+        "397": 10,
+        "196": 8,
+        "199": 6,
+        "5": 20,
+        "221": 18,
+        "197": 2,
+        "143": 1,
+        "3": 95,
+        "45": 2,
+        "192": 23,
+        "217": 6,
+        "85": 2,
+        "91": 22,
+        "266": 1,
+        "39": 1,
+        "175": 26,
+        "174": 4,
+        "403": 2,
+        "263": 2,
+        "20": 4,
+        "194": 1,
+        "180": 2,
+        "322": 1,
+        "10": 1,
+        "146": 1,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [],
+      "target_opens": [
+        [
+          "/dev/mem",
+          1708032
+        ],
+        [
+          "/proc/247/mem",
+          655360
+        ]
+      ]
+    },
+    {
+      "name": "retry-after-READY-failure",
+      "exit": 0,
+      "stdout": "",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "369": 1,
+        "6": 1085,
+        "397": 13,
+        "196": 8,
+        "199": 7,
+        "5": 63,
+        "221": 59,
+        "197": 3,
+        "143": 1,
+        "3": 126,
+        "45": 2,
+        "192": 33,
+        "217": 22,
+        "85": 4,
+        "91": 32,
+        "266": 1,
+        "39": 1,
+        "175": 111,
+        "174": 8,
+        "403": 36,
+        "263": 36,
+        "20": 6,
+        "194": 1,
+        "180": 12,
+        "322": 6,
+        "4": 5,
+        "38": 1,
+        "265": 10,
+        "118": 2,
+        "327": 2,
+        "329": 2,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/READY",
+          69,
+          0,
+          false
+        ],
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/counts-8e43d679-123.part",
+          16384,
+          10,
+          true
+        ],
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/counts-8e43d679-123.part",
+          5760,
+          10,
+          true
+        ],
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/DONE-8e43d679-123.part",
+          106,
+          10,
+          true
+        ]
+      ],
+      "target_opens": [
+        [
+          "/dev/mem",
+          1708032
+        ],
+        [
+          "/proc/247/mem",
+          655360
+        ]
+      ]
+    },
+    {
+      "name": "export-DONE-sync-failure-retains-RAM",
+      "exit": 1,
+      "stdout": "TRACE_EXPORT_FAILED_RAM_RETAINED\n",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "369": 1,
+        "6": 1085,
+        "397": 12,
+        "196": 8,
+        "199": 7,
+        "5": 63,
+        "221": 59,
+        "197": 3,
+        "143": 1,
+        "3": 126,
+        "45": 2,
+        "192": 33,
+        "217": 22,
+        "85": 4,
+        "91": 32,
+        "266": 1,
+        "39": 1,
+        "175": 111,
+        "174": 8,
+        "403": 38,
+        "263": 38,
+        "20": 6,
+        "194": 1,
+        "180": 12,
+        "322": 6,
+        "4": 5,
+        "38": 1,
+        "265": 10,
+        "118": 2,
+        "327": 1,
+        "329": 1,
+        "328": 1,
+        "146": 1,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/READY",
+          69,
+          0,
+          false
+        ],
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/counts-d6babe62-123.part",
+          16384,
+          10,
+          true
+        ],
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/counts-d6babe62-123.part",
+          5760,
+          10,
+          true
+        ],
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/DONE-d6babe62-123.part",
+          106,
+          10,
+          true
+        ]
+      ],
+      "target_opens": [
+        [
+          "/dev/mem",
+          1708032
+        ],
+        [
+          "/proc/247/mem",
+          655360
+        ]
+      ]
+    },
+    {
+      "name": "retry-existing-counts-after-DONE-failure",
+      "exit": 0,
+      "stdout": "NXL_VIDEO_PROBE1\nstate=OFF\nreason=TRACE_SAVED\nreport=/mnt/mmc/NXDEMO51/VIDEO_STAGE_test\nsamples=5\nperiod_ms=200\nend=NXL_VIDEO_PROBE_END1\n",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "397": 6,
+        "196": 2,
+        "199": 4,
+        "5": 11,
+        "221": 11,
+        "3": 12,
+        "6": 14,
+        "197": 3,
+        "143": 3,
+        "192": 5,
+        "45": 2,
+        "217": 4,
+        "85": 2,
+        "91": 4,
+        "20": 2,
+        "322": 4,
+        "403": 1,
+        "263": 1,
+        "4": 1,
+        "118": 1,
+        "327": 1,
+        "329": 1,
+        "54": 1,
+        "146": 2,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/DONE-d6babe62-123.part",
+          106,
+          0,
+          false
+        ]
+      ],
+      "target_opens": []
+    },
+    {
+      "name": "CPU-budget-throttle-two-steps",
+      "exit": 0,
+      "stdout": "",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "369": 1,
+        "6": 1282,
+        "397": 13,
+        "196": 8,
+        "199": 7,
+        "5": 336,
+        "221": 256,
+        "197": 3,
+        "143": 1,
+        "3": 327,
+        "45": 2,
+        "192": 29,
+        "217": 14,
+        "85": 4,
+        "91": 28,
+        "266": 1,
+        "39": 1,
+        "175": 1556,
+        "174": 8,
+        "403": 368,
+        "263": 368,
+        "20": 6,
+        "194": 1,
+        "180": 182,
+        "322": 6,
+        "4": 5,
+        "38": 1,
+        "265": 91,
+        "118": 2,
+        "327": 2,
+        "329": 2,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/READY",
+          69,
+          0,
+          false
+        ],
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/counts-67a88e33-123.part",
+          16384,
+          91,
+          true
+        ],
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/counts-67a88e33-123.part",
+          103680,
+          91,
+          true
+        ],
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/DONE-67a88e33-123.part",
+          110,
+          91,
+          true
+        ]
+      ],
+      "target_opens": [
+        [
+          "/dev/mem",
+          1708032
+        ],
+        [
+          "/proc/247/mem",
+          655360
+        ]
+      ]
+    },
+    {
+      "name": "capacity-halts-sampling-retains-RAM",
+      "exit": 0,
+      "stdout": "",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "369": 1,
+        "6": 1059,
+        "397": 10,
+        "196": 8,
+        "199": 6,
+        "5": 40,
+        "221": 36,
+        "197": 2,
+        "143": 1,
+        "3": 112,
+        "45": 2,
+        "192": 24,
+        "217": 6,
+        "85": 2,
+        "91": 23,
+        "266": 1,
+        "39": 1,
+        "175": 128,
+        "174": 8,
+        "403": 33,
+        "263": 33,
+        "20": 4,
+        "194": 1,
+        "180": 14,
+        "322": 1,
+        "4": 2,
+        "38": 1,
+        "265": 7,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/READY",
+          69,
+          0,
+          false
+        ]
+      ],
+      "target_opens": [
+        [
+          "/dev/mem",
+          1708032
+        ],
+        [
+          "/proc/247/mem",
+          655360
+        ]
+      ]
+    },
+    {
+      "name": "pending-for-live-controller",
+      "exit": 0,
+      "stdout": "",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "369": 1,
+        "6": 1054,
+        "397": 10,
+        "196": 8,
+        "199": 6,
+        "5": 35,
+        "221": 31,
+        "197": 2,
+        "143": 1,
+        "3": 107,
+        "45": 2,
+        "192": 24,
+        "217": 6,
+        "85": 2,
+        "91": 23,
+        "266": 1,
+        "39": 1,
+        "175": 111,
+        "174": 8,
+        "403": 27,
+        "263": 27,
+        "20": 4,
+        "194": 1,
+        "180": 12,
+        "322": 1,
+        "4": 2,
+        "38": 1,
+        "265": 5,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/READY",
+          69,
+          0,
+          false
+        ]
+      ],
+      "target_opens": [
+        [
+          "/dev/mem",
+          1708032
+        ],
+        [
+          "/proc/247/mem",
+          655360
+        ]
+      ]
+    },
+    {
+      "name": "live-controller-mark",
+      "exit": 3,
+      "stdout": "NXL_VIDEO_PROBE1\nstate=SAVING\nreason=TRACE_NOT_RUNNING\nreport=/mnt/mmc/NXDEMO51/VIDEO_STAGE_test\nsamples=5\nperiod_ms=200\nend=NXL_VIDEO_PROBE_END1\n",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "397": 3,
+        "196": 2,
+        "199": 3,
+        "5": 4,
+        "221": 4,
+        "3": 2,
+        "6": 4,
+        "197": 1,
+        "143": 2,
+        "192": 1,
+        "85": 2,
+        "54": 1,
+        "146": 2,
+        "91": 1,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [],
+      "target_opens": []
+    },
+    {
+      "name": "invalid-registry-refused",
+      "exit": 1,
+      "stdout": "NXL_VIDEO_PROBE1\nstate=OFF\nreason=TRACE_REGISTRY_INVALID\nreport=\nsamples=0\nperiod_ms=200\nend=NXL_VIDEO_PROBE_END1\n",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "397": 3,
+        "196": 3,
+        "199": 2,
+        "5": 1,
+        "221": 1,
+        "3": 1,
+        "6": 1,
+        "54": 1,
+        "146": 2,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [],
+      "target_opens": []
+    },
+    {
+      "name": "invalid-registry-not-overwritten",
+      "exit": 1,
+      "stdout": "TRACE_REGISTRY_INVALID\n",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "369": 1,
+        "6": 1022,
+        "397": 4,
+        "196": 4,
+        "199": 3,
+        "5": 1,
+        "221": 1,
+        "3": 1,
+        "146": 1,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [],
+      "target_opens": []
+    },
+    {
+      "name": "recording-prevents-arming",
+      "exit": 1,
+      "stdout": "TRACE_STOP_VIDEO_BEFORE_START\n",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "369": 1,
+        "6": 1028,
+        "397": 5,
+        "196": 4,
+        "199": 4,
+        "5": 8,
+        "221": 7,
+        "197": 1,
+        "143": 1,
+        "3": 4,
+        "45": 2,
+        "192": 3,
+        "217": 3,
+        "85": 3,
+        "91": 2,
+        "146": 1,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [],
+      "target_opens": []
+    },
+    {
+      "name": "pending-for-control-requests",
+      "exit": 0,
+      "stdout": "",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "369": 1,
+        "6": 1054,
+        "397": 10,
+        "196": 8,
+        "199": 6,
+        "5": 35,
+        "221": 31,
+        "197": 2,
+        "143": 1,
+        "3": 107,
+        "45": 2,
+        "192": 24,
+        "217": 6,
+        "85": 2,
+        "91": 23,
+        "266": 1,
+        "39": 1,
+        "175": 111,
+        "174": 8,
+        "403": 27,
+        "263": 27,
+        "20": 4,
+        "194": 1,
+        "180": 12,
+        "322": 1,
+        "4": 2,
+        "38": 1,
+        "265": 5,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/READY",
+          69,
+          0,
+          false
+        ]
+      ],
+      "target_opens": [
+        [
+          "/dev/mem",
+          1708032
+        ],
+        [
+          "/proc/247/mem",
+          655360
+        ]
+      ]
+    },
+    {
+      "name": "live-mark-request-queued-without-false-applied-claim",
+      "exit": 0,
+      "stdout": "NXL_VIDEO_PROBE1\nstate=ON\nreason=TRACE_COMPARE_REQUESTED\nreport=/mnt/mmc/NXDEMO51/VIDEO_STAGE_test\nsamples=5\nperiod_ms=200\nend=NXL_VIDEO_PROBE_END1\n",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "397": 3,
+        "196": 2,
+        "199": 3,
+        "5": 7,
+        "221": 7,
+        "3": 4,
+        "6": 7,
+        "197": 1,
+        "143": 2,
+        "192": 3,
+        "85": 2,
+        "45": 2,
+        "217": 2,
+        "91": 2,
+        "265": 100,
+        "54": 1,
+        "146": 2,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [],
+      "target_opens": []
+    },
+    {
+      "name": "live-stop-request-committed",
+      "exit": 0,
+      "stdout": "NXL_VIDEO_PROBE1\nstate=ON\nreason=TRACE_SAVE_REQUESTED\nreport=/mnt/mmc/NXDEMO51/VIDEO_STAGE_test\nsamples=5\nperiod_ms=200\nend=NXL_VIDEO_PROBE_END1\n",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "397": 3,
+        "196": 2,
+        "199": 3,
+        "5": 4,
+        "221": 4,
+        "3": 2,
+        "6": 4,
+        "197": 1,
+        "143": 2,
+        "192": 1,
+        "85": 2,
+        "54": 1,
+        "146": 2,
+        "91": 1,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [],
+      "target_opens": []
+    },
+    {
+      "name": "counts-write-error-preserves-RAM",
+      "exit": 1,
+      "stdout": "TRACE_EXPORT_FAILED_RAM_RETAINED\n",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "369": 1,
+        "6": 1082,
+        "397": 11,
+        "196": 8,
+        "199": 7,
+        "5": 61,
+        "221": 57,
+        "197": 3,
+        "143": 1,
+        "3": 124,
+        "45": 2,
+        "192": 33,
+        "217": 22,
+        "85": 4,
+        "91": 32,
+        "266": 1,
+        "39": 1,
+        "175": 111,
+        "174": 8,
+        "403": 38,
+        "263": 38,
+        "20": 5,
+        "194": 1,
+        "180": 12,
+        "322": 4,
+        "4": 3,
+        "38": 1,
+        "265": 10,
+        "328": 1,
+        "146": 1,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/READY",
+          69,
+          0,
+          false
+        ],
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/counts-3c4d9f4a-123.part",
+          16384,
+          10,
+          true
+        ]
+      ],
+      "target_opens": [
+        [
+          "/dev/mem",
+          1708032
+        ],
+        [
+          "/proc/247/mem",
+          655360
+        ]
+      ]
+    },
+    {
+      "name": "counts-write-error-retry",
+      "exit": 0,
+      "stdout": "NXL_VIDEO_PROBE1\nstate=OFF\nreason=TRACE_SAVED\nreport=/mnt/mmc/NXDEMO51/VIDEO_STAGE_test\nsamples=5\nperiod_ms=200\nend=NXL_VIDEO_PROBE_END1\n",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "397": 6,
+        "196": 2,
+        "199": 4,
+        "5": 13,
+        "221": 13,
+        "3": 8,
+        "6": 16,
+        "197": 2,
+        "143": 3,
+        "192": 5,
+        "45": 2,
+        "217": 4,
+        "85": 2,
+        "91": 4,
+        "20": 2,
+        "322": 5,
+        "403": 1,
+        "263": 1,
+        "4": 3,
+        "118": 2,
+        "327": 2,
+        "329": 2,
+        "54": 1,
+        "146": 2,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/counts-3c4d9f4a-123.part",
+          16384,
+          0,
+          false
+        ],
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/counts-3c4d9f4a-123.part",
+          5760,
+          0,
+          false
+        ],
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/DONE-3c4d9f4a-123.part",
+          106,
+          0,
+          false
+        ]
+      ],
+      "target_opens": []
+    },
+    {
+      "name": "pending-before-simulated-power-cycle",
+      "exit": 0,
+      "stdout": "",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "369": 1,
+        "6": 1054,
+        "397": 10,
+        "196": 8,
+        "199": 6,
+        "5": 35,
+        "221": 31,
+        "197": 2,
+        "143": 1,
+        "3": 107,
+        "45": 2,
+        "192": 24,
+        "217": 6,
+        "85": 2,
+        "91": 23,
+        "266": 1,
+        "39": 1,
+        "175": 111,
+        "174": 8,
+        "403": 27,
+        "263": 27,
+        "20": 4,
+        "194": 1,
+        "180": 12,
+        "322": 1,
+        "4": 2,
+        "38": 1,
+        "265": 5,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/READY",
+          69,
+          0,
+          false
+        ]
+      ],
+      "target_opens": [
+        [
+          "/dev/mem",
+          1708032
+        ],
+        [
+          "/proc/247/mem",
+          655360
+        ]
+      ]
+    },
+    {
+      "name": "RAM-reset-ignores-persistent-tmp-registry",
+      "exit": 0,
+      "stdout": "NXL_VIDEO_PROBE1\nstate=OFF\nreason=TRACE_OFF\nreport=\nsamples=0\nperiod_ms=200\nend=NXL_VIDEO_PROBE_END1\n",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "397": 3,
+        "196": 3,
+        "199": 2,
+        "5": 1,
+        "54": 1,
+        "146": 2,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [],
+      "target_opens": []
+    },
+    {
+      "name": "fresh-start-after-RAM-reset",
+      "exit": 0,
+      "stdout": "",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "369": 1,
+        "6": 1085,
+        "397": 13,
+        "196": 8,
+        "199": 7,
+        "5": 63,
+        "221": 59,
+        "197": 3,
+        "143": 1,
+        "3": 126,
+        "45": 2,
+        "192": 33,
+        "217": 22,
+        "85": 4,
+        "91": 32,
+        "266": 1,
+        "39": 1,
+        "175": 111,
+        "174": 8,
+        "403": 36,
+        "263": 36,
+        "20": 6,
+        "194": 1,
+        "180": 12,
+        "322": 6,
+        "4": 5,
+        "38": 1,
+        "265": 10,
+        "118": 2,
+        "327": 2,
+        "329": 2,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test2/READY",
+          69,
+          0,
+          false
+        ],
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test2/counts-5e293ff5-123.part",
+          16384,
+          10,
+          true
+        ],
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test2/counts-5e293ff5-123.part",
+          5760,
+          10,
+          true
+        ],
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test2/DONE-5e293ff5-123.part",
+          106,
+          10,
+          true
+        ]
+      ],
+      "target_opens": [
+        [
+          "/dev/mem",
+          1708032
+        ],
+        [
+          "/proc/247/mem",
+          655360
+        ]
+      ]
+    },
+    {
+      "name": "kernel-CPU-frequency-and-governor-readonly",
+      "exit": 0,
+      "stdout": "",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "369": 1,
+        "6": 1087,
+        "397": 13,
+        "196": 8,
+        "199": 7,
+        "5": 63,
+        "221": 61,
+        "197": 3,
+        "143": 1,
+        "3": 128,
+        "45": 2,
+        "192": 33,
+        "217": 22,
+        "85": 4,
+        "91": 32,
+        "266": 1,
+        "39": 1,
+        "175": 111,
+        "174": 8,
+        "403": 36,
+        "263": 36,
+        "20": 6,
+        "194": 1,
+        "180": 12,
+        "322": 6,
+        "4": 5,
+        "38": 1,
+        "265": 10,
+        "118": 2,
+        "327": 2,
+        "329": 2,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/READY",
+          69,
+          0,
+          false
+        ],
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/counts-a6a027de-123.part",
+          16384,
+          10,
+          true
+        ],
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/counts-a6a027de-123.part",
+          5760,
+          10,
+          true
+        ],
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/DONE-a6a027de-123.part",
+          106,
+          10,
+          true
+        ]
+      ],
+      "target_opens": [
+        [
+          "/dev/mem",
+          1708032
+        ],
+        [
+          "/proc/247/mem",
+          655360
+        ]
+      ]
+    },
+    {
+      "name": "unknown-CPU-frequency-keeps-counters-usable",
+      "exit": 0,
+      "stdout": "",
+      "modeled_syscalls": {
+        "983045": 1,
+        "256": 1,
+        "369": 1,
+        "6": 1087,
+        "397": 13,
+        "196": 8,
+        "199": 7,
+        "5": 63,
+        "221": 61,
+        "197": 3,
+        "143": 1,
+        "3": 128,
+        "45": 2,
+        "192": 33,
+        "217": 22,
+        "85": 4,
+        "91": 32,
+        "266": 1,
+        "39": 1,
+        "175": 111,
+        "174": 8,
+        "403": 36,
+        "263": 36,
+        "20": 6,
+        "194": 1,
+        "180": 12,
+        "322": 6,
+        "4": 5,
+        "38": 1,
+        "265": 10,
+        "118": 2,
+        "327": 2,
+        "329": 2,
+        "248": 1
+      },
+      "hardware_tested": false,
+      "SD_writes": [
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/READY",
+          69,
+          0,
+          false
+        ],
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/counts-ef170fc7-123.part",
+          16384,
+          10,
+          true
+        ],
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/counts-ef170fc7-123.part",
+          5760,
+          10,
+          true
+        ],
+        [
+          "/mnt/mmc/NXDEMO51/VIDEO_STAGE_test/DONE-ef170fc7-123.part",
+          106,
+          10,
+          true
+        ]
+      ],
+      "target_opens": [
+        [
+          "/dev/mem",
+          1708032
+        ],
+        [
+          "/proc/247/mem",
+          655360
+        ]
+      ]
+    }
+  ],
+  "actual_ARM": true,
+  "modeled_OS_only": true,
+  "hardware_tested": false
+}

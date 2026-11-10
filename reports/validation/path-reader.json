@@ -1,0 +1,196 @@
+{
+  "passed": true,
+  "actual_ARM_binary": true,
+  "modeled_OS_and_RAM": true,
+  "hardware_tested": false,
+  "binary_sha256": "dc8111f3e7e4aa358631101dde2966acda16a6844aa568aba2c4ca06d3210177",
+  "source_sha256": "a9fefe930d847046f626455168bc6b2289b9852c2cf0d33301b8501cc09f6f14",
+  "cases": [
+    {
+      "name": "stable",
+      "passed": true,
+      "samples": 12,
+      "valid": "0x8c087",
+      "snapshots": 3,
+      "max_cached_pages": 32,
+      "unique_pages": 36,
+      "target_opens": [
+        [
+          "/dev/mem",
+          1708032
+        ],
+        [
+          "/proc/247/mem",
+          655360
+        ]
+      ],
+      "hot_SD_writes": [],
+      "binary_sha256": "dc8111f3e7e4aa358631101dde2966acda16a6844aa568aba2c4ca06d3210177"
+    },
+    {
+      "name": "legacy_UD",
+      "passed": true,
+      "samples": 12,
+      "valid": "0x8c087",
+      "snapshots": 3,
+      "max_cached_pages": 32,
+      "unique_pages": 36,
+      "target_opens": [
+        [
+          "/dev/mem",
+          1708032
+        ],
+        [
+          "/proc/247/mem",
+          655360
+        ]
+      ],
+      "hot_SD_writes": [],
+      "binary_sha256": "dc8111f3e7e4aa358631101dde2966acda16a6844aa568aba2c4ca06d3210177"
+    },
+    {
+      "name": "mmio_op",
+      "passed": true,
+      "samples": 12,
+      "valid": "0x8c087",
+      "snapshots": 3,
+      "max_cached_pages": 32,
+      "unique_pages": 35,
+      "target_opens": [
+        [
+          "/dev/mem",
+          1708032
+        ],
+        [
+          "/proc/247/mem",
+          655360
+        ]
+      ],
+      "hot_SD_writes": [],
+      "binary_sha256": "dc8111f3e7e4aa358631101dde2966acda16a6844aa568aba2c4ca06d3210177"
+    },
+    {
+      "name": "bad_parent",
+      "passed": true,
+      "samples": 12,
+      "valid": "0x88087",
+      "snapshots": 0,
+      "max_cached_pages": 20,
+      "unique_pages": 20,
+      "target_opens": [
+        [
+          "/dev/mem",
+          1708032
+        ],
+        [
+          "/proc/247/mem",
+          655360
+        ]
+      ],
+      "hot_SD_writes": [],
+      "binary_sha256": "dc8111f3e7e4aa358631101dde2966acda16a6844aa568aba2c4ca06d3210177"
+    },
+    {
+      "name": "mmio_source",
+      "passed": true,
+      "samples": 12,
+      "valid": "0x8c087",
+      "snapshots": 3,
+      "max_cached_pages": 32,
+      "unique_pages": 35,
+      "target_opens": [
+        [
+          "/dev/mem",
+          1708032
+        ],
+        [
+          "/proc/247/mem",
+          655360
+        ]
+      ],
+      "hot_SD_writes": [],
+      "binary_sha256": "dc8111f3e7e4aa358631101dde2966acda16a6844aa568aba2c4ca06d3210177"
+    },
+    {
+      "name": "evict",
+      "passed": true,
+      "samples": 76,
+      "valid": "0x8c087",
+      "snapshots": 15,
+      "max_cached_pages": 32,
+      "unique_pages": 228,
+      "target_opens": [
+        [
+          "/dev/mem",
+          1708032
+        ],
+        [
+          "/proc/247/mem",
+          655360
+        ]
+      ],
+      "hot_SD_writes": [],
+      "binary_sha256": "dc8111f3e7e4aa358631101dde2966acda16a6844aa568aba2c4ca06d3210177"
+    },
+    {
+      "name": "stable",
+      "passed": true,
+      "samples": 12,
+      "valid": "0x8c087",
+      "snapshots": 3,
+      "max_cached_pages": 32,
+      "unique_pages": 36,
+      "target_opens": [
+        [
+          "/dev/mem",
+          1708032
+        ],
+        [
+          "/proc/247/mem",
+          655360
+        ]
+      ],
+      "hot_SD_writes": [],
+      "binary_sha256": "dc8111f3e7e4aa358631101dde2966acda16a6844aa568aba2c4ca06d3210177"
+    },
+    {
+      "name": "extension_survives_export_retry",
+      "passed": true
+    },
+    {
+      "name": "stable",
+      "passed": true,
+      "samples": 12,
+      "valid": "0x8c087",
+      "snapshots": 3,
+      "max_cached_pages": 32,
+      "unique_pages": 36,
+      "target_opens": [
+        [
+          "/dev/mem",
+          1708032
+        ],
+        [
+          "/proc/247/mem",
+          655360
+        ]
+      ],
+      "hot_SD_writes": [],
+      "binary_sha256": "dc8111f3e7e4aa358631101dde2966acda16a6844aa568aba2c4ca06d3210177"
+    },
+    {
+      "name": "corrupt_extension_refused_on_retry_and_decode",
+      "passed": true
+    },
+    {
+      "name": "real_R9x_capture_backwards_compatible",
+      "passed": true,
+      "samples": 168
+    },
+    {
+      "name": "real_R9y_schema1_capture_backwards_compatible",
+      "passed": true,
+      "samples": 131
+    }
+  ]
+}

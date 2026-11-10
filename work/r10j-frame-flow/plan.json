@@ -1,0 +1,77 @@
+{
+  "bounded_pixel_sample_points": 25,
+  "bounded_pixel_sample_side": 16,
+  "cap_bytes": 201326592,
+  "case": {
+    "id": "SELECTED_DCIM_NATIVE_WB_BLACK_SOURCE_CC",
+    "index": 0,
+    "ldc_injection_enabled": true,
+    "source": "runtime-readonly-DCIM-descriptor",
+    "source_black_profiles": [
+      128,
+      512
+    ],
+    "source_cc_enabled": true,
+    "source_cc_reloaded": false,
+    "source_index": 0,
+    "source_sha256": "bound-in-job-config-request-and-workspace-lease",
+    "source_wb_enabled": true,
+    "wb_packet_schema": 3
+  },
+  "case_hash_encoding": "sha256_UTF8_sorted_compact_JSON_of_case",
+  "case_hashes": [
+    "c0f4936f7a902c70511d3e2d777c7e465a0003565f935bc7c78511c2366318be"
+  ],
+  "default_lut": "off",
+  "dynamic_black_delta_implemented": false,
+  "execution": "SELECTED_SRW_NATIVE_ISP_NATIVE_LDC_NATIVE_3DLUT_NATIVE_JPEG",
+  "format": "NXR8LNATIVEPLAN1",
+  "frames_total": 1,
+  "isp_control_audit": {
+    "cap_offset": 65011712,
+    "record_bytes": 11920,
+    "shadow_is_dma_proof": false,
+    "stages": 6
+  },
+  "jpeg_quantization": "selected_SRW_full_embedded_JPEG_DQT_natural_order_verified_in_final_stream",
+  "ldc_injection_enabled": true,
+  "ldc_profile_count": 12,
+  "ldc_profile_match": "exact_normalized_makernote_key_and_complete_source_packet",
+  "middle_full_frame_files": 0,
+  "native_pixel_capture": "qualified_RAM_only_OTF_reported_unavailable",
+  "new_camera_version_tested": false,
+  "output_geometry": [
+    6480,
+    4320,
+    6496
+  ],
+  "output_sampling": 422,
+  "same_stem_native_jpeg_required": true,
+  "shared_workspace": true,
+  "source_A028_register_mapping_implemented": true,
+  "source_cc_reloaded": false,
+  "source_count": 1,
+  "source_fd_pinned": true,
+  "source_geometry": [
+    6496,
+    4336,
+    14,
+    32773
+  ],
+  "source_hash_required": true,
+  "source_origin": [
+    0,
+    0
+  ],
+  "version": "R9e-source-IQ-before-final-native-parameter-load",
+  "source_cc_scope": "18 signed11 coefficient fields only; preserve non-coefficient flags",
+  "curve_audit": "Original factory Still IQ refresh, then source CC and optional Gamma before the final existing native load; initial geometry load retained",
+  "source_cc_submitted_before_original_config_load": true,
+  "extra_parameter_reload_calls": 0,
+  "gamma_modes": [
+    "factory",
+    "source19",
+    "source19_midtone_lift"
+  ],
+  "native_original_bank_loads": 2
+}

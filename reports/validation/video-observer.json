@@ -1,0 +1,243 @@
+{
+  "passed": true,
+  "actual_C_ABI_bytes": 696,
+  "actual_ARM_samples": 2,
+  "decoded": {
+    "format": "NX_VIDEO_FRONT_PC4",
+    "record_counts": {
+      "kind19_status1": 2,
+      "kind20_status1": 2
+    },
+    "frontend_changes": [],
+    "sensor_cache_changes": [],
+    "sensor_window_changes": [],
+    "fullwidth_profile_changes": [
+      {
+        "root": "0x82010000",
+        "profile6": "0x82030000",
+        "profile19": "0x82040000",
+        "mapping_literal": "0x8014e8a0",
+        "requested_mode": 17,
+        "applied_mode": 17,
+        "profile6_geometry": [
+          6608,
+          3680,
+          6480,
+          3644,
+          92,
+          36
+        ],
+        "profile19_geometry": [
+          4096,
+          2436,
+          3856,
+          2176,
+          232,
+          260
+        ],
+        "profile19_RAW_bytes": "02040100",
+        "movie_work_descriptor": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "movie_source_descriptor": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "work_frame_budget": 48514176,
+        "source_frame_budget": 13271040,
+        "sensor_readout_or_scaler_pixel_effect_proven": false,
+        "power_manager": "0x82050000",
+        "video_power": "0x82060000",
+        "power_operations": "0x82070000",
+        "power_entry": "0x82080010",
+        "UD_power_scene": 9,
+        "UD_HDMI_scene": 5,
+        "native_full_scene_words": [
+          0,
+          48,
+          3,
+          96,
+          96,
+          6,
+          96,
+          96,
+          5,
+          3
+        ],
+        "native_crop_scene_words": [
+          0,
+          32,
+          3,
+          32,
+          102,
+          3,
+          48,
+          32,
+          5,
+          3
+        ],
+        "IPC_setup_function": "0x801ce78c",
+        "native_IPC_preset": "0xe001",
+        "fullwidth_scaler_selected": false,
+        "begin_ns": 0,
+        "end_ns": 1000,
+        "sequence": 0
+      },
+      {
+        "root": "0x82010000",
+        "profile6": "0x82030000",
+        "profile19": "0x82040000",
+        "mapping_literal": "0x8014e858",
+        "requested_mode": 17,
+        "applied_mode": 17,
+        "profile6_geometry": [
+          6608,
+          3680,
+          6480,
+          3644,
+          92,
+          36
+        ],
+        "profile19_geometry": [
+          6608,
+          3680,
+          6496,
+          3644,
+          92,
+          36
+        ],
+        "profile19_RAW_bytes": "02040100",
+        "movie_work_descriptor": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "movie_source_descriptor": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "work_frame_budget": 48514176,
+        "source_frame_budget": 13271040,
+        "sensor_readout_or_scaler_pixel_effect_proven": false,
+        "power_manager": "0x82050000",
+        "video_power": "0x82060000",
+        "power_operations": "0x82070000",
+        "power_entry": "0x82080010",
+        "UD_power_scene": 8,
+        "UD_HDMI_scene": 5,
+        "native_full_scene_words": [
+          0,
+          48,
+          3,
+          96,
+          96,
+          6,
+          96,
+          96,
+          5,
+          3
+        ],
+        "native_crop_scene_words": [
+          0,
+          32,
+          3,
+          32,
+          102,
+          3,
+          48,
+          32,
+          5,
+          3
+        ],
+        "IPC_setup_function": "0x801ce78c",
+        "native_IPC_preset": "0xe001",
+        "fullwidth_scaler_selected": false,
+        "begin_ns": 100000000,
+        "end_ns": 100001000,
+        "sequence": 1
+      }
+    ],
+    "video_runtime_changes": [
+      {
+        "requested_mode": 23,
+        "applied_mode": 23,
+        "native_power_scene": 8,
+        "PP_EOF": 100,
+        "PP_WDMA0": 90,
+        "SSIF_SOF": 120,
+        "SSIF_EOF": 120,
+        "clock_selectors": [
+          48,
+          3,
+          96,
+          96,
+          6,
+          96,
+          96,
+          5,
+          3
+        ],
+        "clock_stable": true,
+        "counters_are_native_RAM_ISR_counts": true,
+        "atomic": false,
+        "begin_ns": 0,
+        "end_ns": 1000,
+        "sequence": 0
+      },
+      {
+        "requested_mode": 23,
+        "applied_mode": 23,
+        "native_power_scene": 8,
+        "PP_EOF": 101,
+        "PP_WDMA0": 91,
+        "SSIF_SOF": 121,
+        "SSIF_EOF": 121,
+        "clock_selectors": [
+          48,
+          3,
+          96,
+          96,
+          6,
+          96,
+          96,
+          5,
+          3
+        ],
+        "clock_stable": true,
+        "counters_are_native_RAM_ISR_counts": true,
+        "atomic": false,
+        "begin_ns": 100000000,
+        "end_ns": 100001000,
+        "sequence": 1
+      }
+    ],
+    "fullwidth_native_ISR_progress": {
+      "PP_EOF": true,
+      "PP_WDMA0": true
+    },
+    "video_file_or_pixel_quality_proven": false,
+    "atomic": false,
+    "physical_sensor_readout_proven": false,
+    "scaler_geometry_proven": false,
+    "notes": [
+      "Frontend first two video configuration words are exposure time and sensitivity, not width/height or video-mode enum.",
+      "Sensor mode bytes and window parameters are cached driver state, not independent sensor register or raw frame proof.",
+      "Associate changes with recorder marks and actual video files before identifying readout behavior.",
+      "Kind19 schema2 adds the guarded native UD power operation entry and unmodified scene rows. Kind20 records stable-bracketed clock selectors and non-clearing native PP/SSIF ISR counters; advancing counts are frontend event evidence, not pixel-quality or a saved movie proof."
+    ]
+  },
+  "corruption_rejected": true,
+  "physical_camera_tested": false
+}

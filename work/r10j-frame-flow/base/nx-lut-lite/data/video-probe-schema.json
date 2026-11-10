@@ -1,0 +1,135 @@
+{
+  "release": "R10j",
+  "schema": 6,
+  "sample_schema": 6,
+  "byte_order": "little",
+  "header_bytes": 16384,
+  "header_struct_bytes": 616,
+  "header_hash_offset": 608,
+  "record_bytes": 1152,
+  "record_capacity": 6000,
+  "sampler_RAM_bytes": 6928384,
+  "buffer_filesystem": "verified tmpfs/ramfs under /dev/shm/nx-lut-lite",
+  "period_ms": [
+    200,
+    500,
+    1000
+  ],
+  "CPU_budget_fraction": 0.005,
+  "valid": {
+    "rtos_irq": 1,
+    "pp": 2,
+    "policy": 4,
+    "camera": 8,
+    "source": 16,
+    "encoder": 32,
+    "hevc": 64,
+    "queue0": 256,
+    "IPC_active_backend": 16384,
+    "IPC_setup_selector": 32768,
+    "native_flow_timing": 65536,
+    "hardware_completion": 131072,
+    "hardware_progress": 262144,
+    "flow_context": 524288,
+    "changed": 2147483648
+  },
+  "timing": {
+    "magic": "33544c56",
+    "schema": 4,
+    "RTOS_address": "817dbbe0",
+    "bytes": 256,
+    "capacity": 8,
+    "header_words": [
+      "magic",
+      "schema",
+      "completed_sequence",
+      "flags",
+      "first_CS0_start_tick",
+      "hardware_tick",
+      "first_final_IRQ_tick",
+      "first_SRAM_IRQ_tick"
+    ],
+    "record_words": [
+      "sequence",
+      "hardware_tick",
+      "first_SRAM_IRQ_tick",
+      "first_CS0_start_tick",
+      "first_final_IRQ_tick",
+      "callback_tick",
+      "flags"
+    ],
+    "flags": {
+      "0": "request active",
+      "1": "hardware start observed",
+      "2": "final IRQ observed",
+      "3": "callback observed",
+      "4": "cancelled before callback",
+      "7": "start/final coalesced in one IRQ status",
+      "8..15": "final IRQ observation count",
+      "16..23": "hardware start count",
+      "24..25": "controller",
+      "26..27": "start IRQ count saturated at3",
+      "28..29": "SRAM IRQ count saturated at3",
+      "30..31": "count overflow"
+    },
+    "clock_Hz": 26000000,
+    "clock_order": [
+      "native high",
+      "native low"
+    ],
+    "qualification": {
+      "driver_pairs": [
+        "1717",
+        "1818",
+        "1919"
+      ],
+      "presets": [
+        "E004",
+        "E005"
+      ]
+    },
+    "interpretation": "IRQ-entry observations before unchanged OEM ACK; not hardware-latched assertion timestamps. Missing events unavailable, not zero duration. Coalesced bits have no measured internal order."
+  },
+  "flow_context": {
+    "record_word_offset": 255,
+    "words": 32,
+    "layout": {
+      "0": "schema1",
+      "1": "valid bits",
+      "2..3": "HAL output width height",
+      "4": "HAL rounded FPS and raw high half",
+      "5": "intra period",
+      "6": "codec mode",
+      "7": "bitrate kbps",
+      "8..9": "raw encoder configuration",
+      "10..13": "OEM callback slots43 46 42 47",
+      "14": "active backend vtable",
+      "15": "IPC global pointer",
+      "16..29": "14 raw IPC global words",
+      "30": "source state",
+      "31": "native parent state"
+    }
+  },
+  "pinned_hardware_phases": {
+    "offset": 4096,
+    "record_bytes": 704,
+    "capacity": 16,
+    "bytes": 11296,
+    "settle_ms": 2000,
+    "overflow_explicit": true
+  },
+  "bookmarks": {
+    "offset": 3968,
+    "bytes": 128,
+    "legacy_magic": "NXLQOSAB",
+    "device_writes": false
+  },
+  "notes": [
+    "Sampling reads only; separate guarded photo-mode operation arms fixed trace code without changing geometry or clocks.",
+    "Blue-boundary recipe retained byte-for-byte; SRW and USB engines unchanged.",
+    "No ACK/mask/debug-selector/QoS/CPU/DDR writes; no MPTOP device open; no hot SD writes.",
+    "Same eight-slot native ring and280-byte original TMC count lease; no extra RTOS heap/SMA/frame buffer.",
+    "Source/epoch transition windows are excluded; metadata and actual MP4 format must be checked together.",
+    "This package tests flow differences and does not claim the frame-rate issue fixed. EP readback remains a cleared suspect."
+  ]
+}

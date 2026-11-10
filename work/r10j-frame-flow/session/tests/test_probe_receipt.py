@@ -1,0 +1,17 @@
+#!/usr/bin/env python3
+"""Cross-parse untouched receipt emitted by the actual production probe encoder."""
+from pathlib import Path
+import os,sys,json,hashlib,subprocess
+R=Path(__file__).resolve().parents[1];P=R.parent;W=P.parent;fixture=P/'core/results/session-rearm-positive-fixture.proof';raw=fixture.read_bytes();fields=dict(x.split('=',1) for x in raw.decode().splitlines() if '=' in x);job=Path(fields['job']);assert str(job).startswith(str(P/'core/build/rearm-collector-'))
+proof=job/('rearm_'+fields['token']);proof.mkdir(parents=True,exist_ok=True);target=proof/'REARM.proof'
+if target.exists():assert target.read_bytes()==raw
+else:target.write_bytes(raw)
+B=R/'build';wrapper=B/'probe-receipt-crossparse.c';host=B/'probe-receipt-crossparse.host';arm=B/'probe-receipt-crossparse.arm';wrapper.write_text('#define main production_main\n#include '+json.dumps(str(R/'src/session.c'))+'\n#undef main\nint main(int argc,char **argv){if(argc!=2)return 2;char path[2048],body[MAX_RECORD],job[1024],previous[1024],token[40],head[40];size_t n;if(!bounded(path,sizeof path,argv[1],"REARM.proof")||!bytes(path,body,sizeof body,&n))return 3;char *q=body;if(!field(&q,"",head,sizeof head)||!field(&q,"job=",job,sizeof job)||!field(&q,"previous=",previous,sizeof previous)||!field(&q,"token=",token,sizeof token))return 4;struct session s={0},p={0};strcpy(s.job,job);strcpy(p.job,previous);if(setenv("NX51_SESSION_TOKEN",token,1))return 5;int ok=rearm_receipt(&s,&p,argv[1]);printf("actual_C_receipt_valid=%d\\n",ok);return ok?0:6;}\n')
+subprocess.run(['cc','-O2','-Wno-unused-function','-Wno-misleading-indentation',str(wrapper),'-o',str(host)],check=True)
+subprocess.run([sys.executable,str(R/'tools/build_session.py'),'--zig',str(W/'wb-load-p42/deps/ziglang/zig'),'--cross-runtime',str(W/'wb-load-p42/cross-runtime/arm-linux-musleabi-cross'),'--source',str(wrapper),'--output',str(arm)],check=True,capture_output=True)
+commands=[]
+for name,cmd in [('HOST',[str(host)]),('actual_ARM',[str(W/'demo-p49/tooling/qemu/usr/bin/qemu-arm-static'),str(arm)])]:
+ p=subprocess.run(cmd+[str(proof)],check=True,capture_output=True,text=True);assert p.stdout=='actual_C_receipt_valid=1\n';commands.append(dict(runtime=name,exit=p.returncode,stdout=p.stdout))
+assert fixture.read_bytes()==raw,'Producer fixture changed during cross-parse'
+sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();d=dict(format='NX51_R7_PRODUCER_CONSUMER_RECEIPT_CROSSPARSE1',passed=True,tests_run=2,hardware_tested=False,actual_ARM_execution=True,receipt_unmodified=True,receipt_sha256=sha(fixture),producer_proof_path=str(fixture.relative_to(P)),commands=commands,source_sha256={str(p.relative_to(R)):sha(p) for p in [R/'src/session.c',R/'src/journal.inc',R/'src/rearm.inc']},test_sha256=sha(Path(__file__)),model_binaries=dict(HOST=sha(host),ARM=sha(arm)),limits=['Production probe main/control/encoder ran with explicit read-only hardware models, not camera hardware.','Consumer is the actual session rearm_receipt function with real path/checksum checks; this test does not exercise or bypass production lease authorization.','Original temporary pathname was recreated under its exact workspace build directory; receipt bytes and checksum were not projected or re-signed.'])
+(R/'validation/probe-receipt-crossparse.json').write_text(json.dumps(d,indent=2)+'\n');print(json.dumps(dict(passed=True,tests_run=2,receipt_sha256=sha(fixture),unmodified=True)))

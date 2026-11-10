@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "bytes": 16448,
+  "sha256": "c864c883f9b536ced4a12be6d5897e70c987d9de06d39653145499b37842cabf",
+  "source_sha256": "18103c959256c349a9c214b7bcceb51d03a46945f940124d5a766939c725bc69",
+  "headers_sha256": {
+    "video_fullwidth_contract.h": "6bd0ff013bac8b0ff3f45847117402377a413892da7b77206c775e999be7a5bb",
+    "video_fullwidth_blocks.h": "8894ad6a4e98068b2ce07de818dc8928260775876c23a395fedaeccf9172b0f9"
+  },
+  "relocatable": true,
+  "guarded_replacement_words": 242,
+  "legacy_LCAC_instruction_words": 2,
+  "boot_resident_fixed_timing_code": true,
+  "physical_camera_tested": false
+}
