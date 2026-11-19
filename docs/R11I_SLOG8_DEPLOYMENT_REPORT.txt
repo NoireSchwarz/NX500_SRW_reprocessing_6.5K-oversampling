@@ -1,0 +1,31 @@
+R11i 8bit Samsung Log／BT.2020 部署与接续报告
+完成时间：2026-11-17T18:22:21.296096+01:00
+
+结果：SD_DEPLOYED_CAMERA_INSTALL_PENDING。代码、官方LUT模型、ARM回放、生产入口及安装/重试验证通过，已写入身份确认的SD并完整读回。此状态不代表相机已安装或真实像素验收通过。
+
+部署包：D:\NX500模组开发\r11i-log-work\NX500_R11i_SLOG8_BT2020.zip
+SHA256：8cd95699dc670d88bf6b22052684e5f4f79e130b6cdd9a83749ff552dcc82dec
+字节数：66674742；读回文件：1624；新增或更新文件：807。
+SD：H:\；exFAT；卷序列号4040321079。
+待替换补丁的备份：D:\NX500模组开发\r11i-log-work\R11i_previous_SD_payload.zip
+备份SHA256：b56a00cc60af7bcf91b66ccb937be6093f611d9117b6cd2863240cf368a584f1
+最后写入并读回：install.sh → nx_cs.adj → info.tg。
+
+保留核验：23813项原有文件元数据保持一致；666项重点原件SHA256保持一致，包括原始固件、两份snapshot-before.img、全部looks、既有Gamma日志、最近5段MP4和未改动的运行组件。其余媒体/历史记录不在写入路径中。未格式化、清理或修复；此前62项枚举/读取错误保留，未据此认定相机故障原因。
+
+实现范围：原厂颜色校准后组合BT.709/D65→BT.2020/D65，两组RGB分支均处理；双TC使用三星2025 Log参考；固定REF1曝光标度，保留原厂恢复、开机租约及四回调所有权校验。8bit输出，未替换核心库、未修改已接受的全宽24p/码率。
+曝光与精度：REF1为native0..16383→scene0..1；未作物理18%反射校准或承诺新增高光宽容度。19点曲线和原生矩阵量化保留误差报告；高饱和蓝最坏约4个8bit Log码值。实机RGB顺序、像素消费、曝光比例和稳定性仍待下面一次合并测试。
+
+验证：33项原厂ARM事务；38项租约/菜单；99项快照/保存故障；15项中性表准入；2项CLI；14项生产shell；7项安装与失败重试；6项相机日志审计夹具；官方4096点1D与65³ 3D LUT模型对照；标签副本326帧解码YUV一致。ARM/OS/缓存/MMIO端点模拟边界详见证据，不能替代实机。
+源码：仅应用本次17项明确改动，保留5340项其他既有源码；未重置、提交或推送Git。
+
+下一轮：先实际断电后安装，再实际断电重新开机确认R11i菜单。中性视频表NXLOG_REF_V1/100%、视频LUT ON；同一次开机A1原厂ISO200约10秒→B SLOG8的ISO100/200/400/200各8秒→A2原厂恢复ISO200约10秒。模式切换均停录回照片；不启用COUNTERS、不重复码率或LIFT。保持Tab S7+自然模式、屏幕亮度、快门、光圈、WB和对焦固定。ISO不能边录边改时拆B为三段即可。
+原片仍有原厂标签；B段显式全范围并避免其他自动输入变换，再应用单个官方Samsung Log还原/创意LUT。官方副本在SD的NXDEMO51/SLOG8_R11I/Official_LUTs。标签副本工具只复制，不进行Log变换。
+恢复确认后等写卡灯连续熄灭5秒才接USB；保留新GAMMA_R11I_*和全部MP4。
+
+完整步骤：D:\NX500模组开发\repository\nx500\docs\R11I_SLOG8_TEST_STEPS.txt
+实现/限制：D:\NX500模组开发\repository\nx500\docs\R11I_SLOG8_IMPLEMENTATION.txt
+验证：D:\NX500模组开发\r11i-log-work\r11i-validation.json
+部署凭据：D:\NX500模组开发\r11i-log-work\SD-deployment.json
+官方来源：https://developer.samsung.com/mobile/samsung-log-video.html
+当前未关机、未弹出SD；没有执行相机安装。

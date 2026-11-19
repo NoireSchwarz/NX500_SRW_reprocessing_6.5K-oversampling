@@ -1,0 +1,15 @@
+R11f6 合并修复、激活与 HEVC A/B/A 测试
+
+本包修复已确认的分区容量误判，并补齐提示/退出诊断。部署到SD不等于相机已激活。菜单仍是R11f HEVC A/B/A TEST；激活提示和报告才使用R11f6。
+
+1. 电池充足。安全断开USB，保持照片模式，正常关机后装卡开机。先不要应用全宽，也不要按COUNTER。
+2. R11f6 BACKUP / ACTIVATION提示约12秒后消失；消失不代表结束。继续保持供电，等待完整备份和复核。成功后应出现BACKUP VERIFIED - ACTIVATING，并进入原有启动恢复流程。
+3. 若出现BACKUP FAILED或ACTIVATION FAILED，停止测试。机身写卡灯持续熄灭一分钟后正常关机，再接USB取回日志。若正常关机90秒仍不结束，保持供电，不拔电。若10分钟仍是普通取景且无结果，也按这一方式停止；不要再次安装、按COUNTER或反复重启。屏幕脚本绿点不是完成凭据。
+4. 若已经进入黑屏启动恢复，等待至少90秒且机身写卡灯熄灭后，按原启动方案取出电池约30秒再装回，只做一次。不要在写卡灯亮时拔电。启动可能较慢。
+5. 必须看到R11f6 CORE VERIFIED - HEVC A/B/A READY才继续。若显示OEM RESTORED，或恢复启动后3分钟仍没有成功提示，停止并取回日志。
+6. 通过后做照片模式5秒COUNTERS短测：启动应为ON / STOP+SAVE，没有schema/library mismatch；5秒后停止，明确看到COUNTERS SAVED - SAFE TO CONNECT USB。
+7. 短测通过后，只录一段全宽120秒。照片模式应用FULL WIDTH 4K 30P，按原提示重新选择NTSC/UHD30p/PRO再回照片模式；启动COUNTERS，进入视频取景并录像120秒。自动执行预热→正常30秒→约四分之一普通帧输入30秒→恢复正常30秒，不需中途操作菜单。
+8. 停录后等5秒，回照片模式停止并保存COUNTERS，明确看到SAVED / TEST COMPLETE / SAFE TO CONNECT USB后再接USB。若失败或ABORTED，也保存记录，不立即重跑。
+
+保留新的NXDEMO51/R11F6_ACTIVATION_*、VIDEO_STAGE_*和对应MP4。保留既有照片、录像、固件与所有历史日志。不重复码率、CPU/BUS或原生裁切对照。
+若本轮仍未显示结果，新日志可以区分容量/签名/复制/复核失败、显示连接失败、提示超时，以及最终同步是否返回。

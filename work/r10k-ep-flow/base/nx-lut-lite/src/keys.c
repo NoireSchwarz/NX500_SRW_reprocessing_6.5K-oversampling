@@ -1,7 +1,12 @@
 /* SPDX-License-Identifier: AGPL-3.0-only
- * Standalone EV+AEL menu and EV+Wi-Fi video listener. No global input grab.
+ * Standalone EV+AEL menu and EV+Wi-Fi VLog listener. No global input grab.
  */
 #include "common.h"
+#include "ev_triple.h"
+#include <sys/syscall.h>
+#include <time.h>
+static unsigned long key_ticks(void){struct timespec ts;if(syscall(263,CLOCK_MONOTONIC,&ts))return 0;return(unsigned long)ts.tv_sec*1000UL+(unsigned long)ts.tv_nsec/1000000UL;}
+static int menu_active(void){int f=nxl_lock("/tmp/nx-lut-lite/menu.lock");if(f<0)return 1;close(f);return 0;}
 static volatile sig_atomic_t stopping;
 static void stop(int sig) { (void)sig; stopping = 1; }
 static int debug;
@@ -15,7 +20,7 @@ static void event_log(const char *kind, int a, int b) {
 }
 int main(int argc, char **argv) {
     if(argc==2 && !strcmp(argv[1],"--version")) {
-        puts("NX_LUT_KEYS_VERSION=0.2.1; KEYS_LOGS_FOLDER_R4");return 0;
+        puts("NX_LUT_KEYS_VERSION=0.4.0-RC5; EV_DOUBLE_CURRENT_LUT; CHORD_PRIORITY");return 0;
     }
     if (argc != 2 || !nxl_supported()) {
         fputs("nxl-keys: requires NX500 firmware 1.12 and a UI executable path\n", stderr);
@@ -31,6 +36,7 @@ int main(int argc, char **argv) {
     int open_failed[2]={0,0};
     struct pollfd p[2] = {{-1, POLLIN, 0}, {-1, POLLIN, 0}};
     struct nxl_shortcut shortcut = {0};
+    struct nxl_ev_taps taps={0};
     while (!stopping) {
         for (int i = 0; i < 2; ++i) if (p[i].fd < 0) {
             p[i].fd=nxl_input(i);
@@ -52,22 +58,26 @@ int main(int argc, char **argv) {
         for (int i = 0; i < 2; ++i) {
             if (p[i].revents & (POLLERR | POLLHUP | POLLNVAL)) {
                 close(p[i].fd); p[i].fd = -1;
-                memset(&shortcut, 0, sizeof shortcut);
+                memset(&shortcut,0,sizeof shortcut);memset(&taps,0,sizeof taps);
                 announced=0; unlink("/tmp/nx-lut-lite/listener.ready");
             }
             if (!(p[i].revents & POLLIN)) continue;
             struct nxl_event e;
             while (read(p[i].fd, &e, sizeof e) == sizeof e) {
-                if (e.type == 0 && e.code == 3) memset(&shortcut, 0, sizeof shortcut); /* SYN_DROPPED */
+                if (e.type == 0 && e.code == 3){memset(&shortcut,0,sizeof shortcut);memset(&taps,0,sizeof taps);} /* SYN_DROPPED */
                 if (e.type==1 && (e.code==NXL_EV || e.code==NXL_AEL || e.code==NXL_WIFI) && e.value!=2)
                     event_log("KEY",e.code,e.value);
                 if (e.type != 1)continue;
-                int command=nxl_activate(&shortcut, e.code, e.value);
+                int command=nxl_activate(&shortcut,e.code,e.value);
+                int quick=nxl_ev_feed(&taps,e.code,e.value,key_ticks());
+                if(shortcut.chord.ael||shortcut.wifi||shortcut.pending||command)memset(&taps,0,sizeof taps);
+                if(quick&&!command&&!menu_active())command=3;
                 if(!command)continue;
-                event_log(command==NXL_TOGGLE_VIDEO?"VIDEO_LAUNCH":"MENU_LAUNCH",0,0);
+                if(command==NXL_TOGGLE_VLOG&&menu_active())continue;
+                event_log(command==NXL_TOGGLE_VLOG?"VLOG_LAUNCH":"MENU_LAUNCH",0,0);
                 pid_t child = fork();
                 if (!child) {
-                    execl(argv[1], argv[1], command==NXL_TOGGLE_VIDEO?"--video-toggle":"--toggle", (char *)0);
+                    execl(argv[1], argv[1], command==3?"--quick-lut":command==NXL_TOGGLE_VLOG?"--vlog-toggle":"--toggle", (char *)0);
                     _exit(127);
                 }
             }

@@ -1,0 +1,13 @@
+R11k3c SD交付完成
+
+安装版本recovery-r11k3c-gamma-gate / 菜单R11k3c CURVE PRESETS。
+H: exFAT，序列号4040321079。5149个文件读回一致，383项新增或替换；安装触发文件最后写入。26635个受保护文件元数据和2701份内容散列核对一致，既有70个枚举错误保持记录，未修复文件系统。未改核心库，未删除媒体、原始固件、完整备份或历史日志。
+
+修复旧参数记录校验只允许模式0～2导致LINEAR3/LOG4在phase143被拒绝的问题。生产ARM回放和安装验证已通过，实机验收尚待执行；写入SD不等于已安装入相机。
+
+包：D:\NX500模组开发\r11k3c-gamma-audit-work\NX500_R11k3c_GAMMA_GATE.zip
+SHA256：72d811dd402b408a667dfde9d7b55c3c3f7565dbb6349b110653e9375fdc6616
+旧程序备份：D:\NX500模组开发\r11k3c-gamma-audit-work\R11k3c_previous_SD_payload.zip
+SHA256：523a4a9ca0327e9218e0e3291b6ef5f78e3736f74e5091efae52b2ba8e6e39d4
+
+先安全断开USB、正常关机、取电池约30秒冷启动后按原方式安装，完成后关机开机核对R11k3c。使用SAM_0468.SRW依次SOURCE19→LINEAR→LOG→SOURCE19，详见R11K3C_SRW_TEST_STEPS.txt。用户已授权完成交付后关机。

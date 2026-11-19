@@ -1,156 +1,226 @@
 [
- {
-  "id": "fuji_provia100f",
-  "name": "Fuji Provia 100F",
-  "tone": "自然均衡，色彩清晰。",
-  "scene": "适合旅行、风景与日常记录。",
-  "group": "landscape"
- },
- {
-  "id": "kodak_portra400",
-  "name": "Kodak Portra 400",
-  "tone": "柔和暖调，色彩较为克制。",
-  "scene": "适合人像、生活与柔和光线。",
-  "group": "portrait"
- },
- {
-  "id": "mono_hp5",
-  "name": "Ilford HP5",
-  "tone": "经典黑白，明暗层次鲜明。",
-  "scene": "适合街拍、人像与纪实。",
-  "group": "mono"
- },
- {
-  "id": "fuji_400h",
-  "name": "Fuji Pro 400H",
-  "tone": "清爽浅色，柔和低饱和。",
-  "scene": "适合户外人像、花草与浅色衣物。",
-  "group": "portrait"
- },
- {
-  "id": "fuji_astia100f",
-  "name": "Fuji Astia 100F",
-  "tone": "自然柔和，色彩与层次均衡。",
-  "scene": "适合人像、旅行与日常记录。",
-  "group": "portrait"
- },
- {
-  "id": "fuji_classicchrome",
-  "name": "Fuji Classic Chrome",
-  "tone": "低饱和配色，复古纪实感。",
-  "scene": "适合街拍、城市与阴天。",
-  "group": "retro"
- },
- {
-  "id": "fuji_eterna500",
-  "name": "Fuji Eterna 500",
-  "tone": "柔和偏冷，低调电影感。",
-  "scene": "适合城市、室内与傍晚。",
-  "group": "cinema"
- },
- {
-  "id": "fuji_velvia50",
-  "name": "Fuji Velvia 50",
-  "tone": "浓郁鲜明，突出绿色与蓝色。",
-  "scene": "适合山水、树木与蓝天。",
-  "group": "landscape"
- },
- {
-  "id": "kodak_gold200",
-  "name": "Kodak Gold 200",
-  "tone": "暖黄配色，怀旧负片感。",
-  "scene": "适合阳光、咖啡馆与日常。",
-  "group": "retro"
- },
- {
-  "id": "kodak_ektar100",
-  "name": "Kodak Ektar 100",
-  "tone": "浓郁彩色，画面较为鲜明。",
-  "scene": "适合建筑、旅行与彩色物件。",
-  "group": "landscape"
- },
- {
-  "id": "kodak_2383",
-  "name": "Kodak 2383",
-  "tone": "电影印片配色，明暗层次分明。",
-  "scene": "适合人物、街景与傍晚。",
-  "group": "cinema"
- },
- {
-  "id": "film_cinestill",
-  "name": "CineStill",
-  "tone": "夜景冷暖配色，不生成光晕。",
-  "scene": "适合招牌、霓虹与夜间街景。",
-  "group": "cinema"
- },
- {
-  "id": "pentax_satobi",
-  "name": "Pentax Satobi",
-  "tone": "低饱和暖调，褪色复古感。",
-  "scene": "适合老街、旧建筑与午后。",
-  "group": "retro"
- },
- {
-  "id": "ricoh_retro",
-  "name": "Ricoh Retro",
-  "tone": "偏暖的怀旧随拍配色。",
-  "scene": "适合散步、室内与小物。",
-  "group": "retro"
- },
- {
-  "id": "mono_acros",
-  "name": "Acros",
-  "tone": "清晰黑白，突出明暗结构。",
-  "scene": "适合街拍、人像与建筑。",
-  "group": "mono"
- },
- {
-  "id": "kodak_5207_apx",
-  "name": "Kodak 5207 (近似)",
-  "tone": "清爽自然，带柔和电影配色。",
-  "scene": "适合日光人像、街景与旅行。",
-  "group": "cinema"
- },
- {
-  "id": "kodak_5219_apx",
-  "name": "Kodak 5219 (近似)",
-  "tone": "冷暖对比，柔和的电影负片感。",
-  "scene": "适合室内、夜景与傍晚人像。",
-  "group": "cinema"
- },
- {
-  "id": "gold200_warm100_apx",
-  "name": "Gold 200 暖调 100% (近似)",
-  "tone": "完整暖调，偏金黄的怀旧色彩。",
-  "scene": "适合阳光、人像与日常随拍。",
-  "group": "retro"
- },
- {
-  "id": "gold200_warm30_apx",
-  "name": "Gold 200 轻暖 30% (近似)",
-  "tone": "三成暖调，保留较多原色。",
-  "scene": "适合日常、人像与浅色场景。",
-  "group": "retro"
- },
- {
-  "id": "portrait_5207_gold30_apx",
-  "name": "5207 + Gold 30% 人像 (近似)",
-  "tone": "5207 风格叠加三成金色暖调。",
-  "scene": "合成为一张，适合柔和光人像。",
-  "group": "portrait"
- },
- {
-  "id": "portrait_5207_gold30_skin_apx",
-  "name": "5207 + Gold + 肤色 (近似)",
-  "tone": "暖调人像配方，加肤色优化。",
-  "scene": "适合人像，同色物体也可能变化。",
-  "group": "portrait"
- },
- {
-  "id": "ejay_skin_native",
-  "name": "EJAY 肤色优化",
-  "tone": "肤色配色优化，不含电影暖调。",
-  "scene": "先试单层效果，同色物体也会变化。",
-  "group": "portrait"
- }
+  {
+    "id": "fuji_provia100f",
+    "name": "Fuji Provia 100F",
+    "tone": "自然均衡，色彩清晰。",
+    "scene": "適合旅行、風景與日常記錄。",
+    "group": "landscape"
+  },
+  {
+    "id": "kodak_portra400",
+    "name": "Kodak Portra 400",
+    "tone": "柔和暖調，色彩較為克制。",
+    "scene": "適合人像、生活與柔和光線。",
+    "group": "portrait"
+  },
+  {
+    "id": "mono_hp5",
+    "name": "Ilford HP5",
+    "tone": "經典黑白，明暗層次鮮明。",
+    "scene": "適合街拍、人像與紀實。",
+    "group": "mono"
+  },
+  {
+    "id": "ejay_skin_native",
+    "name": "EJAY 膚色最佳化",
+    "tone": "選擇性調整紅橙色區，同色物件亦受影響。",
+    "scene": "保留其他色調；不含人臉識別或磨皮。",
+    "group": "portrait"
+  },
+  {
+    "id": "ejay_5207_n",
+    "name": "5207 Noritsu",
+    "tone": "諾日士沖掃方向，暖調日光電影配色。",
+    "scene": "日光人像與街景；原表標準畫面輸入。",
+    "group": "cinema"
+  },
+  {
+    "id": "ejay_5207_n_fx",
+    "name": "5207 Noritsu FX",
+    "tone": "諾日士配色加藍色增強，暗部去紅。",
+    "scene": "適合藍天與海景；固定合適白平衡比較。",
+    "group": "cinema"
+  },
+  {
+    "id": "ejay_5207_s",
+    "name": "5207 SP3000",
+    "tone": "SP3000沖掃方向，原表帶青色修正。",
+    "scene": "日光電影配色；與Noritsu版本比較。",
+    "group": "cinema"
+  },
+  {
+    "id": "ejay_g200_fx_n",
+    "name": "Gold 200 FX 暖",
+    "tone": "Gold 200配色，FX藍色增強與暖調版本。",
+    "scene": "作者用於普通／標準畫面；依使用者確認分類。",
+    "group": "retro"
+  },
+  {
+    "id": "ejay_g200_n_fx_l",
+    "name": "Gold 200 Noritsu FX 冷",
+    "tone": "Gold 200諾日士配色，FX藍色增強與冷調版本。",
+    "scene": "作者用於普通／標準畫面；依使用者確認分類。",
+    "group": "retro"
+  },
+  {
+    "id": "vlog_ejay_5207_n",
+    "name": "VLog 5207 Noritsu",
+    "tone": "諾日士沖掃方向的日光電影配色。",
+    "scene": "作者原版V‑Log LUT；僅從VID的Log入口選擇。",
+    "group": "loglut"
+  },
+  {
+    "id": "vlog_ejay_5207_n_fx",
+    "name": "VLog 5207 Noritsu FX",
+    "tone": "諾日士配色加FX藍色增強。",
+    "scene": "作者原版V‑Log LUT；僅從VID的Log入口選擇。",
+    "group": "loglut"
+  },
+  {
+    "id": "vlog_ejay_5207_s",
+    "name": "VLog 5207 SP3000",
+    "tone": "SP3000沖掃方向的5207配色。",
+    "scene": "作者原版V‑Log LUT；僅從VID的Log入口選擇。",
+    "group": "loglut"
+  },
+  {
+    "id": "vlog_ejay_g200_n_fx_l",
+    "name": "VLog Gold 200 FX 冷",
+    "tone": "Gold 200諾日士配色，FX藍色增強與冷調。",
+    "scene": "作者原版V‑Log LUT；僅從VID的Log入口選擇。",
+    "group": "loglut"
+  },
+  {
+    "id": "vlog_ejay_g200_fx_n",
+    "name": "VLog Gold 200 FX 暖",
+    "tone": "Gold 200配色，FX藍色增強與暖調。",
+    "scene": "作者原版V‑Log LUT；僅從VID的Log入口選擇。",
+    "group": "loglut"
+  },
+  {
+    "id": "vlog_v709",
+    "name": "V‑Log → V709",
+    "tone": "松下官方V709還原，輸出展開為滿範圍。",
+    "scene": "V‑Log／V‑Gamut專用；17點機內重採樣版本。",
+    "group": "loglut"
+  },
+  {
+    "id": "pan_backlight_n",
+    "name": "Backlight-N",
+    "tone": "自然暖調、柔化暗部對比，適合逆光人像。",
+    "scene": "原表基於松下Natural；本機普通畫面試用。",
+    "group": "portrait"
+  },
+  {
+    "id": "pan_smoky_s",
+    "name": "Smoky Color-S",
+    "tone": "抑制亮部與暖色，呈現低飽和的煙霧質感。",
+    "scene": "原表基於Standard；適合建築、街景與藍天。",
+    "group": "cinema"
+  },
+  {
+    "id": "pan_dramatic_s",
+    "name": "Dramatic BlockBuster-S",
+    "tone": "青橙對比的電影配色，保留鮮明的冷暖層次。",
+    "scene": "Kotaro Kumazawa；原表基於Standard。",
+    "group": "cinema"
+  },
+  {
+    "id": "vlog_pan_dramatic",
+    "name": "VLog Dramatic BlockBuster",
+    "tone": "V‑Log專用青橙電影配色，帶膠片式對比。",
+    "scene": "Kotaro Kumazawa原版；僅從VID選擇。",
+    "group": "loglut"
+  },
+  {
+    "id": "film_cinestill",
+    "name": "CineStill 電影風格",
+    "tone": "偏冷暗部配暖色亮部，帶電影膠片感。",
+    "scene": "適合夜景與街景；為色彩風格，非光暈或顆粒效果。",
+    "group": "cinema"
+  },
+  {
+    "id": "fuji_400h",
+    "name": "Fuji Pro 400H",
+    "tone": "柔和色彩與清淡綠調，明暗對比較柔。",
+    "scene": "適合日光人像、花卉與生活記錄。",
+    "group": "portrait"
+  },
+  {
+    "id": "fuji_astia100f",
+    "name": "Fuji Astia 100F",
+    "tone": "較柔和的正片色彩，保留細緻中間調。",
+    "scene": "適合人像、旅行與柔和日光。",
+    "group": "portrait"
+  },
+  {
+    "id": "fuji_classicchrome",
+    "name": "Fuji Classic Chrome",
+    "tone": "降低飽和度並加強冷暖分離，紀實風格。",
+    "scene": "適合街拍、建築與陰天。",
+    "group": "retro"
+  },
+  {
+    "id": "fuji_eterna500",
+    "name": "Fuji Eterna 500",
+    "tone": "低對比、較克制的電影色調。",
+    "scene": "適合影片與柔和光線；普通畫面輸入。",
+    "group": "cinema"
+  },
+  {
+    "id": "fuji_velvia50",
+    "name": "Fuji Velvia 50",
+    "tone": "強烈飽和與對比，綠藍色較鮮明。",
+    "scene": "適合自然風景；高飽和色可能較易裁切。",
+    "group": "landscape"
+  },
+  {
+    "id": "kodak_2383",
+    "name": "Kodak 2383",
+    "tone": "電影拷貝方向的色彩與較深暗部。",
+    "scene": "本檔沿用既有普通畫面轉換，不作Log輸入表。",
+    "group": "cinema"
+  },
+  {
+    "id": "kodak_ektar100",
+    "name": "Kodak Ektar 100",
+    "tone": "鮮明色彩與清晰明暗，偏暖膠片風格。",
+    "scene": "適合日光風景、建築與旅行。",
+    "group": "landscape"
+  },
+  {
+    "id": "mono_acros",
+    "name": "Acros 黑白",
+    "tone": "黑白映射，強調明暗分離與質感。",
+    "scene": "適合街拍、建築與紀實；不增加顆粒。",
+    "group": "mono"
+  },
+  {
+    "id": "pentax_satobi",
+    "name": "Pentax Satobi",
+    "tone": "低飽和的暖調與褪色感。",
+    "scene": "適合懷舊街景、人像與生活場景。",
+    "group": "retro"
+  },
+  {
+    "id": "ricoh_retro",
+    "name": "Ricoh Retro",
+    "tone": "偏暖、較低飽和的懷舊色彩。",
+    "scene": "適合旅行、街拍與日常記錄。",
+    "group": "retro"
+  },
+  {
+    "id": "xh_5219_bright",
+    "name": "XH 5219 明亮",
+    "tone": "作者3號：明亮方向的5219配色。",
+    "scene": "適合日常與人像；普通／標準畫面輸入。",
+    "group": "portrait"
+  },
+  {
+    "id": "xh_5219_hasselblad",
+    "name": "XH 5219 哈蘇風格",
+    "tone": "作者7號：哈蘇風格方向的5219配色。",
+    "scene": "適合人像與生活記錄；可與明亮版對照。",
+    "group": "portrait"
+  }
 ]

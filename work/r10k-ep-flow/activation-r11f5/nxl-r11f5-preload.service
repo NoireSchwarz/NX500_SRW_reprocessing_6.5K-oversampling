@@ -1,0 +1,14 @@
+[Unit]
+Description=NX500 R11f5 fresh-boot core preparation
+DefaultDependencies=no
+After=opt-usr.mount hibernation.service
+Wants=opt-usr.mount
+Before=di-camera-app.service
+IgnoreOnIsolate=yes
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/bin/sh /opt/usr/nxl-r11f5-activation/preload.sh
+TimeoutSec=90
+WorkingDirectory=/

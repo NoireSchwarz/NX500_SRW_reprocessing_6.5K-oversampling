@@ -12,12 +12,14 @@
 #define SW_FRONT_OUT 0x20000u
 #define SW_LDC_OUT 0x38000u
 #else
-#define SW_BYTES (192u*1024u*1024u)
+#define SW_BYTES (176u*1024u*1024u)
 #define SW_FRONT_ACTIVE (128u*1024u*1024u)
 #define SW_W 6480u
 #define SW_H 4320u
 #define SW_FRONT_OUT (64u*1024u*1024u)
-#define SW_LDC_OUT (128u*1024u*1024u)
+/* Front data ends at117.576MiB. LDC runs only after front retirement.
+ * Keep the front128MiB cache window; reuse its unused tail in the later stage. */
+#define SW_LDC_OUT (120u*1024u*1024u)
 #endif
 #define SW_CONTROL 65536u
 #define SW_INPUT SW_FRONT_OUT
@@ -48,11 +50,13 @@ _Static_assert(SW_TABLE+0xf000u+19712u<SW_LEASE,"table slots before lease guard"
 static uint32_t sw_checksum(const void *data,size_t n){const unsigned char *p=data;uint32_t h=2166136261u;while(n--)h=(h^*p++)*16777619u;return h;}
 static void sw_seal(struct sw_lease *s){s->checksum=sw_checksum(s,offsetof(struct sw_lease,checksum));}
 static int sw_hash_valid(const char s[68]){for(unsigned i=0;i<64;i++)if(!((s[i]>='0'&&s[i]<='9')||(s[i]>='a'&&s[i]<='f')))return 0;return !s[64]&&!s[65]&&!s[66]&&!s[67];}
+/* CAP physical blocks are16KiB; the original user VA is page aligned4KiB.
+ * Keep the returned VA unchanged; translation/owner/range checks remain mandatory. */
 static int sw_valid_capacity(const struct sw_lease *s,unsigned capacity){
  if(s->magic!=SW_MAGIC||s->version!=1||s->bytes!=sizeof *s||s->phase<SW_FRONT_READY||s->phase>SW_RELEASED||
     s->capacity!=capacity||s->front_active!=SW_FRONT_ACTIVE||s->input_offset!=SW_INPUT||s->lut_offset!=SW_LUT_OUT||
     s->jpeg_offset!=SW_JPEG_OUT||s->table_offset!=capacity-0x20000u||s->lease_offset!=capacity-16384u||!s->nonce||s->owner_pid<=1||!s->owner_start_ticks||
-    s->pa<0x94000000u||(s->pa&16383u)||(uint64_t)s->pa+capacity>0xbb6cc000ULL||!s->va||(s->va&16383u)||
+    s->pa<0x94000000u||(s->pa&16383u)||(uint64_t)s->pa+capacity>0xbb6cc000ULL||!s->va||(s->va&4095u)||
     (uint64_t)s->va+capacity>0x100000000ULL||s->index!=(s->pa-0x94000000u)/16384u||
     (s->metadata[0]&255u)!=35||s->metadata[1]!=capacity/16384u||
     !sw_hash_valid(s->prefix_sha256)||!sw_hash_valid(s->lut_sha256)||!sw_hash_valid(s->source_sha256)||
@@ -61,9 +65,9 @@ static int sw_valid_capacity(const struct sw_lease *s,unsigned capacity){
  for(unsigned i=0;i<51;i++)if(s->reserved[i])return 0;return 1;
 }
 static int sw_valid(const struct sw_lease*s){return sw_valid_capacity(s,SW_BYTES);}
-/* Old completed160MiB jobs remain checkable after a192MiB software upgrade.
+/* Completed160/192MiB jobs remain checkable after a176MiB layout change.
  * Only the receipt reader calls this. Runtime borrowing still requires SW_BYTES. */
-static int sw_receipt_valid(const struct sw_lease*s){return (s->capacity==167772160u||s->capacity==SW_BYTES)&&sw_valid_capacity(s,s->capacity);}
+static int sw_receipt_valid(const struct sw_lease*s){return (s->capacity==167772160u||s->capacity==201326592u||s->capacity==SW_BYTES)&&sw_valid_capacity(s,s->capacity);}
 static int sw_receipt_same(const struct sw_lease*a,const struct sw_lease*b){if(!sw_receipt_valid(a)||!sw_receipt_valid(b))return 0;struct sw_lease x=*a,y=*b;x.phase=y.phase=0;x.checksum=y.checksum=0;return !memcmp(&x,&y,sizeof x);}
 static int sw_same_allocation(const struct sw_lease*a,const struct sw_lease*b){
  if(!sw_valid(a)||!sw_valid(b))return 0;struct sw_lease x=*a,y=*b;x.phase=y.phase=0;x.checksum=y.checksum=0;return !memcmp(&x,&y,sizeof x);

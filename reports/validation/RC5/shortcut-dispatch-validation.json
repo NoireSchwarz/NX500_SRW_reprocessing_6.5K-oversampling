@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "result": {
+    "exit": 0,
+    "stdout": "PASS actual VLog shortcut dispatch to gamma-toggle with busy guards\n",
+    "modeled_syscalls": {
+      "983045": 1,
+      "256": 1,
+      "54": 1,
+      "146": 1,
+      "248": 1
+    },
+    "hardware_tested": false
+  },
+  "actual_ARM_dispatch": true,
+  "new_shortcut_uses_existing_Gamma_toggle": true,
+  "busy_blocks_second_dispatch": true,
+  "detail_scope_refresh_on_success": true,
+  "backend_and_OS_modeled": true,
+  "hardware_tested": false
+}

@@ -103,6 +103,27 @@ def decode_latency_legacy(records,started_ns):
  if values:summary['IPC_to_EP_ms']=dict(min=min(values),median=statistics.median(values),p95=values[min(len(values)-1,int(len(values)*0.95))],max=max(values))
  return summary
 def decode_latency(records,started_ns):
+ if any(x['valid']&65536 and x['latency'][:2]==[0x42544c56,11]for x in records):
+  from video_ipc_flow11 import decode_ipc_flow11
+  return decode_ipc_flow11(records,started_ns)
+ if any(x['valid']&65536 and x['latency'][:2]==[0x41544c56,10]for x in records):
+  from video_ipc_flow10 import decode_ipc_flow10
+  return decode_ipc_flow10(records,started_ns)
+ if any(x['valid']&65536 and x['latency'][:2]==[0x39544c56,9] for x in records):
+  from video_ldc_flow9 import decode_ldc_flow9
+  return decode_ldc_flow9(records,started_ns)
+ if any(x['valid']&65536 and x['latency'][:2]==[0x38544c56,8] for x in records):
+  from video_ep_flow8 import decode_ep_flow8
+  return decode_ep_flow8(records,started_ns)
+ if any(x['valid']&65536 and x['latency'][:2]==[0x37544c56,7] for x in records):
+  from video_ep_flow7 import decode_ep_flow7
+  return decode_ep_flow7(records,started_ns)
+ if any(x['valid']&65536 and x['latency'][:2]==[0x36544c56,6] for x in records):
+  from video_ep_flow import decode_ep_flow
+  return decode_ep_flow(records,started_ns)
+ if any(x['valid']&65536 and x['latency'][:2]==[0x35544c56,5] for x in records):
+  from video_stage_flow import decode_stage_flow
+  return decode_stage_flow(records,started_ns)
  if any(x['valid']&65536 and x['latency'][:2]==[0x33544c56,4] for x in records):
   from video_frame_flow import decode_frame_flow
   return decode_frame_flow(records,started_ns)
@@ -118,7 +139,7 @@ def decode(path):
  data=Path(path).read_bytes()
  if len(data)<4096:raise ValueError('Incomplete header')
  h=HEADER.unpack_from(data);magic,schema,hbytes,rbytes,capacity,count,phase=h[:7]
- if (schema,rbytes)not in [(1,512),(2,704),(3,768),(4,896),(5,1024),(6,1152),(7,1280)]or (magic,hbytes,capacity,phase)!=(b'NXLVCTR1',16384 if schema>=6 else 8192 if schema==5 else 4096,6000,6)or count>capacity or len(data)!=hbytes+count*rbytes:raise ValueError('Unknown schema, unsaved or incorrect file size')
+ if (schema,rbytes)not in [(1,512),(2,704),(3,768),(4,896),(5,1024),(6,1152),(7,1280),(8,1280)]or (magic,hbytes,capacity,phase)!=(b'NXLVCTR1',16384 if schema>=6 else 8192 if schema==5 else 4096,6000,6)or count>capacity or len(data)!=hbytes+count*rbytes:raise ValueError('Unknown schema, unsaved or incorrect file size')
  if h[-1]!=fnv(data[:608]):raise ValueError('Header integrity failed')
  records=[]
  for i in range(count):
@@ -191,7 +212,18 @@ def decode(path):
   else:
    from video_hardware_progress import decode_qos_compare,decode_progress,decode_phases,QOS_PHASES,compare_qos_intervals
    if schema>=6:
-    from video_frame_flow import compare_flows
+    if summary['frame_timing'].get('schema')=='NXL_IPC_BIT6_FLOW11':
+     from video_ipc_flow11 import compare_flows
+    elif summary['frame_timing'].get('schema')=='NXL_IPC_BUFFER_FLOW10':
+     from video_ipc_flow10 import compare_flows
+    elif summary['frame_timing'].get('schema')=='NXL_LDC_FLOW9':
+     from video_ldc_flow9 import compare_flows
+    elif summary['frame_timing'].get('schema')=='NXL_EP_FLOW8':
+     from video_ep_flow8 import compare_flows
+    elif summary['frame_timing'].get('schema')=='NXL_EP_FLOW7':
+     from video_ep_flow7 import compare_flows
+    else:
+     from video_frame_flow import compare_flows
     summary['flow_bookmarks']=decode_qos_compare(data);summary['flow_bookmarks']['schema']='NXL_FLOW_BOOKMARKS1';summary['flow_bookmarks']['scope']='Bookmarks only. R10j makes no bridge/CPU/clock writes.'
     summary['hardware_progress']=decode_progress(records,h[7]);summary['pinned_hardware_phases']=decode_phases(data)
     summary['frame_flow_comparison']=compare_flows(summary['frame_timing'])
@@ -208,6 +240,11 @@ def decode(path):
  if schema>=7:
   from video_ep_readback import decode_ep_readback
   summary['EP_readback_comparison']=decode_ep_readback(records,intervals,summary.get('frame_timing',{}),h[7])
+ from video_ipc_link import decode_ipc_links
+ summary['IPC_link_evidence']=decode_ipc_links(records,h[7])
+ from video_ep_route import decode_ep_routes
+ routes=decode_ep_routes(data)
+ if routes is not None:summary['EP_route_evidence']=routes
  return summary,intervals
 def main():
  p=argparse.ArgumentParser(description=__doc__);p.add_argument('counts',type=Path);p.add_argument('--out',type=Path);a=p.parse_args();summary,rows=decode(a.counts)

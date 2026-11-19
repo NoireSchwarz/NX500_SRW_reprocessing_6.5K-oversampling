@@ -1,0 +1,12 @@
+R11k1 SRW 启动修复短测
+2026-11-18 / Europe/Berlin
+
+1. 安全断开 USB，正常关机待写卡灯熄灭，取出电池约30秒后装回，按原方式安装。安装日志版本应为 recovery-r11k1-version-prefix，等待完成后再关机、开机。
+2. SRW菜单仍显示 R11k SRW TRANSFER TEST，这是同一诊断功能的版本；补丁修订号R11k1由安装日志和程序身份确认。视频页保持R11j。
+3. 回照片模式，选定本轮用于对照的RAW+JPEG，LUT保持OFF / ORIGINAL，GAMMA TEST先选SOURCE 19，只运行一次 AUTO + COMPARE。
+4. 等 AUTO INITIALIZATION COMPLETE、JPEG保存及资源归还确认。若失败，停止其余三组并保留新记录；不要连续重试，不删除日志或租约。
+5. 第一组成功后，继续同一RAW的 LINEAR TEST → LOG TRANSFER TEST → SOURCE 19，每组执行一次 AUTO + COMPARE 并等待完成。不要切换RAW或拍摄参数。
+6. 全部保存、机身写卡灯熄灭后再连接USB。保留全部JPEG、JOB_*、INIT_AUTO_*和安装日志。
+
+本次没有要求重拍视频或码率测试。使用现有同源RAW序列，分析仍在电脑，Log组仍只隔离Gamma传递曲线。
+这次软件验证确认的是启动版本兼容性；实际ISP曲线消费与像素结果待回收后确认。

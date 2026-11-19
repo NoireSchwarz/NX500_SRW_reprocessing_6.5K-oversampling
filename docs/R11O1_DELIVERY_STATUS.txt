@@ -1,0 +1,16 @@
+R11o1交付状态：2026-11-18
+SD_DEPLOYED_READBACK_VERIFIED；相机安装与实机验收待用户完成。
+H:、exFAT、序列号4040321079；5474包文件读回一致，50文件写入，安装触发最后写入。
+照片、录像、完整备份和历史日志保留；28891非包文件元数据及77受保护文件内容一致；76历史读取错误保持。
+新模块清单：21cc3a163518cf0e8bff1234e652f9d281765077bd6f828f84ef7e9e9bc0c6fc
+包：D:\NX500模组开发\r11o1-lut-unlock-work\NX500_R11o1_LUT_OPTIONAL.zip
+包SHA256：0cf76a25172d44411ddcb690112d89769f000abe137fc479f2df0c7abf3392f3
+旧SD包文件备份：D:\NX500模组开发\r11o1-lut-unlock-work\R11o1_previous_SD_payload.zip
+旧完整R11o包：D:\NX500模组开发\r11o-live-log-work\NX500_R11o_LIVE_MIDGRAY.zip
+修正shell和ARM主入口两层中性LUT限制；曲线开关现独立于LUT/强度/视频LUT开关。
+R11o曲线、中灰、SGR3、还原表、RTOS、SRW和核心库保持；新日志GAMMA_R11O1_*。
+菜单：R11o1 LIVE MIDGRAY LOG / 24P。
+31组真实shell、6组ARM主入口、host租约/快照、审计及两种核心库的完整安装接续通过；硬件端点有模拟。
+安装前后实际断电（取电池约30秒）。保持原LUT状态点一次Log确认不再报LUT限制，再继续未完成的R11o计划。
+标准Log像素验收仍建议中性参考表；任意风格/还原LUT开启视频作用时会同时写入MP4，没有预览/写卡分流。
+测试步骤R11O1_TEST_STEPS.txt；原因与验证R11O1_ANALYSIS_REPORT.txt。

@@ -1,0 +1,50 @@
+{
+  "passed": true,
+  "unchanged_native_binaries": [
+    "cube2lut.arm",
+    "nx_regtabwrite.arm",
+    "nx_slotwrite.arm",
+    "nxl-atomic-rename.arm",
+    "nxl-color-observe.arm",
+    "nxl-demo-front.arm",
+    "nxl-demo-post.arm",
+    "nxl-fileops",
+    "nxl-gamma-reload.arm",
+    "nxl-handoff-watch.arm",
+    "nxl-holdcheck.arm",
+    "nxl-hw-controller.arm",
+    "nxl-hw-worker.arm",
+    "nxl-init-pipeline.arm",
+    "nxl-init-test.arm",
+    "nxl-init-watch.arm",
+    "nxl-lens-watch.arm",
+    "nxl-lutblend.arm",
+    "nxl-lutguard.arm",
+    "nxl-lutidle.arm",
+    "nxl-lutload.arm",
+    "nxl-lutobserve.arm",
+    "nxl-native-refresh.arm",
+    "nxl-oem-restore.arm",
+    "nxl-owned-ep.arm",
+    "nxl-session-rearm.arm",
+    "nxl-session.arm",
+    "nxl-sharp.arm",
+    "nxl-tablecheck.arm",
+    "nxl-usb-guard.arm",
+    "nxl-video-fullwidth.arm",
+    "nxl-video-mode.arm",
+    "nxl-video-probe.arm"
+  ],
+  "changed_binaries": [
+    "nxl-keys",
+    "nxl-menu"
+  ],
+  "new_binaries": [],
+  "semantic_shell_changes": [
+    "gamma-reload.sh",
+    "lut-core.sh"
+  ],
+  "core_RTOS_Gamma_SRW_native_and_all_32_LUTs_byte_exact_RC4": true,
+  "tested_shell_body_matches_final": true,
+  "hardware_tested": false
+}

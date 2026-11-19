@@ -1,0 +1,851 @@
+00008000-00441000 r-xp 00000000 b3:0a 13377      /usr/apps/com.samsung.di-camera-app/bin/di-camera-app
+00448000-0049e000 rw-p 00438000 b3:0a 13377      /usr/apps/com.samsung.di-camera-app/bin/di-camera-app
+0049e000-00722000 rw-p 00000000 00:00 0          [heap]
+6cf32000-6cf33000 ---p 00000000 00:00 0 
+6cf33000-6d732000 rwxp 00000000 00:00 0 
+6d732000-6d733000 ---p 00000000 00:00 0 
+6d733000-6df32000 rwxp 00000000 00:00 0          [stack:289]
+6df32000-6e155000 rw-p 00000000 00:00 0 
+6e155000-6e156000 ---p 00000000 00:00 0 
+6e156000-6e955000 rwxp 00000000 00:00 0          [stack:285]
+6e955000-6e95c000 r--s 00000000 b3:0a 3552       /usr/lib/gconv/gconv-modules.cache
+6ec00000-6ec88000 rw-p 00000000 00:00 0 
+6ec88000-6ed00000 ---p 00000000 00:00 0 
+6ed45000-6ee97000 rw-s 9023e000 00:04 5891       /drm mm object (deleted)
+6ee97000-6f397000 rw-s 84c00000 00:05 16         /dev/mem
+6f397000-6f398000 r-xp 00000000 b3:0a 11449      /usr/lib/evas/modules/loaders/eet/linux-gnueabi-armv7l-1.7.99/module.so
+6f398000-6f39f000 ---p 00001000 b3:0a 11449      /usr/lib/evas/modules/loaders/eet/linux-gnueabi-armv7l-1.7.99/module.so
+6f39f000-6f3a0000 rw-p 00000000 b3:0a 11449      /usr/lib/evas/modules/loaders/eet/linux-gnueabi-armv7l-1.7.99/module.so
+6f3a0000-6f3a1000 ---p 00000000 00:00 0 
+6f3a1000-6fba0000 rwxp 00000000 00:00 0          [stack:282]
+6fba0000-6fba2000 r-xp 00000000 b3:0a 11472      /usr/lib/remix/libeet_sndfile_reader.so
+6fba2000-6fba9000 ---p 00002000 b3:0a 11472      /usr/lib/remix/libeet_sndfile_reader.so
+6fba9000-6fbaa000 rw-p 00001000 b3:0a 11472      /usr/lib/remix/libeet_sndfile_reader.so
+6fbaa000-6fbb2000 r-xp 00000000 b3:0a 77         /usr/lib/lib_DNSe_NRSS_ver225.so
+6fbb2000-6fbb9000 ---p 00008000 b3:0a 77         /usr/lib/lib_DNSe_NRSS_ver225.so
+6fbb9000-6fbba000 rw-p 00007000 b3:0a 77         /usr/lib/lib_DNSe_NRSS_ver225.so
+6fbba000-6fbc1000 rw-p 00000000 00:00 0 
+6fbc1000-6fbcc000 r-xp 00000000 b3:0a 81         /usr/lib/lib_SamsungRec_V04001_redwood.so
+6fbcc000-6fbd4000 ---p 0000b000 b3:0a 81         /usr/lib/lib_SamsungRec_V04001_redwood.so
+6fbd4000-6fbd7000 rw-p 0000b000 b3:0a 81         /usr/lib/lib_SamsungRec_V04001_redwood.so
+6fbd7000-6fbe0000 rw-p 00000000 00:00 0 
+6fbe0000-6fbe5000 r-xp 00000000 b3:0a 11853      /usr/lib/libmmfpcmsound.so.0.0.0
+6fbe5000-6fbec000 ---p 00005000 b3:0a 11853      /usr/lib/libmmfpcmsound.so.0.0.0
+6fbec000-6fbed000 rw-p 00004000 b3:0a 11853      /usr/lib/libmmfpcmsound.so.0.0.0
+6fbed000-6fbef000 r-xp 00000000 b3:0a 16878      /usr/lib/remix/libtizen_sound_player.so
+6fbef000-6fbf6000 ---p 00002000 b3:0a 16878      /usr/lib/remix/libtizen_sound_player.so
+6fbf6000-6fbf7000 rw-p 00001000 b3:0a 16878      /usr/lib/remix/libtizen_sound_player.so
+6fbf7000-6fbf8000 r-xp 00000000 b3:0a 11465      /usr/lib/edje/modules/multisense_factory/linux-gnueabi-armv7l-1.0.0/module.so
+6fbf8000-6fbff000 ---p 00001000 b3:0a 11465      /usr/lib/edje/modules/multisense_factory/linux-gnueabi-armv7l-1.0.0/module.so
+6fbff000-6fc00000 rw-p 00000000 b3:0a 11465      /usr/lib/edje/modules/multisense_factory/linux-gnueabi-armv7l-1.0.0/module.so
+6fc00000-6fd00000 rw-p 00000000 00:00 0 
+6fd07000-6fd1e000 r-xp 00000000 b3:0a 11475      /usr/lib/edje/modules/elm/linux-gnueabi-armv7l-1.0.0/module.so
+6fd1e000-6fd25000 ---p 00017000 b3:0a 11475      /usr/lib/edje/modules/elm/linux-gnueabi-armv7l-1.0.0/module.so
+6fd25000-6fd2a000 rw-p 00016000 b3:0a 11475      /usr/lib/edje/modules/elm/linux-gnueabi-armv7l-1.0.0/module.so
+6fd2a000-6ff45000 r--s 00000000 b3:0a 1741       /usr/share/elementary/themes/tizen-default.edj
+6ff45000-6ff76000 rw-p 00000000 00:00 0 
+6ff76000-70984000 r--p 00000000 b3:0a 7987       /usr/share/fonts/SDIC_GP_US_20120720.ttf
+70984000-70999000 rw-p 00a0e000 b3:0a 7987       /usr/share/fonts/SDIC_GP_US_20120720.ttf
+70999000-709a6000 r--p 00a23000 b3:0a 7987       /usr/share/fonts/SDIC_GP_US_20120720.ttf
+709a6000-709aa000 r--s 00000000 00:15 4815       /tmp/fontconfig/3830d5c3ddfd5cd38a049b759396e72e-le32d8.cache-3
+709aa000-70ab4000 r--s 00000000 b3:0a 13378      /usr/apps/com.samsung.di-camera-app/res/edje/nx_style.edj
+70ab4000-70ab5000 r--p 00000000 07:00 686        /usr/share/locale/zh_TW/LC_MESSAGES/elementary.mo
+70ab5000-70ae0000 r--p 00000000 07:00 689        /usr/share/locale/zh_TW/LC_MESSAGES/di-camera-app.mo
+70ae0000-70af8000 r-xp 00000000 b3:0a 8333       /usr/lib/libpng12.so.0.50.0
+70af8000-70aff000 ---p 00018000 b3:0a 8333       /usr/lib/libpng12.so.0.50.0
+70aff000-70b00000 rw-p 00017000 b3:0a 8333       /usr/lib/libpng12.so.0.50.0
+70b00000-70c00000 rw-p 00000000 00:00 0 
+70c06000-70c08000 r-xp 00000000 b3:0a 11454      /usr/lib/evas/modules/loaders/png/linux-gnueabi-armv7l-1.7.99/module.so
+70c08000-70c0f000 ---p 00002000 b3:0a 11454      /usr/lib/evas/modules/loaders/png/linux-gnueabi-armv7l-1.7.99/module.so
+70c0f000-70c10000 rw-p 00001000 b3:0a 11454      /usr/lib/evas/modules/loaders/png/linux-gnueabi-armv7l-1.7.99/module.so
+70c10000-70c11000 rw-s 10003000 00:05 179        /dev/gpiodev.3
+70c11000-70c52000 r--p 01577000 07:00 711        /usr/share/locale/locale-archive
+70c52000-70c53000 rw-s 85600000 00:05 16         /dev/mem
+70c53000-70c5e000 rw-s 854e0000 00:05 16         /dev/mem
+70c5e000-70c5f000 ---p 00000000 00:00 0 
+70c5f000-7145e000 rwxp 00000000 00:00 0          [stack:280]
+7145e000-7155f000 rw-p 00000000 00:00 0 
+7155f000-71560000 ---p 00000000 00:00 0 
+71560000-71d5f000 rwxp 00000000 00:00 0          [stack:279]
+71d5f000-79d5f000 rw-s 99600000 00:05 16         /dev/mem
+79d5f000-7b15f000 rw-s 98200000 00:05 16         /dev/mem
+7b15f000-7bb5f000 rw-s 97800000 00:05 16         /dev/mem
+7bb5f000-7f35f000 rw-s 94000000 00:05 16         /dev/mem
+7f35f000-7f360000 rw-s 85500000 00:05 16         /dev/mem
+7f391000-7f392000 r-xp 00000000 b3:0a 11457      /usr/lib/evas/modules/savers/jpeg/linux-gnueabi-armv7l-1.7.99/module.so
+7f392000-7f399000 ---p 00001000 b3:0a 11457      /usr/lib/evas/modules/savers/jpeg/linux-gnueabi-armv7l-1.7.99/module.so
+7f399000-7f39a000 rw-p 00000000 b3:0a 11457      /usr/lib/evas/modules/savers/jpeg/linux-gnueabi-armv7l-1.7.99/module.so
+7f39a000-7f39c000 r-xp 00000000 b3:0a 11431      /usr/lib/evas/modules/engines/buffer/linux-gnueabi-armv7l-1.7.99/module.so
+7f39c000-7f3a4000 ---p 00002000 b3:0a 11431      /usr/lib/evas/modules/engines/buffer/linux-gnueabi-armv7l-1.7.99/module.so
+7f3a4000-7f3a5000 rw-p 00002000 b3:0a 11431      /usr/lib/evas/modules/engines/buffer/linux-gnueabi-armv7l-1.7.99/module.so
+7f3a5000-7f726000 rw-s bee79000 00:05 329        /dev/d5_sma
+7f726000-7f727000 ---p 00000000 00:00 0 
+7f727000-7ff26000 rwxp 00000000 00:00 0          [stack:267]
+7ff26000-7ff27000 ---p 00000000 00:00 0 
+7ff27000-80726000 rwxp 00000000 00:00 0          [stack:266]
+80726000-80727000 ---p 00000000 00:00 0 
+80727000-80f26000 rwxp 00000000 00:00 0          [stack:265]
+80f26000-80f27000 rw-s bbc66000 00:05 16         /dev/mem
+80f27000-80fa8000 rw-s 85400000 00:05 16         /dev/mem
+80fa8000-80fa9000 ---p 00000000 00:00 0 
+80fa9000-817a8000 rwxp 00000000 00:00 0          [stack:264]
+817a8000-817a9000 ---p 00000000 00:00 0 
+817a9000-81fa8000 rwxp 00000000 00:00 0          [stack:263]
+81fa8000-81fa9000 ---p 00000000 00:00 0 
+81fa9000-827a8000 rwxp 00000000 00:00 0          [stack:262]
+827a8000-827a9000 ---p 00000000 00:00 0 
+827a9000-82fa8000 rwxp 00000000 00:00 0          [stack:261]
+82fa8000-aefa8000 rw-s 94000000 00:05 16         /dev/mem
+aefa8000-aefa9000 ---p 00000000 00:00 0 
+aefa9000-af7a8000 rwxp 00000000 00:00 0          [stack:260]
+af7a8000-af7ae000 r-xp 00000000 b3:0a 9119       /usr/lib/libUMP.so
+af7ae000-af7b5000 ---p 00006000 b3:0a 9119       /usr/lib/libUMP.so
+af7b5000-af7b6000 rw-p 00005000 b3:0a 9119       /usr/lib/libUMP.so
+af7b6000-af7b9000 r-xp 00000000 b3:0a 17233      /usr/lib/bufmgr/libtbm_drime5.so.0.0.0
+af7b9000-af7c0000 ---p 00003000 b3:0a 17233      /usr/lib/bufmgr/libtbm_drime5.so.0.0.0
+af7c0000-af7c1000 rw-p 00002000 b3:0a 17233      /usr/lib/bufmgr/libtbm_drime5.so.0.0.0
+af7c1000-af7c2000 r-xp 00000000 b3:0a 8241       /usr/lib/libdrm_slp.so.1.0.0
+af7c2000-af7c9000 ---p 00001000 b3:0a 8241       /usr/lib/libdrm_slp.so.1.0.0
+af7c9000-af7ca000 rw-p 00000000 b3:0a 8241       /usr/lib/libdrm_slp.so.1.0.0
+af7ca000-af7d4000 r-xp 00000000 b3:0a 11446      /usr/lib/evas/modules/engines/software_generic/linux-gnueabi-armv7l-1.7.99/module.so
+af7d4000-af7dc000 ---p 0000a000 b3:0a 11446      /usr/lib/evas/modules/engines/software_generic/linux-gnueabi-armv7l-1.7.99/module.so
+af7dc000-af7dd000 rw-p 0000a000 b3:0a 11446      /usr/lib/evas/modules/engines/software_generic/linux-gnueabi-armv7l-1.7.99/module.so
+af7dd000-af7df000 r-xp 00000000 b3:0a 9088       /usr/lib/libdri2.so.0.0.0
+af7df000-af7e6000 ---p 00002000 b3:0a 9088       /usr/lib/libdri2.so.0.0.0
+af7e6000-af7e7000 rw-p 00001000 b3:0a 9088       /usr/lib/libdri2.so.0.0.0
+af7e7000-af7f0000 r-xp 00000000 b3:0a 11447      /usr/lib/evas/modules/engines/software_x11/linux-gnueabi-armv7l-1.7.99/module.so
+af7f0000-af7f8000 ---p 00009000 b3:0a 11447      /usr/lib/evas/modules/engines/software_x11/linux-gnueabi-armv7l-1.7.99/module.so
+af7f8000-af7f9000 rw-p 00009000 b3:0a 11447      /usr/lib/evas/modules/engines/software_x11/linux-gnueabi-armv7l-1.7.99/module.so
+af7f9000-af7fa000 ---p 00000000 00:00 0 
+af7fa000-afff9000 rwxp 00000000 00:00 0          [stack:259]
+afff9000-b0003000 r-xp 00000000 b3:0a 3246       /lib/libnss_files-2.13.so
+b0003000-b000a000 ---p 0000a000 b3:0a 3246       /lib/libnss_files-2.13.so
+b000a000-b000b000 r--p 00009000 b3:0a 3246       /lib/libnss_files-2.13.so
+b000b000-b000c000 rw-p 0000a000 b3:0a 3246       /lib/libnss_files-2.13.so
+b0010000-b0013000 r-xp 00000000 b3:0a 9127       /usr/lib/libnative-buffer.so.0.1.0
+b0013000-b001a000 ---p 00003000 b3:0a 9127       /usr/lib/libnative-buffer.so.0.1.0
+b001a000-b001b000 rw-p 00002000 b3:0a 9127       /usr/lib/libnative-buffer.so.0.1.0
+b001b000-b00e3000 r-xp 00000000 b3:0a 12195      /usr/lib/libscim-1.0.so.8.2.3
+b00e3000-b00f1000 rw-p 000c8000 b3:0a 12195      /usr/lib/libscim-1.0.so.8.2.3
+b00f1000-b0115000 r-xp 00000000 b3:0a 12192      /usr/lib/ecore/immodules/libisf-imf-module.so
+b0115000-b011d000 ---p 00024000 b3:0a 12192      /usr/lib/ecore/immodules/libisf-imf-module.so
+b011d000-b011e000 rw-p 00024000 b3:0a 12192      /usr/lib/ecore/immodules/libisf-imf-module.so
+b011e000-b011f000 rw-p 00000000 00:00 0 
+b011f000-b0120000 r--p 0079b000 07:00 711        /usr/share/locale/locale-archive
+b0120000-b023e000 r--p 002a7000 07:00 711        /usr/share/locale/locale-archive
+b023e000-b043e000 r--p 00000000 07:00 711        /usr/share/locale/locale-archive
+b043e000-b043f000 rw-s 85580000 00:05 16         /dev/mem
+b043f000-b0450000 rw-s 85480000 00:05 16         /dev/mem
+b0450000-b045d000 r-xp 00000000 b3:0a 17120      /usr/lib/libslp_devman_plugin.so
+b045d000-b0465000 ---p 0000d000 b3:0a 17120      /usr/lib/libslp_devman_plugin.so
+b0465000-b0466000 rw-p 0000d000 b3:0a 17120      /usr/lib/libslp_devman_plugin.so
+b0466000-b0470000 rw-p 00000000 00:00 0 
+b0470000-b0472000 r-xp 00000000 b3:0a 9325       /usr/lib/libsystemd-daemon.so.0.0.10
+b0472000-b0479000 ---p 00002000 b3:0a 9325       /usr/lib/libsystemd-daemon.so.0.0.10
+b0479000-b047a000 r--p 00001000 b3:0a 9325       /usr/lib/libsystemd-daemon.so.0.0.10
+b047a000-b047b000 rw-p 00002000 b3:0a 9325       /usr/lib/libsystemd-daemon.so.0.0.10
+b047b000-b0490000 r-xp 00000000 b3:0a 10333      /usr/lib/libpkgmgr_parser.so.0.1.0
+b0490000-b0497000 ---p 00015000 b3:0a 10333      /usr/lib/libpkgmgr_parser.so.0.1.0
+b0497000-b0498000 rw-p 00014000 b3:0a 10333      /usr/lib/libpkgmgr_parser.so.0.1.0
+b0498000-b049a000 r-xp 00000000 b3:0a 11965      /usr/lib/libpkgmgr_installer_status_broadcast_server.so.0.1.0
+b049a000-b04a1000 ---p 00002000 b3:0a 11965      /usr/lib/libpkgmgr_installer_status_broadcast_server.so.0.1.0
+b04a1000-b04a2000 rw-p 00001000 b3:0a 11965      /usr/lib/libpkgmgr_installer_status_broadcast_server.so.0.1.0
+b04a2000-b04a8000 r-xp 00000000 b3:0a 11963      /usr/lib/libpkgmgr_installer_client.so.0.1.0
+b04a8000-b04b0000 ---p 00006000 b3:0a 11963      /usr/lib/libpkgmgr_installer_client.so.0.1.0
+b04b0000-b04b1000 rw-p 00006000 b3:0a 11963      /usr/lib/libpkgmgr_installer_client.so.0.1.0
+b04b1000-b04b2000 rw-p 00000000 00:00 0 
+b04b2000-b04e1000 r-xp 00000000 b3:0a 12079      /usr/lib/libnfc-common-lib.so.1.0.0
+b04e1000-b04e9000 ---p 0002f000 b3:0a 12079      /usr/lib/libnfc-common-lib.so.1.0.0
+b04e9000-b04ec000 rw-p 0002f000 b3:0a 12079      /usr/lib/libnfc-common-lib.so.1.0.0
+b04ec000-b04ee000 r-xp 00000000 b3:0a 8960       /usr/lib/libXau.so.6.0.0
+b04ee000-b04f5000 ---p 00002000 b3:0a 8960       /usr/lib/libXau.so.6.0.0
+b04f5000-b04f6000 rw-p 00001000 b3:0a 8960       /usr/lib/libXau.so.6.0.0
+b04f6000-b04fc000 r-xp 00000000 b3:0a 9930       /usr/lib/libaudioutil.so.0.0.0
+b04fc000-b0503000 ---p 00006000 b3:0a 9930       /usr/lib/libaudioutil.so.0.0.0
+b0503000-b0504000 rw-p 00005000 b3:0a 9930       /usr/lib/libaudioutil.so.0.0.0
+b0504000-b0505000 rw-p 00000000 00:00 0 
+b0505000-b0507000 r-xp 00000000 b3:0a 13258      /usr/lib/libmedia-svc-hash.so.1.0.0
+b0507000-b050e000 ---p 00002000 b3:0a 13258      /usr/lib/libmedia-svc-hash.so.1.0.0
+b050e000-b050f000 rw-p 00001000 b3:0a 13258      /usr/lib/libmedia-svc-hash.so.1.0.0
+b050f000-b0512000 r-xp 00000000 b3:0a 1745       /usr/lib/libuuid.so.1.3.0
+b0512000-b0519000 ---p 00003000 b3:0a 1745       /usr/lib/libuuid.so.1.3.0
+b0519000-b051a000 rw-p 00002000 b3:0a 1745       /usr/lib/libuuid.so.1.3.0
+b051a000-b0525000 r-xp 00000000 b3:0a 10048      /usr/lib/libQdio.so.0.1.0
+b0525000-b052c000 ---p 0000b000 b3:0a 10048      /usr/lib/libQdio.so.0.1.0
+b052c000-b052d000 rw-p 0000a000 b3:0a 10048      /usr/lib/libQdio.so.0.1.0
+b052d000-b053f000 r-xp 00000000 b3:0a 10416      /usr/lib/libcom-core.so.0.0.1
+b053f000-b0546000 ---p 00012000 b3:0a 10416      /usr/lib/libcom-core.so.0.0.1
+b0546000-b0547000 rw-p 00011000 b3:0a 10416      /usr/lib/libcom-core.so.0.0.1
+b0547000-b0595000 r-xp 00000000 b3:0a 10326      /usr/lib/libsoup-2.4.so.1.5.0
+b0595000-b059c000 ---p 0004e000 b3:0a 10326      /usr/lib/libsoup-2.4.so.1.5.0
+b059c000-b059f000 rw-p 0004d000 b3:0a 10326      /usr/lib/libsoup-2.4.so.1.5.0
+b059f000-b05a0000 rw-p 00000000 00:00 0 
+b05a0000-b05e3000 r-xp 00000000 b3:0a 12024      /usr/lib/libwsm.so
+b05e3000-b05ea000 ---p 00043000 b3:0a 12024      /usr/lib/libwsm.so
+b05ea000-b070e000 rw-p 00042000 b3:0a 12024      /usr/lib/libwsm.so
+b070e000-b072f000 r-xp 00000000 b3:0a 10336      /usr/lib/libpkgmgr-info.so.0.0.17
+b072f000-b0736000 ---p 00021000 b3:0a 10336      /usr/lib/libpkgmgr-info.so.0.0.17
+b0736000-b0737000 rw-p 00020000 b3:0a 10336      /usr/lib/libpkgmgr-info.so.0.0.17
+b0737000-b0750000 r-xp 00000000 b3:0a 11987      /usr/lib/libpkgmgr-client.so.0.1.68
+b0750000-b0758000 ---p 00019000 b3:0a 11987      /usr/lib/libpkgmgr-client.so.0.1.68
+b0758000-b0759000 rw-p 00019000 b3:0a 11987      /usr/lib/libpkgmgr-client.so.0.1.68
+b0759000-b076b000 r-xp 00000000 b3:0a 9687       /usr/lib/libsecurity-server-commons.so.1.0.0
+b076b000-b0772000 ---p 00012000 b3:0a 9687       /usr/lib/libsecurity-server-commons.so.1.0.0
+b0772000-b0773000 rw-p 00011000 b3:0a 9687       /usr/lib/libsecurity-server-commons.so.1.0.0
+b0773000-b0774000 rw-p 00000000 00:00 0 
+b0774000-b0778000 r-xp 00000000 b3:0a 8396       /usr/lib/libogg.so.0.7.1
+b0778000-b077f000 ---p 00004000 b3:0a 8396       /usr/lib/libogg.so.0.7.1
+b077f000-b0780000 rw-p 00003000 b3:0a 8396       /usr/lib/libogg.so.0.7.1
+b0780000-b07a2000 r-xp 00000000 b3:0a 8621       /usr/lib/libvorbis.so.0.4.3
+b07a2000-b07a9000 ---p 00022000 b3:0a 8621       /usr/lib/libvorbis.so.0.4.3
+b07a9000-b07aa000 rw-p 00021000 b3:0a 8621       /usr/lib/libvorbis.so.0.4.3
+b07aa000-b088e000 r-xp 00000000 b3:0a 8623       /usr/lib/libvorbisenc.so.2.0.6
+b088e000-b0896000 ---p 000e4000 b3:0a 8623       /usr/lib/libvorbisenc.so.2.0.6
+b0896000-b08a2000 rw-p 000e4000 b3:0a 8623       /usr/lib/libvorbisenc.so.2.0.6
+b08a2000-b08d3000 r-xp 00000000 b3:0a 10071      /usr/lib/libFLAC.so.8.2.0
+b08d3000-b08db000 ---p 00031000 b3:0a 10071      /usr/lib/libFLAC.so.8.2.0
+b08db000-b08dc000 rw-p 00031000 b3:0a 10071      /usr/lib/libFLAC.so.8.2.0
+b08dc000-b08f2000 r-xp 00000000 b3:0a 8662       /lib/libexpat.so.1.5.2
+b08f2000-b08f9000 ---p 00016000 b3:0a 8662       /lib/libexpat.so.1.5.2
+b08f9000-b08fb000 rw-p 00015000 b3:0a 8662       /lib/libexpat.so.1.5.2
+b08fb000-b08fc000 rw-p 00000000 00:00 0 
+b08fc000-b0938000 r-xp 00000000 b3:0a 8209       /usr/lib/libicule.so.52.1
+b0938000-b093f000 ---p 0003c000 b3:0a 8209       /usr/lib/libicule.so.52.1
+b093f000-b0941000 rw-p 0003b000 b3:0a 8209       /usr/lib/libicule.so.52.1
+b0941000-b0a0c000 r-xp 00000000 b3:0a 8178       /usr/lib/libxml2.so.2.7.8
+b0a0c000-b0a14000 ---p 000cb000 b3:0a 8178       /usr/lib/libxml2.so.2.7.8
+b0a14000-b0a19000 rw-p 000cb000 b3:0a 8178       /usr/lib/libxml2.so.2.7.8
+b0a19000-b0a1a000 rw-p 00000000 00:00 0 
+b0a1a000-b0a23000 r-xp 00000000 b3:0a 8642       /usr/lib/libspdy.so.0.0.0
+b0a23000-b0a2b000 ---p 00009000 b3:0a 8642       /usr/lib/libspdy.so.0.0.0
+b0a2b000-b0a2c000 rw-p 00009000 b3:0a 8642       /usr/lib/libspdy.so.0.0.0
+b0a2c000-b0a5a000 r-xp 00000000 b3:0a 8742       /usr/lib/libidn.so.11.5.44
+b0a5a000-b0a61000 ---p 0002e000 b3:0a 8742       /usr/lib/libidn.so.11.5.44
+b0a61000-b0a62000 rw-p 0002d000 b3:0a 8742       /usr/lib/libidn.so.11.5.44
+b0a62000-b0a63000 rw-p 00000000 00:00 0 
+b0a63000-b0a6d000 r-xp 00000000 b3:0a 10165      /usr/lib/libcares.so.2.1.0
+b0a6d000-b0a74000 ---p 0000a000 b3:0a 10165      /usr/lib/libcares.so.2.1.0
+b0a74000-b0a75000 rw-p 00009000 b3:0a 10165      /usr/lib/libcares.so.2.1.0
+b0a75000-b0aa8000 r-xp 00000000 b3:0a 12089      /usr/lib/libnfc.so.1.0.0
+b0aa8000-b0aaf000 ---p 00033000 b3:0a 12089      /usr/lib/libnfc.so.1.0.0
+b0aaf000-b0ab0000 rw-p 00032000 b3:0a 12089      /usr/lib/libnfc.so.1.0.0
+b0ab0000-b0ac3000 r-xp 00000000 b3:0a 9023       /usr/lib/libxcb.so.1.1.0
+b0ac3000-b0aca000 ---p 00013000 b3:0a 9023       /usr/lib/libxcb.so.1.1.0
+b0aca000-b0acb000 rw-p 00012000 b3:0a 9023       /usr/lib/libxcb.so.1.1.0
+b0acb000-b0acc000 rw-p 00000000 00:00 0 
+b0acc000-b0b0b000 r-xp 00000000 b3:0a 11835      /usr/lib/libbluetooth-api.so.1.0.0
+b0b0b000-b0b13000 ---p 0003f000 b3:0a 11835      /usr/lib/libbluetooth-api.so.1.0.0
+b0b13000-b0b14000 rw-p 0003f000 b3:0a 11835      /usr/lib/libbluetooth-api.so.1.0.0
+b0b14000-b0b81000 r-xp 00000000 b3:0a 13328      /usr/lib/libwlm_8887.so
+b0b81000-b0b88000 ---p 0006d000 b3:0a 13328      /usr/lib/libwlm_8887.so
+b0b88000-b0b8a000 rw-p 0006c000 b3:0a 13328      /usr/lib/libwlm_8887.so
+b0b8a000-b0b8b000 rw-p 00000000 00:00 0 
+b0b8b000-b0b95000 r-xp 00000000 b3:0a 8394       /usr/lib/libdrm-trusted.so.0.0.57
+b0b95000-b0b9d000 ---p 0000a000 b3:0a 8394       /usr/lib/libdrm-trusted.so.0.0.57
+b0b9d000-b0b9e000 rw-p 0000a000 b3:0a 8394       /usr/lib/libdrm-trusted.so.0.0.57
+b0b9e000-b0ba9000 r-xp 00000000 b3:0a 10324      /usr/lib/libdrm-client.so.0.0.102
+b0ba9000-b0bb0000 ---p 0000b000 b3:0a 10324      /usr/lib/libdrm-client.so.0.0.102
+b0bb0000-b0bb1000 rw-p 0000a000 b3:0a 10324      /usr/lib/libdrm-client.so.0.0.102
+b0bb1000-b0bc1000 r-xp 00000000 b3:0a 8386       /usr/lib/libsys-mmap-manager.so
+b0bc1000-b0bc8000 ---p 00010000 b3:0a 8386       /usr/lib/libsys-mmap-manager.so
+b0bc8000-b0bc9000 rw-p 0000f000 b3:0a 8386       /usr/lib/libsys-mmap-manager.so
+b0bc9000-b0bca000 rw-p 00000000 00:00 0 
+b0bca000-b0bcc000 r-xp 00000000 b3:0a 11423      /usr/lib/libdi-alg-ipplatform.so
+b0bcc000-b0bd4000 ---p 00002000 b3:0a 11423      /usr/lib/libdi-alg-ipplatform.so
+b0bd4000-b0bd5000 rw-p 00002000 b3:0a 11423      /usr/lib/libdi-alg-ipplatform.so
+b0bd5000-b0c4a000 r-xp 00000000 b3:0a 9933       /usr/lib/libredeye.so
+b0c4a000-b0c51000 ---p 00075000 b3:0a 9933       /usr/lib/libredeye.so
+b0c51000-b0c53000 rw-p 00074000 b3:0a 9933       /usr/lib/libredeye.so
+b0c53000-b0cf1000 r-xp 00000000 b3:0a 8397       /usr/lib/libsif.so
+b0cf1000-b0cf9000 ---p 0009e000 b3:0a 8397       /usr/lib/libsif.so
+b0cf9000-b0cfc000 rw-p 0009e000 b3:0a 8397       /usr/lib/libsif.so
+b0cfc000-b0d00000 r-xp 00000000 b3:0a 8420       /usr/lib/libmmfosal.so
+b0d00000-b0d07000 ---p 00004000 b3:0a 8420       /usr/lib/libmmfosal.so
+b0d07000-b0d08000 rw-p 00003000 b3:0a 8420       /usr/lib/libmmfosal.so
+b0d08000-b0d4c000 r-xp 00000000 b3:0a 11988      /usr/lib/libmmfmodules.so
+b0d4c000-b0d54000 ---p 00044000 b3:0a 11988      /usr/lib/libmmfmodules.so
+b0d54000-b0d5d000 rw-p 00044000 b3:0a 11988      /usr/lib/libmmfmodules.so
+b0d5d000-b0d6b000 rw-p 00000000 00:00 0 
+b0d6b000-b0d93000 r-xp 00000000 b3:0a 3578       /usr/lib/libturbojpeg.so
+b0d93000-b0d9a000 ---p 00028000 b3:0a 3578       /usr/lib/libturbojpeg.so
+b0d9a000-b0d9b000 rw-p 00027000 b3:0a 3578       /usr/lib/libturbojpeg.so
+b0d9b000-b0dab000 rw-p 00000000 00:00 0 
+b0dab000-b0db3000 r-xp 00000000 b3:0a 10344      /usr/lib/libmedia-utils.so.0.0.0
+b0db3000-b0dba000 ---p 00008000 b3:0a 10344      /usr/lib/libmedia-utils.so.0.0.0
+b0dba000-b0dbb000 rw-p 00007000 b3:0a 10344      /usr/lib/libmedia-utils.so.0.0.0
+b0dbb000-b0dbf000 r-xp 00000000 b3:0a 13248      /usr/lib/libmedia-thumbnail.so.1.0.0
+b0dbf000-b0dc7000 ---p 00004000 b3:0a 13248      /usr/lib/libmedia-thumbnail.so.1.0.0
+b0dc7000-b0dc8000 rw-p 00004000 b3:0a 13248      /usr/lib/libmedia-thumbnail.so.1.0.0
+b0dc8000-b0de5000 r-xp 00000000 b3:0a 13255      /usr/lib/libmedia-service.so.1.0.0
+b0de5000-b0dec000 ---p 0001d000 b3:0a 13255      /usr/lib/libmedia-service.so.1.0.0
+b0dec000-b0ded000 rw-p 0001c000 b3:0a 13255      /usr/lib/libmedia-service.so.1.0.0
+b0ded000-b0dee000 rw-p 00000000 00:00 0 
+b0dee000-b0df4000 r-xp 00000000 b3:0a 12304      /usr/lib/libalarm.so.0.0.0
+b0df4000-b0dfb000 ---p 00006000 b3:0a 12304      /usr/lib/libalarm.so.0.0.0
+b0dfb000-b0dfc000 rw-p 00005000 b3:0a 12304      /usr/lib/libalarm.so.0.0.0
+b0dfc000-b0e0b000 r-xp 00000000 b3:0a 11884      /usr/lib/libnotification.so.0.1.0
+b0e0b000-b0e12000 ---p 0000f000 b3:0a 11884      /usr/lib/libnotification.so.0.1.0
+b0e12000-b0e13000 rw-p 0000e000 b3:0a 11884      /usr/lib/libnotification.so.0.1.0
+b0e13000-b0e19000 r-xp 00000000 b3:0a 11889      /usr/lib/libappsvc.so.0.1.0
+b0e19000-b0e20000 ---p 00006000 b3:0a 11889      /usr/lib/libappsvc.so.0.1.0
+b0e20000-b0e21000 rw-p 00005000 b3:0a 11889      /usr/lib/libappsvc.so.0.1.0
+b0e21000-b0e6e000 r-xp 00000000 b3:0a 108        /usr/lib/libudd5.so
+b0e6e000-b0e75000 ---p 0004d000 b3:0a 108        /usr/lib/libudd5.so
+b0e75000-b0e77000 rw-p 0004c000 b3:0a 108        /usr/lib/libudd5.so
+b0e77000-b0e7a000 rw-p 00000000 00:00 0 
+b0e7a000-b106b000 r-xp 00000000 b3:0a 10506      /usr/lib/libpalm.so
+b106b000-b1072000 ---p 001f1000 b3:0a 10506      /usr/lib/libpalm.so
+b1072000-b11bc000 rw-p 001f0000 b3:0a 10506      /usr/lib/libpalm.so
+b11bc000-b1288000 rw-p 00000000 00:00 0 
+b1288000-b1328000 r-xp 00000000 b3:0a 10355      /usr/lib/libface.so
+b1328000-b132f000 ---p 000a0000 b3:0a 10355      /usr/lib/libface.so
+b132f000-b28e9000 rw-p 0009f000 b3:0a 10355      /usr/lib/libface.so
+b28e9000-b2909000 rw-p 00000000 00:00 0 
+b2909000-b2923000 r-xp 00000000 b3:0a 12023      /usr/lib/libsap-client-stub-api.so.1.0.0
+b2923000-b292a000 ---p 0001a000 b3:0a 12023      /usr/lib/libsap-client-stub-api.so.1.0.0
+b292a000-b292c000 rw-p 00019000 b3:0a 12023      /usr/lib/libsap-client-stub-api.so.1.0.0
+b292c000-b2935000 rw-p 00000000 00:00 0 
+b2935000-b2984000 r-xp 00000000 b3:0a 12020      /usr/lib/libsap-api.so.1.0.0
+b2984000-b298b000 ---p 0004f000 b3:0a 12020      /usr/lib/libsap-api.so.1.0.0
+b298b000-b298d000 rw-p 0004e000 b3:0a 12020      /usr/lib/libsap-api.so.1.0.0
+b298d000-b299d000 rw-p 00000000 00:00 0 
+b299d000-b29c0000 r-xp 00000000 b3:0a 11892      /usr/lib/libcapi-network-bluetooth.so.0.1.61
+b29c0000-b29c7000 ---p 00023000 b3:0a 11892      /usr/lib/libcapi-network-bluetooth.so.0.1.61
+b29c7000-b29c8000 rw-p 00022000 b3:0a 11892      /usr/lib/libcapi-network-bluetooth.so.0.1.61
+b29c8000-b29c9000 rw-p 00000000 00:00 0 
+b29c9000-b2a48000 r-xp 00000000 b3:0a 9254       /usr/lib/libdi-network-dlna-rvf.so
+b2a48000-b2a4f000 ---p 0007f000 b3:0a 9254       /usr/lib/libdi-network-dlna-rvf.so
+b2a4f000-b2a51000 rw-p 0007e000 b3:0a 9254       /usr/lib/libdi-network-dlna-rvf.so
+b2a51000-b2a59000 rw-p 00000000 00:00 0 
+b2a59000-b2a78000 r-xp 00000000 b3:0a 8019       /usr/lib/libdi-network-dlna-autobackup.so
+b2a78000-b2a7f000 ---p 0001f000 b3:0a 8019       /usr/lib/libdi-network-dlna-autobackup.so
+b2a7f000-b2a81000 rw-p 0001e000 b3:0a 8019       /usr/lib/libdi-network-dlna-autobackup.so
+b2a81000-b2a82000 rw-p 00000000 00:00 0 
+b2a82000-b2b81000 r-xp 00000000 b3:0a 8046       /usr/lib/libdi-network-dlna-dmsui.so
+b2b81000-b2b89000 ---p 000ff000 b3:0a 8046       /usr/lib/libdi-network-dlna-dmsui.so
+b2b89000-b2b8d000 rw-p 000ff000 b3:0a 8046       /usr/lib/libdi-network-dlna-dmsui.so
+b2b8d000-b2bd2000 r-xp 00000000 b3:0a 9323       /usr/lib/libdi-network-dlna-extlib.so
+b2bd2000-b2bd9000 ---p 00045000 b3:0a 9323       /usr/lib/libdi-network-dlna-extlib.so
+b2bd9000-b2bdd000 rw-p 00044000 b3:0a 9323       /usr/lib/libdi-network-dlna-extlib.so
+b2bdd000-b2d40000 r-xp 00000000 b3:0a 8044       /usr/lib/libdi-network-dlna-stack.so
+b2d40000-b2d48000 ---p 00163000 b3:0a 8044       /usr/lib/libdi-network-dlna-stack.so
+b2d48000-b2d4d000 rw-p 00163000 b3:0a 8044       /usr/lib/libdi-network-dlna-stack.so
+b2d4d000-b2d5e000 rw-p 00000000 00:00 0 
+b2d5e000-b2d66000 r-xp 00000000 b3:0a 11191      /usr/lib/libmdm-common.so.1.0.45
+b2d66000-b2d6d000 ---p 00008000 b3:0a 11191      /usr/lib/libmdm-common.so.1.0.45
+b2d6d000-b2d6e000 rw-p 00007000 b3:0a 11191      /usr/lib/libmdm-common.so.1.0.45
+b2d6e000-b2d7e000 r-xp 00000000 b3:0a 3256       /lib/libresolv-2.13.so
+b2d7e000-b2d7f000 r--p 00010000 b3:0a 3256       /lib/libresolv-2.13.so
+b2d7f000-b2d80000 rw-p 00011000 b3:0a 3256       /lib/libresolv-2.13.so
+b2d80000-b2d82000 rw-p 00000000 00:00 0 
+b2d82000-b2d84000 r-xp 00000000 b3:0a 10196      /usr/lib/libgmodule-2.0.so.0.3200.3
+b2d84000-b2d8b000 ---p 00002000 b3:0a 10196      /usr/lib/libgmodule-2.0.so.0.3200.3
+b2d8b000-b2d8c000 rw-p 00001000 b3:0a 10196      /usr/lib/libgmodule-2.0.so.0.3200.3
+b2d8c000-b2d91000 r-xp 00000000 b3:0a 10184      /usr/lib/libffi.so.5.0.10
+b2d91000-b2d98000 ---p 00005000 b3:0a 10184      /usr/lib/libffi.so.5.0.10
+b2d98000-b2d99000 rw-p 00004000 b3:0a 10184      /usr/lib/libffi.so.5.0.10
+b2d99000-b2d9a000 rw-p 00000000 00:00 0 
+b2d9a000-b2daf000 r-xp 00000000 b3:0a 9716       /usr/lib/libsecurity-server-client.so.1.0.1
+b2daf000-b2db7000 ---p 00015000 b3:0a 9716       /usr/lib/libsecurity-server-client.so.1.0.1
+b2db7000-b2db8000 rw-p 00015000 b3:0a 9716       /usr/lib/libsecurity-server-client.so.1.0.1
+b2db8000-b2e00000 r-xp 00000000 b3:0a 11336      /usr/lib/pulseaudio/libpulsecommon-4.0.so
+b2e00000-b2e01000 rw-p 00048000 b3:0a 11336      /usr/lib/pulseaudio/libpulsecommon-4.0.so
+b2e01000-b2e06000 r-xp 00000000 b3:0a 8381       /usr/lib/libjson.so.0.0.1
+b2e06000-b2e0d000 ---p 00005000 b3:0a 8381       /usr/lib/libjson.so.0.0.1
+b2e0d000-b2e0e000 rw-p 00004000 b3:0a 8381       /usr/lib/libjson.so.0.0.1
+b2e0e000-b2e11000 r-xp 00000000 b3:0a 11828      /usr/lib/libsyspopup_caller.so.0.1.0
+b2e11000-b2e18000 ---p 00003000 b3:0a 11828      /usr/lib/libsyspopup_caller.so.0.1.0
+b2e18000-b2e19000 rw-p 00002000 b3:0a 11828      /usr/lib/libsyspopup_caller.so.0.1.0
+b2e19000-b2e5e000 r-xp 00000000 b3:0a 10090      /usr/lib/libsndfile.so.1.0.25
+b2e5e000-b2e66000 ---p 00045000 b3:0a 10090      /usr/lib/libsndfile.so.1.0.25
+b2e66000-b2e68000 rw-p 00045000 b3:0a 10090      /usr/lib/libsndfile.so.1.0.25
+b2e68000-b2e6d000 rw-p 00000000 00:00 0 
+b2e6d000-b2e72000 r-xp 00000000 b3:0a 11857      /usr/lib/libmmfsoundcommon.so.0.0.0
+b2e72000-b2e79000 ---p 00005000 b3:0a 11857      /usr/lib/libmmfsoundcommon.so.0.0.0
+b2e79000-b2e7a000 rw-p 00004000 b3:0a 11857      /usr/lib/libmmfsoundcommon.so.0.0.0
+b2e7a000-b2e7d000 r-xp 00000000 b3:0a 9134       /usr/lib/libXv.so.1.0.0
+b2e7d000-b2e84000 ---p 00003000 b3:0a 9134       /usr/lib/libXv.so.1.0.0
+b2e84000-b2e85000 rw-p 00002000 b3:0a 9134       /usr/lib/libXv.so.1.0.0
+b2e85000-b2e87000 r-xp 00000000 b3:0a 10095      /usr/lib/libctxdata.so.0.0.0
+b2e87000-b2e8e000 ---p 00002000 b3:0a 10095      /usr/lib/libctxdata.so.0.0.0
+b2e8e000-b2e8f000 rw-p 00001000 b3:0a 10095      /usr/lib/libctxdata.so.0.0.0
+b2e8f000-b2e9c000 r-xp 00000000 b3:0a 10097      /usr/lib/libremix.so.0.0.0
+b2e9c000-b2ea3000 ---p 0000d000 b3:0a 10097      /usr/lib/libremix.so.0.0.0
+b2ea3000-b2ea4000 rw-p 0000c000 b3:0a 10097      /usr/lib/libremix.so.0.0.0
+b2ea4000-b2ea5000 rw-p 00000000 00:00 0 
+b2ea5000-b2ea7000 r-xp 00000000 b3:0a 11464      /usr/lib/libecore_imf_evas.so.1.7.99
+b2ea7000-b2eae000 ---p 00002000 b3:0a 11464      /usr/lib/libecore_imf_evas.so.1.7.99
+b2eae000-b2eaf000 rw-p 00001000 b3:0a 11464      /usr/lib/libecore_imf_evas.so.1.7.99
+b2eaf000-b2ec6000 r-xp 00000000 b3:0a 8732       /usr/lib/liblua-5.1.so
+b2ec6000-b2ece000 ---p 00017000 b3:0a 8732       /usr/lib/liblua-5.1.so
+b2ece000-b2ecf000 rw-p 00017000 b3:0a 8732       /usr/lib/liblua-5.1.so
+b2ecf000-b2ed6000 r-xp 00000000 b3:0a 10036      /usr/lib/libembryo.so.1.7.99
+b2ed6000-b2edd000 ---p 00007000 b3:0a 10036      /usr/lib/libembryo.so.1.7.99
+b2edd000-b2ede000 rw-p 00006000 b3:0a 10036      /usr/lib/libembryo.so.1.7.99
+b2ede000-b2f34000 r-xp 00000000 b3:0a 8082       /usr/lib/libpixman-1.so.0.28.2
+b2f34000-b2f3c000 ---p 00056000 b3:0a 8082       /usr/lib/libpixman-1.so.0.28.2
+b2f3c000-b2f41000 rw-p 00056000 b3:0a 8082       /usr/lib/libpixman-1.so.0.28.2
+b2f41000-b2f64000 r-xp 00000000 b3:0a 8726       /usr/lib/libfontconfig.so.1.5.0
+b2f64000-b2f6b000 ---p 00023000 b3:0a 8726       /usr/lib/libfontconfig.so.1.5.0
+b2f6b000-b2f6c000 rw-p 00022000 b3:0a 8726       /usr/lib/libfontconfig.so.1.5.0
+b2f6c000-b2f6e000 rw-p 00000000 00:00 0 
+b2f6e000-b2fb4000 r-xp 00000000 b3:0a 10364      /usr/lib/libharfbuzz.so.0.907.0
+b2fb4000-b2fbc000 ---p 00046000 b3:0a 10364      /usr/lib/libharfbuzz.so.0.907.0
+b2fbc000-b2fbd000 rw-p 00046000 b3:0a 10364      /usr/lib/libharfbuzz.so.0.907.0
+b2fbd000-b2fd0000 r-xp 00000000 b3:0a 11434      /usr/lib/libfribidi.so.0.3.1
+b2fd0000-b2fd7000 ---p 00013000 b3:0a 11434      /usr/lib/libfribidi.so.0.3.1
+b2fd7000-b2fd8000 rw-p 00012000 b3:0a 11434      /usr/lib/libfribidi.so.0.3.1
+b2fd8000-b302b000 r-xp 00000000 b3:0a 1813       /usr/lib/libfreetype.so.6.8.1
+b302b000-b3032000 ---p 00053000 b3:0a 1813       /usr/lib/libfreetype.so.6.8.1
+b3032000-b3036000 rw-p 00052000 b3:0a 1813       /usr/lib/libfreetype.so.6.8.1
+b3036000-b303a000 r-xp 00000000 b3:0a 11466      /usr/lib/libecore_input_evas.so.1.7.99
+b303a000-b3041000 ---p 00004000 b3:0a 11466      /usr/lib/libecore_input_evas.so.1.7.99
+b3041000-b3042000 rw-p 00003000 b3:0a 11466      /usr/lib/libecore_input_evas.so.1.7.99
+b3042000-b304a000 r-xp 00000000 b3:0a 10322      /usr/lib/libecore_ipc.so.1.7.99
+b304a000-b304b000 rw-p 00008000 b3:0a 10322      /usr/lib/libecore_ipc.so.1.7.99
+b304b000-b304c000 rw-p 00000000 00:00 0 
+b304c000-b3053000 r-xp 00000000 b3:0a 10512      /usr/lib/libecore_fb.so.1.7.99
+b3053000-b305a000 ---p 00007000 b3:0a 10512      /usr/lib/libecore_fb.so.1.7.99
+b305a000-b305c000 rw-p 00006000 b3:0a 10512      /usr/lib/libecore_fb.so.1.7.99
+b305c000-b3066000 r-xp 00000000 b3:0a 9031       /usr/lib/libXext.so.6.4.0
+b3066000-b306d000 ---p 0000a000 b3:0a 9031       /usr/lib/libXext.so.6.4.0
+b306d000-b306e000 rw-p 00009000 b3:0a 9031       /usr/lib/libXext.so.6.4.0
+b306e000-b3074000 r-xp 00000000 b3:0a 9040       /usr/lib/libXrender.so.1.3.0
+b3074000-b307b000 ---p 00006000 b3:0a 9040       /usr/lib/libXrender.so.1.3.0
+b307b000-b307c000 rw-p 00005000 b3:0a 9040       /usr/lib/libXrender.so.1.3.0
+b307c000-b307d000 r-xp 00000000 b3:0a 9170       /usr/lib/libXinerama.so.1.0.0
+b307d000-b3085000 ---p 00001000 b3:0a 9170       /usr/lib/libXinerama.so.1.0.0
+b3085000-b3086000 rw-p 00001000 b3:0a 9170       /usr/lib/libXinerama.so.1.0.0
+b3086000-b308e000 r-xp 00000000 b3:0a 9129       /usr/lib/libXi.so.6.1.0
+b308e000-b308f000 rw-p 00008000 b3:0a 9129       /usr/lib/libXi.so.6.1.0
+b308f000-b3090000 rw-p 00000000 00:00 0 
+b3090000-b3093000 r-xp 00000000 b3:0a 9091       /usr/lib/libXfixes.so.3.1.0
+b3093000-b309a000 ---p 00003000 b3:0a 9091       /usr/lib/libXfixes.so.3.1.0
+b309a000-b309b000 rw-p 00002000 b3:0a 9091       /usr/lib/libXfixes.so.3.1.0
+b309b000-b309d000 r-xp 00000000 b3:0a 9770       /usr/lib/libXgesture.so.7.0.0
+b309d000-b30a4000 ---p 00002000 b3:0a 9770       /usr/lib/libXgesture.so.7.0.0
+b30a4000-b30a5000 rw-p 00001000 b3:0a 9770       /usr/lib/libXgesture.so.7.0.0
+b30a5000-b30a6000 r-xp 00000000 b3:0a 9124       /usr/lib/libXdamage.so.1.1.0
+b30a6000-b30ae000 ---p 00001000 b3:0a 9124       /usr/lib/libXdamage.so.1.1.0
+b30ae000-b30af000 rw-p 00001000 b3:0a 9124       /usr/lib/libXdamage.so.1.1.0
+b30af000-b30b2000 r-xp 00000000 b3:0a 8182       /usr/lib/libsmack.so.1.0.0
+b30b2000-b30b9000 ---p 00003000 b3:0a 8182       /usr/lib/libsmack.so.1.0.0
+b30b9000-b30ba000 rw-p 00002000 b3:0a 8182       /usr/lib/libsmack.so.1.0.0
+b30ba000-b30bb000 rw-p 00000000 00:00 0 
+b30bb000-b30ce000 r-xp 00000000 b3:0a 10529      /usr/lib/libsf_common.so
+b30ce000-b30d6000 ---p 00013000 b3:0a 10529      /usr/lib/libsf_common.so
+b30d6000-b30d7000 rw-p 00013000 b3:0a 10529      /usr/lib/libsf_common.so
+b30d7000-b3114000 r-xp 00000000 b3:0a 10167      /usr/lib/libcurl.so.4.3.0
+b3114000-b311b000 ---p 0003d000 b3:0a 10167      /usr/lib/libcurl.so.4.3.0
+b311b000-b311d000 rw-p 0003c000 b3:0a 10167      /usr/lib/libcurl.so.4.3.0
+b311d000-b3126000 r-xp 00000000 b3:0a 11507      /usr/lib/libethumb.so.1.7.99
+b3126000-b312e000 ---p 00009000 b3:0a 11507      /usr/lib/libethumb.so.1.7.99
+b312e000-b312f000 rw-p 00009000 b3:0a 11507      /usr/lib/libethumb.so.1.7.99
+b312f000-b3152000 r-xp 00000000 b3:0a 3576       /usr/lib/libjpeg.so.8.0.2
+b3152000-b3159000 ---p 00023000 b3:0a 3576       /usr/lib/libjpeg.so.8.0.2
+b3159000-b315a000 rw-p 00022000 b3:0a 3576       /usr/lib/libjpeg.so.8.0.2
+b315a000-b316a000 rw-p 00000000 00:00 0 
+b316a000-b3180000 r-xp 00000000 b3:0a 8173       /lib/libz.so.1.2.5
+b3180000-b3187000 ---p 00016000 b3:0a 8173       /lib/libz.so.1.2.5
+b3187000-b3188000 rw-p 00015000 b3:0a 8173       /lib/libz.so.1.2.5
+b3188000-b3189000 rw-p 00000000 00:00 0 
+b3189000-b318c000 r-xp 00000000 b3:0a 11786      /usr/lib/libproc-stat.so.0.2.85
+b318c000-b3193000 ---p 00003000 b3:0a 11786      /usr/lib/libproc-stat.so.0.2.85
+b3193000-b3194000 rw-p 00002000 b3:0a 11786      /usr/lib/libproc-stat.so.0.2.85
+b3194000-b3196000 r-xp 00000000 b3:0a 9182       /usr/lib/libXcomposite.so.1.0.0
+b3196000-b319d000 ---p 00002000 b3:0a 9182       /usr/lib/libXcomposite.so.1.0.0
+b319d000-b319e000 rw-p 00001000 b3:0a 9182       /usr/lib/libXcomposite.so.1.0.0
+b319e000-b31a0000 r-xp 00000000 b3:0a 3236       /lib/libdl-2.13.so
+b31a0000-b31a7000 ---p 00002000 b3:0a 3236       /lib/libdl-2.13.so
+b31a7000-b31a8000 r--p 00001000 b3:0a 3236       /lib/libdl-2.13.so
+b31a8000-b31a9000 rw-p 00002000 b3:0a 3236       /lib/libdl-2.13.so
+b31a9000-b31b3000 r-xp 00000000 b3:0a 10119      /lib/libunwind.so.8.0.1
+b31b3000-b31bb000 ---p 0000a000 b3:0a 10119      /lib/libunwind.so.8.0.1
+b31bb000-b31bc000 rw-p 0000a000 b3:0a 10119      /lib/libunwind.so.8.0.1
+b31bc000-b31e1000 rw-p 00000000 00:00 0 
+b31e1000-b32fc000 r-xp 00000000 b3:0a 3230       /lib/libc-2.13.so
+b32fc000-b3304000 ---p 0011b000 b3:0a 3230       /lib/libc-2.13.so
+b3304000-b3306000 r--p 0011b000 b3:0a 3230       /lib/libc-2.13.so
+b3306000-b3307000 rw-p 0011d000 b3:0a 3230       /lib/libc-2.13.so
+b3307000-b330b000 rw-p 00000000 00:00 0 
+b330b000-b3313000 r-xp 00000000 b3:0a 3202       /lib/libgcc_s-4.6.so.1
+b3313000-b331a000 ---p 00008000 b3:0a 3202       /lib/libgcc_s-4.6.so.1
+b331a000-b331b000 rw-p 00007000 b3:0a 3202       /lib/libgcc_s-4.6.so.1
+b331b000-b3384000 r-xp 00000000 b3:0a 3238       /lib/libm-2.13.so
+b3384000-b338b000 ---p 00069000 b3:0a 3238       /lib/libm-2.13.so
+b338b000-b338c000 r--p 00068000 b3:0a 3238       /lib/libm-2.13.so
+b338c000-b338d000 rw-p 00069000 b3:0a 3238       /lib/libm-2.13.so
+b338d000-b3421000 r-xp 00000000 b3:0a 3560       /usr/lib/libstdc++.so.6.0.16
+b3421000-b3429000 ---p 00094000 b3:0a 3560       /usr/lib/libstdc++.so.6.0.16
+b3429000-b342c000 r--p 00094000 b3:0a 3560       /usr/lib/libstdc++.so.6.0.16
+b342c000-b342e000 rw-p 00097000 b3:0a 3560       /usr/lib/libstdc++.so.6.0.16
+b342e000-b3434000 rw-p 00000000 00:00 0 
+b3434000-b3448000 r-xp 00000000 b3:0a 3254       /lib/libpthread-2.13.so
+b3448000-b344f000 ---p 00014000 b3:0a 3254       /lib/libpthread-2.13.so
+b344f000-b3450000 r--p 00013000 b3:0a 3254       /lib/libpthread-2.13.so
+b3450000-b3451000 rw-p 00014000 b3:0a 3254       /lib/libpthread-2.13.so
+b3451000-b3453000 rw-p 00000000 00:00 0 
+b3453000-b3455000 r-xp 00000000 b3:0a 63         /usr/lib/libdlog.so.0.0.0
+b3455000-b345c000 ---p 00002000 b3:0a 63         /usr/lib/libdlog.so.0.0.0
+b345c000-b345d000 rw-p 00001000 b3:0a 63         /usr/lib/libdlog.so.0.0.0
+b345d000-b3465000 r-xp 00000000 b3:0a 10395      /usr/lib/libdcm.so
+b3465000-b346c000 ---p 00008000 b3:0a 10395      /usr/lib/libdcm.so
+b346c000-b346d000 rw-p 00007000 b3:0a 10395      /usr/lib/libdcm.so
+b346d000-b346e000 rw-p 00000000 00:00 0 
+b346e000-b35b1000 r-xp 00000000 b3:0a 8164       /usr/lib/libcrypto.so.1.0.0
+b35b1000-b35b9000 ---p 00143000 b3:0a 8164       /usr/lib/libcrypto.so.1.0.0
+b35b9000-b35cc000 rw-p 00143000 b3:0a 8164       /usr/lib/libcrypto.so.1.0.0
+b35cc000-b35cf000 rw-p 00000000 00:00 0 
+b35cf000-b361a000 r-xp 00000000 b3:0a 8165       /usr/lib/libssl.so.1.0.0
+b361a000-b3621000 ---p 0004b000 b3:0a 8165       /usr/lib/libssl.so.1.0.0
+b3621000-b3626000 rw-p 0004a000 b3:0a 8165       /usr/lib/libssl.so.1.0.0
+b3626000-b362c000 r-xp 00000000 b3:0a 3258       /lib/librt-2.13.so
+b362c000-b3633000 ---p 00006000 b3:0a 3258       /lib/librt-2.13.so
+b3633000-b3634000 r--p 00005000 b3:0a 3258       /lib/librt-2.13.so
+b3634000-b3635000 rw-p 00006000 b3:0a 3258       /lib/librt-2.13.so
+b3636000-b3637000 rw-s 06002000 00:05 16         /dev/mem
+b3637000-b3638000 rw-p 00000000 00:00 0 
+b3638000-b3639000 rw-s 00000000 00:0d 4998       /dev/shm/sem.hKQMed (deleted)
+b3639000-b363a000 rw-s 00000000 00:0d 4988       /dev/shm/sem.uwcWe6 (deleted)
+b363a000-b363b000 rw-s 00000000 00:0d 4987       /dev/shm/sem.6bkXqD (deleted)
+b363b000-b363c000 r-xp 00000000 b3:0a 8419       /usr/lib/libbincfg.so.1.1
+b363c000-b3643000 ---p 00001000 b3:0a 8419       /usr/lib/libbincfg.so.1.1
+b3643000-b3644000 rw-p 00000000 b3:0a 8419       /usr/lib/libbincfg.so.1.1
+b3644000-b3646000 r-xp 00000000 b3:0a 83         /usr/lib/liblogutil.so
+b3646000-b364d000 ---p 00002000 b3:0a 83         /usr/lib/liblogutil.so
+b364d000-b364e000 rw-p 00001000 b3:0a 83         /usr/lib/liblogutil.so
+b364e000-b3657000 r-xp 00000000 b3:0a 8404       /usr/lib/libasl.so
+b3657000-b365e000 ---p 00009000 b3:0a 8404       /usr/lib/libasl.so
+b365e000-b365f000 rw-p 00008000 b3:0a 8404       /usr/lib/libasl.so
+b365f000-b3770000 r-xp 00000000 b3:0a 14961      /usr/lib/libwifi-sns.so
+b3770000-b3777000 ---p 00111000 b3:0a 14961      /usr/lib/libwifi-sns.so
+b3777000-b377a000 rw-p 00110000 b3:0a 14961      /usr/lib/libwifi-sns.so
+b377a000-b3792000 rw-p 00000000 00:00 0 
+b3792000-b3794000 r-xp 00000000 b3:0a 10015      /usr/lib/liboic-tables.so
+b3794000-b379b000 ---p 00002000 b3:0a 10015      /usr/lib/liboic-tables.so
+b379b000-b379c000 rw-p 00001000 b3:0a 10015      /usr/lib/liboic-tables.so
+b379c000-b37ab000 r-xp 00000000 b3:0a 10491      /usr/lib/libcapi-network-wifi.so.0.1.48
+b37ab000-b37b2000 ---p 0000f000 b3:0a 10491      /usr/lib/libcapi-network-wifi.so.0.1.48
+b37b2000-b37b3000 rw-p 0000e000 b3:0a 10491      /usr/lib/libcapi-network-wifi.so.0.1.48
+b37b3000-b37bb000 r-xp 00000000 b3:0a 12098      /usr/lib/libcapi-network-nfc.so.0.1.14
+b37bb000-b37c2000 ---p 00008000 b3:0a 12098      /usr/lib/libcapi-network-nfc.so.0.1.14
+b37c2000-b37c3000 rw-p 00007000 b3:0a 12098      /usr/lib/libcapi-network-nfc.so.0.1.14
+b37c3000-b3830000 r-xp 00000000 b3:0a 16710      /usr/lib/libdi-alg-prosuggest.so
+b3830000-b3837000 ---p 0006d000 b3:0a 16710      /usr/lib/libdi-alg-prosuggest.so
+b3837000-b383b000 rw-p 0006c000 b3:0a 16710      /usr/lib/libdi-alg-prosuggest.so
+b383b000-b38b5000 rw-p 00000000 00:00 0 
+b38b5000-b3996000 r-xp 00000000 b3:0a 9028       /usr/lib/libX11.so.6.3.0
+b3996000-b399d000 ---p 000e1000 b3:0a 9028       /usr/lib/libX11.so.6.3.0
+b399d000-b39a1000 rw-p 000e0000 b3:0a 9028       /usr/lib/libX11.so.6.3.0
+b39a1000-b39a2000 rw-p 00000000 00:00 0 
+b39a2000-b404c000 r-xp 00000000 b3:0a 13329      /usr/lib/libfactory-mode.so
+b404c000-b4054000 ---p 006aa000 b3:0a 13329      /usr/lib/libfactory-mode.so
+b4054000-b4056000 rw-p 006aa000 b3:0a 13329      /usr/lib/libfactory-mode.so
+b4056000-b4073000 rw-p 00000000 00:00 0 
+b4073000-b407d000 r-xp 00000000 b3:0a 8374       /usr/lib/libmulticore-bridge.so
+b407d000-b4085000 ---p 0000a000 b3:0a 8374       /usr/lib/libmulticore-bridge.so
+b4085000-b4086000 rw-p 0000a000 b3:0a 8374       /usr/lib/libmulticore-bridge.so
+b4086000-b408d000 r-xp 00000000 b3:0a 8389       /usr/lib/libmm-displayer.so
+b408d000-b4094000 ---p 00007000 b3:0a 8389       /usr/lib/libmm-displayer.so
+b4094000-b4095000 rw-p 00006000 b3:0a 8389       /usr/lib/libmm-displayer.so
+b4095000-b4097000 r-xp 00000000 b3:0a 10412      /usr/lib/libmmutil_movie.so.0.0.0
+b4097000-b409e000 ---p 00002000 b3:0a 10412      /usr/lib/libmmutil_movie.so.0.0.0
+b409e000-b409f000 rw-p 00001000 b3:0a 10412      /usr/lib/libmmutil_movie.so.0.0.0
+b409f000-b416f000 r-xp 00000000 b3:0a 10194      /usr/lib/libglib-2.0.so.0.3200.3
+b416f000-b4170000 rw-p 000d0000 b3:0a 10194      /usr/lib/libglib-2.0.so.0.3200.3
+b4170000-b4171000 rw-p 00000000 00:00 0 
+b4171000-b4178000 r-xp 00000000 b3:0a 3214       /usr/lib/libmmfcommon.so.0.0.0
+b4178000-b417f000 ---p 00007000 b3:0a 3214       /usr/lib/libmmfcommon.so.0.0.0
+b417f000-b4180000 rw-p 00006000 b3:0a 3214       /usr/lib/libmmfcommon.so.0.0.0
+b4180000-b4192000 r-xp 00000000 b3:0a 12012      /usr/lib/libmmfile_utils.so.0.0.0
+b4192000-b4199000 ---p 00012000 b3:0a 12012      /usr/lib/libmmfile_utils.so.0.0.0
+b4199000-b419a000 rw-p 00011000 b3:0a 12012      /usr/lib/libmmfile_utils.so.0.0.0
+b419a000-b419f000 r-xp 00000000 b3:0a 12003      /usr/lib/libmmffile.so.0.0.0
+b419f000-b41a7000 ---p 00005000 b3:0a 12003      /usr/lib/libmmffile.so.0.0.0
+b41a7000-b41a8000 rw-p 00005000 b3:0a 12003      /usr/lib/libmmffile.so.0.0.0
+b41a8000-b41c8000 r-xp 00000000 b3:0a 11759      /usr/lib/libmm-slideshow.so
+b41c8000-b41c9000 rw-p 00020000 b3:0a 11759      /usr/lib/libmm-slideshow.so
+b41c9000-b42bb000 r-xp 00000000 b3:0a 11514      /usr/lib/libmm-photo.so
+b42bb000-b42c3000 ---p 000f2000 b3:0a 11514      /usr/lib/libmm-photo.so
+b42c3000-b42c5000 rw-p 000f2000 b3:0a 11514      /usr/lib/libmm-photo.so
+b42c5000-b42c7000 rw-p 00000000 00:00 0 
+b42c7000-b42ca000 r-xp 00000000 b3:0a 8570       /usr/lib/libmm_ta.so.0.0.0
+b42ca000-b42d1000 ---p 00003000 b3:0a 8570       /usr/lib/libmm_ta.so.0.0.0
+b42d1000-b42d2000 rw-p 00002000 b3:0a 8570       /usr/lib/libmm_ta.so.0.0.0
+b42d2000-b42d3000 rw-p 00000000 00:00 0 
+b42d3000-b42f6000 r-xp 00000000 b3:0a 8567       /usr/lib/libexif.so.12.3.3
+b42f6000-b42fd000 ---p 00023000 b3:0a 8567       /usr/lib/libexif.so.12.3.3
+b42fd000-b430a000 rw-p 00022000 b3:0a 8567       /usr/lib/libexif.so.12.3.3
+b430a000-b435c000 r-xp 00000000 b3:0a 11997      /usr/lib/libmmfcore.so
+b435c000-b4363000 ---p 00052000 b3:0a 11997      /usr/lib/libmmfcore.so
+b4363000-b4365000 rw-p 00051000 b3:0a 11997      /usr/lib/libmmfcore.so
+b4365000-b4375000 r-xp 00000000 b3:0a 11998      /usr/lib/libmmf-camcorder.so
+b4375000-b4378000 rw-p 00010000 b3:0a 11998      /usr/lib/libmmf-camcorder.so
+b4378000-b438b000 r-xp 00000000 b3:0a 11999      /usr/lib/libmmf_player.so
+b438b000-b4393000 ---p 00013000 b3:0a 11999      /usr/lib/libmmf_player.so
+b4393000-b4394000 rw-p 00013000 b3:0a 11999      /usr/lib/libmmf_player.so
+b4394000-b4399000 r-xp 00000000 b3:0a 1607       /usr/lib/libmm-type.so
+b4399000-b43a0000 ---p 00005000 b3:0a 1607       /usr/lib/libmm-type.so
+b43a0000-b43a1000 rw-p 00004000 b3:0a 1607       /usr/lib/libmm-type.so
+b43a1000-b43de000 r-xp 00000000 b3:0a 3550       /usr/lib/libtint-util.so
+b43de000-b43e6000 ---p 0003d000 b3:0a 3550       /usr/lib/libtint-util.so
+b43e6000-b43e7000 rw-p 0003d000 b3:0a 3550       /usr/lib/libtint-util.so
+b43e7000-b43e8000 rw-p 00000000 00:00 0 
+b43e8000-b43ec000 r-xp 00000000 b3:0a 8360       /usr/lib/libmicom-node.so.0.1
+b43ec000-b43f3000 ---p 00004000 b3:0a 8360       /usr/lib/libmicom-node.so.0.1
+b43f3000-b43f4000 rw-p 00003000 b3:0a 8360       /usr/lib/libmicom-node.so.0.1
+b43f4000-b43fe000 r-xp 00000000 b3:0a 11469      /usr/lib/libdeviced.so.0.1.0
+b43fe000-b4405000 ---p 0000a000 b3:0a 11469      /usr/lib/libdeviced.so.0.1.0
+b4405000-b4406000 rw-p 00009000 b3:0a 11469      /usr/lib/libdeviced.so.0.1.0
+b4406000-b440b000 r-xp 00000000 b3:0a 10246      /usr/lib/libdevice-node.so.0.1
+b440b000-b4412000 ---p 00005000 b3:0a 10246      /usr/lib/libdevice-node.so.0.1
+b4412000-b4413000 rw-p 00004000 b3:0a 10246      /usr/lib/libdevice-node.so.0.1
+b4413000-b4428000 r-xp 00000000 b3:0a 12118      /usr/lib/libshell-command.so
+b4428000-b4430000 ---p 00015000 b3:0a 12118      /usr/lib/libshell-command.so
+b4430000-b4433000 rw-p 00015000 b3:0a 12118      /usr/lib/libshell-command.so
+b4433000-b4449000 r-xp 00000000 b3:0a 10394      /usr/lib/libfilelist-manager.so
+b4449000-b4450000 ---p 00016000 b3:0a 10394      /usr/lib/libfilelist-manager.so
+b4450000-b4451000 rw-p 00015000 b3:0a 10394      /usr/lib/libfilelist-manager.so
+b4451000-b4452000 rw-p 00000000 00:00 0 
+b4452000-b447a000 r-xp 00000000 b3:0a 13261      /usr/lib/libcapi-content-media-content.so.0.2.108
+b447a000-b4481000 ---p 00028000 b3:0a 13261      /usr/lib/libcapi-content-media-content.so.0.2.108
+b4481000-b4482000 rw-p 00027000 b3:0a 13261      /usr/lib/libcapi-content-media-content.so.0.2.108
+b4482000-b448f000 r-xp 00000000 b3:0a 12306      /usr/lib/libcapi-appfw-application.so.0.1.6
+b448f000-b4496000 ---p 0000d000 b3:0a 12306      /usr/lib/libcapi-appfw-application.so.0.1.6
+b4496000-b4498000 rw-p 0000c000 b3:0a 12306      /usr/lib/libcapi-appfw-application.so.0.1.6
+b4498000-b44a0000 r-xp 00000000 b3:0a 1738       /usr/lib/libdiosal.so
+b44a0000-b44a1000 rw-p 00008000 b3:0a 1738       /usr/lib/libdiosal.so
+b44a1000-b44ab000 r-xp 00000000 b3:0a 13330      /usr/lib/libdi-sensor.so
+b44ab000-b44b2000 ---p 0000a000 b3:0a 13330      /usr/lib/libdi-sensor.so
+b44b2000-b44b3000 rw-p 00009000 b3:0a 13330      /usr/lib/libdi-sensor.so
+b44b3000-b44b4000 r-xp 00000000 b3:0a 10514      /usr/lib/libsystem-tools.so
+b44b4000-b44bb000 ---p 00001000 b3:0a 10514      /usr/lib/libsystem-tools.so
+b44bb000-b44bc000 rw-p 00000000 b3:0a 10514      /usr/lib/libsystem-tools.so
+b44bc000-b44bd000 rw-p 00000000 00:00 0 
+b44bd000-b44c7000 r-xp 00000000 b3:0a 8135       /usr/lib/libfirmware-upgrade.so
+b44c7000-b44cf000 ---p 0000a000 b3:0a 8135       /usr/lib/libfirmware-upgrade.so
+b44cf000-b44d0000 rw-p 0000a000 b3:0a 8135       /usr/lib/libfirmware-upgrade.so
+b44d0000-b44d3000 r-xp 00000000 b3:0a 9034       /usr/lib/libXtst.so.6.1.0
+b44d3000-b44da000 ---p 00003000 b3:0a 9034       /usr/lib/libXtst.so.6.1.0
+b44da000-b44db000 rw-p 00002000 b3:0a 9034       /usr/lib/libXtst.so.6.1.0
+b44db000-b44df000 r-xp 00000000 b3:0a 10069      /usr/lib/libhdmi-cec.so
+b44df000-b44e7000 ---p 00004000 b3:0a 10069      /usr/lib/libhdmi-cec.so
+b44e7000-b44e8000 rw-p 00004000 b3:0a 10069      /usr/lib/libhdmi-cec.so
+b44e8000-b44ed000 r-xp 00000000 b3:0a 9081       /usr/lib/libXrandr.so.2.2.0
+b44ed000-b44f4000 ---p 00005000 b3:0a 9081       /usr/lib/libXrandr.so.2.2.0
+b44f4000-b44f5000 rw-p 00004000 b3:0a 9081       /usr/lib/libXrandr.so.2.2.0
+b44f5000-b44f9000 r-xp 00000000 b3:0a 1611       /usr/lib/libversion-info.so
+b44f9000-b4501000 ---p 00004000 b3:0a 1611       /usr/lib/libversion-info.so
+b4501000-b4502000 rw-p 00004000 b3:0a 1611       /usr/lib/libversion-info.so
+b4502000-b4531000 r-xp 00000000 b3:0a 8417       /usr/lib/libuser-spec.so
+b4531000-b4539000 ---p 0002f000 b3:0a 8417       /usr/lib/libuser-spec.so
+b4539000-b453a000 rw-p 0002f000 b3:0a 8417       /usr/lib/libuser-spec.so
+b453a000-b453f000 rw-p 00000000 00:00 0 
+b453f000-b4b91000 r-xp 00000000 b3:0a 1648       /usr/lib/libprefman.so
+b4b91000-b4b99000 ---p 00652000 b3:0a 1648       /usr/lib/libprefman.so
+b4b99000-b4b9a000 rw-p 00652000 b3:0a 1648       /usr/lib/libprefman.so
+b4b9a000-b4b9e000 r-xp 00000000 b3:0a 10402      /usr/lib/libsysman.so.0.2.0
+b4b9e000-b4ba5000 ---p 00004000 b3:0a 10402      /usr/lib/libsysman.so.0.2.0
+b4ba5000-b4ba6000 rw-p 00003000 b3:0a 10402      /usr/lib/libsysman.so.0.2.0
+b4ba6000-b4c56000 r-xp 00000000 b3:0a 10508      /usr/lib/libcapture-fw-prod.so
+b4c56000-b4c59000 rw-p 000b0000 b3:0a 10508      /usr/lib/libcapture-fw-prod.so
+b4c59000-b4c5a000 rw-p 00000000 00:00 0 
+b4c5a000-b4ca1000 r-xp 00000000 b3:0a 12091      /usr/lib/libdi-network-bt-app.so
+b4ca1000-b4ca8000 ---p 00047000 b3:0a 12091      /usr/lib/libdi-network-bt-app.so
+b4ca8000-b4ca9000 rw-p 00046000 b3:0a 12091      /usr/lib/libdi-network-bt-app.so
+b4ca9000-b4cad000 rw-p 00000000 00:00 0 
+b4cad000-b4d27000 r-xp 00000000 b3:0a 9683       /usr/lib/libdi-network-dlna-api.so
+b4d27000-b4d2e000 ---p 0007a000 b3:0a 9683       /usr/lib/libdi-network-dlna-api.so
+b4d2e000-b4d30000 rw-p 00079000 b3:0a 9683       /usr/lib/libdi-network-dlna-api.so
+b4d30000-b4d33000 rw-p 00000000 00:00 0 
+b4d33000-b4d35000 r-xp 00000000 b3:0a 8327       /usr/lib/libiniparser.so.0
+b4d35000-b4d3d000 ---p 00002000 b3:0a 8327       /usr/lib/libiniparser.so.0
+b4d3d000-b4d3e000 rw-p 00002000 b3:0a 8327       /usr/lib/libiniparser.so.0
+b4d3e000-b4d3f000 rw-p 00000000 00:00 0 
+b4d3f000-b4d73000 r-xp 00000000 b3:0a 10198      /usr/lib/libgobject-2.0.so.0.3200.3
+b4d73000-b4d7a000 ---p 00034000 b3:0a 10198      /usr/lib/libgobject-2.0.so.0.3200.3
+b4d7a000-b4d7c000 rw-p 00033000 b3:0a 10198      /usr/lib/libgobject-2.0.so.0.3200.3
+b4d7c000-b4da6000 r-xp 00000000 b3:0a 9079       /usr/lib/libdbus-1.so.3.7.2
+b4da6000-b4dae000 ---p 0002a000 b3:0a 9079       /usr/lib/libdbus-1.so.3.7.2
+b4dae000-b4daf000 rw-p 0002a000 b3:0a 9079       /usr/lib/libdbus-1.so.3.7.2
+b4daf000-b4db2000 r-xp 00000000 b3:0a 10347      /usr/lib/libcsc-feature.so.0.0.0
+b4db2000-b4db9000 ---p 00003000 b3:0a 10347      /usr/lib/libcsc-feature.so.0.0.0
+b4db9000-b4dba000 rw-p 00002000 b3:0a 10347      /usr/lib/libcsc-feature.so.0.0.0
+b4dba000-b4dc8000 r-xp 00000000 b3:0a 11193      /usr/lib/libmdm.so.1.0.88
+b4dc8000-b4dd0000 ---p 0000e000 b3:0a 11193      /usr/lib/libmdm.so.1.0.88
+b4dd0000-b4dd1000 rw-p 0000e000 b3:0a 11193      /usr/lib/libmdm.so.1.0.88
+b4dd1000-b4dd6000 r-xp 00000000 b3:0a 8391       /usr/lib/libss-client.so.1.0.0
+b4dd6000-b4ddd000 ---p 00005000 b3:0a 8391       /usr/lib/libss-client.so.1.0.0
+b4ddd000-b4dde000 rw-p 00004000 b3:0a 8391       /usr/lib/libss-client.so.1.0.0
+b4dde000-b4ddf000 rw-p 00000000 00:00 0 
+b4ddf000-b4de6000 r-xp 00000000 b3:0a 10214      /usr/lib/libvconf.so.0.2.45
+b4de6000-b4dee000 ---p 00007000 b3:0a 10214      /usr/lib/libvconf.so.0.2.45
+b4dee000-b4def000 rw-p 00007000 b3:0a 10214      /usr/lib/libvconf.so.0.2.45
+b4def000-b4e06000 r-xp 00000000 b3:0a 10234      /usr/lib/libdbus-glib-1.so.2.2.2
+b4e06000-b4e0e000 ---p 00017000 b3:0a 10234      /usr/lib/libdbus-glib-1.so.2.2.2
+b4e0e000-b4e0f000 rw-p 00017000 b3:0a 10234      /usr/lib/libdbus-glib-1.so.2.2.2
+b4e0f000-b4e21000 r-xp 00000000 b3:0a 10367      /usr/lib/libcapi-network-tethering.so.0.1.0
+b4e21000-b4e29000 ---p 00012000 b3:0a 10367      /usr/lib/libcapi-network-tethering.so.0.1.0
+b4e29000-b4e2a000 rw-p 00012000 b3:0a 10367      /usr/lib/libcapi-network-tethering.so.0.1.0
+b4e2a000-b4e40000 r-xp 00000000 b3:0a 10358      /usr/lib/libwifi-direct.so.0.0
+b4e40000-b4e47000 ---p 00016000 b3:0a 10358      /usr/lib/libwifi-direct.so.0.0
+b4e47000-b4e48000 rw-p 00015000 b3:0a 10358      /usr/lib/libwifi-direct.so.0.0
+b4e48000-b4e49000 r-xp 00000000 b3:0a 10200      /usr/lib/libgthread-2.0.so.0.3200.3
+b4e49000-b4e50000 ---p 00001000 b3:0a 10200      /usr/lib/libgthread-2.0.so.0.3200.3
+b4e50000-b4e51000 rw-p 00000000 b3:0a 10200      /usr/lib/libgthread-2.0.so.0.3200.3
+b4e51000-b4e52000 rw-p 00000000 00:00 0 
+b4e52000-b4f26000 r-xp 00000000 b3:0a 10192      /usr/lib/libgio-2.0.so.0.3200.3
+b4f26000-b4f2e000 ---p 000d4000 b3:0a 10192      /usr/lib/libgio-2.0.so.0.3200.3
+b4f2e000-b4f31000 rw-p 000d4000 b3:0a 10192      /usr/lib/libgio-2.0.so.0.3200.3
+b4f31000-b4f32000 rw-p 00000000 00:00 0 
+b4f32000-b4f54000 r-xp 00000000 b3:0a 10340      /usr/lib/libnetwork.so.0.0.0
+b4f54000-b4f5b000 ---p 00022000 b3:0a 10340      /usr/lib/libnetwork.so.0.0.0
+b4f5b000-b4f5c000 rw-p 00021000 b3:0a 10340      /usr/lib/libnetwork.so.0.0.0
+b4f5c000-b4f63000 r-xp 00000000 b3:0a 8234       /usr/lib/libdrm.so.2.4.0
+b4f63000-b4f6b000 ---p 00007000 b3:0a 8234       /usr/lib/libdrm.so.2.4.0
+b4f6b000-b4f6c000 rw-p 00007000 b3:0a 8234       /usr/lib/libdrm.so.2.4.0
+b4f6c000-b4f6f000 r-xp 00000000 b3:0a 8243       /usr/lib/libtbm.so.1.0.0
+b4f6f000-b4f76000 ---p 00003000 b3:0a 8243       /usr/lib/libtbm.so.1.0.0
+b4f76000-b4f77000 rw-p 00002000 b3:0a 8243       /usr/lib/libtbm.so.1.0.0
+b4f77000-b4f7c000 r-xp 00000000 b3:0a 10386      /usr/lib/libhibernation.so
+b4f7c000-b4f83000 ---p 00005000 b3:0a 10386      /usr/lib/libhibernation.so
+b4f83000-b4f84000 rw-p 00004000 b3:0a 10386      /usr/lib/libhibernation.so
+b4f84000-b4f85000 rw-p 00000000 00:00 0 
+b4f85000-b4f8f000 r-xp 00000000 b3:0a 10283      /usr/lib/libaudio-session-mgr.so.0.0.0
+b4f8f000-b4f97000 ---p 0000a000 b3:0a 10283      /usr/lib/libaudio-session-mgr.so.0.0.0
+b4f97000-b4f98000 rw-p 0000a000 b3:0a 10283      /usr/lib/libaudio-session-mgr.so.0.0.0
+b4f98000-b4f9c000 rw-p 00000000 00:00 0 
+b4f9c000-b4fd3000 r-xp 00000000 b3:0a 11335      /usr/lib/libpulse.so.0.16.2
+b4fd3000-b4fda000 ---p 00037000 b3:0a 11335      /usr/lib/libpulse.so.0.16.2
+b4fda000-b4fdb000 rw-p 00036000 b3:0a 11335      /usr/lib/libpulse.so.0.16.2
+b4fdb000-b503b000 r-xp 00000000 b3:0a 8253       /usr/lib/libasound.so.2.0.0
+b503b000-b5042000 ---p 00060000 b3:0a 8253       /usr/lib/libasound.so.2.0.0
+b5042000-b5045000 rw-p 0005f000 b3:0a 8253       /usr/lib/libasound.so.2.0.0
+b5045000-b5048000 r-xp 00000000 b3:0a 11333      /usr/lib/libpulse-simple.so.0.0.4
+b5048000-b504f000 ---p 00003000 b3:0a 11333      /usr/lib/libpulse-simple.so.0.0.4
+b504f000-b5050000 rw-p 00002000 b3:0a 11333      /usr/lib/libpulse-simple.so.0.0.4
+b5050000-b5055000 r-xp 00000000 b3:0a 8047       /usr/lib/libascenario-0.2.so.0.0.0
+b5055000-b505c000 ---p 00005000 b3:0a 8047       /usr/lib/libascenario-0.2.so.0.0.0
+b505c000-b505d000 rw-p 00004000 b3:0a 8047       /usr/lib/libascenario-0.2.so.0.0.0
+b505d000-b5061000 r-xp 00000000 b3:0a 10287      /usr/lib/libmmfsession.so.0.0.0
+b5061000-b5069000 ---p 00004000 b3:0a 10287      /usr/lib/libmmfsession.so.0.0.0
+b5069000-b506a000 rw-p 00004000 b3:0a 10287      /usr/lib/libmmfsession.so.0.0.0
+b506a000-b5084000 r-xp 00000000 b3:0a 11426      /usr/lib/libavsysaudio.so.0.0.1
+b5084000-b508b000 ---p 0001a000 b3:0a 11426      /usr/lib/libavsysaudio.so.0.0.1
+b508b000-b508c000 rw-p 00019000 b3:0a 11426      /usr/lib/libavsysaudio.so.0.0.1
+b508c000-b508d000 rw-p 00000000 00:00 0 
+b508d000-b50a4000 r-xp 00000000 b3:0a 11855      /usr/lib/libmmfsound.so.0.1.0
+b50a4000-b50ab000 ---p 00017000 b3:0a 11855      /usr/lib/libmmfsound.so.0.1.0
+b50ab000-b50ac000 rw-p 00016000 b3:0a 11855      /usr/lib/libmmfsound.so.0.1.0
+b50ac000-b50b5000 r-xp 00000000 b3:0a 10272      /usr/lib/libutilX.so.1.1.0
+b50b5000-b50bc000 ---p 00009000 b3:0a 10272      /usr/lib/libutilX.so.1.1.0
+b50bc000-b50bd000 rw-p 00008000 b3:0a 10272      /usr/lib/libutilX.so.1.1.0
+b50bd000-b50c7000 r-xp 00000000 b3:0a 8416       /usr/lib/libapex.so
+b50c7000-b50ce000 ---p 0000a000 b3:0a 8416       /usr/lib/libapex.so
+b50ce000-b50cf000 rw-p 00009000 b3:0a 8416       /usr/lib/libapex.so
+b50cf000-b50e4000 r-xp 00000000 b3:0a 11502      /usr/lib/libgui.so
+b50e4000-b50eb000 ---p 00015000 b3:0a 11502      /usr/lib/libgui.so
+b50eb000-b50ec000 rw-p 00014000 b3:0a 11502      /usr/lib/libgui.so
+b50ec000-b50ef000 rw-p 00000000 00:00 0 
+b50ef000-b50f7000 r-xp 00000000 b3:0a 8052       /usr/lib/libdi-elementary.so
+b50f7000-b50fe000 ---p 00008000 b3:0a 8052       /usr/lib/libdi-elementary.so
+b50fe000-b50ff000 rw-p 00007000 b3:0a 8052       /usr/lib/libdi-elementary.so
+b50ff000-b513d000 r-xp 00000000 b3:0a 349        /usr/lib/libeina.so.1.7.99
+b513d000-b5144000 ---p 0003e000 b3:0a 349        /usr/lib/libeina.so.1.7.99
+b5144000-b5146000 rw-p 0003d000 b3:0a 349        /usr/lib/libeina.so.1.7.99
+b5146000-b51a1000 r-xp 00000000 b3:0a 11471      /usr/lib/libedje.so.1.7.99
+b51a1000-b51a8000 ---p 0005b000 b3:0a 11471      /usr/lib/libedje.so.1.7.99
+b51a8000-b51aa000 rw-p 0005a000 b3:0a 11471      /usr/lib/libedje.so.1.7.99
+b51aa000-b5255000 r-xp 00000000 b3:0a 11460      /usr/lib/libevas.so.1.7.99
+b5255000-b525c000 ---p 000ab000 b3:0a 11460      /usr/lib/libevas.so.1.7.99
+b525c000-b5267000 rw-p 000aa000 b3:0a 11460      /usr/lib/libevas.so.1.7.99
+b5267000-b5279000 rw-p 00000000 00:00 0 
+b5279000-b528a000 r-xp 00000000 b3:0a 10237      /usr/lib/libecore_input.so.1.7.99
+b528a000-b5291000 ---p 00011000 b3:0a 10237      /usr/lib/libecore_input.so.1.7.99
+b5291000-b5292000 rw-p 00010000 b3:0a 10237      /usr/lib/libecore_input.so.1.7.99
+b5292000-b52c7000 r-xp 00000000 b3:0a 11468      /usr/lib/libecore_evas.so.1.7.99
+b52c7000-b52ce000 ---p 00035000 b3:0a 11468      /usr/lib/libecore_evas.so.1.7.99
+b52ce000-b52d0000 rw-p 00034000 b3:0a 11468      /usr/lib/libecore_evas.so.1.7.99
+b52d0000-b531d000 r-xp 00000000 b3:0a 10239      /usr/lib/libecore_x.so.1.7.99
+b531d000-b5324000 ---p 0004d000 b3:0a 10239      /usr/lib/libecore_x.so.1.7.99
+b5324000-b5326000 rw-p 0004c000 b3:0a 10239      /usr/lib/libecore_x.so.1.7.99
+b5326000-b534e000 r-xp 00000000 b3:0a 10219      /usr/lib/libecore.so.1.7.99
+b534e000-b534f000 rw-p 00028000 b3:0a 10219      /usr/lib/libecore.so.1.7.99
+b534f000-b535d000 rw-p 00000000 00:00 0 
+b535d000-b69c8000 r--p 00000000 b3:0a 8200       /usr/lib/libicudata.so.52.1
+b69c8000-b69cf000 ---p 0166b000 b3:0a 8200       /usr/lib/libicudata.so.52.1
+b69cf000-b69d0000 rw-p 0166a000 b3:0a 8200       /usr/lib/libicudata.so.52.1
+b69d0000-b6ab9000 r-xp 00000000 b3:0a 8221       /usr/lib/libicuuc.so.52.1
+b6ab9000-b6ac0000 ---p 000e9000 b3:0a 8221       /usr/lib/libicuuc.so.52.1
+b6ac0000-b6ac9000 rw-p 000e8000 b3:0a 8221       /usr/lib/libicuuc.so.52.1
+b6ac9000-b6ace000 rw-p 00000000 00:00 0 
+b6ace000-b6c15000 r-xp 00000000 b3:0a 8203       /usr/lib/libicui18n.so.52.1
+b6c15000-b6c1d000 ---p 00147000 b3:0a 8203       /usr/lib/libicui18n.so.52.1
+b6c1d000-b6c25000 rw-p 00147000 b3:0a 8203       /usr/lib/libicui18n.so.52.1
+b6c25000-b6c8a000 r-xp 00000000 b3:0a 8148       /usr/lib/libsqlite3.so.0.8.6
+b6c8a000-b6c91000 ---p 00065000 b3:0a 8148       /usr/lib/libsqlite3.so.0.8.6
+b6c91000-b6c94000 rw-p 00064000 b3:0a 8148       /usr/lib/libsqlite3.so.0.8.6
+b6c94000-b6c97000 r-xp 00000000 b3:0a 10242      /usr/lib/libSLP-db-util.so.0.1.0
+b6c97000-b6c9e000 ---p 00003000 b3:0a 10242      /usr/lib/libSLP-db-util.so.0.1.0
+b6c9e000-b6c9f000 rw-p 00002000 b3:0a 10242      /usr/lib/libSLP-db-util.so.0.1.0
+b6c9f000-b6ca4000 r-xp 00000000 b3:0a 8034       /usr/lib/libxdgmime.so.1.1.0
+b6ca4000-b6cac000 ---p 00005000 b3:0a 8034       /usr/lib/libxdgmime.so.1.1.0
+b6cac000-b6cad000 rw-p 00005000 b3:0a 8034       /usr/lib/libxdgmime.so.1.1.0
+b6cad000-b6cba000 r-xp 00000000 b3:0a 10279      /usr/lib/libail.so.0.1.0
+b6cba000-b6cc1000 ---p 0000d000 b3:0a 10279      /usr/lib/libail.so.0.1.0
+b6cc1000-b6cc2000 rw-p 0000c000 b3:0a 10279      /usr/lib/libail.so.0.1.0
+b6cc2000-b6cc5000 r-xp 00000000 b3:0a 10232      /usr/lib/libbundle.so.0.1.22
+b6cc5000-b6ccc000 ---p 00003000 b3:0a 10232      /usr/lib/libbundle.so.0.1.22
+b6ccc000-b6ccd000 rw-p 00002000 b3:0a 10232      /usr/lib/libbundle.so.0.1.22
+b6ccd000-b6cd9000 r-xp 00000000 b3:0a 11800      /usr/lib/libaul.so.0.1.0
+b6cd9000-b6ce1000 ---p 0000c000 b3:0a 11800      /usr/lib/libaul.so.0.1.0
+b6ce1000-b6ce2000 rw-p 0000c000 b3:0a 11800      /usr/lib/libaul.so.0.1.0
+b6ce2000-b6cf6000 r-xp 00000000 b3:0a 10528      /usr/lib/libsensor.so.1.1.0
+b6cf6000-b6cfd000 ---p 00014000 b3:0a 10528      /usr/lib/libsensor.so.1.1.0
+b6cfd000-b6cff000 rw-p 00013000 b3:0a 10528      /usr/lib/libsensor.so.1.1.0
+b6cff000-b6d03000 r-xp 00000000 b3:0a 11826      /usr/lib/libappcore-common.so.1.1
+b6d03000-b6d0a000 ---p 00004000 b3:0a 11826      /usr/lib/libappcore-common.so.1.1
+b6d0a000-b6d0b000 rw-p 00003000 b3:0a 11826      /usr/lib/libappcore-common.so.1.1
+b6d0b000-b6d44000 r-xp 00000000 b3:0a 10253      /usr/lib/libecore_con.so.1.7.99
+b6d44000-b6d4b000 ---p 00039000 b3:0a 10253      /usr/lib/libecore_con.so.1.7.99
+b6d4b000-b6d4d000 rw-p 00038000 b3:0a 10253      /usr/lib/libecore_con.so.1.7.99
+b6d4d000-b6d55000 r-xp 00000000 b3:0a 10251      /usr/lib/libecore_imf.so.1.7.99
+b6d55000-b6d5c000 ---p 00008000 b3:0a 10251      /usr/lib/libecore_imf.so.1.7.99
+b6d5c000-b6d5d000 rw-p 00007000 b3:0a 10251      /usr/lib/libecore_imf.so.1.7.99
+b6d5d000-b6d65000 r-xp 00000000 b3:0a 11509      /usr/lib/libethumb_client.so.1.7.99
+b6d65000-b6d6c000 ---p 00008000 b3:0a 11509      /usr/lib/libethumb_client.so.1.7.99
+b6d6c000-b6d6d000 rw-p 00007000 b3:0a 11509      /usr/lib/libethumb_client.so.1.7.99
+b6d6d000-b6d76000 r-xp 00000000 b3:0a 11491      /usr/lib/libedbus.so.1.7.99
+b6d76000-b6d7d000 ---p 00009000 b3:0a 11491      /usr/lib/libedbus.so.1.7.99
+b6d7d000-b6d7e000 rw-p 00008000 b3:0a 11491      /usr/lib/libedbus.so.1.7.99
+b6d7e000-b6d80000 r-xp 00000000 b3:0a 10269      /usr/lib/libefreet_trash.so.1.7.99
+b6d80000-b6d87000 ---p 00002000 b3:0a 10269      /usr/lib/libefreet_trash.so.1.7.99
+b6d87000-b6d88000 rw-p 00001000 b3:0a 10269      /usr/lib/libefreet_trash.so.1.7.99
+b6d88000-b6d8c000 r-xp 00000000 b3:0a 10267      /usr/lib/libefreet_mime.so.1.7.99
+b6d8c000-b6d94000 ---p 00004000 b3:0a 10267      /usr/lib/libefreet_mime.so.1.7.99
+b6d94000-b6d95000 rw-p 00004000 b3:0a 10267      /usr/lib/libefreet_mime.so.1.7.99
+b6d95000-b6dab000 r-xp 00000000 b3:0a 10265      /usr/lib/libefreet.so.1.7.99
+b6dab000-b6db2000 ---p 00016000 b3:0a 10265      /usr/lib/libefreet.so.1.7.99
+b6db2000-b6db3000 rw-p 00015000 b3:0a 10265      /usr/lib/libefreet.so.1.7.99
+b6db3000-b6db4000 rw-p 00000000 00:00 0 
+b6db4000-b6dbc000 r-xp 00000000 b3:0a 10255      /usr/lib/libecore_file.so.1.7.99
+b6dbc000-b6dbd000 rw-p 00008000 b3:0a 10255      /usr/lib/libecore_file.so.1.7.99
+b6dbd000-b6dcf000 r-xp 00000000 b3:0a 8000       /usr/lib/libeet.so.1.7.99
+b6dcf000-b6dd6000 ---p 00012000 b3:0a 8000       /usr/lib/libeet.so.1.7.99
+b6dd6000-b6dd7000 rw-p 00011000 b3:0a 8000       /usr/lib/libeet.so.1.7.99
+b6dd7000-b6f00000 r-xp 00000000 b3:0a 11524      /usr/lib/libelementary.so.1.7.99
+b6f00000-b6f07000 ---p 00129000 b3:0a 11524      /usr/lib/libelementary.so.1.7.99
+b6f07000-b6f0f000 rw-p 00128000 b3:0a 11524      /usr/lib/libelementary.so.1.7.99
+b6f0f000-b6f15000 rw-p 00000000 00:00 0 
+b6f15000-b6f1a000 r-xp 00000000 b3:0a 11829      /usr/lib/libappcore-efl.so.1.1
+b6f1a000-b6f21000 ---p 00005000 b3:0a 11829      /usr/lib/libappcore-efl.so.1.1
+b6f21000-b6f22000 rw-p 00004000 b3:0a 11829      /usr/lib/libappcore-efl.so.1.1
+b6f22000-b6f26000 r-xp 00000000 b3:0a 10132      /usr/lib/libsys-assert.so
+b6f26000-b6f2d000 ---p 00004000 b3:0a 10132      /usr/lib/libsys-assert.so
+b6f2d000-b6f2e000 rw-p 00003000 b3:0a 10132      /usr/lib/libsys-assert.so
+b6f2e000-b6f4b000 r-xp 00000000 b3:0a 3223       /lib/ld-2.13.so
+b6f4b000-b6f52000 rw-p 00000000 00:00 0 
+b6f52000-b6f53000 r--p 0001c000 b3:0a 3223       /lib/ld-2.13.so
+b6f53000-b6f54000 rw-p 0001d000 b3:0a 3223       /lib/ld-2.13.so
+bea27000-bea48000 rwxp 00000000 00:00 0          [stack]
+ffff0000-ffff1000 r-xp 00000000 00:00 0          [vectors]

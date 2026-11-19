@@ -1,0 +1,18 @@
+R11i1 原包重新安装
+2026-11-17
+
+最新安装日志在INSTALL_PREFLIGHT因旧Gamma租约退出，未开始替换内部模块。用户确认此次安装前未取电池。SD原有2636个包文件与封包一致；本次仅补回install.sh、nx_cs.adj、info.tg，完整读回2639项。版本仍为R11i1，没有更改源码、运行负载或绕过租约保护。
+
+1. 安全弹出H盘并断开USB，确认停录；正常关机，等机身写卡灯熄灭，再取出电池约30秒，装回开机安装。安装前不要再开启旧版Log/LIFT。
+2. 安装结束、写卡灯灭后，再正常关机、取电池约30秒，再装回开机；菜单必须显示R11i1 SLOG8 BT.2020。
+3. 确认新版后再按原合并步骤拍摄。若仍失败，不反复重装或删除租约；保留记录并接USB。
+
+当前仍不能从SD证明实时租约已清除；最后可证运行版本为R11i。此处只是备好下一次安装入口，内部安装待开机执行。
+照片、录像、完整备份和历史日志保留；26809项原有元数据、897项重点内容SHA256和72项读取错误在补写前后保持一致。没有进行文件系统修复。
+完整原包：D:\NX500模组开发\r11i1-log-work\NX500_R11i1_Log_entry_fix.zip
+包SHA256：0b3f557f3dd3ca93cb4838d6ad7bc695acaddbed6030227db2a31381ba286154
+失败记录：D:\NX500模组开发\r11i1-log-work\reinstall-20261117T181754Z\camera-evidence
+补写凭据：D:\NX500模组开发\r11i1-log-work\reinstall-20261117T181754Z\SD-reinstall-result.json
+合并步骤：D:\NX500模组开发\repository\nx500\docs\R11I1_LOG_TEST_STEPS.txt
+
+额外只读发现：startup.log与startup.status报告WinError1392，无法复制，原文件未覆盖；两项错误已单列于evidence-read-errors.json。此前70项加这两项，本次补写前后均为72项，尚不能据此确定Log故障原因。

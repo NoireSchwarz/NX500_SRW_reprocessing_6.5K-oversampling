@@ -1,0 +1,97 @@
+NX LUT Lite RC1 LUT目錄
+
+Fuji Provia 100F [STD]
+自然均衡，色彩清晰。
+適合旅行、風景與日常記錄。
+來源SHA256：efa7b4a4620b7f11371e585871ec99d5406b850996285d0ffc2cea3644a1e928
+
+Kodak Portra 400 [STD]
+柔和暖調，色彩較為克制。
+適合人像、生活與柔和光線。
+來源SHA256：5ea7bfd6367ce4830ab9104e976040ab6ff163fe07bd38aa8620bf252b34d7db
+
+Ilford HP5 [STD]
+經典黑白，明暗層次鮮明。
+適合街拍、人像與紀實。
+來源SHA256：f773afdf8f5e22329df2a3ac29ceddd7ae41b831f87457de03a1ff923920b874
+
+EJAY 膚色最佳化 [STD]
+選擇性調整紅橙色區，同色物件亦受影響。
+保留其他色調；不含人臉識別或磨皮。
+來源SHA256：58be302e3e007fd66d171a3eba218ed891d550f08660ea5031f59e9efbb9f352
+
+5207 Noritsu [STD]
+諾日士沖掃方向，暖調日光電影配色。
+日光人像與街景；原表標準畫面輸入。
+來源SHA256：6823c974e7bb9e54ee81bb9b867014cc41834bd722abc37f5867afa31bf645f0
+
+5207 Noritsu FX [STD]
+諾日士配色加藍色增強，暗部去紅。
+適合藍天與海景；固定合適白平衡比較。
+來源SHA256：61251ebca7f832dc55585121dbfdbe04ac223594a37251852940713e0d4c428a
+
+5207 SP3000 [STD]
+SP3000沖掃方向，原表帶青色修正。
+日光電影配色；與Noritsu版本比較。
+來源SHA256：f2d4822d032c0cca94d76dafb0787c87d85a629e6d9869b1f11dd619175a0b56
+
+Gold 200 FX 暖 [STD]
+Gold 200配色，FX藍色增強與暖調版本。
+作者用於普通／標準畫面；依使用者確認分類。
+來源SHA256：bd4146b0262151e3c0f97b1a168961a4d244ac05a0b281efe5535835944daa0a
+
+Gold 200 Noritsu FX 冷 [STD]
+Gold 200諾日士配色，FX藍色增強與冷調版本。
+作者用於普通／標準畫面；依使用者確認分類。
+來源SHA256：c5926faf080fdfa3e5c0dbfbb3d85e84f72e3a2f6b80c954e85f767f9be73016
+
+VLog 5207 Noritsu [VLOG]
+諾日士沖掃方向的日光電影配色。
+作者原版V‑Log LUT；僅從VID的Log入口選擇。
+來源SHA256：b2bc3270a746527cf42e7b05aee44d5665bec92fad3e5b2d196978627ed63563
+
+VLog 5207 Noritsu FX [VLOG]
+諾日士配色加FX藍色增強。
+作者原版V‑Log LUT；僅從VID的Log入口選擇。
+來源SHA256：9bd60b47363d8b4aabadeffea2f615f95369fe992940802c9fb653be6f81ee2d
+
+VLog 5207 SP3000 [VLOG]
+SP3000沖掃方向的5207配色。
+作者原版V‑Log LUT；僅從VID的Log入口選擇。
+來源SHA256：78d812c8b3577abb4a0925be7ac8151ac0a969449e7dbf8f1b9f37927c451caa
+
+VLog Gold 200 FX 冷 [VLOG]
+Gold 200諾日士配色，FX藍色增強與冷調。
+作者原版V‑Log LUT；僅從VID的Log入口選擇。
+來源SHA256：fb6823622ad0492900fc3f5068fad3cebdfa75592e5beeba1d2fb601fb5267b9
+
+VLog Gold 200 FX 暖 [VLOG]
+Gold 200配色，FX藍色增強與暖調。
+作者原版V‑Log LUT；僅從VID的Log入口選擇。
+來源SHA256：d27c95666132253a756075d6f023f0b0765dd70fc30d5f562a3a2aba3391c74c
+
+V‑Log → V709 [VLOG]
+松下官方V709還原，輸出展開為滿範圍。
+V‑Log／V‑Gamut專用；17點機內重採樣版本。
+來源SHA256：873ebcbe4d25e852b127d950298ef07e67d72b70db18a29aa02396006ab22d63
+
+Backlight-N [STD]
+自然暖調、柔化暗部對比，適合逆光人像。
+原表基於松下Natural；本機普通畫面試用。
+來源SHA256：cf69fe43df23a6e66cb083d40c375e1ef91d28ef3e38fc4260658daf5889562a
+
+Smoky Color-S [STD]
+抑制亮部與暖色，呈現低飽和的煙霧質感。
+原表基於Standard；適合建築、街景與藍天。
+來源SHA256：624a382fa10439d59135cfcb15b9d7be9e3a83377b7f86acad8ffcfcb4433d68
+
+Dramatic BlockBuster-S [STD]
+青橙對比的電影配色，保留鮮明的冷暖層次。
+Kotaro Kumazawa；原表基於Standard。
+來源SHA256：72299fea6602eef0f36d98450fdd4cedddb3074b944b9e813f7bfc09879779da
+
+VLog Dramatic BlockBuster [VLOG]
+V‑Log專用青橙電影配色，帶膠片式對比。
+Kotaro Kumazawa原版；僅從VID選擇。
+來源SHA256：c605e451048826f603746e53ad4d3eeffeaba912886153526d59fbe7dbd3025c
+

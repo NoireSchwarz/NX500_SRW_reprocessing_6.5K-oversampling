@@ -1,0 +1,10 @@
+R11d 实机证据（保留文件，不重测码率）
+
+依据 D:/NX500模组开发/r11d-work/camera-followup_R11d_e4q41h4v。
+安装：recovery-r11d-memory-ab，manifest 5a289ea3a67b1bb594a3fef8084c6601fd9e3322395ff31feca7a80e50800308，INSTALL_COMPLETE SUCCESS。
+同一READY pid625/cookie1042818258，VIDEO_STAGE_1794670489_613：R11d MEMORY_AB、buffer schema6，时长15.2004秒、31重采样、156快读、最大101.6ms、覆盖该文件完整。reason0x1001包含实验不可用和USB退出。用户未重启后补保存，四bin与DONE完整。
+准入：MemFree22792KiB（22.2578MiB）低于24MiB，status5/reason3，0实验ticks/epochs/剂量。不能据此得出并行访存无影响。
+4条RTOS记录7735..7738均首次t0观察，无新序列，无录像类型有效bit6统计。driver0x0d0d/preset0xe001不符目标0x1717/e005。CPU28次800MHz、2次400MHz；无DDR频率，不构成匹配实验。
+SAM_0444.MP4：HEVC3840x2160、声明30000/1001、6192个视频包，视频时间206.6064秒，音频240.6827秒，相差34.0763秒；每音频秒25.7268包不是新画面帧率。已流式哈希并读回校验，未全解码。相同SD文件时间域中READY比MP4最终修改时间晚46秒，说明这份采样没有覆盖该段录像；不能以相机时间戳推断精确按键顺序。
+FULL应用记录1794670148_537_c2a5a7e0：RTOS进入/退出、CAP返回、UI解冻均成功。
+下一步修复内存准入与误导状态，再只做一段有READY前置确认的35/240/35秒合并实验。仍不直接判断RSZ2、WDMA2、HEVC或DDR为根因。

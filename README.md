@@ -1,58 +1,58 @@
 # NX500 SRW Reprocessing and 6.5K Oversampling Research
 
-面向三星 **NX500 1.12** 的 LUT、SRW 显影与全宽 4K 研究项目，使用 RAM 补丁和原厂图像处理接口。
+面向三星 **NX500 1.12** 的 LUT、SRW 重显影和全宽视频研究项目，使用 RAM 补丁及原厂图像处理接口。
 
-## 当前状态
+## 当前版本：NX LUT Lite 0.4.0 RC5
 
-- **SRW**：自动初始化 → BayerStill → LDC → 可选 EP 3D LUT → JPEG，复用一次申请的 192MiB 工作区；源片白平衡、颜色矩阵、C0 19 点 Gamma 和 JPEG 量化表已接入。
-- **镜头矫正**：16–50mm Power Zoom，531 个 MakerNote 焦距码档位；含原生锚点和离线插值，未宣称每一档都与原厂像素等价。
-- **全宽 4K**：全宽 UD 路径结合缩放 setup 输出 3840×2160，80Mbps、8 位 HEVC 4:2:0。用户已确认视角，蓝边已在 R10c 修复；**真实稳定 29.97p 尚未实现，持续掉帧仍在定位**。“6.5K”描述全宽输入链研究，不表示相机输出 6.5K 视频，也不单凭读出窗口断言每个感光点均参与。
-- **R10k 实测完成**：原生 DCI24／UHD30 的提交→完成中断约 33.10／31.18ms；全宽 UHD 录像为 43.61ms，普通帧仍约 42.36ms。720 步幅 EP 支路在三种模式中均存在；掉帧尚未修复，DDR 争用与内部反压仍未分开。详见 [本轮诊断报告](reports/R10k_field_diagnosis_20261110.txt) 和 [对比图](reports/R10k_field_diagnosis_20261110.png)。
-- **EP 复核已合并**：同一记录器以双读、IPC 活动头和模式夹取采集辅助 RDMA1／WDMA1 两个配置 bank，关联原生 EP 中断总数和三模式稳态计时。采用被动通路对照；尚无已确认的独立关闭入口，**未实现 EP bypass 开／关 A/B**，也未宣称修复掉帧。
+[下载完整安装包与校验文件](https://github.com/NoireSchwarz/NX500_SRW_reprocessing_6.5K-oversampling/releases/tag/v0.4.0-rc5) · [更新说明](docs/RELEASE_0.4.0_RC5_zh.md) · [接手交接](docs/HANDOFF_20261119_RC5.md) · [当前状态](docs/CURRENT_STATUS.md) · [合并短测](docs/RC5_TEST_STEPS_zh.txt)
 
-## 上游与致谢
+- **普通 LUT 默认用于视频**：选择和参数只暂存，OK 才装载；每次非零普通 LUT 提交默认开启影片 LUT，仍可在菜单手动关闭。冷启动不自动套用。
+- **EV+WiFi 开关 V‑Log**；**双击 EV 打开当前已应用的 LUT／Log LUT 详细页**；EV+AEL 菜单保留。切换 V‑Log 前停录并回照片待机。
+- **半屏详细页**保留上半屏取景，提供浓淡、色相、锐度、对比及 M3 A/B 混合；装载后菜单保持打开，半按才返回取景。
+- **繁体中文菜单、输入隔离及视频规格重载**；全宽 UHD24、UHD 转 2.5K、恢复原厂 UHD 通过原厂命令重新提交，不再要求手动重选原厂尺寸。
+- **32 张正式 LUT**：25 普通、7 V‑Log；Log LUT 仅在 VID 专用入口选择，普通 A/B 和 SRW 不可选。
+- **SRW** 保持已恢复的原生重显影链和五项精简菜单，初始化并重显影自动准备工作阶段。
 
-本项目基于并参考以下社区工作，保留原作者的版权和许可证：
+RC4 已获用户反馈“效果很好”。RC5 已通过电脑验证并部署到 SD，**尚未收到 RC5 独立相机安装及短测回执**，因此以 RC 预发布提供。模拟 OS、MMIO、中断和 Gamma 端点的通过，不代表所有相机状态均已验收。
 
-- **[WApaperplane/metol](https://github.com/WApaperplane/metol)**：LUT 格式、转换与写入工具，以及 NX500／NX1 上的实现经验。本项目保留派生工具的来源标记；早期基线记录为提交 `cb82f4886c1174261cbba8127000c7b696944ff4`。菜单焦点归还、物理半按和 NXUI 交互经验也参考 metol；本菜单独立绘制。
-- **[ottokiksmaler/nx500_nx1_modding](https://github.com/ottokiksmaler/nx500_nx1_modding)**：NX500／NX1 社区逆向资料、按键事件／keyscan 定义，以及 SD 脚本与模组接入方法。本项目没有把这些社区基础工作声称为原创。
+完整包为 `NX_LUT_Lite_0.4.0_RC5_full.zip`，85,921,118 字节：
 
-具体派生文件、改动、字体和其它组件来源见 [NOTICE.md](NOTICE.md) 与 [STRENGTHS_NOTICE.md](STRENGTHS_NOTICE.md)。两项上游均采用 AGPL-3.0；本项目派生代码按 [GNU AGPL v3](LICENSE) 分发，第三方字体／头文件等仍遵循各自许可证。
+```text
+SHA256 74615b39bd1644ebc251b0d845de942acd0ee42435d5adc7e7dbb99761449be3
+```
 
-## 目录
+## 能力与研究边界
+
+**全宽视频**优先采用原生 24p 的可用路线，用户已自行检查认可 R11g 的使用效果。真实稳定全宽 30p 尚未实现；bit6→bit2 区间的 RSZ2／WDMA2／HEVC／DDR 因果拆分仍未完成，也没有证明不可改变的硬件上限。“6.5K”描述全宽输入链研究，不表示输出 6.5K 视频或已独立证明全部感光点的参与方式。
+
+**Log** 当前为 8bit V‑Log／V‑Gamut 兼容路线，不是 Main10 或厂商认证。已有相对曲线、曝光与颜色研究，物理 18% 灰和源原色／白点的独立标定仍有边界；MP4 原厂颜色标签未自动改写。视频原色监看与 Log 写卡尚未独立分流。
+
+**SRW 与镜头矫正**复用已验证的原厂接口及查表路径。剩余颜色误差和插值不宣称与原厂逐像素等价；正式菜单隐藏诊断开关，不把新观测实验塞进日常重显影。
+
+## 安装与使用
+
+下载 Release 的完整 ZIP，核对 SHA256 后按包内说明覆盖所需安装文件；Git 源码目录不是可直接复制到卡上的安装包。先保留媒体、原固件、完整备份和历史日志。断 USB、关机待写卡灯熄灭，取出电池约30秒后安装；完成后关机再开机，确认 VID 页 RC5。
+
+进行 SRW 前先还原 V‑Log、手动关闭影片 LUT，沿用既有初始化并重显影流程。不格式化、清理或修复 SD 文件系统，不重复码率对照。
+
+## 目录与构建
 
 | 路径 | 内容 |
 | --- | --- |
-| `work/r10k-ep-flow/` | 当前 R10k 源码：菜单、Linux 与 RTOS 前后段、资源契约、LDC／JPEG、视频诊断、测试代码 |
-| `work/*r10k*.py`、`work/r10j_timing.S` | 本轮构建、ARM 回放与打包入口；RTOS 计时代码与 R10j 相同 |
-| `docs/` | 开发交接、当前状态和测试步骤 |
-| `reports/` | 实机结论摘要与电脑验证记录；两者明确区分 |
+| `work/r10k-ep-flow/` | 当前组件源码；目录名是历史名称，内容已更新到 RC5 路线 |
+| `docs/` | 更新说明、当前状态、交接续篇和各轮研究记录 |
+| `reports/validation/RC5/` | 本次软件验证与包身份记录；实机覆盖边界单独标注 |
+| Release ZIP 的 `SOURCE/`、`EVIDENCE/` | 对应发布源码、历史支持和完整验证材料 |
 
-## 构建与复现
+主机采用 Python 3、Zig 0.13.0、ARM soft-float musl；ARM 回放依赖 Unicorn、Capstone 和 pyelftools。工具链、开发者自行取得的完整固件／rootfs 不随 Git 正文提交。菜单和按键可用 `base/nx-lut-lite/tools/build_zig.py --keys-menu-only` 定向重建；参数、外部输入和身份绑定见交接，不批量运行历史生成脚本。
 
-主机使用 Python 3、Zig 0.13.0、ARM soft-float musl 交叉工具链；ARM 回放需要 Unicorn、Capstone、pyelftools。工具链和原厂专有运行库不随仓库分发。
+发布脚本依赖既有工作区、原厂依赖和测试支持，不宣称裸仓库无外部输入即可完整复现。修改后必须重建相关组件、重新绑定清单并验证，不能沿用旧 ZIP 的哈希。
 
-```powershell
-python -X utf8 work/build_r10j_timing.py
-python -X utf8 work/build_r10j_rtos.py
-python -X utf8 work/build_r10k.py probe
-python -X utf8 work/build_r10k.py menu
-```
+## 上游与许可
 
-现有研究脚本沿用原工作目录布局：工具链放在 `work/tooling/`，自行取得的 NX500 1.12 `P7.bin` 放在 `work/firmware/`。完整历史回归和发布脚本还依赖本地历史包、原始夹具、对照固件及 LUT 资源，仓库不伪装成不带这些输入也可全部执行。具体依赖、固件散列与验证边界见交接文档。R10k 的全宽和 RTOS 二进制冻结为 R10j；完整发布仍需本地封存的 R10j 基线包。
+- [WApaperplane/metol](https://github.com/WApaperplane/metol)：LUT 格式、工具和 M3 经验；RC4 的完整单次即时加载参考固定提交 `b10ec8413ce5f9a03079288cb9880e4d0fac983f`。本项目菜单独立绘制，不将社区基础工作声称为原创。
+- [ottokiksmaler/nx500_nx1_modding](https://github.com/ottokiksmaler/nx500_nx1_modding)：NX500／NX1 逆向资料、实际按键定义、SD 脚本和模组接入惯例。
 
-源码目录不是可直接复制到 SD 卡的完整安装包；相机部署使用经过清单与身份核验的发布包。
+项目派生代码遵循 [GNU AGPL v3](LICENSE)，来源、字体及第三方组件见 [NOTICE.md](NOTICE.md) 和 [STRENGTHS_NOTICE.md](STRENGTHS_NOTICE.md)。该许可不改变第三方 LUT、字体、运行库及原厂资源的归属。完整开发包包括必要运行资源、内置 SRW 初始化资产、历史校准测试图及对应证据；内容清单见 [发布文件说明](docs/RC5_PACKAGE_CONTENTS.md)。完整固件、整卡照片录像和用户备份不随 Git 正文提交。
 
-## 交接与证据
-
-- [开发交接正文](docs/HANDOFF_20261110.txt)
-- [PDF 交接](docs/HANDOFF_20261110.pdf)
-- [当前状态与 EP 复核修订](docs/CURRENT_STATUS.md)
-- [R10k 合并测试步骤](docs/R10k_TEST_STEPS.txt)
-- [R10k 三模式与 EP 回读实测结论](reports/R10k_field_diagnosis_20261110.txt) · [对照表](reports/R10k_field_diagnosis_20261110.csv) · [图表](reports/R10k_field_diagnosis_20261110.png) · [关键结论 JSON](reports/R10k_field_diagnosis_20261110.json)
-- [R10j 历史测试步骤](docs/R10j_TEST_STEPS.txt)
-- [R10i 持续掉帧结论](reports/R10i_BUS_QOS_ABA与周期阻塞诊断_20261110.txt)
-
-交接中的“EP 已排除”是当时根据用户说明记录的历史状态；用户随后撤回该判断，当前以 `docs/CURRENT_STATUS.md` 为准。尚未证明 NX500 的不可改变硬件上限；单一 QoS 候选无效也不能排除全部 DDR／内部握手因素。
-
-原厂固件／rootfs、机身共享库、个人 SRW／JPEG／视频、整卡原始日志、RAM 快照、第三方 LUT 和本机工具链留在本地；本仓库提供项目源码、必要的参数事实、软件测试夹具及总结资料。
+旧 [2026-11-10 交接 TXT](docs/HANDOFF_20261110.txt)、[PDF](docs/HANDOFF_20261110.pdf) 和 DOCX 保留历史状态；最新接续以 [RC5 交接续篇](docs/HANDOFF_20261119_RC5.md) 为准。

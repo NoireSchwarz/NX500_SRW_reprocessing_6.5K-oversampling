@@ -1,0 +1,19 @@
+R11f7 修复与部署完成记录
+时间：2026-11-16T21:52:58.781091+00:00
+
+已修复激活交接误写失败、依赖 pidof 的进程识别、以及已知 R11f6 失败状态的安全接续。新增 23 个源码/文档文件，1013 个原有源码与交接文件 SHA256 保持一致。
+验证：66 个 ARM 指令案例、46 个真实 shell 流程案例、8 项服务/状态合约；新目录独立编译字节一致。系统、设备和进程端点仍有模拟部分，未执行真实相机 R11f7 激活。
+
+SD：H:，exFAT，卷序列号 4040321079。
+部署 16241 个文件读回一致，实际新增/替换 88 个文件；13 个被替换的旧文件先备份并复核。两个安装触发文件最后写入。
+照片、录像、原始固件、完整备份和历史日志保护比对通过：3198 项元数据、2917 个文件 SHA256 不变；64 项既有读取/枚举错误不变，无新增哈希读取错误，未修复文件系统。
+完整 R11f6 snapshot-before.img 保持 157285888 字节，SHA256 46e69b6fc342885147a88831e2723ff87c282326ab457a80bbdd35b5742a3f5e。
+
+包：D:\NX500模组开发\r11f7-work\release-ready\NX500_R11f7_core_activation_hevc_aba.zip
+包 SHA256：8b6e64a01f4145a82d4e4eda59705ac13577aa7b18a98282176e8a5f25c8444a
+替换前文件备份：D:\NX500模组开发\r11f7-work\release-ready\R11f7_H_previous_files.zip
+部署回执：D:\NX500模组开发\r11f7-work\release-ready\R11f7_SD_H_deployment.json
+保护回执：D:\NX500模组开发\r11f7-work\release-final\protected-after-verification.json
+
+测试按 R11F7_TEST_STEPS.txt：激活确认→照片模式 5 秒启动/保存→一段全宽 120 秒自动 HEVC A/B/A。激活提示为 R11f7，视频菜单保持 R11f HEVC A/B/A TEST。只有 VERIFIED 和实际库校验才算激活成功。必须看到 COUNTERS SAVED - SAFE TO CONNECT USB 后接 USB；不重复码率测试。
+本次没有改动 RTOS、event10、bit6、首末绑定或 HEVC A/B/A 实验逻辑，不宣称帧率瓶颈已解决。部署到 SD 不代表相机已运行新版。

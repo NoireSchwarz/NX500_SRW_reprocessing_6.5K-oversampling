@@ -1,0 +1,15 @@
+R11f1 实机失败与 R11f2 修复依据
+
+已确认：R11f1 安装版本与 e4bbdf30... 模块清单已执行；新旧 inode 保留检查通过。随后 mv 报 cannot remove /usr/lib/libmmfcore.so: Input/output error。没有新库提交记录；回滚核对 original_inode_already_in_place=1，旧模块恢复。最新 VIDEO_FULL_1794730213_417_af4806d8 仍为原生配置状态查询（RTOS_entered=0），没有新的 R11f A/B/A 采样。
+
+关键发现：从原厂固件只读提取 /bin/mv，SHA256 60a474200b8927c776a7a70c4ed49021aa4d408985e367f4bc2f617f4f0e13a6，版本字串6.9。以真实 ARM mv、原厂 ld 与 libc 执行：目标 nlink=1 时仅 rename；nlink=2 时先 unlink；给 unlink 返回 EIO 即得到与相机一致的 cannot remove ... Input/output error，且没有进入 rename。允许 unlink 后可观察 unlink→rename 的间隙。具体路径由原厂真实指令决定，文件系统的 EIO 为显式注入，不能据此宣称相机底层返回 EIO 的原因已唯一证明。
+
+上一轮验证漏项：用主机新版 mv 模拟了整个文件操作，未执行相机旧版工具的分支。因此即使真实硬链接与 shell 控制流程通过，也没有覆盖原厂先删后移的行为。该覆盖缺口已补齐；不再以现代 mv 的语义代替原厂工具。
+
+修复：新增专用于同目录 libmmfcore.so 事务文件的静态 ARM 单次重命名工具；验证源、目标为普通文件、不同实体、同文件系统且均已有保留链接；直接 rename，无 unlink、无 EXDEV 复制回退。提交与回滚都调用该工具，继续保留旧库、新库和原厂备份。工具摘要与完整模块清单绑定。内核若仍拒绝 rename，将记录准确 errno、挂载表与末尾80行内核日志，完整回滚，不能忽略失败或直接改写被映射的库。
+
+验证边界：原厂 mv／ld／libc 指令、新工具指令真实执行；Linux 文件系统、内核返回、SMACK 和进程调度端点仍为模型。完整 shell 测试中的新工具同样执行真实 ARM 指令，实际在隔离主机文件上完成重命名并核对硬链接与文件身份。内核3.5缺少 statx 的 ENOSYS 回退也覆盖。测试记录见 oem-mv-replay.json、atomic-rename-tests.json、installer-tests.json；不是实机安装或帧率改善证明。
+
+保留采集器、菜单、HEVC门控库、RTOS、event10、bit6、首末绑定与原定A/B/A，不做码率或内存压力复测。照片、录像、原始固件、历史日志及62处既有目录枚举错误保留，不进行格式化、清理、文件系统修复。相机内部系统分区操作报EIO，不能据此直接归咎于SD的既有错误。
+
+下一步只需安装 R11f2 并冷启动；安装成功后再完成原定一次120秒A/B/A。若继续失败，应直接分析新日志的 rename errno、mounts、kernel段，不反复套用同一个推断。

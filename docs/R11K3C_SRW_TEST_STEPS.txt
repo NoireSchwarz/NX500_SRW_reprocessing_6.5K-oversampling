@@ -1,0 +1,14 @@
+R11k3c 线性/Log校验修复：合并测试步骤
+2026-11-18 / Europe/Berlin
+
+本轮失败留下了UNKNOWN_REQUIRE_RESTART及已保留的EP/CAP引用。不要手动清锁或继续重试。先安全断开USB，正常关机待写卡灯熄灭，再取出电池约30秒后装回。按现有SD安装方式安装新包。安装修订号应为recovery-r11k3c-gamma-gate；完成后关机再开机，SRW页显示R11k3c CURVE PRESETS才开始测试。
+
+不用重拍；继续使用SAM_0468.SRW。保持照片模式、视频Gamma FACTORY，FORMAT NV16 / JPEG 4:2:2，LUT PIPELINE OFF / ORIGINAL。同一次开机依次四次AUTO + COMPARE：
+A1 SOURCE 19 → B1 LINEAR TEST → B2 LOG TRANSFER TEST → A2 SOURCE 19。
+每次等待JPEG保存完整、资源归还，再换下一项。跳过菜单循环中的FACTORY/LIFT，不用它们代替SOURCE19返回对照。临时LINEAR/LOG不会保存成重启默认，每次执行前核对选项。
+
+任一项失败就停止后续测试，保留屏幕原文，不连续重试；连接USB后读取JOB和INIT_AUTO记录即可。全部成功后待写卡灯熄灭再连接USB，保留四张新NXLI*.JPG及全部新记录。
+
+本包只修复旧记录校验对模式3/4的误拒。曲线点、原厂建表/装载/恢复、WB/CC/LDC、176MiB工作区、VA4KB/PA16KB、后段和核心库均保持原样。电脑端验证通过不代替本轮四项的实机验收。比较、拟合和官方LUT核验继续在电脑完成。LOG TRANSFER TEST仍是固定Gamma预设，不代表已经完成BT.2020色域转换的标准Samsung Log。
+
+照片、录像、原始固件、完整备份和历史日志不删除；不格式化、清理或修复文件系统；不重复码率测试。

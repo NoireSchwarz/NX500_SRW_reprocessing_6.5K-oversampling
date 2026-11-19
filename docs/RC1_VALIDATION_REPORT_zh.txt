@@ -1,0 +1,46 @@
+NX LUT Lite 0.4.0 RC1 驗證與交接報告
+
+結果：候選包已完成電腦端驗證。相機內安裝與實拍驗收待使用者執行。
+不把ARM指令模擬、腳本回放、桌面繪圖或SD讀回視為相機硬體已通過。
+
+功能：R8f半屏詳情、四參數、M3雙強度混合、逐級返回與同次開機暫存；
+繁體中文與統一五列佈局；SRW不顯示Gamma／線性／Log等研究開關。
+普通LUT頁A／B和SRW永遠排除Log LUT，VID提供獨立的單張Log LUT入口。
+SRW完成後先沿用既有資源核驗再建立空白新工作階段，不自動處理下一張。
+保留所有舊日誌與原生資源憑據；新可選wrapper文字日誌合併為最新一份。
+
+驗證：29組實際ARM M3運算，每組比較全部4913節點；42組真實生產shell控制流；
+20組完成／新會話／日誌策略；實際ARM非同步回執、觸摸、輸入、參數暫存、
+模式鎖與64KB進度記錄上限；8張以實際ARM繪圖函數產生的介面預覽。
+另執行舊SRW reset_live_lut實際函數的鎖交接與松下新LUT模式專項。
+從R11p原廠核心庫、R11q既有已修改核心庫各回放一次完整生產安裝；
+兩者均保持核心庫位元組與inode不變、檔案系統恢復唯讀、使用者狀態和歷史保留。
+模擬的邊界：OS／檔案／鎖／X11端點、相機普通RAM、Gamma租約回應與銳度原廠呼叫。
+沒有在電腦上模擬硬體ISP、DMA、快取一致性、編碼器或實體相機核心。
+
+本輪在寫卡前發現並修正：還原函數轉接、遺留SRW選擇、B暫存確認邊界、
+安裝器要求的家族標記、SRW監督器run.lock與原有engine.lock還原交接的衝突。
+SRW原本會在native工作前釋放engine.lock、還原LUT、再取得engine.lock；本包保留它。
+新的LUT guard只持有video-mode.fd，沒有再次取得監督器run.lock，也沒有新增native權限。
+
+19款LUT：原有3款真實表、EJAY膚色、使用者10張CUBE、官方V709、松下新增4款。
+原版33／64／65點CUBE、ZIP、兩份作者說明與官方JSON元資料均保留。
+Backlight-N=Natural；Smoky Color-S、Dramatic BlockBuster-S=Standard；
+Dramatic BlockBuster=V-Log。根據API與CUBE的LUMIXPHOTOSTYLE聯合核對，未憑名稱猜測。
+前3張屬普通分類，第4張屬VID的Log分類。未捏造Backlight／Smoky的Log版。
+來源： https://panasonic.jp/dc/contents/lumix-color/real-time-lut.html
+官方公開目錄： https://lumix-base.jpn.panasonic.com/lutapi/v2/community/luts/filter
+官方詳情： https://lumix-base.jpn.panasonic.com/lutapi/v2/community/lut
+官方資料下載： https://lumix-base.jpn.panasonic.com/lutapi/v2/community/luts/download
+三方MIT程式僅用於理解公開接口，未執行它的程式碼或把其許可套用到LUT作品：
+https://github.com/MangDao/LumixLutSearch
+LUT權利仍歸原作者；這是使用者私人機身測試包，沒有發布到遠端倉庫。
+
+機內17點8bit重採樣有誤差，不能聲稱等同原版高精度後期。全RGB與本機工作域的
+數值報告分別留存；本機工作域是數學模型，不是新拍攝證據或物理灰卡標定。
+V-Log沿用2.520358943倍工作曝光、V-Gamut轉換和已驗證的原廠回調；Gamma／RTOS
+實際工作程序與R11q逐字節相同。核心庫、SRW顯影、鏡頭與JPEG工作程序未改動。
+原始影片仍保留原廠709標籤，純Log後期需手動解釋V-Log/V-Gamut。
+Log LUT會影響錄影寫卡，不宣稱原色監看與純Log寫卡分流已實現。
+
+SD部署不等於相機已安裝。執行RC1_TEST_STEPS_zh.txt後才可核驗相機運行版本和畫面。

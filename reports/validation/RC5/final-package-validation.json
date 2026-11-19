@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "release": "0.4.0-RC5",
+  "payload": "D:\\NX500模组开发\\formal-0.4.0-rc5-work\\release-payload",
+  "archive": "D:\\NX500模组开发\\formal-0.4.0-rc5-work\\NX_LUT_Lite_0.4.0_RC5_full.zip",
+  "bytes": 85921118,
+  "sha256": "74615b39bd1644ebc251b0d845de942acd0ee42435d5adc7e7dbb99761449be3",
+  "files": 10278,
+  "module_manifest_sha256": "a8782bd8e9882d88af711ccfe046754644b577bbc13a2fc3792130caeb833b26",
+  "checks": [
+    "shortcut-dispatch-validation.json",
+    "UI-validation.json",
+    "UI-visual-validation.json",
+    "engine-shell-validation.json",
+    "installer-validation.json",
+    "identity-validation.json",
+    "build-validation.json"
+  ],
+  "archive_CRC_passed": true,
+  "hardware_tested": false
+}

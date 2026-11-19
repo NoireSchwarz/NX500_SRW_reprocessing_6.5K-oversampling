@@ -1,0 +1,132 @@
+NX LUT Lite RC3 LUT目錄：25張普通／7張V-Log
+
+普通A／B及SRW不含Log LUT；Log LUT僅VID。
+
+Fuji Provia 100F [STD]
+自然均衡，色彩清晰。
+適合旅行、風景與日常記錄。
+
+Kodak Portra 400 [STD]
+柔和暖調，色彩較為克制。
+適合人像、生活與柔和光線。
+
+Ilford HP5 [STD]
+經典黑白，明暗層次鮮明。
+適合街拍、人像與紀實。
+
+EJAY 膚色最佳化 [STD]
+選擇性調整紅橙色區，同色物件亦受影響。
+保留其他色調；不含人臉識別或磨皮。
+
+5207 Noritsu [STD]
+諾日士沖掃方向，暖調日光電影配色。
+日光人像與街景；原表標準畫面輸入。
+
+5207 Noritsu FX [STD]
+諾日士配色加藍色增強，暗部去紅。
+適合藍天與海景；固定合適白平衡比較。
+
+5207 SP3000 [STD]
+SP3000沖掃方向，原表帶青色修正。
+日光電影配色；與Noritsu版本比較。
+
+Gold 200 FX 暖 [STD]
+Gold 200配色，FX藍色增強與暖調版本。
+作者用於普通／標準畫面；依使用者確認分類。
+
+Gold 200 Noritsu FX 冷 [STD]
+Gold 200諾日士配色，FX藍色增強與冷調版本。
+作者用於普通／標準畫面；依使用者確認分類。
+
+VLog 5207 Noritsu [VLOG]
+諾日士沖掃方向的日光電影配色。
+作者原版V‑Log LUT；僅從VID的Log入口選擇。
+
+VLog 5207 Noritsu FX [VLOG]
+諾日士配色加FX藍色增強。
+作者原版V‑Log LUT；僅從VID的Log入口選擇。
+
+VLog 5207 SP3000 [VLOG]
+SP3000沖掃方向的5207配色。
+作者原版V‑Log LUT；僅從VID的Log入口選擇。
+
+VLog Gold 200 FX 冷 [VLOG]
+Gold 200諾日士配色，FX藍色增強與冷調。
+作者原版V‑Log LUT；僅從VID的Log入口選擇。
+
+VLog Gold 200 FX 暖 [VLOG]
+Gold 200配色，FX藍色增強與暖調。
+作者原版V‑Log LUT；僅從VID的Log入口選擇。
+
+V‑Log → V709 [VLOG]
+松下官方V709還原，輸出展開為滿範圍。
+V‑Log／V‑Gamut專用；17點機內重採樣版本。
+
+Backlight-N [STD]
+自然暖調、柔化暗部對比，適合逆光人像。
+原表基於松下Natural；本機普通畫面試用。
+
+Smoky Color-S [STD]
+抑制亮部與暖色，呈現低飽和的煙霧質感。
+原表基於Standard；適合建築、街景與藍天。
+
+Dramatic BlockBuster-S [STD]
+青橙對比的電影配色，保留鮮明的冷暖層次。
+Kotaro Kumazawa；原表基於Standard。
+
+VLog Dramatic BlockBuster [VLOG]
+V‑Log專用青橙電影配色，帶膠片式對比。
+Kotaro Kumazawa原版；僅從VID選擇。
+
+CineStill 電影風格 [STD]
+偏冷暗部配暖色亮部，帶電影膠片感。
+適合夜景與街景；為色彩風格，非光暈或顆粒效果。
+
+Fuji Pro 400H [STD]
+柔和色彩與清淡綠調，明暗對比較柔。
+適合日光人像、花卉與生活記錄。
+
+Fuji Astia 100F [STD]
+較柔和的正片色彩，保留細緻中間調。
+適合人像、旅行與柔和日光。
+
+Fuji Classic Chrome [STD]
+降低飽和度並加強冷暖分離，紀實風格。
+適合街拍、建築與陰天。
+
+Fuji Eterna 500 [STD]
+低對比、較克制的電影色調。
+適合影片與柔和光線；普通畫面輸入。
+
+Fuji Velvia 50 [STD]
+強烈飽和與對比，綠藍色較鮮明。
+適合自然風景；高飽和色可能較易裁切。
+
+Kodak 2383 [STD]
+電影拷貝方向的色彩與較深暗部。
+本檔沿用既有普通畫面轉換，不作Log輸入表。
+
+Kodak Ektar 100 [STD]
+鮮明色彩與清晰明暗，偏暖膠片風格。
+適合日光風景、建築與旅行。
+
+Acros 黑白 [STD]
+黑白映射，強調明暗分離與質感。
+適合街拍、建築與紀實；不增加顆粒。
+
+Pentax Satobi [STD]
+低飽和的暖調與褪色感。
+適合懷舊街景、人像與生活場景。
+
+Ricoh Retro [STD]
+偏暖、較低飽和的懷舊色彩。
+適合旅行、街拍與日常記錄。
+
+XH 5219 明亮 [STD]
+作者3號：明亮方向的5219配色。
+適合日常與人像；普通／標準畫面輸入。
+
+XH 5219 哈蘇風格 [STD]
+作者7號：哈蘇風格方向的5219配色。
+適合人像與生活記錄；可與明亮版對照。
+

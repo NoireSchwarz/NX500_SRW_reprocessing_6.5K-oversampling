@@ -1,0 +1,31 @@
+R11f4 相机激活结果检查（2026-11-16，欧洲/柏林）
+
+结论：备份没有完成，且尚未创建snapshot-before.img。流程在快照设备前置校验失败后走错误出口；没有进入本包后续内部激活文件安装、启动单元安装、换库或systemctl rescue。屏幕绿点不能证明备份仍在执行，本次日志已有明确失败记录。
+
+证据：H:\NXDEMO51\R11F4_ACTIVATION_1794814616_574
+入口：R11F4_ENTRY_FAILED=SNAPSHOT_BACKUP_NOT_VERIFIED
+备份：state=UNAVAILABLE / reason=SNAPSHOT_DEVICE_INVALID
+备份镜像：不存在；目录仅有10个文件，没有phase/history/preload/post记录。
+实际入口SHA256：e08badba2139ea6dabc1929bce523d9b40033fc8f6bd4ef7a4dfba49523c2e72
+已核对本次入口、14项载荷清单及实际ARM核验工具，均为最终部署的R11f4；安装触发文件已归档到本目录，SD根部无待执行触发文件。
+
+有价值的新证据：原厂debugfs从根分区块设备只读导出的/usr/lib/libmmfcore.so为inode45、434176字节、SHA256=7743dd26b06fb2e600cc65aff6ad92913b43c3f75b9493437239006b24991cd9，与R11f目标核心库相同。说明本次块设备读视图已能读到目标文件；不能再把SD部署、路径视图、块设备读视图和运行中的相机映射混为一谈。当前相机可见文件及进程映射没有在此次失败路径中采集；尚不能确认当前运行核心库。块设备读取也不是独立的非缓存介质证明。
+
+已确认的代码缺陷：gate-check.c第79行把BLKGETSIZE64写为0x80081272。使用项目ARM目标工具链和头文件编译到LLVM常量，sizeof(size_t)=4，BLKGETSIZE64应为0x80041272。Linux原始接口定义使用_IOR(0x12,114,size_t)，输出缓冲仍为u64，不能把缓冲宽度直接当作请求号中的类型宽度。独立按ARM接口规则重放现有生产ARM二进制，在不接受错误请求号的模拟内核端点中复现SNAPSHOT_DEVICE_INVALID，且备份目标未创建。
+
+验证遗漏：原有模拟端点也硬编码接受0x80081272，因此此前完整ARM备份回放没有验证接口编号是否符合目标内核ABI。真实ARM指令通过不等于真实内核接口通过。本次已经发现并单独记录此遗漏，没有修改或覆盖旧测试结果。
+
+证据边界：相机当前错误码把open、fstat、设备类型/编号、ioctl、大小和对齐校验合并。现场未记录errno、ioctl返回值或实际大小，所以该ABI错误是确认的缺陷和可复现原因，尚不能证明它是现场唯一失败条件。既有R11f3实机内核日志记载p9启用153592k swap，支持其位于既定数量级；这不是本次实时分区大小查询。
+
+无可见失败提示的原因：entry.sh的fail()在owned=1后才显示失败消息；备份步骤发生在设置owned之前。因此本次失败仅写入日志并退出，没有给出CORE NOT VERIFIED提示。BACKUP提示本身仅显示12秒。没有证据说明整机卡死或核心库因本轮失败被破坏。
+
+下一步方案：一次修正中使用目标头文件的BLKGETSIZE64，独立校验目标ABI；将设备打开、属性、接口返回/errno、实际字节数、签名、复制和复核分别持久记录；在内部安装前发生失败时同样显示明确结果；复用同一激活及A/B/A流程，不另发纯检测版、不重复覆盖已匹配核心库或码率测试。本轮只读留证，未改代码、未写SD、未重新部署。
+
+原始10文件复制并逐项校验：D:\NX500模组开发\r11f4-work\camera-result-20261116T145153Z\R11F4_ACTIVATION_1794814616_574
+结构化结果：D:\NX500模组开发\r11f4-work\camera-result-20261116T145153Z\camera-result.json
+独立ABI分析：D:\NX500模组开发\r11f4-work\camera-result-20261116T145153Z\ABI-analysis.json
+仓库952项原源码与19项激活新增源码均保持已有摘要；照片、录像、固件和历史日志未写入、删除或修复。
+
+原始接口参考：
+https://github.com/torvalds/linux/blob/v3.4/include/linux/fs.h
+https://github.com/torvalds/linux/blob/v3.4/block/ioctl.c

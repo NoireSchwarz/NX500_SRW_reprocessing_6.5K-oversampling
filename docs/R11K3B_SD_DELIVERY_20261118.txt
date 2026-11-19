@@ -1,0 +1,13 @@
+R11k3b交付完成 / 2026-11-18 Europe/Berlin
+
+H: exFAT serial4040321079，4782文件读回一致；26218项非部署文件元数据及2366项内容哈希未变，原有70项读取/枚举错误保留，未执行修复或清理。成功JPEG及原照片、录像、原始固件、完整备份和历史日志保留。
+
+恢复LINEAR/LOG预设，后端沿用实机成功的R11k3a版本。SOURCE19输入请求与成功基线逐字节相同。不新增强制Gamma JSON；电脑端直接解析既有审计。
+
+安装修订号recovery-r11k3b-curve-presets
+模块清单SHA256 09b232cff683b36bb95ad0e58858e4414a7209acacbb185167abb57dfc7a03de
+包SHA256 9fbab81373c4359a21eccb6f60fac39441ebe2735f3cb076f2b72c177f14deab
+
+安装并确认R11k3b CURVE PRESETS后，同一SAM_0468、LUT OFF，SOURCE19→LINEAR→LOG→SOURCE19，每组AUTO + COMPARE完整保存后再下一组。四组完成再接USB。新预设实机像素效果仍待验收。
+
+用户已重新明确授权部署完成后关机，关机动作将在交付核验全部通过后执行。

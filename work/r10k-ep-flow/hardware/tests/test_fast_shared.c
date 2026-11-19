@@ -1,3 +1,6 @@
+#ifndef NXL_TEST_VA
+#define NXL_TEST_VA 0x90b35000u
+#endif
 #define _GNU_SOURCE
 #define NXL_SMALL_MODEL
 #define NXL_FAST_PIPELINE
@@ -19,7 +22,7 @@ int main(void){
  }
  struct sw_lease s={0};s.magic=SW_MAGIC;s.version=1;s.bytes=sizeof s;s.phase=SW_FRONT_READY;s.capacity=SW_BYTES;s.front_active=SW_FRONT_ACTIVE;
  s.input_offset=SW_INPUT;s.lut_offset=SW_LUT_OUT;s.jpeg_offset=SW_JPEG_OUT;s.table_offset=SW_TABLE;s.lease_offset=SW_LEASE;
- s.pa=0x98000000;s.va=0x87000000;s.nonce=777;s.owner_pid=getpid();s.owner_start_ticks=12345;s.index=(s.pa-0x94000000u)/16384;
+ s.pa=0x98000000;s.va=NXL_TEST_VA;s.nonce=777;s.owner_pid=getpid();s.owner_start_ticks=12345;s.index=(s.pa-0x94000000u)/16384;
  s.metadata[0]=35;s.metadata[1]=SW_BYTES/16384;s.metadata[2]=42;s.metadata[3]=100;s.front_return_barrier=s.frame_callbacks_retired=s.controller_slot_restored=1;
  full_hash(memory,SW_CONTROL,s.prefix_sha256);lut_make_table(full_table,1);full_hash(full_table,sizeof full_table,s.lut_sha256);memset(s.source_sha256,'c',64);sw_seal(&s);assert(sw_valid(&s));
  assert(sw_owner_proof_publish(&s)&&sw_owner_alive(&s));

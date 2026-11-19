@@ -8,10 +8,10 @@ RUN=/tmp/nx-lut-lite
 OPS=$D/bin/nxl-fileops
 RESTORE=$D/bin/nxl-oem-restore.arm
 MENU=$D/bin/nxl-menu
-MENU_SHA=60f6cbfe3105c4faca676d846f85ecf9b52c83a3d242fa0ff43dae1ea8e4915b
+MENU_SHA=2b7cc2a68bb0c34eae4271c1ba151353a9eab4cf6ac4789d2bcb97375ec4220d
 menu_ok=0 popup=
 OPS_SHA=c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d
-RESTORE_SHA=7dc63f61e40790ab643e0dc128ba140ccb04864cb02c72cced88407b452fe6c6
+RESTORE_SHA=1f4beb372bcdc7557ececfc89257361d283ae7487e4b364ef33ff330f75fa996
 regular(){ [ -f "$1" ] && [ ! -L "$1" ]; }
 absent(){ [ ! -e "$1" ] && [ ! -L "$1" ]; }
 hash(){ "$OPS" sha256 "$1"; }

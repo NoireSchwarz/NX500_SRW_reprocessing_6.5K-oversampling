@@ -1,0 +1,22 @@
+Samsung Log 与 Panasonic V-Log 电脑端对照 / 2026-11-18
+
+按用户希望尝试松下标准，采用松下V-Log/V-Gamut。官方技术手册给出的18%灰为433/1023，8bit约108；这与三星Log约135的编码灰值不同。已下载原版手册和官方VLog_to_V709_forV35_EN.zip，来源URL、原始文件及SHA256保存于official/provenance.json。没有将松下LUT直接套在三星Log上。
+
+实验分两层：第一层让两套标准从同一组推断的线性灰输入开始，分别编码并量化8bit，再套各自官方显示LUT；第二层将各自编码/解码后的线性数据统一用同一条自定gamma2.4显示曲线展示，隔离厂商显示LUT的差异。输入来自上一轮实机LINEAR、SOURCE19、LIFT的共同推断；不是重新拍摄的灰卡，也不是已知原色的完整彩色图。中性轴在D65宽色域转换中保持中性，因此本层比较不必假定NX500源色域已经认证。
+
+官方松下LUT的Readme_EN.txt明确写明Output is in legal range only。本次按(LUT值×1023−64)/(940−64)展开为图片显示满范围，保留原LUT和原值，处理方法记入验证文件。没有加曝光补偿或自动色阶。此步骤是数据范围解释，不是提高曝光。
+
+结果：在本机名义18%灰格、推断线性输入约18.099%处，SOURCE19实机输出169；当前Still三星Log经官方LUT后约109；从同一推断线性输入重新正确编码为标准三星Log并套官方LUT，显示约118；标准V-Log经官方V709及范围展开后约108。因此换用松下标准不会自动让这套官方还原更接近SOURCE19，V709中灰在此反而略暗。
+
+统一最后的显示曲线后，未编码的参考灰约125.09码，三星8bit编码/解码后约125.53，V-Log后约124.92。47个可用灰块的平均显示误差分别约0.530和0.643码，主要属于模拟8bit量化差异。未量化的正反变换最大线性误差分别为3.32e-07与5.56e-08；已保留标准中的十进制接缝，没有偷偷修改公式。
+
+这支持现有亮度差主要需要从Still输入标度及显示曲线理解，不支持“Samsung Log编码公式算错，所以换V-Log即可解决”的解释。换Log标准改变信息在码值中的分配，不会恢复前级已经裁切的光信息，也不增加NX500传感器动态范围。当前结论限于灰阶，尚不能据此宣称完整V-Gamut颜色兼容。
+
+已生成可复用的PC候选：线性BT.709→线性V-Gamut的独立33³矩阵LUT、4097点V-Log编码及解码1D LUT，以及标准矩阵JSON。矩阵LUT对2000个随机点相对解析矩阵的最大误差4.68e-13。候选包名称以PC_ONLY开头，没有安装脚本。实际相机端19节点拟合、录像输出标度、V-Gamut写入及硬件验收尚未实施；没有部署或替换相机模式。
+
+图像：renders/Samsung_vs_Panasonic_official_gray.png为四路灰阶对照，renders/same_display_roundtrip.png为相同显示曲线对照，renders/standard_curves_and_display.png为编码与显示曲线。全部保留原SOURCE19、现有Still Log和新电脑模拟的明确标签。
+
+本轮未访问SD写入接口，没有改相机程序、Gamma、矩阵或核心库，没有要求补拍。原照片、录像、备份和历史日志保持原样。既有R11l1及暂停中的取景功能不受本次PC实验影响。
+
+原始技术参考：https://pro-av.panasonic.net/jp/cinema_camera_varicam_eva/support/pdf/VARICAM_V-Log_V-Gamut.pdf
+官方LUT页面：https://av.jpn.support.panasonic.com/support/global/cs/dsc/download/lut/

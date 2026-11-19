@@ -1,0 +1,39 @@
+{
+  "passed": true,
+  "lifetime": {
+    "exit": 0,
+    "stdout": "PASS actual UI ARM: no apply on open/change; OK-only worker stays mapped; shortcut uses applied parameters, STD/Log/off scope\n",
+    "modeled_syscalls": {
+      "983045": 1,
+      "256": 1,
+      "5": 1,
+      "45": 2,
+      "192": 2,
+      "54": 2,
+      "6": 1,
+      "91": 1,
+      "146": 1,
+      "248": 1
+    },
+    "hardware_tested": false
+  },
+  "gesture": {
+    "exit": 0,
+    "stdout": "PASS actual double EV, EV+WiFi VLog in both orders, menu/ambiguity/busy guards and one dispatch per release\n",
+    "modeled_syscalls": {
+      "983045": 1,
+      "256": 1,
+      "54": 1,
+      "146": 1,
+      "248": 1
+    },
+    "hardware_tested": false
+  },
+  "double_EV_current_applied_state": true,
+  "EV_WiFi_VLog": true,
+  "AEL_WiFi_not_bound": true,
+  "menu_and_listener_no_duplicate_dispatch": true,
+  "actual_ARM_control_flow": true,
+  "OS_X11_and_backend_modeled": true,
+  "hardware_tested": false
+}

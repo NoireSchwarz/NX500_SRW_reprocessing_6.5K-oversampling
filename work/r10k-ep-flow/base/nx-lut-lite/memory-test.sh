@@ -3,6 +3,8 @@
 set -u
 umask 077
 D=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd) || exit 1
+LOGPOLICY=$D/srw-log-policy.sh
+SRW_LOG_POLICY_SHA=ea30b428f6a607c304b3a1400f2263a89f5e32bdb770dece39512c30efaf1093
 RUN=/tmp/nx-lut-lite
 OUT=/mnt/mmc/NXDEMO51
 OLD_OUT=/mnt/mmc/NXDEMO50
@@ -16,8 +18,8 @@ HWCTL=$D/bin/nxl-hw-controller.arm
 HWWORK=$D/bin/nxl-hw-worker.arm
 INIT_PIPELINE=$D/bin/nxl-init-pipeline.arm
 OWNED_EP=$D/bin/nxl-owned-ep.arm
-INIT_PIPELINE_SHA=0000000000000000000000000000000000000000000000000000000000000000
-OWNED_EP_SHA=0000000000000000000000000000000000000000000000000000000000000000
+INIT_PIPELINE_SHA=dd70a2cd84aed091a2b2004430cc4d4c3400d89c60fd069f041a6864d9058e74
+OWNED_EP_SHA=15f24175e1f4d1e246ce3333a2eb0a384a4d07660c380625fdced88cf5d6b95f
 OPS=$D/bin/nxl-fileops
 CV=$D/bin/cube2lut.arm
 CV_SHA=1fee2e50896dd044025022a2fb3e968a857a7b1c5d1426630d899f5cf286d34d
@@ -25,12 +27,12 @@ MENU=$D/bin/nxl-menu
 ENGINE=$D/lut.sh
 RESTORE=$D/bin/nxl-oem-restore.arm
 HANDOFF_WATCH=$D/bin/nxl-handoff-watch.arm
-HANDOFF_WATCH_SHA=5fdd4546dee2cdacb2fc77bc27537d3b20c237c862c85a8a5d03f0c5c053c90e
-RESTORE_SHA=7dc63f61e40790ab643e0dc128ba140ccb04864cb02c72cced88407b452fe6c6
+HANDOFF_WATCH_SHA=91b4520d2a4df5b8af805657f94f940e8c28d56964ae7faba20687233164c3bd
+RESTORE_SHA=1f4beb372bcdc7557ececfc89257361d283ae7487e4b364ef33ff330f75fa996
 RESTORE_SCRIPT=$D/restore-camera.sh
-RESTORE_SCRIPT_SHA=7e178cce610c7c05324494109713ec8f250846568ec3d8d08a4c8743e7404301
+RESTORE_SCRIPT_SHA=8e78506c58274d8f6faaaca754e197f60bf5d9952d6bc1c0b024100b3b7de8da
 REARM_SCRIPT=$D/rearm-session.sh
-REARM_SCRIPT_SHA=e796fceb8813881ef7c7c256040b21ba188079c6d6349ac071731bb2d2afaff8
+REARM_SCRIPT_SHA=e9f507eee90522530688e243c787ab307be4f561846a466bd6497ba91b58c39e
 FRONT_GRANT=$D/state/p49-experiment.state
 RETIRE_MANIFEST=$D/data/prior-front-retire.sha256
 RETIRE_MANIFEST_SHA=8af1064169dcdc3f1f89bedd84bdd53ace6bf476177f4d338ded8f3b0746d2f4
@@ -39,17 +41,17 @@ RETIRE_REPORT=front_1/front
 RETIRE_FALSE_REASON=FRONT_RESTART_OR_PATH_INVALID
 PREPARE_PROC=/proc
 prepare_full=0
-SESSION_SHA=f7187bedb1b9dc2f89b997a70bc9e5aa6618d5414d5de6445509afb0fda3c8db
-FRONT_SHA=beda78cd9ac1da78d8b5eb4dc7956c007bea5ce5264d101e950905cf5463f5bb
-POST_SHA=aa5a948dd882e910198688de0b4726a5e81cd4b028da8b53a5d6f8c24c529a99
-HWCTL_SHA=6e9d80efd4d7ca3d9eaea2011211b49a5bdda4a7c71dc1367e74964977f14a88
-HWWORK_SHA=24282f2fe0c6b1453cd06a4abb1250a2be625acf748104df986256155fab9310
-MENU_SHA=60f6cbfe3105c4faca676d846f85ecf9b52c83a3d242fa0ff43dae1ea8e4915b
-ENGINE_SHA=66095aeab680e897246ac656a3d73da4c80a568459b7faa0cd194077fcba6d15
+SESSION_SHA=7c2e2a0e60652c16116b4b9250bad164e543c85cf3ddffc72846cae754b44659
+FRONT_SHA=714bb6a9608ef849d716ef4716d65db7d392fe464d90ecbe0fb882815700b232
+POST_SHA=c8d178c4802a917433ae38264eb56e896b3d90b879ec691ad6a3d9b4f49d433f
+HWCTL_SHA=60e5833761547c3ac1c1b9165fdda87f97592ccfc2de766c1d9471ac081d8973
+HWWORK_SHA=74642c4d9729062004246ae9bcee9a12c659db4e1efd240350a2e66b72eba719
+MENU_SHA=2b7cc2a68bb0c34eae4271c1ba151353a9eab4cf6ac4789d2bcb97375ec4220d
+ENGINE_SHA=2d5c5d0c64242691413e41c8d4c833dbf864695e0d9c9c03a164337aff3345d2
 OPS_SHA=c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d
 OLD_FRONT_SHA=07f64d2ab1a3bc073a49a2b45fffa4ec4ae41fc5ad7dfddfb6384563be9c7a14
 SOURCE_SHA=dfd6608e4ee05f0d5b4b402fedd3c928aee509595e6964efa4c1ce87f1d9715c
-PLAN_SHA=d861a9b189e5c17be802a4f72ec5693578d6dc890f7b8bebe7585b577ad1233e
+PLAN_SHA=9e0e625e61b86eea0d9db87b1f5954622b2d3152eca7d5cdd529c64e7d48c188
 hash(){ "$OPS" sha256 "$1"; }
 is_hash(){ [ "${#1}" = 64 ] && case "$1" in *[!0-9a-f]*) return 1;;*) return 0;;esac; }
 identifier(){ [ -n "$1" ] && [ "${#1}" -le 80 ] && case "$1" in *[!A-Za-z0-9_-]*) return 1;;*) return 0;;esac; }
@@ -62,7 +64,7 @@ is_nonce(){
     case "$leading" in 1|2|3) return 0;;4) [ "$tail" -le 294967295 ];;*) return 1;;esac
 }
 # A bootstrap failure must be recorded outside the not-yet-created job root.
-BOOT_LOG=$OUT/logs/run.log
+BOOT_LOG=$OUT/logs/run-RC1.log
 bootstrap_log(){
     printf 'RAW_BOOTSTRAP phase=%s detail=%s\n' "$1" "$2" >&2
     if [ ! -L "$BOOT_LOG" ] && { [ ! -e "$BOOT_LOG" ] || [ -f "$BOOT_LOG" ]; };then
@@ -96,7 +98,7 @@ esac
 regular "$SESSION" && [ -x "$SESSION" ] && [ "$(hash "$SESSION")" = "$SESSION_SHA" ] || { bootstrap_log SESSION_MANAGER_IDENTITY_FAILED "$SESSION";nxl_progress RAW_COMPONENT_CHECK FAILED SESSION_MANAGER_IDENTITY_FAILED;exit 1; }
 init_trial=0
 case "${1:-}" in
---init-trial) shift;exec "$SESSION" "$OUT" run "$0" --init-trial-worker "$@" >> "$BOOT_LOG" 2>&1;;
+--init-trial) [ ! -L "$BOOT_LOG" ] || exit 1;: > "$BOOT_LOG" || exit 1;shift;exec "$SESSION" "$OUT" run "$0" --init-trial-worker "$@" >> "$BOOT_LOG" 2>&1;;
 --init-trial-worker) init_trial=1;shift;;
 --status) exec "$SESSION" "$OUT" status;;
 --new) exec "$SESSION" "$OUT" new;;
@@ -115,6 +117,10 @@ fi
 job=${NX51_JOB:-}
 case "$job" in "$OUT"/JOB_*) :;;*) exit 1;;esac
 [ -d "$job" ] && [ ! -L "$job" ] || exit 1
+if [ "${NX51_RC_NEW_JOB:-0}" = 1 ] && [ "$init_trial" = 1 ];then
+ regular "$LOGPOLICY" && [ "$(hash "$LOGPOLICY")" = "$SRW_LOG_POLICY_SHA" ] || exit 1
+ /bin/sh "$LOGPOLICY" mark "$job" "${NX51_PROGRESS_TOKEN:-}" || exit 1
+fi
 exec >> "$job/collector.log" 2>&1
 LOOK=raw422
 STRENGTH=100
@@ -414,7 +420,7 @@ reset_live_lut(){
     phase=LUT_FACTORY_RESET
     lock_release "$RUN/engine.lock" || fail ENGINE_HANDOFF_RELEASE_FAILED
     engine_owned=0
-    /bin/sh "$ENGINE" off > "$job/live-lut-off.log" 2>&1 & child=$!
+    NXL_SRW_LUT_RESET=1 /bin/sh "$ENGINE" off > "$job/live-lut-off.log" 2>&1 & child=$!
     rc=0;wait "$child" || rc=$?;child=
     [ "$rc" = 0 ] || fail LIVE_LUT_RESTORE_FAILED
     lock_take "$RUN/engine.lock" || fail LIVE_LUT_CHANGED_DURING_HANDOFF
@@ -477,6 +483,8 @@ capture_srw_lut(){
     selected_srw_lut=${NX51_SRW_LUT:-off}
     case "$selected_srw_lut" in off) pipeline_lut=;printf 'table=identity_favorite_selection_off\n' > "$report/srw-lut.origin" || fail LUT_SNAPSHOT_FAILED;return;;esac
     identifier "$selected_srw_lut" || fail SRW_LUT_NAME_INVALID
+    case "$selected_srw_lut" in vlog_*) fail SRW_LOG_LUT_NOT_ALLOWED;;esac
+    case "$selected_srw_lut" in vlog_*) fail SRW_LOG_LUT_NOT_ALLOWED;;esac
     srw_looks=${NX_LUT_LOOKS:-/mnt/mmc/looks}
     case "$srw_looks" in /*) :;;*) fail SRW_LUT_DIRECTORY_INVALID;;esac
     [ -d "$srw_looks" ] && [ ! -L "$srw_looks" ] || fail SRW_LUT_DIRECTORY_INVALID

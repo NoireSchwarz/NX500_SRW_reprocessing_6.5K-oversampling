@@ -1,0 +1,31 @@
+from context import *
+steps='''NX LUT Lite 0.4.0 RC5 合併短測
+
+安裝前安全斷開USB，關機待寫卡燈熄滅，取出電池約30秒，再裝回開機安裝；完成後關機再開機，確認VID頁顯示0.4.0 RC5。
+
+1. 照片待機中，選普通LUT進詳細頁；調整仍只暫存，OK裝載。此次影片LUT自動開啟，不必再手動開啟；半按回取景後錄5秒，確認影片有同一LUT效果。
+2. 在取景雙擊EV（兩次按住都少於0.4秒，間隔約0.1–0.4秒），應打開剛才已應用的LUT與參數。單按EV的原有功能保留，稍延後判定。
+3. 停錄並回照片待機，按EV+WiFi，放開兩鍵後切換V-Log。等完成提示，應得到純V-Log，先前普通LUT自動清除。
+4. 雙擊EV應跟到Log LUT選擇器；選一張、OK裝載。菜單仍留在下半屏，半按才回取景。
+5. 停錄並回照片待機，再按EV+WiFi，應還原原廠Gamma／色彩／LUT；雙擊EV應跟到普通LUT的原廠項。
+6. 可在菜單開啟時試EV+WiFi一次，確認只有一次切換；原本的EV+AEL菜單快捷鍵保留。AEL+WiFi不另作綁定。
+
+每次新的普通LUT提交會預設開啟影片LUT。菜單內仍能手動關閉，沿用僅照片或SRW的既有工作流程；下一次應用普通LUT又回到預設開啟。冷啟動不自動應用LUT。
+錄影／拍照儲存或SRW工作期間不能切換V-Log。若顯示未確認，停止測試並保留記錄。
+不需要重複碼率測試；RC4的視頻規格重載、原生SRW、核心庫、Gamma／RTOS入口及全部32張LUT保持原實現。
+'''
+report='''NX LUT Lite 0.4.0 RC5 變更與驗證
+
+以用戶確認效果良好的RC4為基線，僅更改Linux菜單／按鍵及兩份shell流程：lut-core.sh在非零LUT提交後一律啟用已驗證DYN24影片路徑；gamma-reload.sh增加toggle入口，在既有命令鎖內依真實Gamma狀態／Log策略標記選擇啟用或恢復。
+EV+WiFi改為V-Log開關。雙鍵完全放開後才提交，長按重複不重複切換，EV+AEL及三鍵衝突處理保留。菜單有自己的辨識，啟動監聽器在菜單已開啟時不重複啟動第二個操作。
+EV雙擊取代三按，仍以已應用收據恢復LUT／Log LUT和A/B參數，單按功能延後最多約420ms判定。保持OK提交與半按返回。
+V-Log從詳細頁切換成功後，詳細頁依實際新狀態改到對應普通／Log範圍，避免顯示舊輸入類別。
+SRW菜單及原生管線不改，既有影片LUT手動關閉入口保留。新預設不代表冷啟動自動應用，也不在無LUT時重定向影片指標。強度全零及原廠恢復仍回原廠基準。
+核心庫、RTOS、原廠Gamma／色彩、RC4即時重載工具和視頻規格工具及32張LUT均逐字節保持RC4。
+真實ARM按鍵／菜單控制流、真實shell＋ARM LUT工具及正式安裝器回放在電腦驗證；OS、Gamma、MMIO／中斷及相機端點仍有模擬。新增快捷鍵與預設的實機驗收待本次短測，不把PC通過當作硬體驗收。
+'''
+for n,s in [('RC5_TEST_STEPS_zh.txt',steps),('RC5_VALIDATION_REPORT_zh.txt',report),('RC5_RELOAD_RESEARCH_zh.txt',report)]: (S/n).write_text(s,'utf8',newline='\n')
+(M/'README_zh.md').write_text('NX LUT Lite 0.4.0 RC5\n\n'+steps+'\n'+report,'utf8',newline='\n')
+(S/'README_zh.md').write_text('NX LUT Lite 0.4.0 RC5\n\n'+steps,'utf8',newline='\n')
+b=json.loads((S/'BUILD.json').read_text('utf8'));b.update(format='NXL_RELEASE_RC5',release='0.4.0-RC5',runtime_revision='release-0.4.0-rc5',EV_shortcut='two taps, applied state',EV_WiFi='toggle V-Log through existing Gamma path',video_LUT_default_on_after_apply=True,cold_boot_auto_apply=False,physical_camera_tested=False,hardware_tested=False);put(S/'BUILD.json',b)
+print('PASS RC5 instructions')

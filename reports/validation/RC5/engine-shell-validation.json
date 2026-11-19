@@ -1,0 +1,153 @@
+{
+  "passed": true,
+  "cases": 11,
+  "commands": [
+    {
+      "script": "lut.sh",
+      "args": [
+        "detail",
+        "fuji_400h",
+        65,
+        2,
+        0,
+        -1,
+        "fuji_astia100f",
+        40,
+        -1,
+        0,
+        1
+      ],
+      "exit": 0,
+      "output": "STAGED LIVE_VIEW_JPEG fuji_400h strength=65; OLED preserved\nOK VIDEO_TRIAL_ON; start a NEW recording to test; stop recording before changing LUT\nNXL_LUT_RELOAD_CONFIRMED1 EOF14 DMA7 ACCESS_CLEAR\nNX_LUT_DETAIL_APPLIED2 A=fuji_400h 65 2 0 -1 B=fuji_astia100f 40 -1 0 1\n"
+    },
+    {
+      "script": "lut.sh",
+      "args": [
+        "video-off"
+      ],
+      "exit": 0,
+      "output": "NXL_LUT_RELOAD_CONFIRMED1 EOF14 DMA7 ACCESS_CLEAR\n"
+    },
+    {
+      "script": "lut.sh",
+      "args": [
+        "detail",
+        "fuji_400h",
+        55,
+        0,
+        0,
+        0,
+        "fuji_400h",
+        0,
+        0,
+        0,
+        0
+      ],
+      "exit": 0,
+      "output": "STAGED LIVE_VIEW_JPEG fuji_400h strength=55; OLED preserved\nOK VIDEO_TRIAL_ON; start a NEW recording to test; stop recording before changing LUT\nNXL_LUT_RELOAD_CONFIRMED1 EOF14 DMA7 ACCESS_CLEAR\nNX_LUT_DETAIL_APPLIED2 A=fuji_400h 55 0 0 0 B=fuji_400h 0 0 0 0\n"
+    },
+    {
+      "script": "gamma-reload.sh",
+      "args": [
+        "toggle"
+      ],
+      "exit": 0,
+      "output": "NXL_GAMMA_RELOAD1\nmode=LOG\nphase=NATIVE_QUEUED\nreason=MODELED_NATIVE_ENDPOINT\nepoch=1\nqueued_epoch=1\nqualified=0\napplies=0\ninvalidations=0\nqueues=0\nfault=0\nend=NXL_GAMMA_RELOAD_END1\n"
+    },
+    {
+      "script": "lut.sh",
+      "args": [
+        "log-detail",
+        "vlog_v709",
+        100,
+        0,
+        0,
+        0,
+        "vlog_v709",
+        0,
+        0,
+        0,
+        0
+      ],
+      "exit": 0,
+      "output": "STAGED LIVE_VIEW_JPEG vlog_v709 strength=100; OLED preserved\nOK VIDEO_TRIAL_ON; start a NEW recording to test; stop recording before changing LUT\nNXL_LUT_RELOAD_CONFIRMED1 EOF14 DMA7 ACCESS_CLEAR\nNX_LUT_DETAIL_APPLIED2 A=vlog_v709 100 0 0 0 B=vlog_v709 0 0 0 0\n"
+    },
+    {
+      "script": "gamma-reload.sh",
+      "args": [
+        "toggle"
+      ],
+      "exit": 0,
+      "output": "NXL_GAMMA_RELOAD1\nmode=FACTORY\nphase=FACTORY_QUEUED\nreason=MODELED_NATIVE_ENDPOINT\nepoch=1\nqueued_epoch=1\nqualified=0\napplies=0\ninvalidations=0\nqueues=0\nfault=0\nend=NXL_GAMMA_RELOAD_END1\n"
+    },
+    {
+      "script": "gamma-reload.sh",
+      "args": [
+        "toggle"
+      ],
+      "exit": 0,
+      "output": "NXL_GAMMA_RELOAD1\nmode=LOG\nphase=NATIVE_QUEUED\nreason=MODELED_NATIVE_ENDPOINT\nepoch=1\nqueued_epoch=1\nqualified=0\napplies=0\ninvalidations=0\nqueues=0\nfault=0\nend=NXL_GAMMA_RELOAD_END1\n"
+    },
+    {
+      "script": "gamma-reload.sh",
+      "args": [
+        "toggle"
+      ],
+      "exit": 1,
+      "output": "NXL_GAMMA_RELOAD1\nmode=FACTORY\nphase=FAILED\nreason=CLEAN_LOG_GAMMA_RESTORED_LOOK_CLEANUP_REQUIRED\nepoch=0\nqueued_epoch=0\nqualified=0\napplies=0\ninvalidations=0\nqueues=0\nfault=0\nend=NXL_GAMMA_RELOAD_END1\n"
+    },
+    {
+      "script": "gamma-reload.sh",
+      "args": [
+        "toggle"
+      ],
+      "exit": 0,
+      "output": "NXL_GAMMA_RELOAD1\nmode=FACTORY\nphase=FACTORY_QUEUED\nreason=MODELED_NATIVE_ENDPOINT\nepoch=1\nqueued_epoch=1\nqualified=0\napplies=0\ninvalidations=0\nqueues=0\nfault=0\nend=NXL_GAMMA_RELOAD_END1\n"
+    },
+    {
+      "script": "lut.sh",
+      "args": [
+        "detail",
+        "fuji_400h",
+        0,
+        0,
+        0,
+        0,
+        "fuji_400h",
+        0,
+        0,
+        0,
+        0
+      ],
+      "exit": 0,
+      "output": "NXL_LUT_RELOAD_CONFIRMED1 EOF14 DMA7 ACCESS_CLEAR\nNX_LUT_DETAIL_APPLIED2 A=fuji_400h 0 0 0 0 B=fuji_400h 0 0 0 0\n"
+    },
+    {
+      "script": "lut.sh",
+      "args": [
+        "detail",
+        "fuji_400h",
+        100,
+        0,
+        0,
+        0,
+        "fuji_400h",
+        0,
+        0,
+        0,
+        0
+      ],
+      "exit": 1,
+      "output": "ERR STOP_RECORDING_AND_RETURN_TO_PHOTO\n"
+    }
+  ],
+  "ordinary_video_default_on": true,
+  "explicit_off_then_new_apply_on": true,
+  "VLog_toggle_roundtrip": true,
+  "zero_strength_factory_baseline": true,
+  "recording_busy_rejected": true,
+  "production_shell": true,
+  "real_ARM_table_and_M3": true,
+  "MMIO_IRQ_Gamma_and_OS_endpoints_modeled": true,
+  "hardware_tested": false
+}

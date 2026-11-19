@@ -5,10 +5,8 @@ umask 077
 D=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 OPS=$D/bin/nxl-fileops
 PROBE=$D/bin/nxl-video-probe.arm
-FLOW=$D/bin/nxl-video-fullwidth.arm
-VIDEO_FULLWIDTH_SHA=0000000000000000000000000000000000000000000000000000000000000000
-OPS_SHA=0000000000000000000000000000000000000000000000000000000000000000
-VIDEO_PROBE_SHA=0000000000000000000000000000000000000000000000000000000000000000
+OPS_SHA=c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d
+VIDEO_PROBE_SHA=7228073bea11ef7eb9fa050075887c390643674f0021eb1254ac77ec7eacf7e7
 fail(){ printf 'NXL_VIDEO_PROBE1\nstate=OFF\nreason=%s\nreport=\nsamples=0\nperiod_ms=200\nend=NXL_VIDEO_PROBE_END1\n' "$1";exit 1; }
 regular(){ [ -f "$1" ] && [ ! -L "$1" ]; }
 [ "$#" = 1 ] || exit 2
@@ -26,9 +24,8 @@ $current
 EOF
     case "$state" in ON|SAVING|FULL) printf '%s\n' "$current";exit 0;;PENDING) printf '%s\n' "$current";exit 1;;esac
     ready=$("$PROBE" --ready) || { printf '%s\n' "$ready";exit 1; }
-    regular "$FLOW" && [ -x "$FLOW" ] && [ "$("$OPS" sha256 "$FLOW")" = "$VIDEO_FULLWIDTH_SHA" ] || fail TRACE_FLOW_COMPONENT_IDENTITY_FAILED
-    # Idle bounded transaction installs observation only; selected output stays intact.
-    "$FLOW" trace >/tmp/nx-lut-lite/video-flow-arm.txt 2>&1 || fail TRACE_FLOW_ARM_FAILED_RETURN_PHOTO
+    # R10m: starting a reader must never install RTOS code or suspend the camera.
+    # A pre-existing camera-tested timer is optional; absence stays explicit.
     mkdir -p /mnt/mmc/NXDEMO51
     [ ! -L /mnt/mmc/NXDEMO51 ] || fail TRACE_REPORT_DIRECTORY_INVALID
     report=/mnt/mmc/NXDEMO51/VIDEO_STAGE_$(date +%s)_$$

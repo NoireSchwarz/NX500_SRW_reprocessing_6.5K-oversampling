@@ -27,11 +27,11 @@ static int vc_pair(const struct vp_reader*r,struct vp_completion*z){
   r->physical(r->context,VP_LATENCY_DATA,z->after,32);
 }
 static int vc_same_request(const uint32_t*a,const uint32_t*b){
- return a[0]==VP_LATENCY_MAGIC&&a[1]==4u&&b[0]==a[0]&&b[1]==a[1]&&
-  a[2]==b[2]&&a[4]==b[4]&&a[5]==b[5];
+ return vp_timer_common_header(a)&&b[0]==a[0]&&b[1]==a[1]&&
+  a[2]==b[2]&&a[5]==b[5];
 }
 static int vc_inflight(const uint32_t*a){
- return (a[3]&15u)==3u&&((a[3]>>24)&3u)==0u&&((a[3]>>16)&255u)==1u;
+ return vp_timer_inflight(a);
 }
 static void vp_completion_capture(const struct vp_reader*r,struct vp_record*s,
  vc_now_fn now,vc_wait_fn wait,void*clock_context,uint32_t phase,uint32_t result,uint32_t governor){

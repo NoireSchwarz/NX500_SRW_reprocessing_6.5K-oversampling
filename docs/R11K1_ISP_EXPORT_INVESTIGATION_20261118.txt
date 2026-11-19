@@ -1,0 +1,38 @@
+R11k1 ISP／共享工作区导出失败调查
+2026-11-18 / Europe/Berlin
+
+已确认结论
+R11k1成功安装，模块清单daae8330a53b089ce993af7c4331307f8bb6ca904f5dcecb687d12f7cf3cc865；相机核心库仍为7743dd26b06fb2e600cc65aff6ad92913b43c3f75b9493437239006b24991cd9，安装前后未变。
+最新JOB_1794936370_510_98401fe1使用SAM_0468.SRW。本轮已通过上次版本入口，完成原生Still帧；front-frame-result为P48_NATIVE_FRAME_COMPLETE、ISP_completed=1、Gamma模式1、目标回读匹配1、恢复1、原生配置装载2次。postframe/export均连续3次稳定，failure_mask=0。
+直接失败记录为SHARED_WORKSPACE_EXPORT_FAILED：发生在原生帧之后的共享工作区导出，还未进入后段LDC/LUT/JPEG。汇总AUTO_NATIVE_STATE_UNKNOWN_EP_REFERENCE_HELD是外层保守收尾分类，不能反推ISP提交失败。汇总native_jobs=0是失败路径结果写法；前端独立记录确认本轮ISP已运行。
+尚无最终JPEG或完整像素验收，不能宣称Gamma像素正确或Log兼容性已完成。
+
+明确的校验缺陷
+原厂CAP返回PA=0xa1c00000，VA=0x90b35000，容量201326592（192MiB）。分配响应已通过原有地址翻译、分配表及所有权检查，且这块缓冲已用于完成原生帧。
+PA按16KB对齐；VA按4KB对齐，但VA%16384=4096。front_workspace_export把response[0]原样填入s.va，随后common/shared_workspace.h的sw_valid_capacity要求(s->va & 16383)==0，必然拒绝本次VA。
+这条虚拟地址检查把物理分配块的16KB粒度套到了虚拟映射上。物理地址/容量/索引/所有权的原校验应继续保留；不能把VA向下取整或修改原厂返回句柄来迎合该检查。
+
+电脑复现
+使用捕获的8条RESOURCE.journal，由生产nr_read/nr_valid验证原始校验和及资源身份；将真实front_workspace_export函数编成ARM并执行。
+原函数对同一16KB区间内4种4KB页基址，只接受第0页；本次第1页VA被拒绝，且未进入后续still_owned调用。仅在电脑私有副本将VA掩码16383改为4095后，四种页基址都能导出512字节租约及owner证明。
+原版/假设副本各12组，共24组通过预期检查。零VA、非页对齐、VA溢出、错误PA、错误索引、错误nonce、错误源哈希、所有权丢失仍拒绝。OS进程身份、原生退场等端点根据记录建模；这不是相机硬件复测。
+电脑回放证明该检查足以解释本轮导出拒绝；现有日志未逐项记录所有导出前置条件，所以不能用它排除后续仍有其他问题。
+
+与前次改动的关系
+common/shared_workspace.h及front_workspace.inc在R11j、R11k、R11k1的本地源码副本中逐字节相同。这是已有检查缺陷，本次地址使它暴露；仅凭发生顺序不能证明是哪次历史修改最初引入，也不能把VA变化直接归因于关闭镜头记录器或Gamma新增。
+此前test_fast_pipeline.c模拟了前端，手工构造租约并固定VA=0x87000000，没有执行真实front_workspace_export，也没有覆盖4KB对齐而非16KB对齐的地址组合。这是前两轮验证的明确缺口。
+
+需要一起修的范围
+1. common/shared_workspace.h：区分物理块16KB粒度与虚拟映射4KB对齐，保持完整范围、nonce、哈希、分配表和owner绑定检查。
+2. core/src/session_rearm_contract.h的r7_extent，以及core/src/nxl-session-rearm.c的backend_info，还有相同VA的16KB限制；必须同步核验，不能只让前端导出通过。
+3. 按实际头文件依赖重建普通/AUTO显影器、后段控制器/worker、结果验证器和资源接续工具，统一清单与运行时哈希；不改RTOS、Gamma曲线、DMA流程或核心库。
+4. 以真实导出函数加本次PA/VA做生产路径回归，并把四种页基址贯穿接收、后处理结果、归还及接续校验。保留错误物理地址、越界和所有权变化的拒绝测试。
+5. 导出记录补齐具体失败步骤及原始PA/VA/容量，避免仅有SHARED_WORKSPACE_EXPORT_FAILED和过时errno=2，下一次能直接区分租约校验、owner证明和文件保存。
+
+现场与状态
+RESOURCE最后是STOPPED，未出现RELEASED；EP-open显示reference_acquired=1，未取得归还证明。当前RESTART_REQUIRED保守状态应保持，不能因为ISP已完成就清锁或强行释放。先停止重复采样，后续修复验收从实际重启后的单次SOURCE19开始。
+本轮只读SD并保存80个证据文件到电脑。相关生产源码哈希已核对保持，未修改项目代码、未打包、未部署、未格式化或修复文件系统。所有照片、录像、备份和历史日志保留。
+
+证据目录：D:\NX500模组开发\r11k1-export-investigation-20261118
+电脑回放：export-replay-validation.json
+实机摘录：investigation-result.json

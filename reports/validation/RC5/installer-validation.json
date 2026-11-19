@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "case": "RC4-current-patched",
+      "passed": true,
+      "fixture": "D:\\NX500模组开发\\formal-0.4.0-rc5-work\\tests\\installer-1\\installer-dodcvl5x",
+      "core_sha256": "7743dd26b06fb2e600cc65aff6ad92913b43c3f75b9493437239006b24991cd9",
+      "core_bytes_and_inode_preserved": true,
+      "prior_user_state_and_history_preserved": true,
+      "all_32_LUTs_installed": true
+    }
+  ],
+  "production_deploy_sha256": "a0abb6c54f657555dc8d6ea292a2526989af6d41a11ced8aedbc89b10a9c0cbe",
+  "module_manifest_sha256": "a8782bd8e9882d88af711ccfe046754644b577bbc13a2fc3792130caeb833b26",
+  "real_production_shell": true,
+  "OS_process_mount_fileops_endpoints_modeled": true,
+  "hardware_tested": false
+}

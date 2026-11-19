@@ -1,0 +1,684 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "script": "nx-lut-demo/nx-lut-lite/auto-init-capture.sh",
+      "key": "AUTO_WATCH_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-init-watch.arm",
+      "expected": "53dce4d8760a4323499a305431ce36d3df0241476c87fca5a8e6b0b11a8567c8",
+      "actual": "53dce4d8760a4323499a305431ce36d3df0241476c87fca5a8e6b0b11a8567c8",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/auto-init.sh",
+      "key": "SRW_LOG_POLICY_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/srw-log-policy.sh",
+      "expected": "ea30b428f6a607c304b3a1400f2263a89f5e32bdb770dece39512c30efaf1093",
+      "actual": "ea30b428f6a607c304b3a1400f2263a89f5e32bdb770dece39512c30efaf1093",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/auto-init.sh",
+      "key": "SAP_GUARD_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/srw-sap-service.sh",
+      "expected": "25fe4b65714ff03d5c4ce2fe4ff66aa54b7f00f95ac4b1a9964c4646538de1f3",
+      "actual": "25fe4b65714ff03d5c4ce2fe4ff66aa54b7f00f95ac4b1a9964c4646538de1f3",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/auto-init.sh",
+      "key": "OPS_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-fileops",
+      "expected": "c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d",
+      "actual": "c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/auto-init.sh",
+      "key": "INIT_TEST_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-init-test.arm",
+      "expected": "7706a4667e6d71e6288a5e6e853680e83c4d854b9d8ed4487ed40fa700e1d074",
+      "actual": "7706a4667e6d71e6288a5e6e853680e83c4d854b9d8ed4487ed40fa700e1d074",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/auto-init.sh",
+      "key": "LENS_CAPTURE_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/lens-capture.sh",
+      "expected": "583dd0eab1984f1154f09128daa35e630d0b808e1e973f5eb38f3250578bbea3",
+      "actual": "583dd0eab1984f1154f09128daa35e630d0b808e1e973f5eb38f3250578bbea3",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/auto-init.sh",
+      "key": "RUNNER_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/memory-test.sh",
+      "expected": "137487a71c660c37e11d31e0e59d4dcf2408f2cbd75664f1c6c7742f5e7d46c7",
+      "actual": "137487a71c660c37e11d31e0e59d4dcf2408f2cbd75664f1c6c7742f5e7d46c7",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/color-observe.sh",
+      "key": "OPS_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-fileops",
+      "expected": "c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d",
+      "actual": "c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/color-observe.sh",
+      "key": "COLOR_OBSERVE_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-color-observe.arm",
+      "expected": "bfcb9126e3d0af6979a9ced64d6162bd1e7efc9bf5fc1e8199b17856571a3965",
+      "actual": "bfcb9126e3d0af6979a9ced64d6162bd1e7efc9bf5fc1e8199b17856571a3965",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/color-observe.sh",
+      "key": "USB_GUARD_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-usb-guard.arm",
+      "expected": "61bf59b3bf4ccba775525e40024d0a42b86cffd22a1b94d9a431a8102f266918",
+      "actual": "61bf59b3bf4ccba775525e40024d0a42b86cffd22a1b94d9a431a8102f266918",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/finish-srw.sh",
+      "key": "OPS_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-fileops",
+      "expected": "c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d",
+      "actual": "c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/finish-srw.sh",
+      "key": "RUNNER_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/memory-test.sh",
+      "expected": "137487a71c660c37e11d31e0e59d4dcf2408f2cbd75664f1c6c7742f5e7d46c7",
+      "actual": "137487a71c660c37e11d31e0e59d4dcf2408f2cbd75664f1c6c7742f5e7d46c7",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/finish-srw.sh",
+      "key": "SRW_LOG_POLICY_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/srw-log-policy.sh",
+      "expected": "ea30b428f6a607c304b3a1400f2263a89f5e32bdb770dece39512c30efaf1093",
+      "actual": "ea30b428f6a607c304b3a1400f2263a89f5e32bdb770dece39512c30efaf1093",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/gamma-reload.sh",
+      "key": "NATIVE_REFRESH_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-native-refresh.arm",
+      "expected": "3a7b272e3be9ad81996c823f17f33d84e990a85eff0f252785db7d575a0ceac7",
+      "actual": "3a7b272e3be9ad81996c823f17f33d84e990a85eff0f252785db7d575a0ceac7",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/gamma-reload.sh",
+      "key": "LUT_IDLE_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-lutidle.arm",
+      "expected": "295fb39359b29739801fd69f71aaaa12c731efd1ee25d64c07c71c91fd94ffb3",
+      "actual": "295fb39359b29739801fd69f71aaaa12c731efd1ee25d64c07c71c91fd94ffb3",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/gamma-reload.sh",
+      "key": "OPS_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-fileops",
+      "expected": "c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d",
+      "actual": "c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/gamma-reload.sh",
+      "key": "GAMMA_RELOAD_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-gamma-reload.arm",
+      "expected": "5edf35e0ba839f198d18049e61f4b843d49507a59758e527a25204708dae9d6b",
+      "actual": "5edf35e0ba839f198d18049e61f4b843d49507a59758e527a25204708dae9d6b",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/gamma-reload.sh",
+      "key": "USB_GUARD_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-usb-guard.arm",
+      "expected": "61bf59b3bf4ccba775525e40024d0a42b86cffd22a1b94d9a431a8102f266918",
+      "actual": "61bf59b3bf4ccba775525e40024d0a42b86cffd22a1b94d9a431a8102f266918",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/gamma-reload.sh",
+      "key": "ENGINE_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/lut.sh",
+      "expected": "2d5c5d0c64242691413e41c8d4c833dbf864695e0d9c9c03a164337aff3345d2",
+      "actual": "2d5c5d0c64242691413e41c8d4c833dbf864695e0d9c9c03a164337aff3345d2",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/handoff-watch.sh",
+      "key": "WATCH_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-handoff-watch.arm",
+      "expected": "91b4520d2a4df5b8af805657f94f940e8c28d56964ae7faba20687233164c3bd",
+      "actual": "91b4520d2a4df5b8af805657f94f940e8c28d56964ae7faba20687233164c3bd",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/hevc-gate-install.sh",
+      "key": "HG_OEM_SHA",
+      "classification": "historical whitelist",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/hevc-gate-install.sh",
+      "key": "HG_PATCH_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/native/libmmfcore.r11f.so",
+      "expected": "7743dd26b06fb2e600cc65aff6ad92913b43c3f75b9493437239006b24991cd9",
+      "actual": "7743dd26b06fb2e600cc65aff6ad92913b43c3f75b9493437239006b24991cd9",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/hevc-gate-install.sh",
+      "key": "HG_RENAME_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-atomic-rename.arm",
+      "expected": "7424ee60dc9947d63789bba534ef96710bbdd13218caafc0e3ba3f7712350a48",
+      "actual": "7424ee60dc9947d63789bba534ef96710bbdd13218caafc0e3ba3f7712350a48",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/lens-capture.sh",
+      "key": "LENS_WATCH_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-lens-watch.arm",
+      "expected": "d1eef31e7fab89e0d440bea14997f88121f0959bede9c4d27292ec0009814a67",
+      "actual": "d1eef31e7fab89e0d440bea14997f88121f0959bede9c4d27292ec0009814a67",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/lens-capture.sh",
+      "key": "OPS_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-fileops",
+      "expected": "c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d",
+      "actual": "c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/lut-core.sh",
+      "key": "LUT_LOAD_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-lutload.arm",
+      "expected": "e2ce269905b3ae17d514f1787aed8388d40ef78add59c9e2b9f3421566379424",
+      "actual": "e2ce269905b3ae17d514f1787aed8388d40ef78add59c9e2b9f3421566379424",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/lut-core.sh",
+      "key": "OPS_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-fileops",
+      "expected": "c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d",
+      "actual": "c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/lut-core.sh",
+      "key": "LUT_IDLE_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-lutidle.arm",
+      "expected": "295fb39359b29739801fd69f71aaaa12c731efd1ee25d64c07c71c91fd94ffb3",
+      "actual": "295fb39359b29739801fd69f71aaaa12c731efd1ee25d64c07c71c91fd94ffb3",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/lut-core.sh",
+      "key": "LOG_LUT_POLICY_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/log-lut-policy.sh",
+      "expected": "fba6d817ffbca242b4e8dddf645e8878dcb1759b85ac770dc4f7ab1f5eaf9620",
+      "actual": "fba6d817ffbca242b4e8dddf645e8878dcb1759b85ac770dc4f7ab1f5eaf9620",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/lut-core.sh",
+      "key": "LUT_CATALOG_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/data/release-lut-allowlist.tsv",
+      "expected": "599013808495ffe34f53135bbf92deb742254fd8b63866147396bbcffc8f2be4",
+      "actual": "599013808495ffe34f53135bbf92deb742254fd8b63866147396bbcffc8f2be4",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/lut-core.sh",
+      "key": "BLEND_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-lutblend.arm",
+      "expected": "acb74f412adf89da4008fc58ac209120d72e940d29a703a0f8d7fd5c4754e0f4",
+      "actual": "acb74f412adf89da4008fc58ac209120d72e940d29a703a0f8d7fd5c4754e0f4",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/lut-core.sh",
+      "key": "SHARP_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-sharp.arm",
+      "expected": "480d0b66a0b706ae5217a5a8ca06ca6fc1ccb99857a70bbfd5e85aba2bf1ed1a",
+      "actual": "480d0b66a0b706ae5217a5a8ca06ca6fc1ccb99857a70bbfd5e85aba2bf1ed1a",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/lut.sh",
+      "key": "OPS_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-fileops",
+      "expected": "c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d",
+      "actual": "c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/lut.sh",
+      "key": "LUT_GUARD_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-lutguard.arm",
+      "expected": "07fb33c0c6d7d1279a9fb4cef8b8bc125143374fba3e8ff61273e6671f165fe9",
+      "actual": "07fb33c0c6d7d1279a9fb4cef8b8bc125143374fba3e8ff61273e6671f165fe9",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/lut.sh",
+      "key": "LUT_CORE_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/lut-core.sh",
+      "expected": "11873fc54b28bbbbb1c6c230a86f73b099c07247d8388ef94134f58dbe837a89",
+      "actual": "11873fc54b28bbbbb1c6c230a86f73b099c07247d8388ef94134f58dbe837a89",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/memory-test.sh",
+      "key": "SRW_LOG_POLICY_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/srw-log-policy.sh",
+      "expected": "ea30b428f6a607c304b3a1400f2263a89f5e32bdb770dece39512c30efaf1093",
+      "actual": "ea30b428f6a607c304b3a1400f2263a89f5e32bdb770dece39512c30efaf1093",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/memory-test.sh",
+      "key": "INIT_PIPELINE_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-init-pipeline.arm",
+      "expected": "dd70a2cd84aed091a2b2004430cc4d4c3400d89c60fd069f041a6864d9058e74",
+      "actual": "dd70a2cd84aed091a2b2004430cc4d4c3400d89c60fd069f041a6864d9058e74",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/memory-test.sh",
+      "key": "OWNED_EP_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-owned-ep.arm",
+      "expected": "15f24175e1f4d1e246ce3333a2eb0a384a4d07660c380625fdced88cf5d6b95f",
+      "actual": "15f24175e1f4d1e246ce3333a2eb0a384a4d07660c380625fdced88cf5d6b95f",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/memory-test.sh",
+      "key": "CV_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/cube2lut.arm",
+      "expected": "1fee2e50896dd044025022a2fb3e968a857a7b1c5d1426630d899f5cf286d34d",
+      "actual": "1fee2e50896dd044025022a2fb3e968a857a7b1c5d1426630d899f5cf286d34d",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/memory-test.sh",
+      "key": "HANDOFF_WATCH_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-handoff-watch.arm",
+      "expected": "91b4520d2a4df5b8af805657f94f940e8c28d56964ae7faba20687233164c3bd",
+      "actual": "91b4520d2a4df5b8af805657f94f940e8c28d56964ae7faba20687233164c3bd",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/memory-test.sh",
+      "key": "RESTORE_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-oem-restore.arm",
+      "expected": "1f4beb372bcdc7557ececfc89257361d283ae7487e4b364ef33ff330f75fa996",
+      "actual": "1f4beb372bcdc7557ececfc89257361d283ae7487e4b364ef33ff330f75fa996",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/memory-test.sh",
+      "key": "RESTORE_SCRIPT_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/restore-camera.sh",
+      "expected": "8e78506c58274d8f6faaaca754e197f60bf5d9952d6bc1c0b024100b3b7de8da",
+      "actual": "8e78506c58274d8f6faaaca754e197f60bf5d9952d6bc1c0b024100b3b7de8da",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/memory-test.sh",
+      "key": "REARM_SCRIPT_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/rearm-session.sh",
+      "expected": "e9f507eee90522530688e243c787ab307be4f561846a466bd6497ba91b58c39e",
+      "actual": "e9f507eee90522530688e243c787ab307be4f561846a466bd6497ba91b58c39e",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/memory-test.sh",
+      "key": "RETIRE_MANIFEST_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/data/prior-front-retire.sha256",
+      "expected": "8af1064169dcdc3f1f89bedd84bdd53ace6bf476177f4d338ded8f3b0746d2f4",
+      "actual": "8af1064169dcdc3f1f89bedd84bdd53ace6bf476177f4d338ded8f3b0746d2f4",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/memory-test.sh",
+      "key": "SESSION_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-session.arm",
+      "expected": "7c2e2a0e60652c16116b4b9250bad164e543c85cf3ddffc72846cae754b44659",
+      "actual": "7c2e2a0e60652c16116b4b9250bad164e543c85cf3ddffc72846cae754b44659",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/memory-test.sh",
+      "key": "FRONT_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-demo-front.arm",
+      "expected": "714bb6a9608ef849d716ef4716d65db7d392fe464d90ecbe0fb882815700b232",
+      "actual": "714bb6a9608ef849d716ef4716d65db7d392fe464d90ecbe0fb882815700b232",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/memory-test.sh",
+      "key": "POST_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-demo-post.arm",
+      "expected": "c8d178c4802a917433ae38264eb56e896b3d90b879ec691ad6a3d9b4f49d433f",
+      "actual": "c8d178c4802a917433ae38264eb56e896b3d90b879ec691ad6a3d9b4f49d433f",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/memory-test.sh",
+      "key": "HWCTL_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-hw-controller.arm",
+      "expected": "60e5833761547c3ac1c1b9165fdda87f97592ccfc2de766c1d9471ac081d8973",
+      "actual": "60e5833761547c3ac1c1b9165fdda87f97592ccfc2de766c1d9471ac081d8973",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/memory-test.sh",
+      "key": "HWWORK_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-hw-worker.arm",
+      "expected": "74642c4d9729062004246ae9bcee9a12c659db4e1efd240350a2e66b72eba719",
+      "actual": "74642c4d9729062004246ae9bcee9a12c659db4e1efd240350a2e66b72eba719",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/memory-test.sh",
+      "key": "MENU_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-menu",
+      "expected": "2b7cc2a68bb0c34eae4271c1ba151353a9eab4cf6ac4789d2bcb97375ec4220d",
+      "actual": "2b7cc2a68bb0c34eae4271c1ba151353a9eab4cf6ac4789d2bcb97375ec4220d",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/memory-test.sh",
+      "key": "ENGINE_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/lut.sh",
+      "expected": "2d5c5d0c64242691413e41c8d4c833dbf864695e0d9c9c03a164337aff3345d2",
+      "actual": "2d5c5d0c64242691413e41c8d4c833dbf864695e0d9c9c03a164337aff3345d2",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/memory-test.sh",
+      "key": "OPS_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-fileops",
+      "expected": "c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d",
+      "actual": "c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/memory-test.sh",
+      "key": "OLD_FRONT_SHA",
+      "classification": "historical whitelist",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/memory-test.sh",
+      "key": "SOURCE_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/assets/SAM_0183.SRW",
+      "expected": "dfd6608e4ee05f0d5b4b402fedd3c928aee509595e6964efa4c1ce87f1d9715c",
+      "actual": "dfd6608e4ee05f0d5b4b402fedd3c928aee509595e6964efa4c1ce87f1d9715c",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/memory-test.sh",
+      "key": "PLAN_SHA",
+      "classification": "package dependency",
+      "target": "SOURCE/demo-p52-recovery-r7/plan.json",
+      "expected": "9e0e625e61b86eea0d9db87b1f5954622b2d3152eca7d5cdd529c64e7d48c188",
+      "actual": "9e0e625e61b86eea0d9db87b1f5954622b2d3152eca7d5cdd529c64e7d48c188",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/rearm-session.sh",
+      "key": "OPS_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-fileops",
+      "expected": "c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d",
+      "actual": "c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/rearm-session.sh",
+      "key": "SESSION_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-session.arm",
+      "expected": "7c2e2a0e60652c16116b4b9250bad164e543c85cf3ddffc72846cae754b44659",
+      "actual": "7c2e2a0e60652c16116b4b9250bad164e543c85cf3ddffc72846cae754b44659",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/rearm-session.sh",
+      "key": "PROBE_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-session-rearm.arm",
+      "expected": "fe39f59b4960e12977bd8d3db2ac318bc586abb8a5539c65389978c06aa877eb",
+      "actual": "fe39f59b4960e12977bd8d3db2ac318bc586abb8a5539c65389978c06aa877eb",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/rearm-session.sh",
+      "key": "MENU_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-menu",
+      "expected": "2b7cc2a68bb0c34eae4271c1ba151353a9eab4cf6ac4789d2bcb97375ec4220d",
+      "actual": "2b7cc2a68bb0c34eae4271c1ba151353a9eab4cf6ac4789d2bcb97375ec4220d",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/rearm-session.sh",
+      "key": "HOLDCHECK_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-holdcheck.arm",
+      "expected": "57a51d73bcf483e602bcc3b7bf1e87ea296ed0c5799536a19c4eaf80dca2d368",
+      "actual": "57a51d73bcf483e602bcc3b7bf1e87ea296ed0c5799536a19c4eaf80dca2d368",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/restore-camera.sh",
+      "key": "MENU_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-menu",
+      "expected": "2b7cc2a68bb0c34eae4271c1ba151353a9eab4cf6ac4789d2bcb97375ec4220d",
+      "actual": "2b7cc2a68bb0c34eae4271c1ba151353a9eab4cf6ac4789d2bcb97375ec4220d",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/restore-camera.sh",
+      "key": "OPS_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-fileops",
+      "expected": "c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d",
+      "actual": "c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/restore-camera.sh",
+      "key": "RESTORE_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-oem-restore.arm",
+      "expected": "1f4beb372bcdc7557ececfc89257361d283ae7487e4b364ef33ff330f75fa996",
+      "actual": "1f4beb372bcdc7557ececfc89257361d283ae7487e4b364ef33ff330f75fa996",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/srw-log-policy.sh",
+      "key": "OPS_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-fileops",
+      "expected": "c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d",
+      "actual": "c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/video-mode.sh",
+      "key": "NATIVE_REFRESH_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-native-refresh.arm",
+      "expected": "3a7b272e3be9ad81996c823f17f33d84e990a85eff0f252785db7d575a0ceac7",
+      "actual": "3a7b272e3be9ad81996c823f17f33d84e990a85eff0f252785db7d575a0ceac7",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/video-mode.sh",
+      "key": "OPS_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-fileops",
+      "expected": "c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d",
+      "actual": "c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/video-mode.sh",
+      "key": "VIDEO_MODE_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-video-mode.arm",
+      "expected": "690c4c409b6684679a747ca84a3c26e8c8c44cf4c4212b9c2a9e7810b2b4b2f1",
+      "actual": "690c4c409b6684679a747ca84a3c26e8c8c44cf4c4212b9c2a9e7810b2b4b2f1",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/video-mode.sh",
+      "key": "VIDEO_FULLWIDTH_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-video-fullwidth.arm",
+      "expected": "4839e68c0b96fb0a627259e5c74da047e9e44dea183108ad805b17e80d81ea2c",
+      "actual": "4839e68c0b96fb0a627259e5c74da047e9e44dea183108ad805b17e80d81ea2c",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/video-mode.sh",
+      "key": "USB_GUARD_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-usb-guard.arm",
+      "expected": "61bf59b3bf4ccba775525e40024d0a42b86cffd22a1b94d9a431a8102f266918",
+      "actual": "61bf59b3bf4ccba775525e40024d0a42b86cffd22a1b94d9a431a8102f266918",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/video-probe.sh",
+      "key": "OPS_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-fileops",
+      "expected": "c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d",
+      "actual": "c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/nx-lut-lite/video-probe.sh",
+      "key": "VIDEO_PROBE_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/nx-lut-lite/bin/nxl-video-probe.arm",
+      "expected": "7228073bea11ef7eb9fa050075887c390643674f0021eb1254ac77ec7eacf7e7",
+      "actual": "7228073bea11ef7eb9fa050075887c390643674f0021eb1254ac77ec7eacf7e7",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/deploy.sh",
+      "key": "MANIFEST_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/module.manifest",
+      "expected": "a8782bd8e9882d88af711ccfe046754644b577bbc13a2fc3792130caeb833b26",
+      "actual": "a8782bd8e9882d88af711ccfe046754644b577bbc13a2fc3792130caeb833b26",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/deploy.sh",
+      "key": "OPS_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/patch-fileops",
+      "expected": "c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d",
+      "actual": "c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/deploy.sh",
+      "key": "OWNERSHIP_INDEX_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/ownership/index.sha256",
+      "expected": "e9176fb9b2bb40304576db6775fece48eea3bbf7b3b2cd4a06daac2a4d57a561",
+      "actual": "e9176fb9b2bb40304576db6775fece48eea3bbf7b3b2cd4a06daac2a4d57a561",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/deploy.sh",
+      "key": "HOLDCHECK_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/bin/nxl-holdcheck.arm",
+      "expected": "57a51d73bcf483e602bcc3b7bf1e87ea296ed0c5799536a19c4eaf80dca2d368",
+      "actual": "57a51d73bcf483e602bcc3b7bf1e87ea296ed0c5799536a19c4eaf80dca2d368",
+      "matches": true
+    },
+    {
+      "script": "nx-lut-demo/deploy.sh",
+      "key": "SESSION_CHECK_SHA",
+      "classification": "package dependency",
+      "target": "nx-lut-demo/bin/nxl-session.arm",
+      "expected": "b11c3cd10443c2983d6551f5d337b0f0091dec0ee6bcb82ecbd70afc325f28f0",
+      "actual": "b11c3cd10443c2983d6551f5d337b0f0091dec0ee6bcb82ecbd70afc325f28f0",
+      "matches": true
+    }
+  ],
+  "failed": []
+}

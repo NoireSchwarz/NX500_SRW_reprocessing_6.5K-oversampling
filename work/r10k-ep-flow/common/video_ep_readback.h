@@ -22,7 +22,7 @@ static void vp_ep_readback_capture(const struct vp_reader*r,struct vp_record*s,
     (s->valid&(VP_POLICY|VP_BACKEND))!=(VP_POLICY|VP_BACKEND))return;
  uint64_t start=now(context);
  if(r->physical(r->context,VP_LATENCY_DATA,before,sizeof before)&&
-    before[0]==VP_LATENCY_MAGIC&&before[1]==4u){z[1]|=256u;z[2]=before[2];z[3]=before[3];}
+    vp_timer_common_header(before)){z[1]|=256u;z[2]=before[2];z[3]=before[3];}
  for(unsigned group=0;group<4;group++){
   if(!r->physical(r->context,vpe_base[group],a,sizeof a)||
      !r->physical(r->context,vpe_base[group],b,sizeof b))continue;
@@ -32,7 +32,7 @@ static void vp_ep_readback_capture(const struct vp_reader*r,struct vp_record*s,
   }
  }
  if(r->physical(r->context,VP_LATENCY_DATA,after,sizeof after)&&
-    after[0]==VP_LATENCY_MAGIC&&after[1]==4u){
+    vp_timer_common_header(after)){
   z[1]|=512u;z[4]=after[2];z[5]=after[3];
   if((z[1]&256u)&&!memcmp(before,after,sizeof before))z[1]|=1024u;
  }

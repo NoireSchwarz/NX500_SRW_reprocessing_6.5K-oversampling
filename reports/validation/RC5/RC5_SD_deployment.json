@@ -1,0 +1,40 @@
+{
+  "passed": true,
+  "release": "0.4.0-RC5",
+  "volume": {
+    "root": "H:\\",
+    "serial": 4040321079,
+    "filesystem": "exFAT",
+    "label": ""
+  },
+  "archive_sha256": "74615b39bd1644ebc251b0d845de942acd0ee42435d5adc7e7dbb99761449be3",
+  "module_manifest_sha256": "a8782bd8e9882d88af711ccfe046754644b577bbc13a2fc3792130caeb833b26",
+  "verified_files": 1281,
+  "written_files": 984,
+  "already_identical_files": 297,
+  "backup": "D:\\NX500模组开发\\formal-0.4.0-rc5-work\\SD-before-RC5-20261119T155428Z",
+  "protected": [
+    "DCIM",
+    "ALBM",
+    "NX500.bin",
+    "NXDEMO51",
+    "nx-lut-activation",
+    "nx-lut-startup-check",
+    "nx-lut-lite-ui",
+    "ROLLBACK",
+    "SYSTEM",
+    "System Volume Information"
+  ],
+  "protected_root_metadata_unchanged": true,
+  "history_and_user_backups_not_targeted": true,
+  "omitted_inherited_docs_sources_evidence": 8997,
+  "trigger_hashes": {
+    "nx_cs.adj": "fd4a6c44a1c15fb4fdc4d5bd393841689f82f37ff78fc14b59d25bb9b56a4ca2",
+    "install.sh": "ee0500a764c34c33df1e0b97ae2753b33704d234eac0ad9ffc0ac94cde5e0c97",
+    "info.tg": "84d6fd76e45d5bca43e62816bdf4173d677f4860fbe507372ee4a11f608c4098"
+  },
+  "installer_triggers_written_last": true,
+  "filesystem_repairs_or_formatting": false,
+  "SD_deployment_only_camera_install_not_yet_observed": true,
+  "hardware_tested": false
+}

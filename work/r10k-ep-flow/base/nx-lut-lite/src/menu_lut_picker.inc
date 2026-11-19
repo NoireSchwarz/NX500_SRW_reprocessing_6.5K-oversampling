@@ -1,10 +1,11 @@
-/* Favorites-only modal. Selecting changes the SRW table, never live ISP. */
+/* Favorites and the explicit reference LUT. Selecting never changes live ISP. */
 static int lut_picker_open,lut_picker_count,lut_picker_cursor,lut_picker_press=-1;
 static int lut_picker_view[513];
 static const char*lut_picker_id(int row){return row>0&&row<lut_picker_count?names[lut_picker_view[row]]:"off";}
 static void lut_picker_begin(void){
+ if(!menu_modal_input_take())return;
  lut_picker_count=1;lut_picker_cursor=0;lut_picker_press=-1;
- for(int i=0;i<total_count&&lut_picker_count<513;i++)if(favorite_index(names[i])>=0){lut_picker_view[lut_picker_count]=i;if(!strcmp(srw_lut_id,names[i]))lut_picker_cursor=lut_picker_count;lut_picker_count++;}
+ for(int i=0;i<total_count&&lut_picker_count<513;i++)if(strcmp(info_for(names[i])->group,"loglut")&&favorite_index(names[i])>=0){lut_picker_view[lut_picker_count]=i;if(!strcmp(srw_lut_id,names[i]))lut_picker_cursor=lut_picker_count;lut_picker_count++;}
  lut_picker_open=1;notice[0]=0;nxl_help_reset(&help,ticks());
 }
 static void lut_picker_move(int step){lut_picker_cursor=(lut_picker_cursor+step+lut_picker_count)%lut_picker_count;}

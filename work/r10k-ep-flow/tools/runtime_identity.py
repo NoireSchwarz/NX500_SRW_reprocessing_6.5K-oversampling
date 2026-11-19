@@ -7,6 +7,10 @@ from pathlib import Path
 import argparse,hashlib,json,re
 M='nx-lut-demo/nx-lut-lite/'
 LIVE={
+ 'SAP_GUARD_SHA':M+'srw-sap-service.sh',
+ 'GAMMA_RELOAD_SHA':M+'bin/nxl-gamma-reload.arm',
+ 'HG_RENAME_SHA':M+'bin/nxl-atomic-rename.arm',
+ 'HG_PATCH_SHA':M+'native/libmmfcore.r11f.so',
  'VIDEO_PROBE_SHA':M+'bin/nxl-video-probe.arm',
  'USB_GUARD_SHA':M+'bin/nxl-usb-guard.arm',
  'VIDEO_FULLWIDTH_SHA':M+'bin/nxl-video-fullwidth.arm',
@@ -28,11 +32,13 @@ LIVE={
  'MANIFEST_SHA':'nx-lut-demo/module.manifest','HOLDCHECK_SHA':'nx-lut-demo/bin/nxl-holdcheck.arm',
  'SESSION_CHECK_SHA':'nx-lut-demo/bin/nxl-session.arm','OWNERSHIP_INDEX_SHA':'nx-lut-demo/ownership/index.sha256'
 }
-HISTORICAL={'OLD_FRONT_SHA':'07f64d2ab1a3bc073a49a2b45fffa4ec4ae41fc5ad7dfddfb6384563be9c7a14'}
+HISTORICAL={'HG_OEM_SHA':'b3e7cd2987282d856a8f95b8768d44ea2f4f3804684a391de0567c10dada73c8','OLD_FRONT_SHA':'07f64d2ab1a3bc073a49a2b45fffa4ec4ae41fc5ad7dfddfb6384563be9c7a14'}
 PATTERN=re.compile(r'^([A-Z][A-Z0-9_]*_SHA)=([0-9a-f]{64})$',re.M)
 DECLARATION=re.compile(r'^([A-Z][A-Z0-9_]*_SHA)=(.*)$',re.M)
 REQUIRED={
- M+'video-probe.sh':set(['OPS_SHA','VIDEO_PROBE_SHA','VIDEO_FULLWIDTH_SHA']),
+ M+'gamma-reload.sh':set(['OPS_SHA','GAMMA_RELOAD_SHA','USB_GUARD_SHA']),
+ M+'hevc-gate-install.sh':set(['HG_RENAME_SHA','HG_PATCH_SHA','HG_OEM_SHA']),
+ M+'video-probe.sh':set(['OPS_SHA','VIDEO_PROBE_SHA']),
  M+'video-mode.sh':set(['OPS_SHA','VIDEO_MODE_SHA','VIDEO_FULLWIDTH_SHA','USB_GUARD_SHA']),
  M+'auto-init.sh':set(['OPS_SHA','INIT_TEST_SHA','LENS_CAPTURE_SHA','RUNNER_SHA']),M+'auto-init-capture.sh':set(['AUTO_WATCH_SHA']),
  M+'lens-capture.sh':set(['OPS_SHA','LENS_WATCH_SHA']),

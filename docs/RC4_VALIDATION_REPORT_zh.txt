@@ -1,0 +1,25 @@
+NX LUT Lite 0.4.0 RC4 實作與驗證說明
+
+本次改動
+普通LUT、VID專用Log LUT、Log開關加入確認後一次性即時裝載。按鍵／觸控只改草稿；OK提交。套用過程不卸載菜單，半按快門仍負責返回取景。保留普通A/B混合原有兩次OK提交流程。
+三按EV採用400ms最大按住時間、420ms相鄰間隔；自動重複不算額外次數，其他按鍵與組合鍵會中止連按。現有EV+AEL與EV+WiFi優先。普通單按EV延至連按窗口結束，或下一個其他操作前執行。
+快捷入口按已應用的運行狀態及完整參數收據恢復；不把未提交草稿當作現行設定。增加原廠／純Log基準項。裝載失敗保留pending，不發成功收據。
+
+Metol路徑
+依據 WApaperplane/metol 固定提交 b10ec8413ce5f9a03079288cb9880e4d0fac983f 的 nx_lutload.c；只移植單次取景裝載，不移植影片監看器，也不替換現有DYN24視頻指標路徑。
+取景CORE RSZ_OUT1_EOF(14)同步後，執行完整3DLUT寄存器順序，等待ACC RD_FINISH(7)，隨即退出Access狀態，再輸出日誌。等待逾時／錯誤也清除Access。只接收6個已知原廠／工作表地址。原廠恢復使用本次工作前捕獲的來源地址；不猜測白平衡、曝光或矩陣。
+IRQ完成與寄存器回讀只能證明傳輸得到確認；不能獨立證明取景畫質、無閃爍或新片起始幀正確。
+
+視頻規格
+按原廠 di-camera-app 的 record resolution 24f／30f 命令重新提交規格。原函數 cmd_set_menu_option 使用GUI事件5／4，並由 nx_cmd_update_gui 執行原廠S1更新；並非我們直接寫輸入裝置。菜單在該操作期間不因S1離開。未使用切換P/M曝光模式、拍照或錄影開始／停止命令。
+只讀核驗固件／原廠st工具身份、唯一相機進程及啟動時間、原廠共享UserSpec映射、NTSC、PRO及目標尺寸項；命令自身逾時只終止本工具啟動的子進程。新增工具不使用ptrace、不直接寫相機進程記憶體。原有全寬／尺寸RAM補丁保持原實現。
+配置與原廠命令提交核驗通過後，真實輸出仍必須用新MP4檢查。不能據此宣稱實機規格已驗收。
+
+Log開關
+保留已驗證的原廠Gamma/CC入口與原RTOS程式。準備／還原期間暫緩3DLUT傳輸；讀取Gamma queued epoch確認原廠已排隊後，只做一次最後裝載。若等待原廠回調，最多補送一次同尺寸的原廠照片resolution命令，再有限等待；未確認則失敗，不假報立即生效。原廠Gamma恢復優先於選用LUT引擎身份檢查。
+
+回歸邊界
+SRW的reset_live_lut保持原本的表／指標還原、engine.lock交接；明確跳過新的EP裝載，避免重引入EP in use。SRW原生管線、核心庫、Gamma/RTOS二進位及32張LUT內容維持RC3。照片／影片／備份／日誌不作清理。
+詳見EVIDENCE/RC4中的真實ARM控制流、真實shell及安裝器回放結果；所有MMIO、IRQ、原廠命令和OS端點的模擬邊界均有標註。相機尚待合併短測。
+
+原始依據：https://github.com/WApaperplane/metol/blob/b10ec8413ce5f9a03079288cb9880e4d0fac983f/test_server/lutpipe/nx_lutload.c

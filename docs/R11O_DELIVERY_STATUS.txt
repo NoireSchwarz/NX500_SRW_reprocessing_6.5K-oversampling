@@ -1,0 +1,19 @@
+R11o 交付状态（2026-11-18）
+状态：SD_DEPLOYED_READBACK_VERIFIED；相机内部安装及实拍尚待用户验收。
+SD：H:，exFAT，卷序列号4040321079。
+已读回5440个包文件；实际写入79个，安装触发文件最后写入。
+保护检查：28812个非包文件的元数据和77个受保护文件内容一致；76个既有读取错误保持原状。
+照片、录像、完整备份、原厂固件和历史日志保留；未修复文件系统、未更换核心库。
+包：D:\NX500模组开发\r11o-live-log-work\NX500_R11o_LIVE_MIDGRAY.zip
+包SHA256：959f50a7b00f61f9ca2eb36e60611f9a4ce0bb2d73168868cc698db153cb3a30
+新模块清单SHA256：7f73852b5a749c0f3df6fffa6dd8c2900744d33808357c84a8e09548b2e019cc
+新还原表SHA256：6822809ff93008206e56ca22064948d26fff7399287c20ca9ea0ccda3f20e5e1
+写入前旧文件备份：D:\NX500模组开发\r11o-live-log-work\R11o_previous_SD_payload.zip
+完整回退包：D:\NX500模组开发\r11n-srw-midgray-work\NX500_R11n_SRW_MIDGRAY.zip
+分析报告：R11O_ANALYSIS_REPORT.txt；合并短测：R11O_TEST_STEPS.txt。
+预期菜单：R11o LIVE MIDGRAY LOG / 24P；Gamma开关SAMSUNG LOG +1.33；还原表Samsung Log Rec.709+。
+SRW mode5与中灰不变，录像已接入同一数学曲线并保留视频输出标度补偿。
+录像取景与MP4均为Log，中性视频表NXLOG_REF_V1/100%；还原表不烘焙进视频。
+R11m照片取景辅助仍暂停；无需启动采样器或重复码率测试。
+下一轮只需读新安装日志、一次同源SRW新还原JPEG及原厂→Log→原厂三个短视频，区分软件回放与真实像素验收。
+请实际断电后安装，安装完再实际断电；不要删除旧Gamma租约绕过校验。

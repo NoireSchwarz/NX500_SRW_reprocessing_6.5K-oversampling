@@ -57,8 +57,8 @@ static int no_symlink_parents(const char *p){char b[2048];if(strlen(p)>=sizeof b
 static void diagnostic(const char *phase,const char *result,const char *path,int error){
  int saved=errno;char line[1600],log[2048],logdir[2048];int n=snprintf(line,sizeof line,"NX51SESSION revision=%s phase=%s result=%s errno=%d path=%s\n",SESSION_REVISION,phase,result,error,path?path:"-");
  if(n>0&&n<(int)sizeof line){fwrite(line,1,(size_t)n,stderr);fflush(stderr);
-  if(bounded(logdir,sizeof logdir,sd_alias(),"NXDEMO51/logs")&&no_symlink_parents(logdir)&&realdir(logdir)&&bounded(log,sizeof log,logdir,"session.log")){
-   int fd=open(log,O_WRONLY|O_CREAT|O_APPEND|O_NOFOLLOW|O_CLOEXEC,0600);if(fd>=0){struct stat st;if(!fstat(fd,&st)&&S_ISREG(st.st_mode)){ssize_t ignored=write(fd,line,(size_t)n);(void)ignored;fsync(fd);}close(fd);}
+  if(bounded(logdir,sizeof logdir,sd_alias(),"NXDEMO51/logs")&&no_symlink_parents(logdir)&&realdir(logdir)&&bounded(log,sizeof log,logdir,"session-RC1.log")){
+   int fd=open(log,O_WRONLY|O_CREAT|O_APPEND|O_NOFOLLOW|O_CLOEXEC,0600);if(fd>=0){struct stat st;if(!fstat(fd,&st)&&S_ISREG(st.st_mode)&&(st.st_size<131072||!ftruncate(fd,0))){ssize_t ignored=write(fd,line,(size_t)n);(void)ignored;fsync(fd);}close(fd);}
   }
  }errno=saved;
 }

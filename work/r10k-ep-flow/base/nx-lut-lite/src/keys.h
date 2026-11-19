@@ -19,7 +19,7 @@ static inline int nxl_combo(struct nxl_chord *s, unsigned code, int value) {
     return 0;
 }
 /* Deliver native key-up events before allowing the menu to take focus. */
-enum { NXL_OPEN_MENU=1, NXL_TOGGLE_VIDEO=2 };
+enum { NXL_OPEN_MENU=1, NXL_TOGGLE_VLOG=2 };
 struct nxl_shortcut { struct nxl_chord chord; int pending, wifi, blocked; };
 static inline int nxl_activate(struct nxl_shortcut *s, unsigned code, int value) {
     if(value!=0 && value!=1)return 0; /* autorepeat never arms a shortcut */
@@ -28,7 +28,7 @@ static inline int nxl_activate(struct nxl_shortcut *s, unsigned code, int value)
     else if(code==NXL_WIFI)s->wifi=value;
     else return 0;
     if(s->chord.ael && s->wifi)s->blocked=1;
-    int candidate=s->chord.ev ? (s->wifi?NXL_TOGGLE_VIDEO:s->chord.ael?NXL_OPEN_MENU:0):0;
+    int candidate=s->chord.ev ? (s->wifi?NXL_TOGGLE_VLOG:s->chord.ael?NXL_OPEN_MENU:0):0;
     if(candidate && s->pending && candidate!=s->pending)s->blocked=1;
     if(candidate && !s->blocked)s->pending=candidate;
     if (!s->chord.ev && !s->chord.ael && !s->wifi) {
@@ -46,15 +46,15 @@ static inline int nxl_sidebar_step(unsigned code) {
 }
 static inline int nxl_category_step(unsigned code) {
     switch (code) {
-    case 75: case 178: return -1; /* LEFT / JOG1_CCW */
-    case 77: case 177: return 1;  /* RIGHT / JOG1_CW */
+    case 178: return -1; /* LEFT / JOG1_CCW */
+    case 177: return 1;  /* RIGHT / JOG1_CW */
     default: return 0;
     }
 }
 static inline int nxl_item_step(unsigned code) {
     switch (code) {
-    case 72: return -1; /* UP */
-    case 80: return 1;  /* DOWN */
+    case 72: case 165: return -1; /* UP */
+    case 80: case 163: return 1;  /* DOWN */
     default: return 0;
     }
 }

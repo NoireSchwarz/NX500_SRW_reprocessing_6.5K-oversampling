@@ -1,0 +1,15 @@
+R11f7 合并激活与 HEVC A/B/A 测试步骤
+
+版本说明：安装/激活提示为 R11f7；视频菜单保持 R11f HEVC A/B/A TEST，这是预期的，因为本包只修复激活流程。部署到 SD 不等于相机已经激活。
+
+1. 电池充足，安全断开 USB，照片模式下正常关机再开机，让卡上的 R11f7 自动启动。先不要应用全宽，也不要点 COUNTER。
+2. 先核验旧 R11f6 完整备份与状态，然后出现 R11f7 BACKUP / ACTIVATION 并制作本轮完整备份。提示消失并不等于结束；应继续等待 BACKUP VERIFIED - ACTIVATING 和后续启动恢复。
+3. 如果正常进入黑屏、写卡灯变化、随后自动关机，先等待原厂恢复流程结束。灯连续熄灭后再开机，不要在灯亮或闪烁时断电。如果仍停在可操作的普通取景超过 10 分钟，或出现 BACKUP FAILED / ACTIVATION FAILED，停止测试，写卡灯持续熄灭后正常关机并接 USB 取日志，不反复安装或尝试 COUNTER。若正常关机也不能完成，保持供电并反馈状态。
+4. 恢复后开机，等待至少 40 秒的核验；必须看到 R11f7 CORE VERIFIED - HEVC A/B/A READY 才继续。若提示 OEM RESTORED、FAILED，或开机 3 分钟仍没有 VERIFIED，结束本轮并接 USB 取日志。不要自行重试取电池或再次覆盖安装。
+5. 照片模式做一次 5 秒 COUNTERS 短测：开始应出现 ON / STOP+SAVE；5 秒后停止，明确看到 COUNTERS SAVED - SAFE TO CONNECT USB。若出现 schema/library mismatch 或启动失败，停止，不继续录像测试。
+6. 短测通过后，只录一段全宽 120 秒。照片模式应用 FULL WIDTH 4K 30P，按原提示重新选择 NTSC/UHD30p/PRO 再回照片模式。开启 COUNTERS，进入视频取景后录制 120 秒。自动执行预热→正常 30 秒→约四分之一普通帧 HEVC 输入 30 秒→恢复正常 30 秒。中间不改设置。
+7. 停录后等 5 秒，回照片模式停止并保存 COUNTERS。明确看到 COUNTERS SAVED - SAFE TO CONNECT USB 后再连接 USB；TEST COMPLETE/DONE 仅表示实验阶段完成，不能替代保存成功提示。若 ABORTED 也保存记录，不立即重跑。
+
+本轮只需“激活→5 秒短测→一段全宽 120 秒”，不做码率、CPU/BUS 或裁切对比。
+保留 NXDEMO51/R11F7_ACTIVATION_*、旧 R11F6_ACTIVATION_*、两个完整 snapshot-before.img、VIDEO_STAGE_* 及对应 MP4。照片、录像、原始固件、完整备份、历史日志均不清理。
+R11f7 的 REFRESH_REQUESTED 或 recovery-result 中的 REQUEST_ACCEPTED 仍是待验证；成功依据是 VERIFIED 加实际进程/库校验记录。

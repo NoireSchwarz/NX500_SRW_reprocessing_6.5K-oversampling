@@ -1,0 +1,16 @@
+R11k SD 部署记录
+2026-11-18 / Europe/Berlin
+状态：SD载荷已写入并读回校验；相机安装与真实显影验收尚待执行。
+卷：H:\ / serial=4040321079 / exFAT / \\?\Volume{2757f924-d2b9-11f1-9827-aa934adf0de9}\
+软件包：D:\NX500模组开发\r11k-srw-transfer-work\NX500_R11k_SRW_TRANSFER.zip
+SHA256：9d47b53558a3916dbb9e2fd6e175b589309a45ffbda24306e28f98a1ae97436f
+逐文件读回：3824；写入/更新：644。
+保留非载荷文件元数据：25267；保留内容哈希：1711。
+既有读错记录保持：70。未格式化、未清理、未修复文件系统。
+旧程序备份：D:\NX500模组开发\r11k-srw-transfer-work\R11k_previous_SD_payload.zip
+备份SHA256：0ef7274a72d90175dfe66f8bfa5627c5d880cedb99f7bbbbbf5736e89de327ec
+install.sh / nx_cs.adj / info.tg最后写入。视频Log、全宽与核心库载荷逐字节保持R11j原包。原有864项源码基线经比对，受控更新14项并增加4个源文件，其余850项保持；未提交或推送Git。
+本轮仅使用一张新RAW+JPEG，串行SOURCE19→LINEAR→LOG TRANSFER→SOURCE19，每次AUTO + COMPARE。分析在电脑执行，不在相机运行拟合/逆LUT或后台采样。
+操作：D:\NX500模组开发\repository\nx500\docs\R11K_SRW_TRANSFER_TEST_STEPS.txt
+实际SRW版本依据gamma-transfer-profile.json中的release=R11k、请求schema及二进制哈希联合确认；通用pipeline结果的version仍为历史R9n-fullwidth-power[-auto]协议标识，不能单凭该字段判断安装版本。
+Gamma-only测试图没有BT.2020转换；不能将其直接认证为完整Samsung Log输入。参数、像素与返回对照需联合核验。

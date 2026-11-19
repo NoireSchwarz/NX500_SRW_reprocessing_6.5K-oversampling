@@ -1,14 +1,14 @@
 {
-  "release": "R10k",
-  "schema": 7,
-  "sample_schema": 7,
+  "release": "R10l",
+  "schema": 8,
+  "sample_schema": 8,
   "byte_order": "little",
   "header_bytes": 16384,
   "header_struct_bytes": 616,
   "header_hash_offset": 608,
   "record_bytes": 1280,
   "record_capacity": 6000,
-  "sampler_RAM_bytes": 7696384,
+  "sampler_RAM_bytes": 11568512,
   "buffer_filesystem": "verified tmpfs/ramfs under /dev/shm/nx-lut-lite",
   "period_ms": [
     200,
@@ -161,5 +161,68 @@
     "span_us_word": 31,
     "test_kind": "passive matched-mode comparison; no auxiliary bypass/disable A/B",
     "configuration_does_not_prove_transfer": true
-  }
+  },
+  "fast_drain": {
+    "file": "frame-flow.bin",
+    "header_bytes": 128,
+    "record_bytes": 296,
+    "capacity": 12000,
+    "period_ms": 100,
+    "independent_of_heavy_snapshots": true,
+    "CPU_budget": "0.5% collector; heavy 200/500/1000ms, then explicit coverage stop",
+    "producer_magic": "33544c56",
+    "producer_schema": 4,
+    "ring_capacity": 8,
+    "RTOS_lease_bytes": 280,
+    "frame_words": [
+      "sequence",
+      "hardware_tick",
+      "SRAM_load_tick",
+      "CS0_start_tick",
+      "final_IRQ_tick",
+      "callback_tick",
+      "flags"
+    ],
+    "EP_WDMA2_completion_proven": false,
+    "EP_native_job_identity_proven": false,
+    "supported_read_formats": [
+      4,
+      5
+    ],
+    "unavailable_flag": "0x8",
+    "never_auto_arms": true
+  },
+  "HEVC_trace": {
+    "file": "hevc-flow.bin",
+    "header_bytes": 128,
+    "record_bytes": 64,
+    "capacity": 5000,
+    "enabled": false,
+    "state": 4,
+    "reason_flags": "0x200",
+    "meaning": "disabled in passive-start recovery; no camera thread instrumentation"
+  },
+  "no_hot_SD_writes": true,
+  "no_clock_or_QoS_changes": true,
+  "frame_drop_fixed": false,
+  "camera_hardware_tested": false,
+  "revision": "R10m PASSIVE SAMPLING",
+  "sampling_start": {
+    "RTOS_arming": false,
+    "camera_thread_attach": false,
+    "native_calls": false,
+    "RTOS_code_writes": false,
+    "hardware_breakpoints": false,
+    "kernel_single_step": false,
+    "timer_optional": true,
+    "timer_code_guard": "all stock or exact R10k; mixed/foreign code rejected",
+    "missing_timer": "fast flags bit3; no frame coverage claim; RAM snapshots and native counters still saved"
+  },
+  "limitations": [
+    "Read-only sampling starts without installing RTOS code or stopping camera threads.",
+    "Timer4 comes only from the existing fullwidth configuration operation; an unarmed timer is missing evidence.",
+    "100ms reader is independent of heavy snapshots. Native IRQ totals are never relabeled as frame counts.",
+    "HEVC breakpoint worker is disabled for this recovery release. hevc-flow.bin explicitly reports flag0x200.",
+    "No throughput fix is claimed. Camera validation of the new start path is pending."
+  ]
 }

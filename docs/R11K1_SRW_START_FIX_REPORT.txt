@@ -1,0 +1,27 @@
+R11k SRW 启动回归调查及 R11k1 修复
+2026-11-18 / Europe/Berlin
+
+结论
+R11k 已在相机安装成功。最新安装日志的模块清单为 e2f94399ada4e32d77b0e4adae9cb95f57aa56c95506bcf79c8ba3b5d79f21e3，核心库前后SHA一致。
+五个实际失败任务全部为 FRONT_VERSION_MISMATCH，front_attempt=0、backend_attempt=0、native_disposition=SAFE_NO_SUBMIT；另有一个仅创建未运行的会话。失败发生在 SETUP 组件检查，未提交 ISP 显影，不是这些记录中的 Gamma 应用、采集中或保存阶段故障。
+
+直接原因
+R11k 在 nxl-pipeline.c 的 --version 分支最前面加入 NXL_SRW_TRANSFER=R11k 信息。memory-test.sh 的生产 check_components 函数要求整个输出以 NXL_DEMO_FRONT=0.3.6-demo50; 开头，新增首行因此破坏旧协议。普通显影与 AUTO 显影共用检查，均被拒绝。
+这是本次代码改动引入的兼容性回归。此前电脑测试只检查新版本标识存在，没有把生产输出送入实际 shell 版本校验；完整安装测试也不启动显影，未覆盖此衔接。
+
+上一版实际改动
+1. 新增 LINEAR / LOG TRANSFER 固定Gamma曲线，扩展请求schema2和参数校验；重新构建SRW普通/AUTO显影器与RTOS校验载荷。
+2. 新增 gamma-transfer-profile.json，并纳入显影后保存证据要求。
+3. 扩展菜单曲线选择和临时设置，增加R11k版本信息。
+4. 关闭 AUTO + COMPARE 附带的自动镜头记录器；图像分析放在电脑。
+核心库、视频Log与全宽采集器未替换。
+
+本次最小修复
+恢复 NXL_DEMO_FRONT 原首行，R11k传递标识排在后面，再附 NXL_SRW_PATCH=R11k1。保持原启动检查不放宽，仍拒绝错误协议和不匹配哈希。
+只重编译普通/AUTO两个Linux显影程序并更新它们的绑定哈希。RTOS载荷、Gamma节点与校验、图像几何、DMA、恢复顺序及菜单逐字节保持R11k；不引入新的采样路径。
+
+验证
+对旧版和修正版的普通/AUTO真实ARM二进制执行 --version；使用实际生产 check_components 函数和真实二进制SHA，验证旧版两条路径拒绝、新版两条通过，并检查错误版本、错误哈希、后处理版本错误、版本执行失败继续拒绝，共8项。
+Windows OS执行边界用已绑定的实际ARM输出代理，可执行权限用夹具后缀模拟；未在电脑假装执行相机ISP。
+另外运行完整 R11k→R11k1 模块安装更新；原安装流程逻辑与R11k一致，仅版本和清单哈希变化。确认核心库字节/文件身份、用户设置及只读挂载恢复。
+既有原厂参数与硬件流验证仅作为相应范围的历史证据，不代表R11k1真实像素已通过。相机仍需先做一组 SOURCE 19 验收。

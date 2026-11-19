@@ -1,0 +1,18 @@
+R11k2部署交接
+2026-11-18 / Europe/Berlin
+状态：SD载荷已写入并读回，实际相机安装及SOURCE19验收待执行。
+卷：H:\ / serial=4040321079 / exFAT / \\?\Volume{2757f924-d2b9-11f1-9827-aa934adf0de9}\
+软件包：D:\NX500模组开发\r11k2-srw-va-work\NX500_R11k2_SRW_VA4K_FIX.zip
+SHA256：fb62c23b390097d683d13d704823984e32c5d81e99778644276ef7bc57851d5c
+模块清单SHA256：01175aaed0a0d1a38dbaa89c0a93f23dfd131d19f1988340d2b7053a960546d9
+读回文件：4112；写入/更新：151。
+保留非载荷元数据：25514；保留内容哈希：1934；原有读取错误记录：70。未格式化、未清理、未修复文件系统。
+旧载荷备份：D:\NX500模组开发\r11k2-srw-va-work\R11k2_previous_SD_payload.zip
+备份SHA256：0168c7fd9ea93a662c66a89eedcf44862dced524890f48385d33c1925727deb1
+触发install.sh、nx_cs.adj、info.tg最后写入。
+修复三处VA检查为4KB，PA仍16KB，保留原始VA、容量、范围、nonce、owner与退场保护；同步更新7个消费者，包含worker指纹。导出日志增加具体步骤和原始地址。
+RTOS、Gamma、DMA及释放调用源码、菜单、视频Log、全宽和核心库均与R11k1保持。受控发布13个现有源文件及3个新测试，其余856项源基线保持。未提交/推送Git。
+导出24组、契约353项、消费者52组、版本入口8组、额外生产版本3组、完整更新1组验证通过，设备/OS端点按记录模拟；不是实机ISP或最终图像验收。
+安装修订号recovery-r11k2-va4k-handoff；SRW菜单仍为R11k族，程序输出附NXL_SRW_PATCH=R11k2。
+上轮缓冲和EP归还未确认，需按步骤实际断电后安装。先只做SOURCE19 / AUTO + COMPARE；完整保存归还后再继续三组。失败停止并保留记录，不自动清锁/强行释放。
+短测：D:\NX500模组开发\repository\nx500\docs\R11K2_SRW_TEST_STEPS.txt

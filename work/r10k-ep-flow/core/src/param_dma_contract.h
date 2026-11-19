@@ -6,6 +6,7 @@
 #ifndef P49_PARAM_DMA_CONTRACT_H
 #define P49_PARAM_DMA_CONTRACT_H
 #include <stdint.h>
+#include "gamma_transfer_profile.h"
 #ifndef P49_PD_CONTRACT_FN
 #define P49_PD_CONTRACT_FN inline
 #endif
@@ -101,9 +102,11 @@ static P49_PD_CONTRACT_FN int p49_pd_factory_audit_valid(const uint32_t *v,uint3
 }
 /* Original SetConfig has a geometry load and a final IQ-manager load.
  * This records both calls, not DMA completion. Source IQ precedes the latter;
- * no extra reload, handler replacement or synthetic interrupt is introduced. */
+ * no extra reload, handler replacement or synthetic interrupt is introduced.
+ * Gamma mode must use the same supported range as the request contract,
+ * including the fixed LINEAR/LOG profiles. All other audit guards stay strict. */
 static P49_PD_CONTRACT_FN int p49_pd_single_audit_valid(const uint32_t*v,uint32_t nonce){
- if(!nonce||v[0]!=P49_PD_MAGIC||v[1]!=P49_PD_SCHEMA||v[2]!=nonce||v[3]!=8||v[48]!=P49_PD_MODE_SINGLE_CONFIG_IQ||v[49]!=1||v[50]||v[51]!=2||v[52]>2||v[53]!=1)return 0;
+ if(!nonce||v[0]!=P49_PD_MAGIC||v[1]!=P49_PD_SCHEMA||v[2]!=nonce||v[3]!=8||v[48]!=P49_PD_MODE_SINGLE_CONFIG_IQ||v[49]!=1||v[50]||v[51]!=2||v[52]>GT_MODE_MAX||v[53]!=1)return 0;
  for(unsigned i=4;i<64;i++)if((i<48||i>53)&&v[i])return 0;return 1;
 }
 _Static_assert(P49_PD_OFFSET+P49_PD_BYTES<=0xc000u,"parameter audit before code");

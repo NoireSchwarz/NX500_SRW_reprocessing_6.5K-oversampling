@@ -1,0 +1,37 @@
+NX500 Gamma 相对标定 V1：一次固定屏幕、三段录像
+2026-11-17
+
+已经确认R11h1安装及LIFT/LOG/原厂恢复链正常，四段MP4共821帧解码无误。继续使用当前R11h1，不重新部署、不开COUNTERS、不改码率。
+你没有测色仪或实体色卡，本轮先做同屏、同曝光的Log→原厂输出配对，检查暗部/高光及中性轴，并拟合还原曲线。不能把屏幕RGB数值当成已测得的物理颜色，也不以此宣称绝对色准或新增动态范围。
+
+主选屏幕：Tab S7+ 的自然模式
+设置→显示→屏幕模式→自然（Natural），不用鲜艳（Vivid）。关闭自动/自适应亮度、护眼/蓝光、额外调暗和辅助功能颜色滤镜；关闭省电，设60Hz固定刷新，亮度手动50%作为起点，三段之间不再调整。50%不是已标定的尼特数，60Hz也不保证消除PWM。
+把原始PNG传到平板，用图库横屏全屏显示，不用聊天缩略图、截图、重压缩JPEG或HDR素材。先开00_uniform_precheck_sRGB.png，随后全程保持01_static_calibration_sRGB.png。自动息屏延长至10分钟，隐藏图库按钮，不要在三段之间退回相册或切换页面。
+iPhone17：若改用它，同样显示原始sRGB PNG，关闭原彩、夜览、自动亮度、降低白点及颜色滤镜，固定亮度；它适合交叉复核，但本轮不用额外拍一套。
+LG备用：若平板拍摄出现无法消除的条纹或亮度变化，再改用LG的SDR/sRGB模式，Windows HDR与夜间模式关闭，固定亮度，关闭DFC和SMART ENERGY SAVING；保持sRGB预设，不再额外改Gamma/RGB。使用RGB全范围输出，DP优先；HDMI须匹配显卡输出范围，不能靠把黑位调暗判断正确。
+
+拍摄前准备，不新增一段测试录像
+屏幕先稳定显示约10分钟，固定在支架上，房间光线稳定并避免反光。相机上三脚架，镜头正对屏幕，画面包含整张测试图和四个角标。不要数字变焦。手动对焦，必要时轻微虚焦消除像素网格，但角标仍要清楚。
+使用已正常的4K24p，M档，ISO100，快门先设1/30秒，白平衡固定6500K，后段视频LUT关闭；光圈先用f/5.6，只在原厂模式开始前调整到白块不溢出。沿用固定原厂画风，若有自动对比/动态范围功能则关闭。
+在均匀灰图上用视频取景观察约5秒，确认没有移动横纹、闪烁或自动变亮。若有，先确认亮度/刷新/自动功能设置；仍有则使用LG备用，这一轮只选最终一块屏幕拍摄。
+然后显示正式测试图，等约10秒稳定。只在此时设好曝光：最亮白块不要溢出，暗块可分辨。确定后锁定ISO、快门、光圈、白平衡、机位、焦距及屏幕亮度，三段之间都不变。G118只是源文件代码值，不是实体18%灰卡，不能拿它强行对齐42IRE。
+
+正式只拍三段，每段约10秒
+A1 原厂：确认ISP GAMMA RELOAD为FACTORY，进入视频取景等3秒，录固定测试图10秒，停止，等写卡灯熄灭。
+B LOG：回照片模式，通过ISP GAMMA RELOAD先到LIFT，再到LOG，每次等QUEUED后再操作；LIFT不另拍。进入视频取景等3秒，录相同测试图10秒。不要因为Log画面发灰、黑位抬高而补偿曝光。
+A2 原厂：停止、等灯灭、回照片模式，通过同一行请求恢复FACTORY。确认QUEUED，进入视频取景等3秒，录相同测试图10秒。
+随后回照片模式重开视频页查询一次，退出菜单，等写卡结束再连USB。全过程保持同一次相机启动，切换Gamma只在停止录像后进行。
+
+交回资料
+保留三段新MP4、全部新增GAMMA_R11H1_*目录；文字记录屏幕型号/模式/亮度百分比、相机ISO/快门/光圈/WB、是否存在横纹。不需要再拍三块屏幕，也不删除本轮及历史素材。
+后续分析将先用A1/A2判断屏幕与曝光是否稳定，再按同一色块拟合Log到原厂的相对曲线；未通过稳定性检查就不输出校准结果。不会用这次屏幕拍摄强行生成绝对颜色矩阵。
+
+资料来源（厂商文档与实验室原始测量；不同样机不作直接排名）：
+https://www.notebookcheck.net/Samsung-Galaxy-Tab-S7-Plus-Review-Finally-a-great-Android-tablet.496494.0.html
+https://www.dxomark.com/apple-iphone-17-display-test/
+https://www.samsung.com/uk/support/mobile-devices/how-to-change-the-screen-mode-or-adjust-the-display-colour-to-your-preference/
+https://support.apple.com/guide/iphone/adjust-screen-brightness-color-balance-iph60ba71065/ios
+https://www.lg.com/ca_en/monitors/uhd-4k-5k/27up650-w/
+https://biznesowe.pl/files/docs/M3Tg7NyBB-/monitor-lg-27up650-w-instrukcja-obslugi-user-manual.pdf
+https://registry.color.org/rgb-registry/srgb
+https://ffmpeg.org/doxygen/trunk/pixfmt_8h.html

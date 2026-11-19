@@ -219,10 +219,11 @@ int main(int argc,char**argv){
  if((argc==3&&!strcmp(argv[1],"--source-sha"))||(argc==4&&!strcmp(argv[1],"--source-ticket")))return nxl_front_entry(argc,argv);
  if(argc==2&&!strcmp(argv[1],"--version")){
 #ifdef NXL_COLD_INIT_TEST
-  puts("NXL_DEMO_FRONT=0.3.6-demo50; R8E_COLD_CONFIGURATION_TRIAL; SHARED192; ORIGINAL_CONFIG_BEFORE_START; OWNED_EP_REFERENCE; RELEASE_R8I_BLACK_PROFILE_A028; RELEASE_R9N_FULLWIDTH_POWER");
+  puts("NXL_DEMO_FRONT=0.3.6-demo50; R8E_COLD_CONFIGURATION_TRIAL; SHARED176; ORIGINAL_CONFIG_BEFORE_START; OWNED_EP_REFERENCE; RELEASE_R8I_BLACK_PROFILE_A028; RELEASE_R9N_FULLWIDTH_POWER");
 #else
-  puts("NXL_DEMO_FRONT=0.3.6-demo50; R8A_STAGE_CHANNEL_ONE_PROCESS_SRW_LUT_JPEG; SHARED192_BANK2; FAST_RAM_HANDOFF; MANUAL_BOOT_INIT; RELEASE_R8I_BLACK_PROFILE_A028; RELEASE_R9N_FULLWIDTH_POWER");
+  puts("NXL_DEMO_FRONT=0.3.6-demo50; R8A_STAGE_CHANNEL_ONE_PROCESS_SRW_LUT_JPEG; SHARED176_BANK2; FAST_RAM_HANDOFF; MANUAL_BOOT_INIT; RELEASE_R8I_BLACK_PROFILE_A028; RELEASE_R9N_FULLWIDTH_POWER");
 #endif
+  puts("NXL_SRW_PATCH=R11k3c; CURVE_PRESETS; VA4K_PA16K; CAP176_LDC120");
   return 0;
  }
  if(argc==3&&!strcmp(argv[1],"--validate-lut")){const char*p="/tmp/nx-lut-lite/pipeline-lut-";unsigned char table[LUT_SLOT_BYTES];return strncmp(argv[2],p,strlen(p))||strstr(argv[2],"..")||!sw_file_read(argv[2],table,sizeof table)||!lut_table_valid(table,sizeof table)?2:0;}
@@ -302,6 +303,7 @@ done:
  unsigned pixel_saved=0;
  for(unsigned i=0;i<sizeof pixel_evidence/sizeof *pixel_evidence;i++){snprintf(path,sizeof path,"%s/%s",hw,pixel_evidence[i]);snprintf(dst,sizeof dst,"%s/%s",frontsd,pixel_evidence[i]);if(pipeline_copy_small(path,dst))pixel_saved|=1u<<i;}
  if(!rc&&((settings_saved&15u)!=15u||pixel_saved!=((1u<<(sizeof pixel_evidence/sizeof *pixel_evidence))-1u))){rc=44;reason="NATIVE_SETTINGS_OR_PIXEL_EVIDENCE_SAVE_FAILED_WORKSPACE_RETURNED";}
+ if(rc==43){snprintf(path,sizeof path,"%s/case_00/allocator_before.bin",front);snprintf(dst,sizeof dst,"%s/allocator-before.bin",frontsd);(void)pipeline_copy_small(path,dst);}
  const char*front_evidence[]={"case_00/result.json","case_00/front_readiness_first.json","case_00/front_readiness_final.json","case_00/pipeline-jpeg-preflight.json","case_00/front_handoff_postframe_first.json","case_00/front_handoff_postframe_final.json","front_handoff_export_first.json","front_handoff_export_final.json","case_00/source-cc-audit.bin","case_00/source-wb-audit.bin","case_00/gamma-test-audit.bin"};
  const char*front_names[]={"front-frame-result.json","front-readiness-first.json","front-readiness-final.json","front-jpeg-preflight.json","front-handoff-postframe-first.json","front-handoff-postframe-final.json","front-handoff-export-first.json","front-handoff-export-final.json","source-cc-audit.bin","source-wb-audit.bin","gamma-test-audit.bin"};
  unsigned iq_saved=0;for(unsigned i=0;i<sizeof front_evidence/sizeof *front_evidence;i++){snprintf(path,sizeof path,"%s/%s",front,front_evidence[i]);snprintf(dst,sizeof dst,"%s/%s",frontsd,front_names[i]);int saved=pipeline_copy_small(path,dst);if(i>=8&&saved)iq_saved|=1u<<(i-8);}

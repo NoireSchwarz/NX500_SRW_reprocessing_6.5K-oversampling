@@ -149,7 +149,7 @@ struct vfw_ipc_route {uint32_t init,update,backend,qhd,ldc_policy,lcac_mask,lcac
 static int vfw_block_state(vfw_reader read,void*c){
  uint32_t words[160];int boundary=-1,timing=-1;
  for(unsigned i=0;i<VFW_BLOCK_COUNT;i++){const struct vfw_block*b=vfw_blocks+i;if(!read(c,b->address,words,b->bytes))return -1;uint32_t h=vfw_hash(words,b->bytes);int state=h==b->stock_hash&&!memcmp(words,vfw_stock(b),b->bytes)?0:h==b->full_hash&&!memcmp(words,vfw_full_code(b),b->bytes)?1:-1;
-  if(state<0)return -1;if(!i)boundary=state;else if(timing<0)timing=state;else if(state!=timing)return -1;}
+  if(state<0)return -1;if(!memcmp(vfw_stock(b),vfw_full_code(b),b->bytes))continue;if(!i)boundary=state;else if(timing<0)timing=state;else if(state!=timing)return -1;}
  /* 2 is a dormant, completely installed timing facility with stock recipe.
   * Its fixed code is retained until reboot: no return PC can outlive it. */
  return timing?(boundary?1:2):boundary?-1:0;
@@ -158,7 +158,7 @@ static int vfw_one_block(const struct vfw_ops*o,unsigned index,int full,unsigned
  const struct vfw_block*b=vfw_blocks+index;const uint32_t*value=full?vfw_full_code(b):vfw_stock(b);int ok=1;
  for(unsigned k=0;k<b->bytes/4;k++)if(vfw_full_code(b)[k]!=vfw_stock(b)[k]){if(count)(*count)++;int written=o->write(o->context,b->address+4*k,value[k]);ok&=written;if(count&&!written)return 0;}return ok;
 }
-static int vfw_one_cache(const struct vfw_ops*o,unsigned index){const struct vfw_block*b=vfw_blocks+index;uint32_t at=b->address&~63u;return o->cache(o->context,at,(b->address-at+b->bytes+63u)&~63u);}
+static int vfw_one_cache(const struct vfw_ops*o,unsigned index){const struct vfw_block*b=vfw_blocks+index;if(!memcmp(vfw_stock(b),vfw_full_code(b),b->bytes))return 1;uint32_t at=b->address&~63u;return o->cache(o->context,at,(b->address-at+b->bytes+63u)&~63u);}
 static int vfw_timing_write(const struct vfw_ops*o,unsigned before,unsigned*count,int*resident,unsigned*status){
  if(before)return 1; /* Never rewrite a published callback body. */
  for(unsigned i=1;i<VFW_ENTRY_FIRST;i++)if(!vfw_one_block(o,i,1,count))return 0;
@@ -197,9 +197,10 @@ _Static_assert(VFW_TMC_DATA+VFW_TMC_BYTES==0x817dbce0u,"native string logger exc
 _Static_assert(VFW_TIMING_DATA+256u==VFW_TMC_DATA+VFW_TMC_BYTES,"bounded count facility");
 static int vfw_tmc_allowed(const uint32_t*p,int full){
  if(!full){for(unsigned i=0;i<VFW_TMC_BYTES/4;i++)if(p[i])return 0;return 1;}
+ /* Native marker tail reads these control bytes even when tracing is armed. */
  for(unsigned i=0;i<5;i++)if(p[i])return 0;
  if(p[5]&&!vfw_ram(p[5],4))return 0;for(unsigned i=(VFW_TIMING_DATA-VFW_TMC_DATA+256u)/4;i<VFW_TMC_BYTES/4;i++)if(p[i])return 0;
- return p[(VFW_TIMING_DATA-VFW_TMC_DATA)/4]==VFW_TIMING_MAGIC&&p[(VFW_TIMING_DATA-VFW_TMC_DATA)/4+1]==4u;
+ return p[(VFW_TIMING_DATA-VFW_TMC_DATA)/4]==VFW_TIMING_MAGIC&&p[(VFW_TIMING_DATA-VFW_TMC_DATA)/4+1]==VFW_TIMING_SCHEMA;
 }
 static int vfw_tmc_write(const struct vfw_ops*o,const uint32_t*p,unsigned*count){int ok=1;for(unsigned i=0;i<VFW_TMC_BYTES/4;i++){if(count)(*count)++;int written=o->write(o->context,VFW_TMC_DATA+4*i,p[i]);ok&=written;if(count&&!written)return 0;}return ok;}
 static int vfw_read_route(vfw_reader read,void*c,struct vfw_ipc_route*r){uint32_t parent,type;int blocks=vfw_block_state(read,c);r->blocks=(uint32_t)blocks;return blocks>=0&&read(c,VFW_IPC_INIT_WORD,r,8)&&vfw_word(read,c,VFW_BACKEND_WORD,&r->backend)&&vfw_word(read,c,VFW_LDC_POLICY_WORD,&r->ldc_policy)&&vfw_word(read,c,VFW_LCAC_MASK_WORD,&r->lcac_mask)&&vfw_word(read,c,VFW_LCAC_OR_WORD,&r->lcac_or)&&vfw_word(read,c,VFW_BACKEND_ROOT,&parent)&&parent==VFW_BACKEND_VTABLE&&vfw_word(read,c,VFW_BACKEND_ROOT+0xd6cu,&r->qhd)&&vfw_ram(r->qhd,0xd44u)&&vfw_word(read,c,r->qhd,&type)&&type==VFW_QHD_VTABLE;}
@@ -280,7 +281,7 @@ static int vfw_transaction(const struct vfw_ops*o,unsigned operation,struct vfw_
  if(!vfw_tmc_allowed(tmc_before,before_route.blocks!=0u)){r->status=VFW_TMC_BUSY;return 0;}
  memset(tmc_target,0,sizeof tmc_target);
  if(before_route.blocks){memcpy(tmc_target,tmc_before,sizeof tmc_target);tmc_target[5]=0;unsigned j=(VFW_TIMING_DATA-VFW_TMC_DATA)/4;for(unsigned k=3;k<8;k++)tmc_target[j+k]=0;}
- else if(target==VFW_FULL||operation==VFW_TRACE){unsigned j=(VFW_TIMING_DATA-VFW_TMC_DATA)/4;tmc_target[j]=VFW_TIMING_MAGIC;tmc_target[j+1]=4u;}
+ else if(target==VFW_FULL||operation==VFW_TRACE){unsigned j=(VFW_TIMING_DATA-VFW_TMC_DATA)/4;tmc_target[j]=VFW_TIMING_MAGIC;tmc_target[j+1]=VFW_TIMING_SCHEMA;}
  if(operation==VFW_TRACE){
   /* Arm observation only. Never store geometry, mapping, clocks, codec or
    * the blue-boundary recipe. Published fixed bodies survive until reboot. */

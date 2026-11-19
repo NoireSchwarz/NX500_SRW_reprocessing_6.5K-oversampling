@@ -5,8 +5,8 @@ umask 077
 D=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 WATCH=$D/bin/nxl-lens-watch.arm
 OPS=$D/bin/nxl-fileops
-LENS_WATCH_SHA=0000000000000000000000000000000000000000000000000000000000000000
-OPS_SHA=0000000000000000000000000000000000000000000000000000000000000000
+LENS_WATCH_SHA=d1eef31e7fab89e0d440bea14997f88121f0959bede9c4d27292ec0009814a67
+OPS_SHA=c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d
 regular(){ [ -f "$1" ] && [ ! -L "$1" ]; }
 regular "$OPS" && [ -x "$OPS" ] && [ "$("$OPS" sha256 "$OPS")" = "$OPS_SHA" ] && regular "$WATCH" && [ -x "$WATCH" ] && [ "$("$OPS" sha256 "$WATCH")" = "$LENS_WATCH_SHA" ] || { echo RECORDER_IDENTITY_FAILED;exit 1; }
 case "${1:-}" in

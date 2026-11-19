@@ -11,18 +11,19 @@ PROBE=$D/bin/nxl-session-rearm.arm
 MENU=$D/bin/nxl-menu
 HOLDCHECK=$D/bin/nxl-holdcheck.arm
 OPS_SHA=c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d
-SESSION_SHA=70ca7a451d62abe4afb1d4ecd3c680e7b7b052916b723b7f9fb6d699c1cd4dea
-PROBE_SHA=0d6eea845b7f90792a04712f031971ba689e98b366bff63b24b7b32e877c27bf
-MENU_SHA=8bf174244b7588a494314d304b888912d7569d99cb08bd0830c80719033a4c9b
-HOLDCHECK_SHA=0118e7de832ee1b0821e694d0b743e3b92c1e33bf9d1d857337cd026d532819d
+SESSION_SHA=7c2e2a0e60652c16116b4b9250bad164e543c85cf3ddffc72846cae754b44659
+PROBE_SHA=fe39f59b4960e12977bd8d3db2ac318bc586abb8a5539c65389978c06aa877eb
+MENU_SHA=2b7cc2a68bb0c34eae4271c1ba151353a9eab4cf6ac4789d2bcb97375ec4220d
+HOLDCHECK_SHA=57a51d73bcf483e602bcc3b7bf1e87ea296ed0c5799536a19c4eaf80dca2d368
 regular(){ [ -f "$1" ] && [ ! -L "$1" ]; }
 absent(){ [ ! -e "$1" ] && [ ! -L "$1" ]; }
 hash(){ "$OPS" sha256 "$1"; }
 nxl_progress(){ :; }
 regular "$D/progress.sh" && . "$D/progress.sh"
 for folder in "$OUT" "$OUT/logs";do [ ! -L "$folder" ] && { [ ! -e "$folder" ] || [ -d "$folder" ]; } || exit 1;[ -d "$folder" ] || mkdir "$folder" || exit 1;done
-LOG=$OUT/logs/rearm.log
+LOG=$OUT/logs/rearm-RC1.log
 [ ! -L "$LOG" ] && { [ ! -e "$LOG" ] || regular "$LOG"; } || exit 1
+[ "${1:-}" != --rearm ] || : > "$LOG"
 exec >> "$LOG" 2>&1
 printf 'NXREARM_WRAPPER revision=recovery-r8n-selector-confirm mode=%s pid=%s\n' "${1:-}" "$$"
 reject(){ printf 'REARM_HELD reason=%s\n' "$1";nxl_progress RAW_RESOURCE_CHECK HELD "$1; see logs/rearm.log";exit 1; }

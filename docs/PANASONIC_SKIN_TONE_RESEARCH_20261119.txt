@@ -1,0 +1,61 @@
+松下肤色处理与 NX500 Gamma／矩阵的可行性研究
+2026-11-19；本阶段只查资料、建立模型，不改拍摄代码、不追加拍摄、不再写SD。
+
+结论
+可以用Gamma与3×3矩阵做出偏向人像的整体色调和颜色，但“松下肤色优化”并不是一个已经公开的通用Gamma＋矩阵配方。
+松下公开说明明确区分Portrait风格、全局Gamma／矩阵、分色相修正、肤色区域修正及肤色细节处理。
+其中只作用于肤色附近的色相／色调调整，以及皮肤纹理柔化，不能由一条全局Gamma和一张固定3×3矩阵完整实现。
+目前没有取得某台松下相机相同场景的原厂／Portrait配对数据，也没有找到其Portrait内部系数，不能宣称复刻了松下官方肤色。
+
+公开证据
+1. LUMIX S系列Photo Style说明将Portrait描述为面向人像肤色的风格；Natural低反差，Like709采用709相当曲线和高光压缩。
+   这证明这些是不同外观选择，没有给出Portrait的实际Gamma节点或颜色矩阵。
+   来源：https://help.na.panasonic.com/answers/how-to-select-a-photo-style-lumix-s-series/
+
+2. AU-EVA1手册分别列出Gamma、暗部Gamma、Knee、六个通道交叉方向的线性矩阵调节，以及按色相独立调整饱和度／相位的Color Correction。
+   可直接确认“矩阵”和“分色相校正”是独立控制；菜单描述不等于内部执行顺序或系数的公开实现。
+   来源：https://pro-av.panasonic.net/manual/html/AU-EVA1P.PJ.EN.ED.AN.PX%28DVQP1561UA%29_E/chapter04_05_04.htm
+
+3. AK-HC5000手册将LINEAR MATRIX、12轴COLOR CORRECT及SKIN CORRECTION分开。
+   SKIN AREA TABLE／HUE／TONE针对肤色区域；SKIN TONE DETAIL另有I/Q范围与细节强度参数。
+   这支持按色区选择性处理的解释，但不能据这些菜单反推出闭源算法、门限或Portrait所用参数。
+   来源：https://pro-av.panasonic.net/manual/html/AK-HC5000G.GS%28VQT5M26A-8%28E%29%29/chapter04_03_06.htm
+
+4. AG-AC90手册说明肤色细节功能使皮肤更柔和，近似肤色的背景也可能被处理。
+   这是纹理／细节功能的证据，不能把它等同于换Gamma，或假定其必然使用人脸识别。
+   来源：https://eww.pass.panasonic.co.jp/pro-av/support/content/download/EN/ep2main/soft/ac90/AG-AC90P_PJ_PX_v1.5_Vol2%28VQT4M99-2%29_E.pdf （93页）
+
+5. Panasonic公布了V-Log数学曲线、V-Gamut原色和D65白点，并提供V-Log→V709 LUT。
+   V-Log本身是编码，不是Portrait肤色优化。V709也不能直接等同于LUMIX Portrait。
+   来源：https://pro-av.panasonic.net/jp/cinema_camera_varicam_eva/support/pdf/VARICAM_V-Log_V-Gamut.pdf
+   LUT入口：https://av.jpn.support.panasonic.com/support/global/cs/dsc/download/index3.html
+   官方S1H手册还特别区分相机用VLT、电脑用Cube，并说明该V709输出为legal range；比较前必须核对范围。
+   来源：https://pro-av.panasonic.net/en/cinema_camera_varicam_eva/support/pdf/S1H_handbook.pdf （54页）
+
+如何用现有能力近似（以下为本项目工程推断，不是松下内部算法）
+A. Gamma／亮度映射
+   主要控制中间调亮度、反差、暗部和高光过渡；不能单独选择“只有皮肤变亮”。
+   若逐RGB通道执行非线性曲线，还会改变通道比例及部分颜色。电脑端应同时比较逐通道曲线与保色的亮度映射，避免把Gamma带来的色相变化归因于矩阵。
+
+B. 3×3矩阵
+   能调整整体饱和度、通道串色及暖色倾向。可用 M·[1,1,1]^T=[1,1,1]^T 约束中性轴，防止用白平衡漂移冒充肤色改善。
+   但矩阵对所有颜色共同作用；例如朝某个暖色方向调整，会同时影响皮肤、木材、橙衣和相近色背景。
+   T(Mx)一般不等于M·T(x)。拟合时必须明确矩阵所在的线性／编码域及顺序，不能把Gamma前后混用。
+
+C. 选择性肤色
+   可在电脑工作色域内定义连续的肤色权重w(Y,h,C)，混合原色和局部修正结果：
+   RGB_out = (1-w)·RGB_base + w·RGB_skin。
+   w应平滑过渡，并在近中性和极暗处回落，避免边界断层与噪声色斑。它可表达局部色相／饱和度／亮度调整，超出了固定3×3矩阵的能力。
+   这种逐像素模型可以形成3D LUT，但不能区分同色的皮肤与物体；真正的纹理柔化还依赖空间邻域，不能只用颜色LUT表达。
+
+建议的最小电脑端流程
+1. 保持现有Samsung Log拍摄与R11p互斥策略。先按已验证的709 YUV矩阵／full range解码，明确Log／BT.2020输入，不依赖原片709标签自动解释。
+2. 以当前工作曲线、固定标度和中灰为基线。统一曝光与灰点后，分开比较：仅亮度曲线、仅保中性的矩阵、两者组合、组合再加肤色色区修正。
+3. 若选官方V709作为风格参照，先将场景线性RGB转换到V-Gamut并编码V-Log，再使用对应电脑版官方LUT；不能直接把V709表套在Samsung Log码值上。
+   现有工作灰点与物理反射标度仍有区别；先统一比较基准，不通过任意额外曝光偏移掩盖LUT之间的差别。
+4. 使用已有SRW／色块录像检查中性轴、阶调、饱和色、暗部噪声和留出色块；已有录像里的人手只可作观感观察，没有配对松下参照就不报告品牌匹配色差。
+5. 判断Gamma＋矩阵相对完整参照的残差是否集中在肤色范围、高光或饱和色。前者提示选择性色区修正，后两者可能需要亮度相关色彩／gamut mapping；不再把所有残差吸收到曝光或Gamma里。
+6. 优先输出电脑后期预设或高精度LUT，不把它烘焙进Log录像，也不再降为相机17点表。只有未来明确需要原厂Gamma下的人像直出，才另议独立非Log模式。
+
+当前不需补拍即可完成架构和数学可行性判断。若未来要求准确复刻某台松下的Portrait，缺的是该型号、设置和同场景配对参考，而不是再对NX500重复部署检测包。
+本轮没有生成新的肤色曲线、矩阵系数、风格LUT或相机修改；也没有声称已经从菜单文字还原出松下闭源实现。

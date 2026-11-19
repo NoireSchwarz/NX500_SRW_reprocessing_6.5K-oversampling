@@ -1,0 +1,81 @@
+{
+  "passed": true,
+  "actual_ARM_drawing_functions": true,
+  "X11_rectangle_endpoint_modeled": true,
+  "actual_bitmap_font": true,
+  "screens": [
+    {
+      "name": "01-LUT-sidebar",
+      "mode": 0,
+      "rectangles": 4685,
+      "image": "D:\\NX500模组开发\\formal-0.4.0-rc5-work\\UI-preview\\01-LUT-sidebar.png"
+    },
+    {
+      "name": "02-SRW",
+      "mode": 1,
+      "rectangles": 5830,
+      "image": "D:\\NX500模组开发\\formal-0.4.0-rc5-work\\UI-preview\\02-SRW.png"
+    },
+    {
+      "name": "03-VID-main",
+      "mode": 2,
+      "rectangles": 4725,
+      "image": "D:\\NX500模组开发\\formal-0.4.0-rc5-work\\UI-preview\\03-VID-main.png"
+    },
+    {
+      "name": "04-VID-mode-picker",
+      "mode": 3,
+      "rectangles": 7037,
+      "image": "D:\\NX500模组开发\\formal-0.4.0-rc5-work\\UI-preview\\04-VID-mode-picker.png"
+    },
+    {
+      "name": "05-A-half",
+      "mode": 4,
+      "rectangles": 3001,
+      "image": "D:\\NX500模组开发\\formal-0.4.0-rc5-work\\UI-preview\\05-A-half.png"
+    },
+    {
+      "name": "06-B-picker",
+      "mode": 5,
+      "rectangles": 5243,
+      "image": "D:\\NX500模组开发\\formal-0.4.0-rc5-work\\UI-preview\\06-B-picker.png"
+    },
+    {
+      "name": "07-B-params",
+      "mode": 6,
+      "rectangles": 4386,
+      "image": "D:\\NX500模组开发\\formal-0.4.0-rc5-work\\UI-preview\\07-B-params.png"
+    },
+    {
+      "name": "08-Log-half",
+      "mode": 7,
+      "rectangles": 3018,
+      "image": "D:\\NX500模组开发\\formal-0.4.0-rc5-work\\UI-preview\\08-Log-half.png"
+    },
+    {
+      "name": "09-XH-Bright",
+      "mode": 8,
+      "rectangles": 2785,
+      "image": "D:\\NX500模组开发\\formal-0.4.0-rc5-work\\UI-preview\\09-XH-Bright.png"
+    },
+    {
+      "name": "10-XH-Hasselblad",
+      "mode": 9,
+      "rectangles": 2938,
+      "image": "D:\\NX500模组开发\\formal-0.4.0-rc5-work\\UI-preview\\10-XH-Hasselblad.png"
+    },
+    {
+      "name": "11-Factory-current",
+      "mode": 10,
+      "rectangles": 2669,
+      "image": "D:\\NX500模组开发\\formal-0.4.0-rc5-work\\UI-preview\\11-Factory-current.png"
+    },
+    {
+      "name": "12-PureLog-current",
+      "mode": 11,
+      "rectangles": 2846,
+      "image": "D:\\NX500模组开发\\formal-0.4.0-rc5-work\\UI-preview\\12-PureLog-current.png"
+    }
+  ],
+  "hardware_tested": false
+}

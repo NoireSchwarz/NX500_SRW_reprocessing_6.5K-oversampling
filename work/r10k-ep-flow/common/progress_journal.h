@@ -36,6 +36,10 @@ static int np_publish(const char*path,const char*phase,const char*state,const ch
  int fd=open(path,O_RDWR|O_CREAT|O_APPEND|O_NOFOLLOW|O_CLOEXEC,0600);if(fd<0)return 0;struct stat st;int ok=!flock(fd,LOCK_EX)&&!NP_FSTAT(fd,&st)&&S_ISREG(st.st_mode)&&st.st_size>=0&&st.st_size<64*1024*1024;
  if(ok&&st.st_size%2048)ok=!ftruncate(fd,st.st_size/2048*2048);
  r.magic=NP_MAGIC;r.version=2;r.bytes=sizeof r;r.sequence=np_last_fd(fd,&old)?old.sequence+1:1;r.pid=(uint32_t)getpid();
+#ifdef NP_MAX_RECORDS
+ if(ok&&st.st_size>=(off_t)(NP_MAX_RECORDS*sizeof r))ok=!ftruncate(fd,0);
+#endif
+
  const char*operation=getenv("NX51_PROGRESS_TOKEN");if(np_operation(operation)){r.version=3;strcpy(r.operation,operation);}
  struct timespec mono;if(clock_gettime(CLOCK_MONOTONIC,&mono))ok=0;else{r.mono_sec=(uint32_t)mono.tv_sec;r.mono_nsec=(uint32_t)mono.tv_nsec;}
  strcpy(r.phase,phase);strcpy(r.state,state);strcpy(r.detail,detail);strcpy(r.stamp,"UNAVAILABLE");np_digest(&r,r.digest);

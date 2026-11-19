@@ -1,3 +1,6 @@
+#ifndef NXL_TEST_VA
+#define NXL_TEST_VA 0x90b35000u
+#endif
 /* Actual coordinator and return verifier. Native submissions are modeled. */
 #define _GNU_SOURCE
 #define NXL_PIPELINE_TEST
@@ -18,16 +21,16 @@ int pipeline_test_init_helper(const char*operation){
 #endif
 static struct sw_lease fixture_lease(void){
  struct sw_lease s={0};s.magic=SW_MAGIC;s.version=1;s.bytes=sizeof s;s.phase=SW_FRONT_READY;s.capacity=SW_BYTES;s.front_active=SW_FRONT_ACTIVE;
- s.input_offset=SW_INPUT;s.lut_offset=SW_LUT_OUT;s.jpeg_offset=SW_JPEG_OUT;s.table_offset=SW_TABLE;s.lease_offset=SW_LEASE;s.pa=0xa1c00000;s.va=0x87000000;s.nonce=777;s.owner_pid=getpid();s.owner_start_ticks=12345;s.index=(s.pa-0x94000000u)/16384;
+ s.input_offset=SW_INPUT;s.lut_offset=SW_LUT_OUT;s.jpeg_offset=SW_JPEG_OUT;s.table_offset=SW_TABLE;s.lease_offset=SW_LEASE;s.pa=0xa39ec000;s.va=NXL_TEST_VA;s.nonce=777;s.owner_pid=getpid();s.owner_start_ticks=12345;s.index=(s.pa-0x94000000u)/16384;
  s.metadata[0]=35;s.metadata[1]=SW_BYTES/16384;s.front_return_barrier=s.frame_callbacks_retired=s.controller_slot_restored=1;
  memset(s.prefix_sha256,'a',64);memset(s.lut_sha256,'b',64);memset(s.source_sha256,'c',64);sw_seal(&s);return s;
 }
 int nxl_front_entry(int argc,char**argv){
  assert(argc==3&&!strcmp(argv[2],"--pipeline-return"));FILE*f=fopen("/test-mode","r");assert(f&&fscanf(f,"%d",&mode)==1&&!fclose(f));
  char p[1200];snprintf(p,sizeof p,"%s/result.json",argv[1]);const char*json="{\"format\":\"NX_FAST_FRONT_BATCH1\"}\n";assert(sw_file_new(p,json,strlen(json)));
- if(mode==1)return 42;if(mode==2)return 43;if(mode==12)return 45;
+ if(mode==1)return 42;if(mode==2){char audit[1400];snprintf(audit,sizeof audit,"%s/case_00",argv[1]);assert(!mkdir(audit,0700));snprintf(audit,sizeof audit,"%s/case_00/allocator_before.bin",argv[1]);assert(sw_file_new(audit,"BANK2_MODEL_TABLE",17));return 43;}if(mode==12)return 45;
  if(mode==23||mode==24){snprintf(p,sizeof p,"%s/case_00",argv[1]);assert(!mkdir(p,0700));snprintf(p,sizeof p,"%s/case_00/p39_rtos_code_guards.txt",argv[1]);assert(sw_file_new(p,"GUARD_REJECTION_MODEL\n",22));return 46;}
- if(mode==14||mode==15||mode==22){
+ if(mode==14||mode==15||mode==22||mode==25){
   assert(!setenv("NX51_SOURCE_SRW","/mnt/mmc/DCIM/305PHOTO/SELECTED.SRW",1));
   snprintf(p,sizeof p,"%s/case_00",argv[1]);assert(!mkdir(p,0700));
   const char*names[]={"selected-source.json","selected-c0.bin","case_00/isp-config-schema.json","native-recorder-link.json","source-tone-curves.json"};
@@ -35,7 +38,7 @@ int nxl_front_entry(int argc,char**argv){
   static struct ic_sample captures[IC_STAGES];
   for(unsigned i=0;i<IC_STAGES;i++){struct ic_sample*r=captures+i;r->magic=IC_MAGIC;r->schema=1;r->nonce=777;r->stage=i+1;r->mask=31;r->stable=1;r->checksum=ic_hash(r,sizeof *r-8);r->commit=IC_MAGIC^r->nonce^r->stage^r->checksum;}
   snprintf(p,sizeof p,"%s/case_00/isp-config-stages.bin",argv[1]);assert(sw_file_new(p,captures,sizeof captures));
-  if(mode!=22){const char*iq[]={"source-cc-audit.bin","source-wb-audit.bin","gamma-test-audit.bin"};unsigned char control[4096]={0};const unsigned bytes[]={4096,1024,2048};for(unsigned i=0;i<3;i++){snprintf(p,sizeof p,"%s/case_00/%s",argv[1],iq[i]);assert(sw_file_new(p,control,bytes[i]));}}
+  if(mode!=22){const char*iq[]={"source-cc-audit.bin","source-wb-audit.bin","gamma-test-audit.bin","gamma-transfer-profile.json"};unsigned char control[4096]={0};const unsigned bytes[]={4096,1024,2048,256};for(unsigned i=0;i<4;i++){if(mode==25&&i==3)continue;snprintf(p,sizeof p,"%s/case_00/%s",argv[1],iq[i]);assert(sw_file_new(p,control,bytes[i]));}}
   snprintf(p,sizeof p,"%s/case_00/p39_rtos_code_guards.txt",argv[1]);assert(sw_file_new(p,"GUARD_SUCCESS_MODEL\n",20));
  }
  if(mode==0){
@@ -56,11 +59,13 @@ int nxl_front_entry(int argc,char**argv){
  unsigned char table[19712]={0};snprintf(p,sizeof p,"%s/srw-lut.bin",argv[1]);assert(sw_file_new(p,table,sizeof table));
  snprintf(p,sizeof p,"%s/native-jpeg-config.bin",argv[1]);assert(sw_file_new(p,table,256));snprintf(p,sizeof p,"%s/native-ldc-config.bin",argv[1]);assert(sw_file_new(p,table,1024));snprintf(p,sizeof p,"%s/source-settings.json",argv[1]);assert(sw_file_new(p,"{}",2));snprintf(p,sizeof p,"%s/front-timing.json",argv[1]);assert(sw_file_new(p,"{}",2));return mode==4?1:0;
 }
+#include "ep_preflight_fixture.h"
 int pipeline_test_controller(const char*dir,const char*out,unsigned abort_only){
  assert(mode!=1&&mode!=2&&mode!=3&&mode!=23&&mode!=24);if(mode==6)return 1;
  if(mode==0){const char*phases[]={"BEFORE_EP","AFTER_EP","AFTER_RELEASE"};char path[1400];unsigned char evidence[8564]={0};
   for(unsigned i=0;i<3;i++){evidence[0]=(unsigned char)(i+3);snprintf(path,sizeof path,"%s/diag-cmdq-%s.bin",dir,phases[i]);assert(sw_file_new(path,evidence,sizeof evidence));}}
  struct sw_lease s=fixture_lease();char p[1400],text[7000],hash[65];unsigned bytes=0;
+ if(!abort_only)assert(rpe_run(dir,&s,0,1));
  if(!abort_only){const char*names[]={"pipeline-isp-settings.json","bayer-out-samples.bin","ldc-out-samples.bin","lut-out-samples.bin","native-ldc-state.bin","j422-proof.bin","ldc-config-audit.json","ldc-hardware-audit.json","ldc-progress-audit.json","p11_kernel_before.bin","p11_kernel_after.bin","p11_rtos_irq_before.bin","p11_rtos_irq_after.bin"};for(unsigned i=0;i<sizeof names/sizeof *names;i++){if((mode==13&&i==2)||(mode==17&&i==6)||(mode==20&&i==7))continue;snprintf(p,sizeof p,"%s/%s",dir,names[i]);assert(sw_file_new(p,"MODEL_ENDPOINT",14));}}
 
  if(!abort_only&&mode!=16&&mode!=18&&mode!=21){const char*target=getenv("NX51_FINAL_PENDING");if(target)snprintf(p,sizeof p,"%s",target);else snprintf(p,sizeof p,"%s/native.jpg.pending",out);assert(pipeline_copy_small("/mnt/mmc/model.jpg",p));assert(pipeline_hash(p,hash,&bytes));char hpath[1400];snprintf(hpath,sizeof hpath,"%s/final-jpeg.sha256",dir);assert(sw_file_new(hpath,hash,64));

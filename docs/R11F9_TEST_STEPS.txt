@@ -1,0 +1,13 @@
+R11f9 合并测试步骤
+
+本版先核验现有进程，通过后直接接续。不应主动进入恢复模式、自动关机或长时间移除相机 UI。视频菜单仍为 R11f HEVC A/B/A TEST；安装提示为 R11f9。
+
+1. 电池充足，安全断开 USB，保持照片模式，按正常安装步骤关机再开机。先不要应用全宽或按 COUNTER。出现 R11f9 VERIFYING LIVE CORE 后保持相机闲置；提示消失不代表结束，两份完整备份仍需读取核验。
+2. 看到 R11f9 CORE VERIFIED - HEVC A/B/A READY 才继续。若显示 R11f9 WAITING - LOG SAVED / RETRY ALLOWED，结束本轮并接回 USB 取日志；这表示尚未满足接续条件，不需要删日志、反复重装或拔电池。若 5 分钟没有结果，待写卡灯持续熄灭后正常关机并接回 USB。若 UI 异常消失或正常关机无响应，停止操作并反馈，不把黑屏当作新版预期流程。
+3. READY 后先在照片模式开启 COUNTERS，等 5 秒，再停止。必须看到 COUNTERS SAVED - SAFE TO CONNECT USB。若出现 schema/library mismatch、启动或保存失败，停止后续录像测试，保留日志。
+4. 短测通过后，在照片模式应用 FULL WIDTH 4K 30P，按提示重新选择 NTSC／UHD30p／PRO，再回照片模式。启动 COUNTERS，进入视频取景，录一段 120 秒；自动执行预热→正常输入 30 秒→约四分之一普通帧 HEVC 输入 30 秒→恢复正常输入 30 秒。中途不改码率、CPU/BUS 或其他设置。
+5. 停录后等 5 秒，回照片模式停止并保存 COUNTERS。明确看到 COUNTERS SAVED - SAFE TO CONNECT USB 后再连接 USB。DONE／TEST COMPLETE 不等于已保存；ABORTED 也先保存本轮，不立即重跑。
+
+本轮只需激活确认、5 秒短测和一段全宽 120 秒，无需重复裁切或码率对照。
+保留 NXDEMO51/R11F9_ACTIVATION_*、VIDEO_STAGE_*、对应 MP4、两份完整备份以及所有照片、录像和旧日志。
+接续状态在 result.txt、entry-stage.txt、checks.txt、initial-*.process/gate、final-*.process/gate、published.gate 和两份 snapshot-check.txt 中。PENDING 会保留触发入口供下一次安装调用重查，但不保证相机的普通休眠式开关机每次都重新调用安装入口；需要从日志确认。

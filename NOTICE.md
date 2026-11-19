@@ -45,3 +45,14 @@ data/ui-glyphs.json 与生成的 src/ui_font.h 当前为 335 字形的 NXL UI Sa
 菜单 0.2.2 的新增 7 张简介依据本次对话已经制作的人像/5219 包说明撰写，仅描述该包的创作配色和使用方向。apx 文件为近似配方，不宣称是 EJAY 5207/Gold200 原版或柯达官方标定。ejay_skin_native 是先前已转换的 EJAY 肤色表；本菜单补丁仅增加文字映射，不包含或修改这 7 张 LUT 的数据。
 
 0.3.0 新增 src/browser.h 的收藏/分类/光标持久化与强度选择，src/nxl-tablecheck.c 为独立只读文件比较/完整性工具，不访问相机内存设备。tools/make_strengths.py 的混合算法作用于本次对话已有的原生 LUT，使用 tools/native_codec.py 的 BT.601-full 转换；后者从此前人像包保留的 metol 固定提交原样复制，来源 blob 与散列见该文件说明和原 UPSTREAM。强度数据的原作者、近似配方与 EJAY 区别见 STRENGTHS_NOTICE.md。
+
+
+## 0.4.0 RC1–RC5 补充（2026-11-19）
+
+上文按版本保留历史来源和当时的实现边界。当前目录名r10k-ep-flow为历史名称，最新状态见docs/HANDOFF_20261119_RC5.md。
+
+RC4的core/src/nxl-lutload.c移植自WApaperplane/metol固定提交b10ec8413ce5f9a03079288cb9880e4d0fac983f的test_server/lutpipe/nx_lutload.c，只采用完整单次取景装载，不采用视频watcher。保留CORE EOF同步、ACC DMA完成确认、Access清理和来源标记；新增已知地址限制、会话原来源及SRW工作锁互斥。该完整流程与早期删除的裸reload不是同一实现。公开DRIMe5 EP接口定义的来源头文件保存在完整包SOURCE的上游材料中。
+
+RC5的双击EV、EV+WiFi V-Log派发、OK提交和默认影片LUT策略为本项目的Linux菜单／脚本改动，复用原有原厂Gamma、色彩与DYN24路径。不是新增RTOS协议或核心库替换。
+
+新增LUT简介是使用方向描述，不宣称胶片／相机厂商官方标定。用户提供的普通／V-Log LUT、Panasonic资源、字体和运行库仍保留各自来源及说明，项目代码许可不改变其归属。完整开发包包括必要运行资产、内置SRW及历史校准输出，详见docs/RC5_PACKAGE_CONTENTS.md；上文早期“未包含”描述不能用于推断当前Release附件内容。

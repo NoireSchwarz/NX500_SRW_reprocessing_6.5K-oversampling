@@ -1,0 +1,25 @@
+NX500 选择性色彩配置通道核验，2026-11-19（只读）
+
+有已验证的3D LUT配置通道，尚未证实专用的实时、分色相/亮度/饱和度参数入口。
+不能仅因字符串出现HSC、SelectiveColor，就把它当成录像主路的12轴或肤色区域模型。
+
+原固件P7.bin SHA256 f8e417cb5b55768851ba7e2b8017d3a98dc0b0c8444cc0a5061265cc08dbbf7f
+offset0x6e6fd0 d5_dp_mlcd_ipu2_hsc_range_set
+offset0x6e6ff0 d5_dp_mlcd_ipu2_global_hsc_control
+offset0x6e7014 d5_dp_mlcd_ipu2_se_hsc_control
+这些命名和相邻ipu1_y2r、lcd_ipu2_fgm、gti/gamma显示配置一致；尚未建立其影响写卡视频的调用链，不应直接调用测试。
+offset0x63eaf8 SelectiveColor，offset0x63ec08 ADE_SelectiveColor_YCCProcess，与ADE_SmartFilter、SelectColorR/G/B/Y同组。
+原/usr/lib/libmm-photo.so有ImpEffector::executeSelectiveColor(int,CYcc...,vector<int>...)；这是编辑/特效线索，不是已证实的直播参数化肤色模型。
+Picture Wizard已暴露色彩、全局饱和度、色相参数；libcapture-fw-prod.so CAttributeHandler::setPWSaturation@0x94d10，get@0x91d88。
+主路已核验CIpcColorD5的CC_RGBL/CC_RGBH、R2Y与SE_MAT_00/01/10/11。当前读到的SE是2×2矩阵字段，尚未发现经验证的分色相选择表。
+以上只限定当前证据，不证明硬件不存在其他选择性颜色模块。
+
+现有LUT通道：A18普通RAM槽0x81119f00，17³原厂CrCbY格式；视频24个DYN consumer指针表0x80383a24。
+它确实可以表示非线性、分色相颜色修正，不必把原厂WB/CC冻结。但是已有接口替换原厂选择的LUT指针，不能声称保留整个原厂后级3D映射。
+若再叠加选择性风格，需先明确是在原厂动态LUT之前、之后，还是把两表在电脑端按明确顺序复合；不能盲目把固定表覆盖当前原厂风格。
+Log要求保留可调色的干净信号，用户已要求Log与风格LUT互斥；因此本次V-Log不把肤色风格烘焙进去。
+建议选择性Skin Optimization继续使用PC原版3D LUT；若研究机内入口，下一步先只读追踪现有PW saturation/hue到IQ参数及最终SE/LUT路由，核实所有者、更新时机和录像消费者。
+只有证明独立参数模块及其实时路径后，才讨论在原厂更新结果上叠加局部增量、关闭时零增量的实现。
+
+当前Log矩阵方式：每次原厂动态颜色矩阵计算后左乘色域转换；不是锁死一次快照。新V-Log沿用这一方式，工作曝光单独记录。
+Gamma确实用自定义技术曲线替代原厂tone rendering，这是Log输出的明确目的；原厂WB与动态颜色校准不因此被替换。

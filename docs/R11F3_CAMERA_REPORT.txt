@@ -1,0 +1,43 @@
+R11f3 实机启动诊断分析（2026-11-15）
+
+结论
+R11f3 只读诊断已成功执行，不是一次补丁安装。DONE 的 complete=1、internal_writes=0、experiment_started=0 均存在；REPORT.sha256 中 34 个文件全部通过校验。触发文件 info.tg、nx_cs.adj、install.sh 已归档到本次报告，根目录不再保留，这是预期的一次性执行结果。
+
+R11f2 的模块、菜单和采集器已安装，但 HEVC A/B/A 所需的新 libmmfcore.so 未在当前启动视图及相机映射中生效。COUNTER 尚未修复，本轮没有新的有效 A/B/A 采样，不能据此判断帧率改善。
+
+证据位置
+SD：H:，exFAT，卷序列号 4040321079。
+相机报告：NXDEMO51/STARTUP_CHECK_1794735076_661。
+本地归档：D:\NX500模组开发\r11f3-work\camera-result-20261115T164416Z
+本地 evidence-index.json 记录了 56 个文件的大小与 SHA256；复制前后均读取核对。SD 本轮未写入。照片、录像、原始固件、历史日志均未删除或修复。
+
+已确认事实
+1. 前一次 R11f2 安装日志确有 recovery-r11f2-single-rename、NXL_ATOMIC_RENAME committed single_rename=1 pre_unlink=0、HEVC_GATE_LIBRARY_COMMITTED 与 INSTALL_COMPLETE，同次会话完成还原只读挂载。提交时新库 inode45、434176 字节，SHA256 为 7743dd26b06fb2e600cc65aff6ad92913b43c3f75b9493437239006b24991cd9。
+2. 本次从相机 /opt/usr/nx-lut-lite 读取的模块清单 SHA256 是 41dcfeb190077c2476568e082d861f74f5fc80b17a2e237e80c6a9e3e4709e26，与 R11f2 交付一致。采集器 7228073b...、菜单 fdbef337...、入口脚本 32e5ae02... 均与交付一致。不是仅仅 SD 卡上放了新文件。
+3. 全局 /usr/lib/libmmfcore.so 与 /proc/247/root/usr/lib/libmmfcore.so 的原始文件均复制保存，独立计算所得 SHA256 都是原厂 b3e7cd2987282d856a8f95b8768d44ea2f4f3804684a391de0567c10dada73c8，340268 字节、inode11997。
+4. 相机 PID247 的 libmmfcore 映射为 b430a000-b435c000 r-xp、inode11997，后接原厂间隙与数据段；没有新库增加的门控段。内核不支持本次 /proc/247/map_files 读取，因此没有独立提取映射背后的字节；映射布局、inode 和文件副本的证据应分别表述。
+5. 相机与诊断进程的 mountinfo 完全相同，相机 root 为 /。现有证据不支持“只是相机位于另一个挂载命名空间”的解释。
+6. 修改库仍存在于 nxl-new.557、nxl-staged.557、nxl-staged.558 别名，均为正确 SHA256；其中本次安装的 nxl-staged.558 仍是 inode45、链接数2。
+7. 原厂库 canonical、nxl-before.557、nxl-before.558 三个可见名称均报告同一设备和 inode11997，但链接数都为1。此为明确的元数据不一致线索；不能将其当作正常硬链接计数。
+8. 内核日志明确存在 PM: Creating hibernation image、kernel_resume start!、restore_processor_state 和 dpm_resume；相机环境 HIB=a，bootmode=3，/etc/snapshot 与 /tmp/.hib_ready 存在。这次启动确实包含休眠恢复，不能因为内核命令行写了 noresume 就认定从头启动。也不能仅凭“PM: Error 1 creating hibernation image”这一条推断快照损坏。
+9. 根分区对应 mmcblk0p10；/opt 与 /opt/usr 对应 p11、p14。恢复段重新挂载了后两者，而根文件系统未呈现同样的重新挂载记录。这与 /opt 下新模块和 /usr 下旧库视图并存的现象一致。
+10. 最新 VIDEO_STAGE_1794735181_432 为空，没有 READY 和采样导出；VIDEO_FULL_1794735166_417_9e7b3258 是 NATIVE_CROP_OR_QHD_CONFIGURATION 状态查询，RTOS_entered=0，不是一次新的全宽录像或因果实验。
+
+原因判断与边界
+直接阻断原因已确认：采集器要求 R11f 门控库，但当前文件系统与相机映射仍呈现原厂核心库。保留校验是正确行为，不能放宽为接受原厂库后宣称 A/B/A 可用。
+
+首要解释是休眠镜像恢复了旧进程及根文件系统缓存，新写入的目录项与旧缓存状态并存。原厂 inode 的异常链接数、新库保留别名、两类分区不同的恢复行为，共同加强此解释。尚未读取当前原始分区元数据，不能断言闪存内容被物理回滚，也没有唯一排除启动代码的恢复动作。当前报告只证明可见文件系统视图与安装提交后的视图不同。
+
+先前把普通关机或取电池视为足以重新加载修改库的方案，在本机证据下不成立；不再要求用户重复上述操作。一次成功的文件替换事务，也不等于启动后修改库已激活。
+
+原厂系统存在 unchecked fs、挂载次数等警告，历史 SD 亦有读取错误。这些均保留，不执行格式化、清理或文件系统修复，也不将它们直接当作本次根因。
+
+后续修复方案与验收
+A. 先核验原厂的一次性真正从头启动机制。固件 hibernation.sh 的确识别 bootmode=4 并跳过休眠准备，但目前尚未核实该模式的安全设置入口；禁止猜写 sysfs、引导参数或硬编码闪存偏移。仅有脚本分支不等于已经找到可执行的修复。
+B. 若不能从原厂描述确认该入口，最小补充证据是以只读方式核对当前根分区的目录项和 inode11997／45，以及快照头部身份；与现有文件系统视图比较，区分持久化状态和恢复缓存。读取范围必须从已确认的挂载设备与 ext4 元数据推导，不能照搬别的 NX 机型分区表。无需重复完整录像、码率或 DDR 压力测试。
+C. 在核实启动机制及恢复方案前，不执行 erase_snapshot.sh、make_snapshot.sh、systemctl rescue，不直接覆盖正在映射的库，也不盲目重启相机服务。原厂快照脚本包含清零、mkswap 等动作，不能将其作为普通重启命令部署。
+D. 后续修复包应把“文件提交成功”与“本次启动加载成功”分成两个状态。激活成功至少要求全局文件摘要、相机可见摘要、进程新库段、内存门控入口版本／默认直通状态一致；失败时保留明确的启动状态和原始错误，而非只显示 schema/library mismatch。不能仅以 PID 或 boot_id 变化判定激活。
+E. 激活链通过后，先一次照片模式 COUNTER 开始／停止保存短测；确认 READY 与完整导出，再执行原定一次正常编码→减少普通帧 HEVC 输入→恢复的 A/B/A，继续分离 HEVC 与 RSZ2／WDMA2／DDR 的因果影响。不再重复码率实验。
+
+本轮改动与验证
+只新增此分析报告及本地证据归档；未修改运行代码、重新部署、改动快照或相机系统。部署时固定的 952 个源文件逐一校验，全部保持一致。没有新的模拟测试或硬件性能测试，不能把证据归档校验当作修复通过。

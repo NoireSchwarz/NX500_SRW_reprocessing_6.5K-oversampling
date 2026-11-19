@@ -2,6 +2,10 @@
 #define VFW_APP_CONTEXT_HASH 0x0e95977au
 struct vfw_code_guard {uint32_t address,bytes,hash;};
 static const struct vfw_code_guard vfw_code_guards[]={
+ {0x80036c70u,32u,0xdfacc4f0u},
+ {0x80036be0u,32u,0xca1dade0u},
+ {0x80036bfcu,32u,0x9ce929f3u},
+ {0x801cdc40u,32u,0xbc703fafu},
 {0x8014e78cu,304u,0x74b1f925u},
 {0x801544b4u,1328u,0xe4bed318u},
 {0x8016bc34u,80u,0x0a653873u},

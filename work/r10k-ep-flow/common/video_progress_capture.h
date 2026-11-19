@@ -25,10 +25,10 @@ static void vp_progress_capture(const struct vp_reader*r,struct vp_record*s,uint
  if(last)memcpy(z+26,after+2,16);
  if(selected&&vp_rw(r,0x208210b0u,&selector2)&&selector2==selector){z[30]=selector;z[1]|=4u;}
  else{z[17]=z[25]=VP_UNKNOWN;z[1]&=~((1u<<15)|(1u<<23));z[30]=VP_UNKNOWN;}
- if(first&&last&&z[2]==0x33544c56u&&z[3]==4u){
+ if(first&&last&&vp_timer_common_header(z+2)&&after[0]==z[2]&&after[1]==z[3]){
   z[1]|=16u;s->valid|=VP_PROGRESS;
   if(!memcmp(z+2,after,32))z[1]|=1u;else z[1]|=8u;
-  if((z[5]&15u)==3u&&((z[5]>>24)&3u)==0u&&((z[5]>>16)&255u)==1u)z[1]|=2u;
+  if(vp_timer_inflight(z+2))z[1]|=2u;
  }
  uint64_t end=now(context);z[31]=end>=begin&&end-begin<=UINT32_MAX*1000ULL?(uint32_t)((end-begin)/1000u):VP_UNKNOWN;
 }

@@ -5,7 +5,7 @@ umask 077
 D=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd) || exit 1
 WATCH=$D/bin/nxl-handoff-watch.arm
 OPS=$D/bin/nxl-fileops
-WATCH_SHA=5fdd4546dee2cdacb2fc77bc27537d3b20c237c862c85a8a5d03f0c5c053c90e
+WATCH_SHA=91b4520d2a4df5b8af805657f94f940e8c28d56964ae7faba20687233164c3bd
 RUN=/tmp/nx-lut-lite
 OUT=/mnt/mmc/NXDEMO51
 case "${1:---start}" in --start) :;;*) exit 2;;esac

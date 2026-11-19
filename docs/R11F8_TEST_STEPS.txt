@@ -1,0 +1,16 @@
+R11f8 合并测试步骤
+
+安装/激活提示为 R11f8。视频菜单保持 R11f HEVC A/B/A TEST，这是预期的：采样实验实现未变。
+
+1. 电池充足，安全断开 USB，保持照片模式，正常关机再开机。先让安装入口核验旧完整备份，不要应用全宽或按 COUNTER。
+2. 校验通过后，会显示 R11f8 BACKUP / ACTIVATION，再创建并复核本轮完整备份。提示消失不表示结束；继续等待 BACKUP VERIFIED - ACTIVATING 和原厂恢复流程。
+3. 若进入黑屏、写卡灯变化、随后自动关机，等待流程结束、灯连续熄灭后再开机，不在写卡灯亮或闪烁时断电。若出现 FAILED，或普通取景保持 10 分钟仍无结果，停止测试，待写卡灯熄灭后正常关机并接 USB 取日志。正常关机也不能完成时，保持供电并反馈。
+4. 恢复开机后留出至少 40 秒核验时间。看到 R11f8 CORE VERIFIED - HEVC A/B/A READY 才继续。若出现 OEM RESTORED / FAILED，或开机 3 分钟仍没有 VERIFIED，结束本轮，取回日志，不反复安装。
+5. 照片模式开启 COUNTERS，保持 5 秒，再停止。确认 COUNTERS SAVED - SAFE TO CONNECT USB。出现 schema/library mismatch、启动或保存失败时停止，不继续录像测试。
+6. 短测通过后，照片模式应用 FULL WIDTH 4K 30P，按提示重新选择 NTSC/UHD30p/PRO，再回照片模式。启动 COUNTERS，进入视频取景，录制一段 120 秒。程序自动执行预热→正常 30 秒→约四分之一普通帧 HEVC 输入 30 秒→恢复正常 30 秒，中间不改设置。
+7. 停录后等 5 秒，回照片模式停止并保存 COUNTERS。必须明确看到 COUNTERS SAVED - SAFE TO CONNECT USB 后再连接。DONE / TEST COMPLETE 不能替代保存成功。若 ABORTED 也保存本轮记录，不立即重跑。
+
+本轮只需激活确认、5 秒短测、一段全宽 120 秒；不重复码率、CPU/BUS 或裁切测试。
+保留 NXDEMO51/R11F8_ACTIVATION_*、VIDEO_STAGE_*、对应 MP4，以及全部旧照片、录像、完整 snapshot-before.img 和历史日志。
+发生接续失败时，优先查看 resume-f6.txt、f6-snapshot-check.txt、f6-tool-stderr.log 和 entry-result.txt；不删除旧备份来绕过检查。
+部署到 SD 不等于相机已激活；REFRESH_REQUESTED / REQUEST_ACCEPTED 仍是待核验，VERIFIED 与实际进程/库校验记录才是成功依据。

@@ -5,7 +5,7 @@
 struct vp_library {const char*name;unsigned bytes;const char*sha256;};
 static const struct vp_library vp_libraries[]={
  {"libmmfmodules.so",315716u,"e40d3c7fdbab8ea7f67d0e876468c2a31fa8572d602d969d32348f3fd0f45de7"},
- {"libmmfcore.so",340268u,"b3e7cd2987282d856a8f95b8768d44ea2f4f3804684a391de0567c10dada73c8"},
+ {"libmmfcore.so",434176u,"7743dd26b06fb2e600cc65aff6ad92913b43c3f75b9493437239006b24991cd9"},
  {"libmmfosal.so",15744u,"66ac8ea0c678a2a8f844bce9f23794e8f76ab95b205354d234072f8b7a00ea3c"},
 };
 struct vp_rom_guard {uint32_t address,words[8];};

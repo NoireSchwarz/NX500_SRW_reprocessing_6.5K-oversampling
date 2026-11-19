@@ -1,0 +1,346 @@
+{
+  "firmware_sha256": "f8e417cb5b55768851ba7e2b8017d3a98dc0b0c8444cc0a5061265cc08dbbf7f",
+  "EP_stages": [
+    {
+      "event": 0,
+      "name": "PATH_CFG_WDMA_INT",
+      "banks": [
+        {
+          "callback": "0x801caeb4",
+          "owner_address": "0x8153cbc8",
+          "registration": "0x801cb010"
+        },
+        {
+          "callback": "0x801cae68",
+          "owner_address": "0x8153cbc4",
+          "registration": "0x801cb848"
+        }
+      ]
+    },
+    {
+      "event": 1,
+      "name": "CORE_RDXI0_EOF",
+      "banks": [
+        {
+          "callback": "0x801cacec",
+          "owner_address": "0x8153cbb0",
+          "registration": "0x801cb810"
+        },
+        {
+          "callback": "0x801cae1c",
+          "owner_address": "0x8153cbc0",
+          "registration": "0x801cb058"
+        }
+      ]
+    },
+    {
+      "event": 2,
+      "name": "CORE_RDXI1_EOF",
+      "banks": [
+        {
+          "callback": "0x801caca0",
+          "owner_address": "0x8153cbac",
+          "registration": "0x801cb7d8"
+        },
+        {
+          "callback": "0x801cadd0",
+          "owner_address": "0x8153cbbc",
+          "registration": "0x801cb0a0"
+        }
+      ]
+    },
+    {
+      "event": 3,
+      "name": "CORE_RDXI2_EOF",
+      "banks": [
+        {
+          "callback": "0x801cac54",
+          "owner_address": "0x8153cba8",
+          "registration": "0x801cb7a0"
+        },
+        {
+          "callback": "0x801cad84",
+          "owner_address": "0x8153cbb8",
+          "registration": "0x801cb0e8"
+        }
+      ]
+    },
+    {
+      "event": 4,
+      "name": "CORE_RDXI3_EOF",
+      "banks": [
+        {
+          "callback": "0x801cac08",
+          "owner_address": "0x8153cba4",
+          "registration": "0x801cb768"
+        },
+        {
+          "callback": "0x801cad38",
+          "owner_address": "0x8153cbb4",
+          "registration": "0x801cb130"
+        }
+      ]
+    },
+    {
+      "event": 5,
+      "name": "CORE_WDXI0_EOF",
+      "banks": [
+        {
+          "callback": "0x801caa40",
+          "owner_address": "0x8153cb8c",
+          "registration": "0x801cb730"
+        },
+        {
+          "callback": "0x801cabbc",
+          "owner_address": "0x8153cba0",
+          "registration": "0x801cb178"
+        }
+      ]
+    },
+    {
+      "event": 6,
+      "name": "CORE_WDXI1_EOF",
+      "banks": [
+        {
+          "callback": "0x801ca9f4",
+          "owner_address": "0x8153cb88",
+          "registration": "0x801cb6f8"
+        },
+        {
+          "callback": "0x801cab70",
+          "owner_address": "0x8153cb9c",
+          "registration": "0x801cb1c0"
+        }
+      ]
+    },
+    {
+      "event": 7,
+      "name": "CORE_WDXI2_EOF",
+      "banks": [
+        {
+          "callback": "0x801ca9a8",
+          "owner_address": "0x8153cb84",
+          "registration": "0x801cb6c0"
+        },
+        {
+          "callback": "0x801cab24",
+          "owner_address": "0x8153cb98",
+          "registration": "0x801cb208"
+        }
+      ]
+    },
+    {
+      "event": 8,
+      "name": "CORE_WDXI3_EOF",
+      "banks": [
+        {
+          "callback": "0x801ca95c",
+          "owner_address": "0x8153cb80",
+          "registration": "0x801cb688"
+        },
+        {
+          "callback": "0x801caad8",
+          "owner_address": "0x8153cb94",
+          "registration": "0x801cb250"
+        }
+      ]
+    },
+    {
+      "event": 9,
+      "name": "CORE_WDXI4_EOF",
+      "banks": [
+        {
+          "callback": "0x801ca910",
+          "owner_address": "0x8153cb7c",
+          "registration": "0x801cb650"
+        },
+        {
+          "callback": "0x801caa8c",
+          "owner_address": "0x8153cb90",
+          "registration": "0x801cb298"
+        }
+      ]
+    },
+    {
+      "event": 10,
+      "name": "CORE_LDC_EOF",
+      "banks": [
+        {
+          "callback": "0x801ca2f0",
+          "owner_address": "0x8153cb28",
+          "registration": "0x801cb2e0"
+        },
+        {
+          "callback": "0x801ca8c4",
+          "owner_address": "0x8153cb78",
+          "registration": "0x801cb618"
+        }
+      ]
+    },
+    {
+      "event": 11,
+      "name": "CORE_MC_M2M_EOF",
+      "banks": [
+        {
+          "callback": "0x801ca7e0",
+          "owner_address": "0x8153cb6c",
+          "registration": "0x801cb5e0"
+        },
+        {
+          "callback": "0x801ca878",
+          "owner_address": "0x8153cb74",
+          "registration": "0x801cb328"
+        }
+      ]
+    },
+    {
+      "event": 12,
+      "name": "CORE_MC_OTF_EOF",
+      "banks": [
+        {
+          "callback": "0x801ca794",
+          "owner_address": "0x8153cb68",
+          "registration": "0x801cb5a8"
+        },
+        {
+          "callback": "0x801ca82c",
+          "owner_address": "0x8153cb70",
+          "registration": "0x801cb370"
+        }
+      ]
+    },
+    {
+      "event": 13,
+      "name": "CORE_RSZ_OUT0_EOF",
+      "banks": [
+        {
+          "callback": "0x801ca5cc",
+          "owner_address": "0x8153cb50",
+          "registration": "0x801cb570"
+        },
+        {
+          "callback": "0x801ca748",
+          "owner_address": "0x8153cb64",
+          "registration": "0x801cb3b8"
+        }
+      ]
+    },
+    {
+      "event": 14,
+      "name": "CORE_RSZ_OUT1_EOF",
+      "banks": [
+        {
+          "callback": "0x801ca580",
+          "owner_address": "0x8153cb4c",
+          "registration": "0x801cb538"
+        },
+        {
+          "callback": "0x801ca6fc",
+          "owner_address": "0x8153cb60",
+          "registration": "0x801cb400"
+        }
+      ]
+    },
+    {
+      "event": 15,
+      "name": "CORE_RSZ_OUT2_EOF",
+      "banks": [
+        {
+          "callback": "0x801ca534",
+          "owner_address": "0x8153cb48",
+          "registration": "0x801cb500"
+        },
+        {
+          "callback": "0x801ca6b0",
+          "owner_address": "0x8153cb5c",
+          "registration": "0x801cb448"
+        }
+      ]
+    },
+    {
+      "event": 16,
+      "name": "CORE_RSZ_OUT3_EOF",
+      "banks": [
+        {
+          "callback": "0x801ca4e8",
+          "owner_address": "0x8153cb44",
+          "registration": "0x801cb4c8"
+        },
+        {
+          "callback": "0x801ca664",
+          "owner_address": "0x8153cb58",
+          "registration": "0x801cb490"
+        }
+      ]
+    },
+    {
+      "event": 17,
+      "name": "CORE_RSZ_OUT4_EOF",
+      "banks": [
+        {
+          "callback": "0x801ca49c",
+          "owner_address": "0x8153cb40",
+          "registration": "0x801cb880"
+        },
+        {
+          "callback": "0x801ca618",
+          "owner_address": "0x8153cb54",
+          "registration": "0x801cafc0"
+        }
+      ]
+    }
+  ],
+  "IPC_stages": [
+    {
+      "name": "CS0_RDMA0_EOF",
+      "native_id": 41,
+      "status_index": 0,
+      "enable_index": 4,
+      "bit": 9,
+      "callback_index": 49,
+      "expected_callback": "0x801dd1dc",
+      "source": "801dd1dc..210: notification ID29 and original cs0 rdma0 done string; this is a notification-ID candidate, not an independently proven hardware registration ID. Never promote it from raw flags alone.",
+      "native_mapping_proven": false
+    },
+    {
+      "name": "CS0_WDXI0_EOF",
+      "native_id": 5,
+      "status_index": 1,
+      "enable_index": 3,
+      "bit": 5,
+      "callback_index": 50,
+      "expected_callback": "0x801dd214",
+      "source": "8017bcd4..bce4: named CS0_WDXI0_DMA_EOF registration ID5",
+      "native_mapping_proven": true
+    },
+    {
+      "name": "CS0_WDXI1_EOF",
+      "native_id": 1,
+      "status_index": 1,
+      "enable_index": 3,
+      "bit": 1,
+      "callback_index": 51,
+      "expected_callback": "0x801dd24c",
+      "source": "8017bbd4..bbe8 and8021bbb8..bbc4: named registration ID1",
+      "native_mapping_proven": true
+    },
+    {
+      "name": "CTRL0_CS0_FRAME_DONE",
+      "native_id": 66,
+      "status_index": 2,
+      "enable_index": 5,
+      "bit": 2,
+      "callback_index": 47,
+      "expected_callback": "0x801cdf6c",
+      "source": "8017bc44..bc58 named CS0 frame done registration; actual R10v slot2 verified",
+      "native_mapping_proven": true
+    }
+  ],
+  "limitations": [
+    "EOF events across modules/CS branches can overlap; event number order is not pipeline order.",
+    "Module configuration functions do not establish independent LCAC/CFA/NR completion flags.",
+    "Read-only observation never clears stale flags or enables masked stages.",
+    "EP owners are registered notification owners, not hardware-latched image/HEVC identities.",
+    "CS0 RDMA0 ID29 is a native notification-ID candidate; its hardware registration mapping remains unproven and is excluded from the verified-stage summary."
+  ]
+}

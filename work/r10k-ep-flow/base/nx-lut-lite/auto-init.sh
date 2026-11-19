@@ -3,16 +3,20 @@
 set -eu
 umask 077
 D=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd) || exit 1
+LOGPOLICY=$D/srw-log-policy.sh
+SRW_LOG_POLICY_SHA=ea30b428f6a607c304b3a1400f2263a89f5e32bdb770dece39512c30efaf1093
 OUT=/mnt/mmc/NXDEMO51
 OPS=$D/bin/nxl-fileops
 TEST=$D/bin/nxl-init-test.arm
 CAPTURE=$D/lens-capture.sh
 RUNNER=$D/memory-test.sh
-LENS_EVIDENCE=1
-OPS_SHA=0000000000000000000000000000000000000000000000000000000000000000
-INIT_TEST_SHA=0000000000000000000000000000000000000000000000000000000000000000
-LENS_CAPTURE_SHA=0000000000000000000000000000000000000000000000000000000000000000
-RUNNER_SHA=0000000000000000000000000000000000000000000000000000000000000000
+LENS_EVIDENCE=0
+SAP_GUARD=$D/srw-sap-service.sh
+SAP_GUARD_SHA=25fe4b65714ff03d5c4ce2fe4ff66aa54b7f00f95ac4b1a9964c4646538de1f3
+OPS_SHA=c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d
+INIT_TEST_SHA=7706a4667e6d71e6288a5e6e853680e83c4d854b9d8ed4487ed40fa700e1d074
+LENS_CAPTURE_SHA=583dd0eab1984f1154f09128daa35e630d0b808e1e973f5eb38f3250578bbea3
+RUNNER_SHA=137487a71c660c37e11d31e0e59d4dcf2408f2cbd75664f1c6c7742f5e7d46c7
 regular(){ [ -f "$1" ] && [ ! -L "$1" ]; }
 absent(){ [ ! -e "$1" ] && [ ! -L "$1" ]; }
 hash(){ "$OPS" sha256 "$1"; }
@@ -31,6 +35,14 @@ probe_failure(){
  fi
  fail "$fallback"
 }
+read_sap_reason(){
+ sap_reason=$2;candidate=;extra=
+ if regular "$root/sap-$1.reason" && { IFS= read -r candidate && ! IFS= read -r extra && [ -z "$extra" ]; } < "$root/sap-$1.reason";then
+  case "$candidate" in ''|*[!A-Z0-9_]*) :;;*) if [ "${#candidate}" -le 100 ];then sap_reason=$candidate;return 0;fi;;esac
+ fi
+ return 1
+}
+sap_failure(){ read_sap_reason "$1" "$2" || :;fail "$sap_reason"; }
 pipeline_failure(){
  for folder in ep-close ep-open;do
   file=$root/$folder/STATUS.reason
@@ -46,7 +58,7 @@ pipeline_failure(){
 [ "$#" = 0 ] || exit 2
 token=${NX51_PROGRESS_TOKEN:-}
 [ "${#token}" = 32 ] && case "$token" in *[!0-9a-f]*) false;;*) true;;esac || fail PROGRESS_OPERATION_REQUIRED
-for pair in "$OPS:$OPS_SHA" "$TEST:$INIT_TEST_SHA" "$CAPTURE:$LENS_CAPTURE_SHA" "$RUNNER:$RUNNER_SHA";do
+for pair in "$OPS:$OPS_SHA" "$SAP_GUARD:$SAP_GUARD_SHA" "$TEST:$INIT_TEST_SHA" "$CAPTURE:$LENS_CAPTURE_SHA" "$RUNNER:$RUNNER_SHA" "$LOGPOLICY:$SRW_LOG_POLICY_SHA";do
  file=${pair%:*};want=${pair##*:};regular "$file" && [ "$(hash "$file")" = "$want" ] || fail INIT_COMPONENT_IDENTITY_FAILED
 done
 regular "$D/process.sh" || fail PROCESS_HELPER_MISSING
@@ -56,7 +68,24 @@ absent /tmp/nx-lut-lite/auto-init-held || fail PREVIOUS_INIT_RETURN_UNCONFIRMED
 [ -d "$OUT" ] && [ ! -L "$OUT" ] || fail REPORT_ROOT_UNAVAILABLE
 root=$OUT/INIT_AUTO_$token
 absent "$root" && mkdir "$root" || fail REPORT_ALREADY_EXISTS
+/bin/sh "$LOGPOLICY" mark "$root" "$token" || fail LOG_POLICY_OWNER_FAILED
 exec >> "$root/runner.log" 2>&1
+sap_cleanup(){
+ sap_exit=$?
+ trap - 0
+ if ! /bin/sh "$SAP_GUARD" after "$root";then
+  read_sap_reason after SAP_RESTORE_UNCONFIRMED || :
+  nxl_progress AUTO_SAP_RESTORE HELD "$sap_reason"
+  [ "$sap_exit" != 0 ] || sap_exit=1
+ fi
+ exit "$sap_exit"
+}
+trap sap_cleanup 0
+trap 'exit 130' 2
+trap 'exit 143' 1 15
+nxl_progress AUTO_SAP_PREPARE RUNNING 'Preparing the original accessory service for exclusive rendering'
+/bin/sh "$SAP_GUARD" before "$root" || sap_failure before SAP_SERVICE_PREPARE_FAILED
+
 trap 'exit 130' HUP INT TERM
 nxl_progress AUTO_BASELINE RUNNING 'Reading cold Still state before original configuration'
 before=0;"$TEST" --ready-idle "$root/before" || before=$?
@@ -65,14 +94,32 @@ case "$before" in 0|42) :;;*) probe_failure "$root/before" BASELINE_RAM_OR_IDLE_
 /bin/sh "$RUNNER" --status > "$root/session-before.txt" || fail SESSION_STATUS_FAILED
 state=
 while IFS= read -r line;do case "$line" in state=*) state=${line#state=};;esac;done < "$root/session-before.txt"
+original_job=$(sed -n 's/^job_dir=//p' "$root/session-before.txt")
+rearmed=0
 case "$state" in
- COMPLETE|RESTART_REQUIRED) /bin/sh "$RUNNER" --rearm > "$root/session-rearm.txt" 2>&1 || fail PREVIOUS_TASK_RESOURCE_CHECK_FAILED;;
+ COMPLETE|RESTART_REQUIRED) /bin/sh "$RUNNER" --rearm > "$root/session-rearm.txt" 2>&1 || fail PREVIOUS_TASK_RESOURCE_CHECK_FAILED;rearmed=1;;
  NEED_STILL_INIT|RETRYABLE) :;;
  *) fail CURRENT_TASK_NOT_ELIGIBLE;;
 esac
-# Revalidate after a possible rearm transaction. Neither result grants a
+# A single explicit button owns resource verification and a fresh round.
 if [ -n "${NX51_SOURCE_SRW:-}" ];then
- /bin/sh "$RUNNER" --new > "$root/session-selected-photo.txt" || fail SELECTED_PHOTO_NEW_SESSION_FAILED
+ selected_status=$root/session-before.txt
+ if [ "$rearmed" = 1 ];then
+  /bin/sh "$RUNNER" --status > "$root/session-prepared.txt" || fail PREPARED_SESSION_STATUS_FAILED
+  grep -qx state=NEED_STILL_INIT "$root/session-prepared.txt" && grep -qx requires_reset=0 "$root/session-prepared.txt" || fail PREPARED_SESSION_NOT_READY
+  selected_status=$root/session-prepared.txt
+ fi
+ current_job=$(sed -n 's/^job_dir=//p' "$selected_status")
+ if [ "$rearmed" = 1 ] && [ -n "$current_job" ] && [ "$current_job" != "$original_job" ] &&
+    grep -qx state=NEED_STILL_INIT "$selected_status" && grep -qx requires_reset=0 "$selected_status" &&
+    grep -qx front_attempt=0 "$selected_status" && grep -qx backend_attempt=0 "$selected_status" &&
+    grep -qx look_id=- "$selected_status";then
+  printf 'REUSE_THIS_BUTTON_VERIFIED_FRESH_SESSION=%s\n' "$current_job" > "$root/session-selected-photo.txt"
+ else
+  /bin/sh "$RUNNER" --new > "$root/session-selected-photo.txt" || fail SELECTED_PHOTO_NEW_SESSION_FAILED
+  grep -qx state=NEED_STILL_INIT "$root/session-selected-photo.txt" && grep -qx requires_reset=0 "$root/session-selected-photo.txt" || fail SELECTED_PHOTO_NEW_SESSION_NOT_READY
+ fi
+ NX51_RC_NEW_JOB=1;export NX51_RC_NEW_JOB
 fi
 # Each selected experiment has a fresh immutable source configuration.
 # The verified rearm above still decides whether resource reuse is legal.
@@ -107,6 +154,7 @@ sync || printf 'PIPELINE_EXIT_SYNC_FAILED\n' >&2
 if [ "$LENS_EVIDENCE" = 1 ];then /bin/sh "$CAPTURE" mark AUTO_CONFIG_PIPELINE_RETURNED || :;fi
 [ "$rc" = 0 ] || pipeline_failure
 regular "$root/ep-close/EP.returned" && absent /tmp/nx-lut-lite/auto-init-held || fail EP_REFERENCE_RETURN_UNCONFIRMED
+/bin/sh "$SAP_GUARD" after "$root" || sap_failure after SAP_SERVICE_RESTORE_UNCONFIRMED
 nxl_progress AUTO_FINAL RUNNING 'Verifying Still readiness after the completed JPEG'
 "$TEST" --readiness "$root/after" || fail FINAL_STILL_READINESS_FAILED
 /bin/sh "$RUNNER" --status > "$root/session-after.txt" || fail FINAL_SESSION_STATUS_FAILED
@@ -120,6 +168,10 @@ final_recorder=;IFS= read -r final_recorder < "$root/recorder-final.txt" || fail
 [ "$final_recorder" = "$recorder_line" ] || fail LENS_RECORDER_CHANGED_DURING_TEST
 fi
 printf 'NXAUTOMENU1\ntoken=%s\noutcome=READY\nreport=%s\nend=NXAUTOMENUEND1\n' "$token" "$root" > "$root/MENU.result"
+# Compact only this successful operation's optional wrapper logs. Native
+# resource records remain available to the next button's rearm verifier.
+completed_job=$(sed -n 's/^job_dir=//p' "$root/session-after.txt")
+/bin/sh "$LOGPOLICY" complete "$completed_job" "$root" "$token" || printf 'OPTIONAL_LOG_COMPACTION_UNCONFIRMED\n' >&2
 sync
 nxl_progress AUTO_READY READY 'Automatic initialization complete; JPEG saved; workspace and EP reference returned.'
 exit 0

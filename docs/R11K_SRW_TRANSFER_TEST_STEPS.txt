@@ -1,0 +1,36 @@
+R11k 同一 RAW 的 Gamma 传递验证
+2026-11-18 / Europe/Berlin
+
+目的
+只拍一张 RAW，再用它做四次原生显影。把拍摄波动排除后，核实 SOURCE 19、线性和当前 Log 传递曲线的真实输出。图像解码、比较、拟合在电脑进行；相机只执行已有的单帧 ISP 显影和保存。此次不用录制额外视频，不重复码率或 CPU/BUS 测试。
+
+安装
+1. SD 文件写入完成后安全断开 USB，正常关机，待机身写卡灯熄灭，取出电池约30秒后装回。
+2. 按原有 SD 安装方式开机，让安装完成。安装日志的版本应为 recovery-r11k-srw-transfer。若报活动 Gamma 租约，按第1步实际断电再安装，不要绕过校验。
+3. 再正常关机、开机，断开 USB。在补丁的“SRW 显影”页确认 R11k SRW TRANSFER TEST。视频页仍保留 R11j 的独立组件标识。
+
+准备唯一输入
+4. 退出录制并回到照片模式，视频 Gamma 保持 FACTORY。将原来的测试灰阶/色块图全屏显示在 Tab S7+ 自然模式，亮度固定，关闭自动亮度和护眼色温。
+5. 固定机位、M档、ISO200、F4.0、1/60，白平衡选固定值，手动对焦后轻微虚焦以减弱网纹。确保灰阶包含暗部、中灰与亮部，最亮灰阶避免明显过曝。使用 RAW+JPEG 只拍一张，这也完成开机后的原生 Still 初始化。不要删除之前文件。
+6. SRW 显影中 SELECT SRW 选刚拍的这一张。LUT PIPELINE 确认 OFF / ORIGINAL；格式 NV16 / JPEG 4:2:2。后续四次都选择同一文件，曝光不需要再改。
+
+同一次开机串行显影四次
+7. GAMMA TEST 选 SOURCE 19，执行 AUTO + COMPARE。等到 AUTO INITIALIZATION COMPLETE、JPEG保存和资源归还完成，再操作下一次。
+8. GAMMA TEST 选 LINEAR TEST，执行 AUTO + COMPARE，等待同样完成。
+9. GAMMA TEST 选 LOG TRANSFER TEST，执行 AUTO + COMPARE，等待同样完成。
+10. GAMMA TEST 回到 SOURCE 19，再执行一次 AUTO + COMPARE。
+
+曲线选择循环为 FACTORY → SOURCE 19 → LIFT TEST → LINEAR TEST → LOG TRANSFER TEST → FACTORY。跳过 LIFT TEST，不要运行它。
+LINEAR TEST 与 LOG TRANSFER TEST 为临时诊断选项；菜单进程重新打开后可能恢复 SOURCE 19，每次执行前看清当前标签。每次 AUTO + COMPARE 会建立新 JOB 并验证旧资源已归还，无需手工清理目录。
+任何一次显示 STOPPED / INITIALIZATION STOPPED，保存现状并停止后续三组，记下第几组和屏幕原文。不要反复重试或手动删租约。
+四次完成后确认机身写卡灯熄灭，再连接 USB。保留新 JPEG、全部 JOB_*、INIT_AUTO_* 与安装日志。成功后不需要额外录像。
+
+这次检查什么
+A. 四次是否确为同一 SRW、同一白平衡/黑电平/色彩矩阵/LDC和恒等LUT，且每次都有独立请求编号。
+B. 固定曲线是否通过原厂建表器、装载前配置及恢复记录；两套 bank 的快照和现有三个图像边界像素是否一致指向本次请求。
+C. LINEAR / LOG TRANSFER 的实际像素是否改变；最后 SOURCE 19 是否回到第一次的结果。
+D. 在电脑用完整 JPEG 与分阶段像素定位欠曝来自曲线未消费、相片输出缩放、还是原厂显示风格。相片与录像增益先独立测量，不能直接套录像的4%模型。
+
+边界
+LOG TRANSFER TEST 只验证传递曲线，继续使用该 RAW 的原厂颜色矩阵，没有 BT.2020 转换。此 JPEG 不能直接认定为完整 Samsung Log 或拿官方3D LUT直接判定兼容性。18%工作灰的物理曝光标度仍需后续证据。
+电脑验证通过不代表实机 ISP/MMIO/DMA 已验收，实际输出留待本轮短测确认。

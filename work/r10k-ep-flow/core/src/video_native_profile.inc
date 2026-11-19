@@ -2,7 +2,7 @@
  * The camera menu selects NTSC / UHD30; read its resolved shared UserSpec.
  * Its native /dev/mem PFN mapping is not ordinary /proc/PID/mem RAM.
  * Verify that mapping, then map only the first parameter page read-only.
- * No sensor timing, MP4 timestamps or firmware files are patched here.
+ * The DCI24 option only maps its output width; native frame timing and MP4 timestamps remain factory code.
  */
 #define VP_MOVIE "/usr/lib/libmmutil_movie.so.0.0.0"
 #define VP_USER "/usr/lib/libuser-spec.so"
@@ -120,4 +120,15 @@ static int vp_profile(struct camera*c,const char*verb,const char**why){
  if(!vp_patch_rate(c,80,why))return 0;
  *why="VIDEO_30P_SELECTION_CHANGED";if(!vp_preferences(c)){*why=vp_preference_error;vp_log(c,"SELECTION_CHANGED",*why);return 0;}if(!vp_ntsc||vp_size!=1){vp_log(c,"SELECTION_CHANGED",*why);return 0;}
  *why="NATIVE_UHD30_2997_PRO80_CONFIGURED";vp_log(c,"AFTER",*why);return 1;
+}
+
+/* Native enum 0: DCI 4096x2160, integer 24 from UI_Get_Movie_FPS.
+ * Enum 4 is FHD24, not UHD24. Never write the shared preference page.
+ */
+static int vp_native24_selection(struct camera*c,const char**why){
+ if(!vp_library_context(c,why))return 0;
+ *why="SELECT_NTSC_DCI24_PRO_IN_CAMERA_MENU";
+ if(!vp_ntsc||vp_size!=0||vp_quality!=2){vp_log(c,"NATIVE24_SELECTION_REQUIRED",*why);return 0;}
+ *why="STOP_RECORDING_OR_TASK_BEFORE_CHANGE";if(!ready(c))return 0;
+ *why="NATIVE_DCI24_SELECTION_VERIFIED";vp_log(c,"NATIVE24_SELECTION_VERIFIED",*why);return 1;
 }

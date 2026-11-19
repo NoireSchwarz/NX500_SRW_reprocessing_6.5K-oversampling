@@ -1,0 +1,19 @@
+R11f4 合并激活及 HEVC A/B/A 短测
+
+此包继续R11f实验，修正新核心库的实际加载。不是30p性能修复。保留照片、录像、原始固件和历史日志。
+
+安装／激活：
+1. 电池充足，正常停止录像和采样并保存。安全断开USB，在照片模式装卡开机；不要应用全宽或立即按COUNTER。
+2. 看到R11f4 BACKUP / ACTIVATION后保持供电，备份和启动恢复可能持续数分钟。不要在写卡灯亮时断电，不连接USB。
+3. 若自动回到取景并出现“R11f4 CORE VERIFIED - HEVC A/B/A READY”，进入下面短测。若进入黑屏恢复状态，等待至少90秒且写卡灯已熄灭后，取出电池约30秒，再装回开机；只做这一次，等待启动完成。
+4. 必须看到CORE VERIFIED再测试。若显示CORE NOT VERIFIED、OEM RESTORED，或重新开机后3分钟仍没有成功提示，停止测试，正常连接USB并保留新的NXDEMO51/R11F4_ACTIVATION_*；不要反复重装、取电池或应用全宽。
+
+同一包内先做照片模式5秒采样：
+5. AELEV补丁视频页仍显示R11f HEVC A/B/A TEST。照片模式按STAGE COUNTERS，确认已启动（ON / STOP+SAVE），不再出现schema/library mismatch；等5秒，再停止保存，明确看到COUNTERS SAVED／SAFE TO CONNECT USB。照片模式没有录像剂量属于正常，本步确认新库校验及开始／保存流程。
+
+通过后只录一段全宽120秒：
+6. 照片模式应用FULL WIDTH 4K 30P，按提示在原厂菜单重新选择NTSC／UHD30p／PRO，再回照片模式。保持原码率、默认BUS QOS和既有拍摄设置。
+7. 启动STAGE COUNTERS后进入视频取景，录像120秒。预热后自动执行正常编码30秒→约四分之一普通帧送入HEVC30秒→恢复正常30秒，无需中途操作菜单。
+8. 停录后等5秒，回照片模式停止并保存采样；明确看到SAVED／TEST COMPLETE／SAFE TO CONNECT USB后再连接USB。失败或ABORTED也保留并保存，不立即重跑。
+
+保留本次R11F4_ACTIVATION_*、VIDEO_STAGE_*目录和对应MP4。验收需要启动后的内存身份、READY、完整文件和实际A/B/A剂量；部署成功或菜单标题不能代替这些证据。不重复100／80／70码率、CPU／BUS或原生裁切对照。

@@ -1,0 +1,12 @@
+[Unit]
+Description=NX500 R11f7 recovery handoff outside camera service
+DefaultDependencies=no
+IgnoreOnIsolate=yes
+ConditionPathExists=/run/nxl-r11f7-recovery/expected-phase
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+WorkingDirectory=/
+ExecStart=/bin/sh /run/nxl-r11f7-recovery/recovery.sh worker
+TimeoutSec=60

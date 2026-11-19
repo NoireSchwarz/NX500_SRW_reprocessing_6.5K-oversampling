@@ -23,7 +23,7 @@ static int task_progress_open(int check){
  if(n!=sizeof bytes){unsigned long seed=ticks();for(unsigned i=0;i<16;i++)bytes[i]=(unsigned char)((seed>>(i%4*8))^((unsigned)getpid()>>(i%3*8))^i);}
  for(unsigned i=0;i<16;i++)snprintf(operation+i*2,3,"%02x",bytes[i]);
  if(setenv("NX51_PROGRESS_TOKEN",operation,1)||setenv("NX51_PROGRESS_UI","1",1))return 0;
- nxl_progress_view_begin(&task_progress,operation,check);task_progress.auto_init=task_progress_auto;task_progress_check=check;snprintf(task_trace_path,sizeof task_trace_path,"/tmp/nx-lut-lite/stage-ui-%s.log",operation);task_trace_fd=open(task_trace_path,O_WRONLY|O_CREAT|O_EXCL|O_NOFOLLOW|O_CLOEXEC,0600);task_trace_owned=task_trace_fd>=0;task_phase_fd=np_stage_open(operation);if(task_phase_fd<0){launch_event("PROGRESS_CHANNEL_FAILED",operation,-1,errno);return 0;}
+ nxl_progress_view_begin(&task_progress,operation,check);task_progress.auto_init=task_progress_auto;task_progress_check=check;snprintf(task_trace_path,sizeof task_trace_path,"/tmp/nx-lut-lite/stage-ui-latest.log");task_trace_fd=open(task_trace_path,O_WRONLY|O_CREAT|O_TRUNC|O_NOFOLLOW|O_CLOEXEC,0600);task_trace_owned=task_trace_fd>=0;task_phase_fd=np_stage_open(operation);if(task_phase_fd<0){launch_event("PROGRESS_CHANNEL_FAILED",operation,-1,errno);return 0;}
  if(task_progress_reused){
   int flags=fcntl(ConnectionNumber(dpy),F_GETFD);if(flags<0||fcntl(ConnectionNumber(dpy),F_SETFD,flags|FD_CLOEXEC))return 0;
   XSynchronize(dpy,False);xerror=0;task_progress_issue_color=color("#EF8178",ink);task_progress_visible=1;task_progress.changed=1;task_progress_drawn=0;
@@ -64,7 +64,7 @@ static void task_progress_paint(void){
  unsigned long foreground=task_progress.issue?task_progress_issue_color:accent;
  XSetForeground(dpy,gc,ink);text(28,y+16,task_progress_auto?"AUTO INITIALIZE":"SRW / LUT / JPEG");text(544,y+16,"STAGE STATUS");
  XSetForeground(dpy,gc,foreground);limited_text(28,y+52,task_progress.title,660);
- XSetForeground(dpy,gc,ink);limited_text(28,y+88,task_progress.detail,660);
+ XSetForeground(dpy,gc,ink);limited_text(28,y+88,task_progress.issue?"已安全停止，請查看工作階段狀態":"請稍候，完成後自動返回選單",660);
  fill(28,y+128,588,18,dark);fill(28,y+128,(int)(588u*task_progress.percent/100u),18,foreground);frame(28,y+128,588,18,line_color);
  char percent[24];snprintf(percent,sizeof percent,"%u%%",task_progress.percent);XSetForeground(dpy,gc,foreground);text(636,y+121,percent);
  XSetForeground(dpy,gc,muted);text(28,y+158,"STAGE CHANGES ONLY - AUTO RETURN TO EV+AEL");

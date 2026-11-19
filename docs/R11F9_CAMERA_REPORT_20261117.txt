@@ -1,0 +1,9 @@
+R11f9 实机接续核验记录（2026-11-17）
+
+证据：NXDEMO51/R11F9_ACTIVATION_1794849098_581，共86个文件已复制至D盘并读回校验。
+result.txt：state=VERIFIED，reason=EXISTING_LIVE_CORE_ADOPTED，pid=301，ticks=1273，boot_id=17990e92-ca9c-450b-9881-f0ba0fefe47c，recovery_requested=0，core_write_performed=0。
+initial三轮、final三轮和published共七次实际进程核验均为ACTIVE／LIVE_CORE_AND_GATE_VERIFIED，base=b42d8000，inode=45，command_enabled=0。entry-stage.txt为VERIFIED，active提示返回0。
+入口于相机记录1794849102检查模块，1794849129达到VERIFIED。R11f6与R11f8两份备份均完成157285888字节专用校验并通过；旧状态保留。
+不能继续把这轮“还是失败”称为R11f9安装或核心激活失败。卡上未见新的采样导出，用户未明确这次后续失败的具体提示，不能补全原因。
+用户已改目标为原生24p全宽普通录像，因此不再继续HEVC A/B/A或重复码率对照。
+本轮写卡前读取有64项枚举异常，较R11f9部署基线新增startup.log与startup.status两项；它们不是已确认的性能或采样根因。保留原卡，无修复或清理。

@@ -7,7 +7,7 @@ static char favorites[512][81],cursors[8][81],ui_path[1024];
 static char srw_lut_id[81]="off";
 static unsigned srw_gamma_mode=1;
 static const char *group_ids[]={"all","favorites","portrait","cinema","landscape","mono","retro","other"};
-static const char *group_names[]={"全部","收藏","人像","电影","风景","黑白","复古","其他"};
+static const char *group_names[]={"全部","收藏","人像","電影","風景","黑白","復古","其他"};
 static const struct nxl_look_info *info_for(const char *id) {
     for(unsigned i=0;i<sizeof nxl_look_infos/sizeof nxl_look_infos[0];++i)
         if(!strcmp(id,nxl_look_infos[i].id))return &nxl_look_infos[i];
@@ -20,7 +20,7 @@ static int favorite_index(const char *id) {
     for(int i=0;i<favorite_count;++i)if(!strcmp(id,favorites[i]))return i;
     return -1;
 }
-static int strength_ok(int s) {return s==25 || s==50 || s==75 || s==100;}
+static int strength_ok(int s) {return s>=0&&s<=100&&s%5==0;}
 static void browser_remember(void) {
     strcpy(cursors[category],selected==0?"#off":selected==count+1?"#video":selected_id());
 }
@@ -29,6 +29,7 @@ static void browser_rebuild(const char *wanted) {
     for(int pass=0;pass<(category==0?2:1);++pass)for(int i=0;i<total_count;++i) {
         int fav=favorite_index(names[i])>=0;
         const struct nxl_look_info *info=info_for(names[i]);
+        if(!strcmp(info->group,"loglut"))continue;
         if(category==0 && fav!=(pass==0))continue;
         if(category==1 && !fav)continue;
         if(category>=2 && strcmp(info->group,group_ids[category]))continue;
@@ -65,9 +66,10 @@ static void browser_load(void) {
         else if(sscanf(line,"favorite %80s",id)==1 && name_ok(id) && favorite_index(id)<0 && favorite_count<512)
             strcpy(favorites[favorite_count++],id);
         else if(sscanf(line,"srw_lut %80s",id)==1 && name_ok(id))strcpy(srw_lut_id,id);
-        else if(sscanf(line,"srw_gamma %d",&value)==1 && value>=0 && value<=2)srw_gamma_mode=(unsigned)value;
+        /* Historical SRW test-curve settings are deliberately ignored. */
     }
     fclose(f);
+    if(!strcmp(info_for(srw_lut_id)->group,"loglut"))strcpy(srw_lut_id,"off");
 }
 static int browser_save(void) {
     browser_remember();
@@ -85,7 +87,7 @@ static int browser_save(void) {
     for(int i=0;i<8;++i)if(cursors[i][0])fprintf(f,"cursor %d %s\n",i,cursors[i]);
     for(int i=0;i<favorite_count;++i)fprintf(f,"favorite %s\n",favorites[i]);
     fprintf(f,"srw_lut %s\n",srw_lut_id);
-    fprintf(f,"srw_gamma %u\n",srw_gamma_mode);
+    /* Experimental curve state is never persisted by the release menu. */
     int failed=ferror(f);if(fflush(f)||fsync(fileno(f)))failed=1;if(fclose(f))failed=1;
     if(failed)return 0;
     return 1;
@@ -103,17 +105,9 @@ static int browser_favorite(void) {
     }
     browser_rebuild(keep);return 1;
 }
-static int browser_has_strengths(void) {
-    const char *id=selected_id(),*looks=getenv("NX_LUT_LOOKS");
-    if(!id[0] || !strength_support)return 0;
-    if(!looks || looks[0]!='/')looks="/mnt/mmc/looks";
-    char path[1200];
-    const char *files[]={"source.bin","25.bin","25.fnv","50.bin","50.fnv","75.bin","75.fnv"};
-    for(unsigned i=0;i<sizeof files/sizeof files[0];++i) {
-        snprintf(path,sizeof path,"%s/nxl-strengths/%s/%s",looks,id,files[i]);
-        if(access(path,R_OK))return 0;
-    }
-    return 1;
+static int browser_has_strengths(void){
+ const char*id=selected_id(),*root=getenv("NX_LUT_ROOT");if(!id[0]||!root)return 0;
+ char path[1200];snprintf(path,sizeof path,"%s/bin/nxl-lutblend.arm",root);return access(path,X_OK)==0;
 }
 static int effective_strength(void) {return browser_has_strengths()?strength:100;}
 static void browser_group(int next) {

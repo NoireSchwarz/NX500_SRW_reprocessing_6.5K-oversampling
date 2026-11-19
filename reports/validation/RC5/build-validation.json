@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "menu_sha256": "2b7cc2a68bb0c34eae4271c1ba151353a9eab4cf6ac4789d2bcb97375ec4220d",
+  "keys_sha256": "07f7103ffb9b588d31e0f7793005e7ad9fa4d33e5285336e933bd69432e83e6e",
+  "new_helpers": {
+    "nxl-lutload.arm": "e2ce269905b3ae17d514f1787aed8388d40ef78add59c9e2b9f3421566379424",
+    "nxl-native-refresh.arm": "3a7b272e3be9ad81996c823f17f33d84e990a85eff0f252785db7d575a0ceac7"
+  },
+  "module_manifest_sha256": "a8782bd8e9882d88af711ccfe046754644b577bbc13a2fc3792130caeb833b26",
+  "hardware_tested": false
+}

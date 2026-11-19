@@ -1,0 +1,12 @@
+[Unit]
+Description=NX500 R11f7 loaded-core proof and bounded fallback
+ConditionPathExists=/run/nxl-r11f7/expected-phase
+After=di-camera-app.service nxl-r11f7-preload.service
+Requires=nxl-r11f7-preload.service
+IgnoreOnIsolate=yes
+
+[Service]
+Type=simple
+ExecStart=/bin/sh /run/nxl-r11f7/post.sh
+TimeoutSec=0
+WorkingDirectory=/

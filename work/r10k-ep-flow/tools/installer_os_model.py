@@ -22,7 +22,7 @@ if op=='fileops':
  elif command=='version':sys.exit(0 if Path(args[0]).read_bytes()==b'1.12\nNX500\n' else 1)
  elif command=='volatile-fs':pass # Only this disposable host path models tmpfs.
  elif command=='mount-info':
-  root=fixture.as_posix();print(('/'+root[0].lower()+root[2:] if root[1:3]==':/' else root)+' rw')
+  root=fixture.as_posix();state=fixture/'mount-mode';mode=state.read_text('ascii').strip() if state.exists() else 'rw';print(('/'+root[0].lower()+root[2:] if root[1:3]==':/' else root)+' '+mode)
  elif command=='unlock':Path(args[0]).rmdir()
  else:raise AssertionError(('unmodeled file utility operation',command,args))
  sys.exit(0)

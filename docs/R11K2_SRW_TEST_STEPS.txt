@@ -1,0 +1,11 @@
+R11k2 SRW修复短测
+2026-11-18 / Europe/Berlin
+
+1. 安全断开USB，正常关机待机身写卡灯熄灭，取出电池约30秒后装回，再按原方式安装。上轮尚未确认缓冲和EP归还，这次需要实际断电，不能只连续点重试。
+2. 等安装结束后关机、开机，断开USB。安装日志修订号应为recovery-r11k2-va4k-handoff。SRW页面仍为R11k SRW TRANSFER TEST，视频页仍为R11j，这是组件家族标签。
+3. 保持照片模式，选本轮对照的同一份RAW+JPEG（SAM_0468），LUT PIPELINE设OFF / ORIGINAL，GAMMA TEST设SOURCE 19，只执行一次AUTO + COMPARE。
+4. 等AUTO INITIALIZATION COMPLETE和JPEG保存、资源归还完成。若失败，停止后续组，保留屏幕原文、JOB_*、INIT_AUTO_*及安装日志；不要连续重试或删除锁。
+5. 第一组成功后，可继续同一RAW的LINEAR TEST → LOG TRANSFER TEST → SOURCE 19，每组一次AUTO + COMPARE并等完整完成。临时曲线可能在菜单进程重开后回到SOURCE 19，每次执行前核对标签。
+6. 全部保存、机身写卡灯熄灭后再连接USB。保留新NXLI*.JPG、所有原照片、录像、完整备份和历史日志。不需要额外拍摄视频或测试码率。
+
+本轮先验收SOURCE19是否恢复完整显影。曲线像素响应和完整Samsung Log兼容性要在真实输出回收后分析，电脑模型通过不等于实机验收。

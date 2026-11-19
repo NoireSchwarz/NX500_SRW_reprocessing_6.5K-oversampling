@@ -1,0 +1,39 @@
+NX500／NX1 外部实物灰阶参考检索
+2026-11-18
+
+结论
+已找到明确来自NX500／NX1的实物ColorChecker测试及原始SRW目录；部分测试列出固定曝光，低照度系列另给出照度。但本轮未取得可解码的外部原始文件，故没有实际测得其18%灰块RAW值，没有据此改变相机18%工作点或曝光补偿。
+外部网页参数是候选来源，不是已经完成的本机物理标定。网络下载返回403的结果已保存在download-attempts.json。
+
+优先候选一：Imaging Resource NX500
+https://www.imaging-resource.com/cameras/samsung-nx500-review/test/
+https://www.imaging-resource.com/cameras/samsung-nx500-review/thumbnails/
+作者页面说明Multi Target包含MacBeth ColorChecker／SG，并列出原始SRW。
+NX500hVFAI00100：ISO100，1/30秒，F5.6，60mm，补偿0EV，公开列有SRW/JPEG。
+NX500hSLI00100NR0：ISO100，1/15秒，F8，60mm，补偿0EV，公开列有SRW/JPEG。
+NX500LL001003：ISO100，2秒，F2.8，60mm，补偿0EV；低照度系列说明约11lux，另组约0.67lux。
+这些是该站列出的拍摄条件。本轮未独立核验文件EXIF、灰块身份、光源实测光谱、灰块处实际照度或测光依据。
+
+优先候选二：Imaging Resource NX1
+https://www.imaging-resource.com/cameras/samsung-nx1-review/test/
+https://www.imaging-resource.com/cameras/samsung-nx1-review/thumbnails/
+NX1hVFAI00100：ISO100，1/40秒，F5.6，60mm，补偿0EV，列有SRW/JPEG。
+NX1hSLI00100NR0：ISO100，1/15秒，F8，60mm，补偿0EV，列有SRW/JPEG。
+NX1只能作为独立交叉参考，不能只凭相同传感器／普通Gamma节点便将曝光或增益直接复制到NX500。
+
+次级候选：Better Family Photos 的NX500实物ColorChecker Passport比较
+https://betterfamilyphotos.blogspot.com/2015/09/improving-color-consistency-with-x-rite.html
+作者描述同一跳闪照明、RAW处理，但曝光经过后期匹配，展示图不能直接用于反推相机物理中灰。
+
+辅助资料：DXOMARK NX500原始测量
+https://www.dxomark.com/Cameras/Samsung/NX500---Measurements
+含SNR18%及色彩响应栏目，不能把SNR18%的标题或其输出图直接当作18%灰RAW码值；没有根据该图反算一个未经支持的固定EV。
+
+可行的逆推流程
+1. 取得公开原始SRW，核验型号、ISO、快门、光圈、补偿、黑位、白平衡及原始数据；优先NX500，并保留原始文件散列和下载来源。
+2. 在实物色卡中确定真正的中性灰块及其参考反射率；不能把看起来灰的背景、任意RGB118，或普通色卡灰块名称自动当成精确18%。
+3. 直接测减黑后的各CFA平面，检查均匀性、饱和与邻块污染。将灰块相对信号与原厂Gamma/校准链分开，不从经过风格LUT的JPEG倒推出唯一曝光。
+4. 若照度、测光基准或曝光放置不充分，只报告该测试条件下的灰块位置、相对白块比例和不确定性；不能把单张样本的RAW比例直接写成通用18%满量程比例。
+5. 与本次合成SRW的已知数字输入→实际ISP输出增益对接，得到从外部实物参考到本机数字曲线的条件估计。外部样本若仍缺照明／测光依据，绝对认证限制保持。
+
+本轮未发布外部物理灰点校准值。当前相机工作定义仍是本机线性输入18%，不是已认证的实体18%反射卡标定。

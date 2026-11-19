@@ -1,0 +1,16 @@
+R11k1 SD部署与接续记录
+2026-11-18 / Europe/Berlin
+R11k1已写卡并读回；相机安装和SOURCE19真实显影尚待执行。
+SD：H:\ / serial=4040321079 / exFAT / \\?\Volume{2757f924-d2b9-11f1-9827-aa934adf0de9}\
+包：D:\NX500模组开发\r11k1-srw-start-fix-work\NX500_R11k1_SRW_START_FIX.zip
+SHA256：45c51c38439903da17500d8008875c31583bad2a91ac14760ef7554377a80f8a
+模块清单SHA256：daae8330a53b089ce993af7c4331307f8bb6ca904f5dcecb687d12f7cf3cc865
+读回3981项，写入/更新170项；保留非载荷文件元数据25420项，保留内容哈希1857项。既有读取错误记录70项保持，未进行清理、格式化、文件系统修复。
+旧载荷备份：D:\NX500模组开发\r11k1-srw-start-fix-work\R11k1_previous_SD_payload.zip
+备份SHA256：a0a3cc4adce51558fa37418a65d73ef13216f8afc63428a2f64f51818463c7c8
+安装触发文件最后写入。本次失败原件已另存本地和包内EVIDENCE/R11K1_VERSION_PREFIX/camera-failure-evidence，原卡日志保留。
+直接原因：R11k新增版本信息抢占原协议首行，导致五次在FRONT_VERSION_MISMATCH时拒绝、原生提交次数为零。R11k1恢复首行，严格版本与SHA规则保留；真实ARM输出/原shell校验8项和完整安装更新1项通过。
+相机菜单仍显示R11k诊断族。安装版本须查recovery-r11k1-version-prefix及本清单；程序输出另含NXL_SRW_PATCH=R11k1。
+RTOS、Gamma、DMA、恢复及菜单字节保持R11k；核心库未替换。前版测试未覆盖该版本输出衔接，此次增加相应回归。
+下一步：先SOURCE 19 / AUTO + COMPARE一组，确认JPEG及归还成功后再继续其余三组；失败则停止并保留新日志。
+操作：D:\NX500模组开发\repository\nx500\docs\R11K1_SRW_TEST_STEPS.txt

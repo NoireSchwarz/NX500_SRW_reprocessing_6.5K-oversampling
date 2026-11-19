@@ -1,0 +1,42 @@
+R11f6 实机激活失败调查（2026-11-16）
+
+结论：本次确实运行R11f6，原分区容量与备份问题已经通过实机。新的直接阻断发生在启动恢复交接：入口收到终止信号后，把REFRESH_REQUESTED改成FAILED。该状态会令下一次preload直接退出，不执行核心库事务。已用真实shell和实际发给本地夹具进程的SIGTERM复现同样状态链及后续跳过。设备上的信号发送者与准确类型没有被旧日志记录，不能把机制吻合当作完整内核追踪。
+
+实机证据
+目录：H:/NXDEMO51/R11F6_ACTIVATION_1794819981_295
+22个文件已复制到电脑并逐项校验。activation-install.sh与部署的R11f6摘要一致。snapshot-before.img为157285888字节，SHA256 46e69b6fc342885147a88831e2723ff87c282326ab457a80bbdd35b5742a3f5e；相机记录complete=1、source_reverified=1、backup_reverified=1，电脑读回摘要也一致。
+
+以入口日志时间为相对基准：+2秒进入备份；+46秒BACKUP_VERIFIED；+51秒安装激活器和启动单元并重新加载单元；+52秒写入REFRESH_REQUESTED并调用恢复。随即出现Terminated，入口记录REQUEST_RECOVERY/INTERRUPTED/exit_code=74，历史序列为PREPARED→REFRESH_REQUESTED→FAILED。未见本轮preload、commit或post-check导出记录。卡钟不用于推算桌面绝对时刻。
+
+notice.log中工作、备份成功、激活失败三次通知均有X连接、映射、同步和结束记录，返回0，与用户这次看到激活失败相符。该记录不能替代物理屏幕的可见性证明。源文件core在启动恢复前仍是原厂340268字节，原始块视图仍为已知434176字节补丁库；两者不是新进程实际加载的证明。
+
+直接缺陷与测试遗漏
+entry.sh的HUP/INT/TERM处理统一exit 74，EXIT处理在owned=1时无条件phase_write FAILED。恢复命令可能同时停止发起它的服务。原厂systemctl标识为systemd 208，上游同版本把rescue映射为isolate；隔离会停止无关活动单元，默认终止信号为SIGTERM。现场顺序与这一机制吻合。
+
+recovery-signal-replay.json记录了实际shell接收SIGTERM后的结果：exit=74、phase=FAILED。随后给予不同boot_id运行原preload脚本，仍退出0且没有启动核心库事务。由此确认不能把这次提示仅当作无害误报；它改变了后续路径。
+
+此前25项shell测试将systemctl端点模拟为返回0，没有模拟隔离时对调用者的终止。这是测试覆盖遗漏。
+
+第二项隐患：相机进程识别
+entry/preload/post均调用pidof并丢弃错误，将任何失败折为没有进程。原厂镜像的全部六个PATH目录均无pidof；/bin/sh实际指向bash，并非BusyBox独立shell调用内置小程序的情况。本次也缺少由pidof分支保存的before-camera-maps。由于USB端无法读取重启后内部目录，尚未直接证明当前运行根目录绝对不存在用户后来安装的pidof；原厂缺失与现场缺项是已确认事实。
+
+此前测试自己定义了pidof函数，掩盖了外部命令依赖。missing-pidof-replay.json把命令缺失返回127引入真实post控制流程：相机ready端点仍报告相机可用，但实际身份检查从未被调用，最终进入ROLLBACK_REQUESTED。该结果证明进程发现失败会造成错误回退，实际本轮是否走到这里没有日志支持。
+
+写卡灯闪动与自动关机
+原厂hibernation.sh会把card灯的trigger设为timer，所以闪动并不独立证明SD正在写入。用户报告的重启后闪灯、自动关机与原厂休眠镜像建立过程相容。但没有重启后的内核/服务日志，不能据此宣布镜像重建成功、补丁已加载或已完成OEM回退。本轮没有新的VIDEO_STAGE采样证据，帧率因果结论未推进。
+
+后续一次性修复方案
+1. 将恢复交接作为独立状态转换处理。记录交接意图与命令拒绝/接受边界，释放SD及内部挂载的打开描述符和工作目录；交接后的预期终止不再把等待状态降级。真正的命令拒绝或交接前故障仍明确失败。由下一次不同boot_id、加载器和进程内存身份核验决定是否VERIFIED。
+2. 使用按/proc/<pid>/exe精确路径及启动时间核验的进程发现，区分零进程、一个进程、多进程和读取错误。避免让发现失败被误当作相机未运行；核验和回退均使用同一实现。
+3. 新入口先读取并校验现有R11f6激活目录、启动单元、失败历史及本次完整备份。只接续身份匹配的本次状态，保留旧目录和所有日志；同时避免旧、新启动任务并行。不能直接重新投放当前入口，因为它会拒绝已经存在的激活状态。
+4. 补充交接前/发出时/接受后真实信号、命令明确拒绝、无新启动、加载失败、进程发现缺失/多实例/读取错误和回退交接等验证。保留当前RTOS、event10、bit6、绑定和HEVC A/B/A，合并到一个修复包，不增加码率或CPU/BUS测试。
+
+本轮范围与保存情况
+本轮只读SD，未修改或部署相机代码，未重新放置安装触发文件。22项新证据的元数据和内容在分析后再次核验一致；1010项已记录交付源码摘要未变化。照片、录像、固件与历史日志未写入。此前startup.log/startup.status的读取异常单独记录，未做修复或清理；它们不能解释已由入口记录明确呈现的状态降级。
+
+电脑证据目录：D:\NX500模组开发\r11f6-work\camera-result-20261116T161100Z
+
+原始语义参考：
+https://github.com/systemd/systemd/blob/v208/src/systemctl/systemctl.c#L1914
+https://github.com/systemd/systemd/blob/v208/src/core/transaction.c#L1101
+https://github.com/systemd/systemd/blob/v208/src/core/kill.c#L30

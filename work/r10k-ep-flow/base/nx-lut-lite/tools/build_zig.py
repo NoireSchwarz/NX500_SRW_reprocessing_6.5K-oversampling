@@ -16,6 +16,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 p = argparse.ArgumentParser()
 p.add_argument("--zig", required=True, type=pathlib.Path)
 p.add_argument("--menu-only", action="store_true")
+p.add_argument("--keys-menu-only", action="store_true")
 p.add_argument("--elftools-path", type=pathlib.Path, help="Use pyelftools instead of GNU nm/readelf")
 a = p.parse_args()
 zig = a.zig.resolve()
@@ -46,7 +47,7 @@ def obj(name):
     return dst
 
 div = obj("uidiv.c")
-for name in (() if a.menu_only else ("cube2lut", "nx_slotwrite", "nx_regtabwrite", "nxl-lutobserve", "nxl-tablecheck")):
+for name in (() if (a.menu_only or a.keys_menu_only) else ("cube2lut", "nx_slotwrite", "nx_regtabwrite", "nxl-lutobserve", "nxl-tablecheck")):
     run(zig, "ld.lld", "-m", "armelf_linux_eabi", "-static", "-e", "_start",
         "--strip-all", "-z", "noexecstack", "-o", ROOT / "bin" / (name + ".arm"),
         obj(name + ".c"), div)

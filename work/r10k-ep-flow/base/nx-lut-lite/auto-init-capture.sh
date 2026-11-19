@@ -4,7 +4,7 @@ set -eu
 D=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 OPS=$D/bin/nxl-fileops
 WATCH=$D/bin/nxl-init-watch.arm
-AUTO_WATCH_SHA=0000000000000000000000000000000000000000000000000000000000000000
+AUTO_WATCH_SHA=53dce4d8760a4323499a305431ce36d3df0241476c87fca5a8e6b0b11a8567c8
 [ -x "$OPS" ] && [ -x "$WATCH" ] && [ "$("$OPS" sha256 "$WATCH")" = "$AUTO_WATCH_SHA" ] || { echo RECORDER_IDENTITY_FAILED;exit 1; }
 fw_version= fw_model=
 { IFS= read -r fw_version && IFS= read -r fw_model; } < /etc/version.info || exit 1

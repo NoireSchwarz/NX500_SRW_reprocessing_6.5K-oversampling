@@ -43,8 +43,9 @@ static int alloc_largest_free_span(const uint32_t *table,unsigned *largest){
 #define EP_TEST_C_BYTES (EP_TEST_Y_BYTES/2u)
 struct ep_candidate {uint32_t width,height,stride,y,c,type;};
 _Static_assert(sizeof(struct ep_candidate)==24,"native CYcc object layout");
+/* Native user VA pages are4KiB; CAP physical blocks remain16KiB. */
 static int ep_make_candidates(uint32_t va,uint32_t pa,struct ep_candidate desc[2]) {
- if(!va||!pa||(va&0x3fffu)||(pa&0x3fffu)||(uint64_t)va+ALLOC_BYTES>UINT32_MAX||
+ if(!va||!pa||(va&0xfffu)||(pa&0x3fffu)||(uint64_t)va+ALLOC_BYTES>UINT32_MAX||
     (uint64_t)pa+ALLOC_BYTES>UINT32_MAX)return 0;
  for(unsigned i=0;i<2;i++)desc[i]=(struct ep_candidate){EP_TEST_WIDTH,EP_TEST_HEIGHT,EP_TEST_WIDTH,va+i*TEST_OUT,va+i*TEST_OUT+EP_TEST_Y_BYTES,1};
  return TEST_OUT+EP_TEST_Y_BYTES+EP_TEST_C_BYTES<=ALLOC_BYTES;
@@ -88,7 +89,7 @@ static struct alloc_regs alloc_call3(const struct alloc_regs *original,uint32_t 
  struct alloc_regs r=alloc_call(original,fn,a);r.r[1]=b;r.r[2]=c;return r;
 }
 static int alloc_sample_range(uint32_t va,uint32_t offset,uint32_t bytes,uint32_t *address) {
- if(!va||(va&0x3fffu)||bytes!=ALLOC_SAMPLE_BYTES||(offset&31u)||offset>ALLOC_BYTES-bytes||
+ if(!va||(va&0xfffu)||bytes!=ALLOC_SAMPLE_BYTES||(offset&31u)||offset>ALLOC_BYTES-bytes||
     (uint64_t)va+ALLOC_BYTES>UINT32_MAX)return 0;
  *address=va+offset;return 1;
 }

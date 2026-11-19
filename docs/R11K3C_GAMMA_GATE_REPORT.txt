@@ -1,0 +1,16 @@
+R11k3c 38%线性显影失败调查与修复
+2026-11-18 / Europe/Berlin
+
+实际运行版本：SD安装日志确认recovery-r11k3b-curve-presets，模块清单09b232cff683b36bb95ad0e58858e4414a7209acacbb185167abb57dfc7a03de，INSTALL_RUNTIME_COHERENT。SOURCE19的JOB_1794946368_536_fabb1097实机完成并生成NXLI0002.JPG；后续两次LINEAR分别为JOB_1794946413_806_4eeed6fb及JOB_1794946510_576_86e13b28，均phase143、frame_irq=0、dma_irq=0，无JPEG。相关320个文件已逐项读回复制到电脑，SD原始记录保留。
+
+已确认的错误：core/src/param_dma_contract.h内p49_pd_single_audit_valid仍使用v[52]>2。这里v[52]是Gamma模式；生产p49_pd_record_single直接写入gt()[3]。恢复LINEAR=3和LOG=4时只更新了请求校验，遗漏了这道生产记录校验及后续Linux消费者共用的限制。即便建表/装载成功，该记录也必然被旧校验拒绝，RTOS主流程在phase143退出，图像Start尚未到达。
+
+两份实际Gamma审计均为schema2、mode3，nonce/来源C0/CC和CRC一致，READY/CALLED/STATUS/TARGET_MATCH/RESTORE_CALLED/RESTORED为1，ERROR为0，CONFIG_LOADS=2，CONFIG_RETURN=1，FINAL_LOAD_STATUS=0。原厂Gamma处理已经进行过，不能把默认失败JSON里的gamma_mode=99、setter_called=0当作未调用；这些是完整前端记录未完成时的默认值。本次不是Bank2不足、EP被占用或Gamma建表错误的证据。
+
+修复：单次配置记录使用与曲线请求相同的GT_LOG_TRANSFER上限，接受既有0/1/2/3/4，未知模式仍拒绝。nonce、schema、阶段、两次原厂配置、保留字段、忙碌及DMA保护都保持不变。普通和AUTO两份RTOS镜像均65324字节，相对R11k3b各只改一字节：offset15328的cmp r1,#2变成cmp r1,#4；没有新增MMIO读写、原生调用、中断、延时或清理路径。更新前端内嵌镜像及R11k3c版本标识，并同步依赖散列；菜单功能保持原有五项。
+
+验证：新增真实生产gt_host_prepare→cc_configured/p49_pd_record_single→共用记录校验回放，输入使用两次实际失败的C0、Gamma、CC审计。旧校验均复现模式3/4拒绝；新校验均通过模式0～4，每份364项计数，覆盖14类生产准入故障、64个记录字段逐项破坏、未知模式、nonce、活动DMA及其他记录类型不可混用。测试用的生产函数体逐字提取核对，不用重新手写的替代函数。保留现有Gamma固定节点/schema/CRC/恢复和成功SOURCE19请求逐字节一致测试。60组协调/实际EP入口/后段/归还场景、18组电脑分析器、8组真实启动版本入口及完整R11k3b→R11k3c生产shell安装接续均通过。核心库字节及inode、用户状态保留。
+
+验证边界：电脑执行真实ARM指令和生产shell，但OS、设备内存指针、原生ISP、DMA、IRQ及SMACK等硬件/内核边界仍按各报告建模。新包尚未在相机执行，不能声称新曲线显影已实机成功。本轮因旧失败留下UNKNOWN_REQUIRE_RESTART和EP/CAP保留，仍要求断电冷启动；不放宽未知资源状态，不强行释放引用。下一次沿用同RAW SOURCE19→LINEAR→LOG→SOURCE19验收，不新增相机诊断模式，不重拍，不改码率。
+
+版本recovery-r11k3c-gamma-gate / R11k3c CURVE PRESETS。保留所有媒体、原始固件、完整备份、旧软件和历史日志；不运行格式化、清理或文件系统修复。当前用户明确授权修复、验证、部署读回完成后关机。

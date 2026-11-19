@@ -1,0 +1,16 @@
+R11l 交付状态：2026-11-18
+
+结论：仍需一次三段原厂→Log→原厂补测。本包为Linux只读颜色参数检测器，未改变Gamma、色彩矩阵或SRW处理。
+已验证并部署至H盘，卷序列号4040321079，exFAT。5318项负载读回相同，183项新增或更新；install.sh、nx_cs.adj、info.tg最后写入并复核。
+27160项受保护文件元数据前后一致，68项内容散列复核一致；照片、录像、完整备份和历史日志未作为写入目标。70项既有WinError1392读取错误保留并记录，未做文件系统修复。不能据这些读取错误认定颜色残差或旧卡死根因。
+78项真实ARM快照/协议/损坏拒绝检查、7组生产shell入口流程、8组原SRW版本入口及当前R11k3c+原厂核心库到R11l的完整生产安装接续通过。独立构建得到相同采集器二进制。OS、设备、对象内存和安装系统边界仍建模；相机硬件读取、开销、覆盖及最终颜色修复均未验收。
+当前安装日志实际仍是R11k3c成功记录。R11l目前仅已部署到卡，不能当作相机已安装或运行。下一次安装修订号应为recovery-r11l-color-readonly，视频页应为R11l COLOR READ ONLY / 24P；SRW保持R11k3c、视频Gamma保持R11j。
+最小步骤见R11L_COLOR_TEST_STEPS.txt：固定Tab S7+自然模式图、ISO200、F4.0、1/60和白平衡；COLOR OBSERVE启动后，原厂、Log、恢复原厂各录8～10秒，停录后切换曲线；最终看到COLOR SAVED - SAFE TO CONNECT USB再连接电脑。不要追加曝光或码率阶梯。
+本轮软件只提供相邻重复一致快照。软件源、缓存和提交影子不等于硬件消费；原生绑定区保留原值，不宣称已取得逐帧原子关联。
+
+包：NX500_R11l_COLOR_READONLY.zip
+包SHA256：0102dad934f476ade179e6fb7b6e29e98320d1cd41eb94cce90ebd925ce1d555
+采集器SHA256：bfcb9126e3d0af6979a9ced64d6162bd1e7efc9bf5fc1e8199b17856571a3965
+菜单SHA256：c1d0a7f662370278f93a18e5fb9bf564d9bd768d4762d4181ac40f3eed2a192d
+旧SD负载备份：D:\NX500模组开发\r11l-color-observation-work\R11l_previous_SD_payload.zip
+完整部署证据：D:\NX500模组开发\r11l-color-observation-work\SD-deployment.json

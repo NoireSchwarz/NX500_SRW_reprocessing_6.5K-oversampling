@@ -1,0 +1,22 @@
+R11k3b 曲线预设合并测试
+2026-11-18 / Europe/Berlin
+
+不用重拍。刚成功的SAM_0468就是完整灰阶/色块图，本次始终使用同一份SAM_0468.SRW。所有比较、拟合和LUT仿真在电脑完成。
+
+准备：安全断开USB，正常关机待写卡灯熄灭，按既有方式触发卡上新包安装。安装修订号应为recovery-r11k3b-curve-presets。安装完成后关机再开机、断开USB，SRW页应显示R11k3b CURVE PRESETS。若尚未出现此标题，先不要跑测试。
+
+保持照片模式，视频Gamma为FACTORY，不录视频。SRW页选择SAM_0468，FORMAT NV16 / JPEG 4:2:2，LUT PIPELINE设OFF / ORIGINAL。无需改曝光、白平衡、焦点或屏幕亮度；它们已包含在唯一输入RAW里。
+
+同一次开机，依次执行四次：
+A1：GAMMA TEST = SOURCE 19 → AUTO + COMPARE
+B1：GAMMA TEST = LINEAR TEST → AUTO + COMPARE
+B2：GAMMA TEST = LOG TRANSFER TEST → AUTO + COMPARE
+A2：GAMMA TEST = SOURCE 19 → AUTO + COMPARE
+
+每次等AUTO INITIALIZATION COMPLETE、JPEG完整保存及资源归还，再改下一项。AUTO沿用现有资源检查和新会话接续，不手动删除锁，不另开LENS RECORD或视频COUNTERS。菜单循环经过LIFT TEST和FACTORY时跳过它们；最后必须回SOURCE 19，不能用FACTORY代替返回对照。
+
+LINEAR/LOG是临时预设，菜单进程重新打开后可能回到SOURCE 19。每次按AUTO前核对当前GAMMA TEST标签。如果任一组失败，停止后续组，保留原文和现场，不连续重试。
+
+四次成功后，等机身写卡灯熄灭再连接USB。保留四张新NXLI*.JPG、全部新JOB_*和INIT_AUTO_*以及安装日志。照片、录像、原始固件、完整备份和历史日志均不删除。
+
+本轮用途：确认线性与Log曲线的实际像素响应、原厂装载/恢复、SOURCE19返回一致性，并从电脑端区分曲线、码值缩放及曝光标度。LOG预设仍使用该RAW原厂颜色矩阵，暂不等同于已完成BT.2020转换的标准Samsung Log。色域及官方LUT兼容性由后续电脑分析核验。不做码率或CPU/BUS实验。

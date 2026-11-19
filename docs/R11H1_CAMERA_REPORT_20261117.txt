@@ -1,0 +1,34 @@
+R11h1 实机重装载验收与下一轮相对曲线标定
+2026-11-17
+
+功能验收结论：通过，可以进入曲线标定；不等同颜色准确性已经校准。
+最新安装日志完成R11h1模块更新，清单186fdd3be818a01e1f60081614c7bb1acd3b1612282f3d2e5af16f9ef5e8b668。七次采集入口均明确报告GAMMA_RELOAD_RUNTIME=R11h1，核心库安装前后不变。
+原厂→LIFT→LOG→原厂在同一次开机完成。全部要求的before/after快照成功；没有快照旁路、原厂计算失败或故障码。实际保存状态1720字节、影子参数864字节和三个回调地址均通过解析核对。
+LIFT的视频路径epoch1记录302次参数提交；LOG的epoch2累计597次，比前一阶段增加295次。当前epoch、视频对象、parent/context及保留目标参数哈希一致，能够排除只命中照片对象或误用前一曲线快照。参数提交次数不是录像帧数。
+bank1_same为1。恢复后epoch3/queued_epoch3、detached1/slots_installed0；三个回调实际地址恢复为0x8038F90C、0x803C595C、0x803C595C。后续仍保留2MiB代码租约是设计行为，不能在同次开机覆盖回调代码；本轮无需重新安装任何相机包。
+
+录像复核
+SAM_0450：FACTORY A1，210帧；SAM_0451：LIFT，204帧；SAM_0452：LOG，201帧；SAM_0453：FACTORY A2，206帧。总计821帧完整解码，无损坏帧或解码错误，PTS递增。四段实际4096×2160/24p，不据此新增全宽3840映射的结论。
+解码Y平面的全景亮度分位数（1%、50%、99%）分别约为：A1 4/66/152，LIFT 5/78/167，LOG 33/91/129，A2 4/65/141.5。结合相近场景和用户观察，符合提亮、Log抬黑压缩亮部、恢复原厂的行为。A1/A2有取景差异，不能声称像素完全相同或曝光已严格控制。
+MP4仍标记BT.709传递/原色/矩阵，且解码器报告range2（全范围）；标签不自动描述自定义Log曲线，不能把保留原标签理解为Gamma没有生效。显示对照图只作预览，不替代线性度/色准测量。
+LOG实际19点输出节点为128至737，输入为0至16383，名义输出未覆盖完整0至1023范围。下一步应明确黑白锚点和还原曲线；当前证据没有证明新增传感器动态范围，也不把此候选称作已完成标准Samsung Log。
+
+显示设备选择的更正
+此前优先LG是基于固定拍摄和面积，不能据此推断它比手机/平板色准更高。Notebookcheck对TabS7+的原始测量显示自然模式使用sRGB且颜色准确；DXOMARK对iPhone17的原始测量显示关闭TrueTone时颜色准确。不能用不同样机、不同时间/条件的测量为用户三台设备作精确排名。
+本轮综合sRGB目标、面积与拍摄便利，主选TabS7+自然模式；iPhone17关闭原彩/夜览/自动亮度作交叉参考；LG SDR/sRGB作为平板有条纹或亮度不稳时的备用。只拍最终选定的一台设备。
+用户无测色仪/实体色卡，因此本轮拟合Log到本机原厂输出的相对关系、中性轴和黑白点。源文件RGB和名义sRGB传递函数不能冒充屏幕已测辐射亮度；拍屏也不能单独确定真实物体在不同光源下的绝对颜色矩阵或物理传感器响应。
+
+合并测试
+保持R11h1，固定同一张48色块图和所有拍摄/屏幕设置，只录FACTORY→LOG→FACTORY三段各10秒。进入LOG需经过LIFT，但不另录LIFT。A1/A2用于核验稳定性，通过后才拟合还原曲线。完整步骤见GAMMA_CAL_V1_TEST_STEPS_20261117.txt。
+测试图为3840×2160、8位sRGB PNG，嵌入ICC；24灰阶及24合成RGB色块中央ROI逐像素验证，参考值与位置另存JSON。这些色块不是实体ColorChecker，不作为绝对色准真值。
+
+原始证据、四段MP4及解析结果已在D盘独立保存。本轮SD只读，照片、录像、完整备份和历史日志不变。
+
+证据目录：D:\NX500模组开发\gamma-calibration-work\R11h1-check-20261117T130940Z
+参数验证：D:\NX500模组开发\gamma-calibration-work\R11h1-check-20261117T130940Z\gamma-validation.json
+媒体验证：D:\NX500模组开发\gamma-calibration-work\R11h1-check-20261117T130940Z\media-validation.json
+对照图：D:\NX500模组开发\gamma-calibration-work\R11h1-check-20261117T130940Z\Gamma-four-clips.png
+测试资料：D:\NX500模组开发\gamma-calibration-work\NX500_Gamma_relative_calibration_V1.zip
+原始测量资料：https://www.notebookcheck.net/Samsung-Galaxy-Tab-S7-Plus-Review-Finally-a-great-Android-tablet.496494.0.html
+https://www.dxomark.com/apple-iphone-17-display-test/
+sRGB定义：https://registry.color.org/rgb-registry/srgb

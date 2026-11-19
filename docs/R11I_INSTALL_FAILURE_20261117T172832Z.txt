@@ -1,0 +1,21 @@
+R11i 安装失败调查与原包重试
+
+已确认：最新R11i安装仅进入INSTALL_PREFLIGHT，即因GAMMA_LEASE_REQUIRES_RESTORE_AND_ACTUAL_BOOT_BEFORE_MODULE_UPDATE退出。未进入VERIFY_PAYLOAD/STAGE_MODULE/SWITCH_COMPONENTS，没有执行新色域/Log原生代码。安装日志1569..1582行已原样保存。
+实际运行证据：最新GAMMA_R11H1_1794911149_478_f2040422/probe.log仍为R11h1。result.json为ok=true、FACTORY/OFF、GAMMA_FACTORY_NO_LEASE、lease_cap=0；这个生产status分支同时检查三个旧回调均为原厂值。这是相机当时保存的状态，不是电脑通过USB实时读取RAM。
+用户补充：安装前未取电池，失败后取过电池。与“安装时旧租约仍在、后来查询无租约”的记录一致。此前原厂恢复后CAP租约有意保留；不能以画面恢复或单纯电源键开关断言租约已结束。
+
+SD原包完整：1621个现有包文件与封闭ZIP逐项一致。失败安装入口按原设计会消耗install.sh/nx_cs.adj/info.tg，无触发文件时单独重启不会再次安装。
+本次处理：已从同一个R11i ZIP补回这三个文件，其余运行文件与源码均未更改。再次读回1624个包文件、核对53项运行依赖，保留25451项元数据与673项重点内容SHA256。62项旧读取/枚举错误保留，未修复文件系统；没有删除租约、释放CAP或绕过保护。
+
+现在的操作：
+1. 安全弹出H盘并断开USB。确认相机停录，正常关机，等机身写卡灯熄灭，再取电池约30秒、装回开机安装。
+2. 安装前不要再进入LIFT/LOG或开启Gamma；仅查询状态不会创建租约。安装期间不要断电。
+3. 安装完成、写卡灯熄灭后，再正常关机并取电池约30秒，装回开机。视频页应显示R11i SLOG8 BT.2020；确认后才做先前合并实拍。
+4. 若仍未显示R11i或再次报租约错误，停止拍摄、保留记录并连接USB；不要删除租约或反复重装。
+
+包：D:\NX500模组开发\r11i-log-work\NX500_R11i_SLOG8_BT2020.zip
+包SHA256：8cd95699dc670d88bf6b22052684e5f4f79e130b6cdd9a83749ff552dcc82dec
+失败证据：D:\NX500模组开发\r11i-log-work\install-failure-20261117T172832Z\camera-evidence
+读回结果：D:\NX500模组开发\r11i-log-work\install-failure-20261117T172832Z\SD-retry-result.json
+此刻状态：三个安装触发文件已就绪，相机内部安装仍待用户开机执行；目前最后可证运行版本仍是R11h1。
+照片、录像、原始固件、完整备份和历史日志均保留。本次未关闭电脑。

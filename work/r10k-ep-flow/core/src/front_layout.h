@@ -2,7 +2,7 @@
 #ifndef P39_FRONT_LAYOUT_H
 #define P39_FRONT_LAYOUT_H
 #include <stdint.h>
-#define P39_CAP_BYTES 0xc000000u
+#define P39_CAP_BYTES 0xb000000u
 #define P39_ACTIVE_BYTES 0x8000000u
 #define P49_FRAME_COUNT 1u
 #define P39_PROOF_BYTES 0x200000u

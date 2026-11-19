@@ -5,6 +5,11 @@ __pycache__/
 .env.*
 !.env.example
 work/tooling/
+package-baseline/
+baseline.json
+work/research-r10l-*.json
+work/research-r10l-*.txt
+work/r10l-stage.json
 work/firmware/
 work/nx1-firmware/
 **/build/
@@ -32,3 +37,5 @@ work/nx1-firmware/
 *.so
 !reports/validation/
 !reports/validation/*.json
+
+work/r10m-stage.json

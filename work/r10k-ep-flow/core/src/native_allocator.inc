@@ -108,8 +108,9 @@ static int snapshot(const char *dir){size_t n=ALLOC_BLOCKS*16u;baseline=malloc(n
    uint32_t bank2=volatile_word(manager_map+0x800+CAP_MANAGER_BANK2_OFFSET),upper=volatile_word(manager_map+0x800+0xb05a0u);
    if(!cap_bank2_largest(baseline,ALLOC_BLOCKS,bank2,upper,&bank_largest)){allocator_snapshot_reason="ALLOCATOR_BANK2_LAYOUT_INVALID";return 0;}
    fprintf(log_file,"BANK_CAPACITY bank=2 start=0x%08x upper=0x%08x largest_blocks=%u required_blocks=%u\n",bank2,upper,bank_largest,ALLOC_SPAN_BLOCKS);fflush(log_file);
+   free_before=c;char path[1200];snprintf(path,sizeof path,"%s/allocator_before.bin",dir);FILE *f=fopen(path,"wb");if(!f){allocator_snapshot_reason="ALLOCATOR_BASELINE_SAVE_FAILED";return 0;}int ok=fwrite(baseline,1,n,f)==n;if(fclose(f))ok=0;
+   if(!ok){allocator_snapshot_reason="ALLOCATOR_BASELINE_SAVE_FAILED";return 0;}
    if(bank_largest<ALLOC_SPAN_BLOCKS){allocator_snapshot_reason="ALLOCATOR_BANK2_NO_CONTIGUOUS_EXTENT";return 0;}
-   free_before=c;char path[1200];snprintf(path,sizeof path,"%s/allocator_before.bin",dir);FILE *f=fopen(path,"wb");if(!f)return 0;int ok=fwrite(baseline,1,n,f)==n;if(fclose(f))ok=0;
    fprintf(log_file,"BASELINE blocks=%u free=%u crc32=%08x\n",ALLOC_BLOCKS,c,mem_crc(baseline,n));fflush(log_file);return ok;
   }pause_ms(50);
  }return 0;

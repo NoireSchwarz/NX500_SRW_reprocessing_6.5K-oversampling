@@ -1,0 +1,18 @@
+R11k3b 线性与Log预设恢复
+2026-11-18 / Europe/Berlin
+
+用户要求：把撤回的LINEAR与LOG预设加回，完成原定同RAW四次对照。沿用刚实机成功的R11k3a路线；不重启之前的ISP内部研究，不新增相机端拟合、求逆、统计或后台采样。
+
+成功基线已保存：R11k3a实际安装，JOB_1794943801_559_fc123643完成SOURCE19显影，生成6480x4320 JPEG，3339207字节，SHA256 d1acbf022fad43285d483738b2e0a444b0bea504c1866757624ccd6944762a54。内存和EP归还，后续原有资源检查已创建就绪会话。图像确认是完整灰阶/色块校准图，可直接复用SAM_0468，不用新拍。电脑已校验其原有Gamma/WB/CC审计、六阶段配置快照、三阶段像素样本和完整JPEG。
+
+恢复范围：复用原R11k保存的两套固定19点曲线参数及其原厂装载/恢复路径，恢复GAMMA TEST五项选择。LINEAR/LOG使用原有固定预设schema2校验，不接受任意新曲线；FACTORY/SOURCE19/LIFT继续schema1。新模式不保存为开机默认。只重建普通前端、AUTO前端、菜单和对应RTOS参数处理；刚成功的控制器、worker、后段LDC/LUT/JPEG、内存布局、VA4KB/PA16KB校验、资源归还、视频Log和核心库逐字节不变。
+
+不恢复额外强制Gamma JSON。相机继续只要求原有WB、CC、Gamma三份审计；front_control及协调器保存门槛保持R11k3a的三文件方案。电脑分析器直接从既有gamma-test-audit.bin读取模式、节点、来源绑定和恢复记录，同时兼容旧版JSON并核验一致性。缺少A2返回对照不会误报完整证据。
+
+验证：Gamma原有模式、固定预设/schema/nonce/CRC/恢复保护及宿主选择通过真实ARM测试。用刚成功的C0和真实审计回放SOURCE19，前256字节请求逐字节一致。预设RTOS与原R11k固定实现相比仅容量常量两字节不同，仍保持176MiB和65324字节代码上限内；应用/恢复顺序不变。60组协调器/实际EP入口/归还场景通过，明确含缺少旧Gamma JSON仍成功；18组电脑分析器场景通过，含二进制记录独立工作及A2缺失判不完整。版本入口8组及R11k3a接续完整模块安装通过。
+
+模型边界：真实ARM与生产shell在电脑执行，OS、原生调用、DMA、IRQ等边界按各报告建模。新LINEAR/LOG曲线的实机像素效果尚待四组输出验收；Gamma参数相同不等于已证明硬件消费，Gamma-only JPEG不等于已认证完整Samsung Log。
+
+安装修订号recovery-r11k3b-curve-presets。先核对SRW页R11k3b CURVE PRESETS，再执行同RAW SOURCE19→LINEAR→LOG→SOURCE19。所有照片、录像、原始固件、完整备份和历史记录保留；不格式化、清理或修复文件系统。
+
+用户最新授权：完成部署、读回并保存说明后，使用PowerShell关机。

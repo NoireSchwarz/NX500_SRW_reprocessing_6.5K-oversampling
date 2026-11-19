@@ -43,7 +43,7 @@ def decode_progress(samples,started_ns):
  for s in samples:
   if not s['valid']&262144:continue
   w=s['progress']
-  if len(w)!=32 or w[0]!=0x33504756 or w[2]!=0x33544c56 or w[3]not in (3,4):raise ValueError('Invalid progress vector')
+  if len(w)!=32 or w[0]!=0x33504756 or (w[2],w[3])not in [(0x33544c56,3),(0x33544c56,4),(0x36544c56,6),(0x37544c56,7),(0x38544c56,8),(0x39544c56,9),(0x41544c56,10)]:raise ValueError('Invalid progress vector')
   flags=w[1];first=(flags>>8)&255;second=(flags>>16)&255
   if flags&1 and w[4:8]!=w[26:30]:raise ValueError('Progress coherence flag mismatch')
   if (first|second)&128 and (not flags&4 or w[30]!=2):raise ValueError('Unselected EP debug read')
