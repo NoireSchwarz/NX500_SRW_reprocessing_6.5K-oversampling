@@ -56,3 +56,9 @@ RC4的core/src/nxl-lutload.c移植自WApaperplane/metol固定提交b10ec8413ce5f
 RC5的双击EV、EV+WiFi V-Log派发、OK提交和默认影片LUT策略为本项目的Linux菜单／脚本改动，复用原有原厂Gamma、色彩与DYN24路径。不是新增RTOS协议或核心库替换。
 
 新增LUT简介是使用方向描述，不宣称胶片／相机厂商官方标定。用户提供的普通／V-Log LUT、Panasonic资源、字体和运行库仍保留各自来源及说明，项目代码许可不改变其归属。完整开发包包括必要运行资产、内置SRW及历史校准输出，详见docs/RC5_PACKAGE_CONTENTS.md；上文早期“未包含”描述不能用于推断当前Release附件内容。
+
+## RC6.14.10 Wi-Fi
+
+无线相簿沿用 metol 及 nx-remote-controller 的基础工作。Wi-Fi 组件的新改动继续采用 AGPL-3.0-only 并保留源文件署名。二维码实现保留 qrcodegen 原许可证。RC6.14.10 沿用 RC6.14.9 的 48／40 MHz 无线配置数据与原厂 RVF 通道。构建输入和验证边界见交接。
+
+[交接](docs/HANDOFF_20261122_RC61410.md)

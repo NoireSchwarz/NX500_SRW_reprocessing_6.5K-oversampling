@@ -1,0 +1,948 @@
+{
+  "passed": true,
+  "hardware_tested": false,
+  "version": "NXL_RADIO_VERSION=0.4.0-RC6.14.10; CN_CH48_HT40_MINUS; OEM_ROLLBACK",
+  "width_readback": [
+    {
+      "case": "HT40 minus",
+      "accepted": true,
+      "readback": "AP_WIDTH_READ ok=1 errno=0 primary=48 bandcfg=0x31 width_code=0 secondary_offset=3 command=0x80b0 bytes=16 result=0"
+    },
+    {
+      "case": "explicit HT40 minus",
+      "accepted": true,
+      "readback": "AP_WIDTH_READ ok=1 errno=0 primary=48 bandcfg=0x39 width_code=2 secondary_offset=3 command=0x80b0 bytes=16 result=0"
+    },
+    {
+      "case": "20 MHz",
+      "accepted": false,
+      "readback": "AP_WIDTH_READ ok=1 errno=0 primary=48 bandcfg=0x01 width_code=0 secondary_offset=0 command=0x80b0 bytes=16 result=0"
+    },
+    {
+      "case": "HT40 plus",
+      "accepted": false,
+      "readback": "AP_WIDTH_READ ok=1 errno=0 primary=48 bandcfg=0x19 width_code=2 secondary_offset=1 command=0x80b0 bytes=16 result=0"
+    },
+    {
+      "case": "80 MHz",
+      "accepted": false,
+      "readback": "AP_WIDTH_READ ok=1 errno=0 primary=48 bandcfg=0x3d width_code=3 secondary_offset=3 command=0x80b0 bytes=16 result=0"
+    },
+    {
+      "case": "44 instead of 48",
+      "accepted": false,
+      "readback": "AP_WIDTH_READ ok=1 errno=0 primary=44 bandcfg=0x31 width_code=0 secondary_offset=3 command=0x80b0 bytes=16 result=0"
+    },
+    {
+      "case": "wrong band",
+      "accepted": false,
+      "readback": "AP_WIDTH_READ ok=1 errno=0 primary=48 bandcfg=0x30 width_code=0 secondary_offset=3 command=0x80b0 bytes=16 result=0"
+    },
+    {
+      "case": "kernel error",
+      "accepted": false,
+      "readback": "AP_WIDTH_READ ok=0 errno=95 primary=0 bandcfg=0x00 width_code=0 secondary_offset=0 command=0x00b0 bytes=16 result=0"
+    },
+    {
+      "case": "short reply",
+      "accepted": false,
+      "readback": "AP_WIDTH_READ ok=1 errno=0 primary=48 bandcfg=0x31 width_code=0 secondary_offset=3 command=0x80b0 bytes=15 result=0"
+    },
+    {
+      "case": "firmware error",
+      "accepted": false,
+      "readback": "AP_WIDTH_READ ok=1 errno=0 primary=48 bandcfg=0x31 width_code=0 secondary_offset=3 command=0x80b0 bytes=16 result=1"
+    },
+    {
+      "case": "unexpected action",
+      "accepted": false,
+      "readback": "AP_WIDTH_READ ok=1 errno=0 primary=48 bandcfg=0x31 width_code=0 secondary_offset=3 command=0x80b0 bytes=16 result=0"
+    },
+    {
+      "case": "wrong TLV",
+      "accepted": false,
+      "readback": "AP_WIDTH_READ ok=1 errno=0 primary=48 bandcfg=0x31 width_code=0 secondary_offset=3 command=0x80b0 bytes=16 result=0"
+    },
+    {
+      "case": "wrong TLV length",
+      "accepted": false,
+      "readback": "AP_WIDTH_READ ok=1 errno=0 primary=48 bandcfg=0x31 width_code=0 secondary_offset=3 command=0x80b0 bytes=16 result=0"
+    }
+  ],
+  "launch_and_restore": [
+    "PASS album launch and restore",
+    "PASS RVF launch and restore",
+    "PASS foreign launch keeps original argv",
+    "PASS stock mismatch, mount failure and cancellation before native start",
+    "PASS watchdog release after owner exits",
+    "PASS safe retry after unmount error",
+    "PASS foreign override is preserved",
+    "PASS rejects USB, dead owner and unrelated argv in owned session",
+    "PASS width mismatch prevents readiness and restores launch path",
+    "PASS native configuration validation and credential preservation"
+  ],
+  "driver_11ac_selection": {
+    "mask": "0xffffcfff",
+    "band_bits": "0x1f",
+    "vht_beacon_enabled": false
+  },
+  "cn_regulatory_lookup": [
+    [
+      0,
+      2412,
+      20,
+      true
+    ],
+    [
+      0,
+      2472,
+      20,
+      true
+    ],
+    [
+      0,
+      5180,
+      20,
+      false
+    ],
+    [
+      0,
+      5200,
+      20,
+      false
+    ],
+    [
+      0,
+      5210,
+      80,
+      false
+    ],
+    [
+      0,
+      5210,
+      160,
+      false
+    ],
+    [
+      0,
+      5220,
+      20,
+      false
+    ],
+    [
+      0,
+      5230,
+      40,
+      false
+    ],
+    [
+      0,
+      5240,
+      20,
+      false
+    ],
+    [
+      0,
+      5240,
+      80,
+      false
+    ],
+    [
+      0,
+      5250,
+      40,
+      false
+    ],
+    [
+      0,
+      5250,
+      80,
+      false
+    ],
+    [
+      0,
+      5260,
+      20,
+      false
+    ],
+    [
+      0,
+      5270,
+      40,
+      false
+    ],
+    [
+      0,
+      5745,
+      20,
+      false
+    ],
+    [
+      0,
+      5755,
+      40,
+      false
+    ],
+    [
+      80,
+      2412,
+      20,
+      true
+    ],
+    [
+      80,
+      2472,
+      20,
+      true
+    ],
+    [
+      80,
+      5180,
+      20,
+      true
+    ],
+    [
+      80,
+      5200,
+      20,
+      true
+    ],
+    [
+      80,
+      5210,
+      80,
+      true
+    ],
+    [
+      80,
+      5210,
+      160,
+      false
+    ],
+    [
+      80,
+      5220,
+      20,
+      true
+    ],
+    [
+      80,
+      5230,
+      40,
+      true
+    ],
+    [
+      80,
+      5240,
+      20,
+      true
+    ],
+    [
+      80,
+      5240,
+      80,
+      false
+    ],
+    [
+      80,
+      5250,
+      40,
+      false
+    ],
+    [
+      80,
+      5250,
+      80,
+      false
+    ],
+    [
+      80,
+      5260,
+      20,
+      false
+    ],
+    [
+      80,
+      5270,
+      40,
+      false
+    ],
+    [
+      80,
+      5745,
+      20,
+      false
+    ],
+    [
+      80,
+      5755,
+      40,
+      false
+    ]
+  ],
+  "cn_channel_flags": [
+    {
+      "case": "ok",
+      "accepted": true,
+      "get_requests": [
+        {
+          "family": 16,
+          "command": 3,
+          "attribute": 2
+        },
+        {
+          "family": 35,
+          "command": 5,
+          "attribute": 3
+        },
+        {
+          "family": 35,
+          "command": 1,
+          "attribute": 1
+        },
+        {
+          "family": 35,
+          "command": 31,
+          "attribute": 0
+        }
+      ]
+    },
+    {
+      "case": "no-vht",
+      "accepted": true,
+      "get_requests": [
+        {
+          "family": 16,
+          "command": 3,
+          "attribute": 2
+        },
+        {
+          "family": 35,
+          "command": 5,
+          "attribute": 3
+        },
+        {
+          "family": 35,
+          "command": 1,
+          "attribute": 1
+        },
+        {
+          "family": 35,
+          "command": 31,
+          "attribute": 0
+        }
+      ]
+    },
+    {
+      "case": "extra-DFS",
+      "accepted": true,
+      "get_requests": [
+        {
+          "family": 16,
+          "command": 3,
+          "attribute": 2
+        },
+        {
+          "family": 35,
+          "command": 5,
+          "attribute": 3
+        },
+        {
+          "family": 35,
+          "command": 1,
+          "attribute": 1
+        },
+        {
+          "family": 35,
+          "command": 31,
+          "attribute": 0
+        }
+      ]
+    },
+    {
+      "case": "no80",
+      "accepted": true,
+      "get_requests": [
+        {
+          "family": 16,
+          "command": 3,
+          "attribute": 2
+        },
+        {
+          "family": 35,
+          "command": 5,
+          "attribute": 3
+        },
+        {
+          "family": 35,
+          "command": 1,
+          "attribute": 1
+        },
+        {
+          "family": 35,
+          "command": 31,
+          "attribute": 0
+        }
+      ]
+    },
+    {
+      "case": "reg-wrong-country",
+      "accepted": false,
+      "get_requests": [
+        {
+          "family": 16,
+          "command": 3,
+          "attribute": 2
+        },
+        {
+          "family": 35,
+          "command": 5,
+          "attribute": 3
+        },
+        {
+          "family": 35,
+          "command": 1,
+          "attribute": 1
+        },
+        {
+          "family": 35,
+          "command": 31,
+          "attribute": 0
+        }
+      ]
+    },
+    {
+      "case": "reg-stock-only",
+      "accepted": false,
+      "get_requests": [
+        {
+          "family": 16,
+          "command": 3,
+          "attribute": 2
+        },
+        {
+          "family": 35,
+          "command": 5,
+          "attribute": 3
+        },
+        {
+          "family": 35,
+          "command": 1,
+          "attribute": 1
+        },
+        {
+          "family": 35,
+          "command": 31,
+          "attribute": 0
+        }
+      ]
+    },
+    {
+      "case": "reg-bw20",
+      "accepted": false,
+      "get_requests": [
+        {
+          "family": 16,
+          "command": 3,
+          "attribute": 2
+        },
+        {
+          "family": 35,
+          "command": 5,
+          "attribute": 3
+        },
+        {
+          "family": 35,
+          "command": 1,
+          "attribute": 1
+        },
+        {
+          "family": 35,
+          "command": 31,
+          "attribute": 0
+        }
+      ]
+    },
+    {
+      "case": "reg-DFS",
+      "accepted": false,
+      "get_requests": [
+        {
+          "family": 16,
+          "command": 3,
+          "attribute": 2
+        },
+        {
+          "family": 35,
+          "command": 5,
+          "attribute": 3
+        },
+        {
+          "family": 35,
+          "command": 1,
+          "attribute": 1
+        },
+        {
+          "family": 35,
+          "command": 31,
+          "attribute": 0
+        }
+      ]
+    },
+    {
+      "case": "reg-indoor-missing",
+      "accepted": false,
+      "get_requests": [
+        {
+          "family": 16,
+          "command": 3,
+          "attribute": 2
+        },
+        {
+          "family": 35,
+          "command": 5,
+          "attribute": 3
+        },
+        {
+          "family": 35,
+          "command": 1,
+          "attribute": 1
+        },
+        {
+          "family": 35,
+          "command": 31,
+          "attribute": 0
+        }
+      ]
+    },
+    {
+      "case": "reg-power-changed",
+      "accepted": false,
+      "get_requests": [
+        {
+          "family": 16,
+          "command": 3,
+          "attribute": 2
+        },
+        {
+          "family": 35,
+          "command": 5,
+          "attribute": 3
+        },
+        {
+          "family": 35,
+          "command": 1,
+          "attribute": 1
+        },
+        {
+          "family": 35,
+          "command": 31,
+          "attribute": 0
+        }
+      ]
+    },
+    {
+      "case": "reg-duplicate-attr",
+      "accepted": false,
+      "get_requests": [
+        {
+          "family": 16,
+          "command": 3,
+          "attribute": 2
+        },
+        {
+          "family": 35,
+          "command": 5,
+          "attribute": 3
+        },
+        {
+          "family": 35,
+          "command": 1,
+          "attribute": 1
+        },
+        {
+          "family": 35,
+          "command": 31,
+          "attribute": 0
+        }
+      ]
+    },
+    {
+      "case": "reg-missing-attr",
+      "accepted": false,
+      "get_requests": [
+        {
+          "family": 16,
+          "command": 3,
+          "attribute": 2
+        },
+        {
+          "family": 35,
+          "command": 5,
+          "attribute": 3
+        },
+        {
+          "family": 35,
+          "command": 1,
+          "attribute": 1
+        },
+        {
+          "family": 35,
+          "command": 31,
+          "attribute": 0
+        }
+      ]
+    },
+    {
+      "case": "reg-extra-band",
+      "accepted": false,
+      "get_requests": [
+        {
+          "family": 16,
+          "command": 3,
+          "attribute": 2
+        },
+        {
+          "family": 35,
+          "command": 5,
+          "attribute": 3
+        },
+        {
+          "family": 35,
+          "command": 1,
+          "attribute": 1
+        },
+        {
+          "family": 35,
+          "command": 31,
+          "attribute": 0
+        }
+      ]
+    },
+    {
+      "case": "reg-duplicate-rule",
+      "accepted": false,
+      "get_requests": [
+        {
+          "family": 16,
+          "command": 3,
+          "attribute": 2
+        },
+        {
+          "family": 35,
+          "command": 5,
+          "attribute": 3
+        },
+        {
+          "family": 35,
+          "command": 1,
+          "attribute": 1
+        },
+        {
+          "family": 35,
+          "command": 31,
+          "attribute": 0
+        }
+      ]
+    },
+    {
+      "case": "reg-duplicate-country",
+      "accepted": false,
+      "get_requests": [
+        {
+          "family": 16,
+          "command": 3,
+          "attribute": 2
+        },
+        {
+          "family": 35,
+          "command": 5,
+          "attribute": 3
+        },
+        {
+          "family": 35,
+          "command": 1,
+          "attribute": 1
+        },
+        {
+          "family": 35,
+          "command": 31,
+          "attribute": 0
+        }
+      ]
+    },
+    {
+      "case": "reg-empty",
+      "accepted": false,
+      "get_requests": [
+        {
+          "family": 16,
+          "command": 3,
+          "attribute": 2
+        },
+        {
+          "family": 35,
+          "command": 5,
+          "attribute": 3
+        },
+        {
+          "family": 35,
+          "command": 1,
+          "attribute": 1
+        },
+        {
+          "family": 35,
+          "command": 31,
+          "attribute": 0
+        }
+      ]
+    },
+    {
+      "case": "missing48",
+      "accepted": false,
+      "get_requests": [
+        {
+          "family": 16,
+          "command": 3,
+          "attribute": 2
+        },
+        {
+          "family": 35,
+          "command": 5,
+          "attribute": 3
+        },
+        {
+          "family": 35,
+          "command": 1,
+          "attribute": 1
+        },
+        {
+          "family": 35,
+          "command": 31,
+          "attribute": 0
+        }
+      ]
+    },
+    {
+      "case": "only24",
+      "accepted": false,
+      "get_requests": [
+        {
+          "family": 16,
+          "command": 3,
+          "attribute": 2
+        },
+        {
+          "family": 35,
+          "command": 5,
+          "attribute": 3
+        },
+        {
+          "family": 35,
+          "command": 1,
+          "attribute": 1
+        },
+        {
+          "family": 35,
+          "command": 31,
+          "attribute": 0
+        }
+      ]
+    },
+    {
+      "case": "disabled",
+      "accepted": false,
+      "get_requests": [
+        {
+          "family": 16,
+          "command": 3,
+          "attribute": 2
+        },
+        {
+          "family": 35,
+          "command": 5,
+          "attribute": 3
+        },
+        {
+          "family": 35,
+          "command": 1,
+          "attribute": 1
+        },
+        {
+          "family": 35,
+          "command": 31,
+          "attribute": 0
+        }
+      ]
+    },
+    {
+      "case": "no-ir",
+      "accepted": false,
+      "get_requests": [
+        {
+          "family": 16,
+          "command": 3,
+          "attribute": 2
+        },
+        {
+          "family": 35,
+          "command": 5,
+          "attribute": 3
+        },
+        {
+          "family": 35,
+          "command": 1,
+          "attribute": 1
+        },
+        {
+          "family": 35,
+          "command": 31,
+          "attribute": 0
+        }
+      ]
+    },
+    {
+      "case": "no-ibss",
+      "accepted": false,
+      "get_requests": [
+        {
+          "family": 16,
+          "command": 3,
+          "attribute": 2
+        },
+        {
+          "family": 35,
+          "command": 5,
+          "attribute": 3
+        },
+        {
+          "family": 35,
+          "command": 1,
+          "attribute": 1
+        },
+        {
+          "family": 35,
+          "command": 31,
+          "attribute": 0
+        }
+      ]
+    },
+    {
+      "case": "radar",
+      "accepted": false,
+      "get_requests": [
+        {
+          "family": 16,
+          "command": 3,
+          "attribute": 2
+        },
+        {
+          "family": 35,
+          "command": 5,
+          "attribute": 3
+        },
+        {
+          "family": 35,
+          "command": 1,
+          "attribute": 1
+        },
+        {
+          "family": 35,
+          "command": 31,
+          "attribute": 0
+        }
+      ]
+    },
+    {
+      "case": "duplicate-frequency",
+      "accepted": false,
+      "get_requests": [
+        {
+          "family": 16,
+          "command": 3,
+          "attribute": 2
+        },
+        {
+          "family": 35,
+          "command": 5,
+          "attribute": 3
+        },
+        {
+          "family": 35,
+          "command": 1,
+          "attribute": 1
+        }
+      ]
+    },
+    {
+      "case": "wrong-ifname",
+      "accepted": false,
+      "get_requests": [
+        {
+          "family": 16,
+          "command": 3,
+          "attribute": 2
+        },
+        {
+          "family": 35,
+          "command": 5,
+          "attribute": 3
+        }
+      ]
+    },
+    {
+      "case": "wrong-wiphy",
+      "accepted": false,
+      "get_requests": [
+        {
+          "family": 16,
+          "command": 3,
+          "attribute": 2
+        },
+        {
+          "family": 35,
+          "command": 5,
+          "attribute": 3
+        },
+        {
+          "family": 35,
+          "command": 1,
+          "attribute": 1
+        }
+      ]
+    },
+    {
+      "case": "wrong-source",
+      "accepted": false,
+      "get_requests": [
+        {
+          "family": 16,
+          "command": 3,
+          "attribute": 2
+        }
+      ]
+    },
+    {
+      "case": "kernel-error",
+      "accepted": false,
+      "get_requests": [
+        {
+          "family": 16,
+          "command": 3,
+          "attribute": 2
+        }
+      ]
+    },
+    {
+      "case": "timeout",
+      "accepted": false,
+      "get_requests": [
+        {
+          "family": 16,
+          "command": 3,
+          "attribute": 2
+        }
+      ]
+    }
+  ]
+}

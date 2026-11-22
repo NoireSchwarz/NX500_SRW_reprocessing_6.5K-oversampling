@@ -11,9 +11,9 @@ PROBE=$D/bin/nxl-session-rearm.arm
 MENU=$D/bin/nxl-menu
 HOLDCHECK=$D/bin/nxl-holdcheck.arm
 OPS_SHA=c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d
-SESSION_SHA=7c2e2a0e60652c16116b4b9250bad164e543c85cf3ddffc72846cae754b44659
+SESSION_SHA=4abfc845c917beccb42171c1ceade84101ec5f06cd205c5717db59c2dcd73208
 PROBE_SHA=fe39f59b4960e12977bd8d3db2ac318bc586abb8a5539c65389978c06aa877eb
-MENU_SHA=2b7cc2a68bb0c34eae4271c1ba151353a9eab4cf6ac4789d2bcb97375ec4220d
+MENU_SHA=fafb7acac5a340602047e27771a800bef378fbf576ea1f070f95ed12e7b1fe39
 HOLDCHECK_SHA=57a51d73bcf483e602bcc3b7bf1e87ea296ed0c5799536a19c4eaf80dca2d368
 regular(){ [ -f "$1" ] && [ ! -L "$1" ]; }
 absent(){ [ ! -e "$1" ] && [ ! -L "$1" ]; }

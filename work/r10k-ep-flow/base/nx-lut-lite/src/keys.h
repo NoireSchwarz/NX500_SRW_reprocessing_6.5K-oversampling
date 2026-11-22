@@ -19,26 +19,30 @@ static inline int nxl_combo(struct nxl_chord *s, unsigned code, int value) {
     return 0;
 }
 /* Deliver native key-up events before allowing the menu to take focus. */
-enum { NXL_OPEN_MENU=1, NXL_TOGGLE_VLOG=2 };
-struct nxl_shortcut { struct nxl_chord chord; int pending, wifi, blocked; };
-static inline int nxl_activate(struct nxl_shortcut *s, unsigned code, int value) {
-    if(value!=0 && value!=1)return 0; /* autorepeat never arms a shortcut */
-    if(code==NXL_EV)s->chord.ev=value;
-    else if(code==NXL_AEL)s->chord.ael=value;
-    else if(code==NXL_WIFI)s->wifi=value;
-    else return 0;
-    if(s->chord.ael && s->wifi)s->blocked=1;
-    int candidate=s->chord.ev ? (s->wifi?NXL_TOGGLE_VLOG:s->chord.ael?NXL_OPEN_MENU:0):0;
-    if(candidate && s->pending && candidate!=s->pending)s->blocked=1;
-    if(candidate && !s->blocked)s->pending=candidate;
-    if (!s->chord.ev && !s->chord.ael && !s->wifi) {
-        int result=s->blocked?0:s->pending;
-        s->pending = 0;
-        s->blocked=0;
-        return result;
-    }
-    return 0;
+/* SPDX-License-Identifier: AGPL-3.0-only */
+enum { NXL_OPEN_MENU=1, NXL_TOGGLE_VLOG=2, NXL_OPEN_WIFI=4 };
+struct nxl_shortcut { struct nxl_chord chord; int pending,wifi,blocked,wifi_armed,wifi_cancel,wifi_owned; };
+static inline int nxl_activate(struct nxl_shortcut*s,unsigned code,int value){
+ if(value!=0&&value!=1)return 0;
+ if(code!=NXL_EV&&code!=NXL_AEL&&code!=NXL_WIFI){
+  if(value==1&&(s->wifi||s->pending)){s->wifi_cancel=1;s->blocked=1;}
+  return 0;
+ }
+ if(code==NXL_EV)s->chord.ev=value;
+ else if(code==NXL_AEL)s->chord.ael=value;
+ else {if(value&&!s->wifi){s->wifi_armed=1;s->wifi_cancel=0;}s->wifi=value;}
+ if(s->chord.ael&&s->wifi)s->blocked=1;
+ if(s->wifi&&(s->chord.ev||s->chord.ael))s->wifi_cancel=1;
+ int candidate=s->chord.ev?(s->wifi?NXL_TOGGLE_VLOG:s->chord.ael?NXL_OPEN_MENU:0):0;
+ if(candidate&&s->pending&&candidate!=s->pending)s->blocked=1;
+ if(candidate&&!s->blocked)s->pending=candidate;
+ if(!s->chord.ev&&!s->chord.ael&&!s->wifi){
+  int result=s->blocked?0:s->pending?s->pending:s->wifi_armed&&!s->wifi_cancel&&!s->wifi_owned?NXL_OPEN_WIFI:0;
+  s->pending=s->blocked=s->wifi_armed=s->wifi_cancel=s->wifi_owned=0;return result;
+ }
+ return 0;
 }
+
 /* Upper dial selects categories; rear dial switches the left panel.
  * Only D-pad UP/DOWN select items. AEL alone remains unused. */
 static inline int nxl_sidebar_step(unsigned code) {

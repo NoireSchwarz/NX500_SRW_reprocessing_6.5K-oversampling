@@ -29,6 +29,7 @@ static const struct{const char*a,*b;} map[]={
 {"Applying native lens correction","套用鏡頭校正"},
 {"Applying native LUT","套用LUT"},
 {"Encoding native JPEG","輸出JPEG"},
+{"Creating the new album preview","建立相簿預覽與EXIF資料"},
 {"JPEG stream written","JPEG已寫入"},
 {"Checking callback and DMA retirement","核驗影像處理已結束"},
 {"Callbacks and DMA are quiet","影像處理已結束"},

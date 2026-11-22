@@ -2,24 +2,16 @@
 
 面向三星 **NX500 1.12** 的 LUT、SRW 重显影和全宽视频研究项目，使用 RAM 补丁及原厂图像处理接口。
 
-## 当前版本：NX LUT Lite 0.4.0 RC5
+## 当前版本 · NX LUT Lite 0.4.0 RC6.14.10
 
-[下载完整安装包与校验文件](https://github.com/NoireSchwarz/NX500_SRW_reprocessing_6.5K-oversampling/releases/tag/v0.4.0-rc5) · [更新说明](docs/RELEASE_0.4.0_RC5_zh.md) · [接手交接](docs/HANDOFF_20261119_RC5.md) · [当前状态](docs/CURRENT_STATUS.md) · [合并短测](docs/RC5_TEST_STEPS_zh.txt)
+[下载完整安装包与 SHA-256](https://github.com/NoireSchwarz/NX500_SRW_reprocessing_6.5K-oversampling/releases/tag/v0.4.0-rc6.14.10) · [更新说明](docs/RELEASE_0.4.0_RC6.14.10_zh.md) · [交接文档](docs/HANDOFF_20261122_RC61410.md) · [合并短测](docs/RC61410_WIFI_TEST_STEPS_zh.md)
 
-- **普通 LUT 默认用于视频**：选择和参数只暂存，OK 才装载；每次非零普通 LUT 提交默认开启影片 LUT，仍可在菜单手动关闭。冷启动不自动套用。
-- **EV+WiFi 开关 V‑Log**；**双击 EV 打开当前已应用的 LUT／Log LUT 详细页**；EV+AEL 菜单保留。切换 V‑Log 前停录并回照片待机。
-- **半屏详细页**保留上半屏取景，提供浓淡、色相、锐度、对比及 M3 A/B 混合；装载后菜单保持打开，半按才返回取景。
-- **繁体中文菜单、输入隔离及视频规格重载**；全宽 UHD24、UHD 转 2.5K、恢复原厂 UHD 通过原厂命令重新提交，不再要求手动重选原厂尺寸。
-- **32 张正式 LUT**：25 普通、7 V‑Log；Log LUT 仅在 VID 专用入口选择，普通 A/B 和 SRW 不可选。
-- **SRW** 保持已恢复的原生重显影链和五项精简菜单，初始化并重显影自动准备工作阶段。
+- **无线连接** · 短按 Wi-Fi 后选择「5 GHz 相簿」「2.4 GHz 相簿」或「2.4 GHz 圖傳」。双码连接。相簿可下载原档及查看相机资讯，2.4 GHz 原厂图传支持浏览器全屏。
+- **快捷键** · EV+Wi-Fi 切换 V-Log，双击 EV 打开当前 LUT 详情，EV+AEL 打开补丁菜单。
+- **LUT 与视频** · 繁体中文半屏菜单、四项参数及 M3 A/B 混合。OK 装载，半按返回取景。支持全宽 UHD24、UHD 转 2.5K 和恢复原厂 UHD。
+- **SRW** · 一键初始化并重显影，输出相册用 JPEG 与缩略图并更新相册列表。
 
-RC4 已获用户反馈“效果很好”。RC5 已通过电脑验证并部署到 SD，**尚未收到 RC5 独立相机安装及短测回执**，因此以 RC 预发布提供。模拟 OS、MMIO、中断和 Gamma 端点的通过，不代表所有相机状态均已验收。
-
-完整包为 `NX_LUT_Lite_0.4.0_RC5_full.zip`，85,921,118 字节：
-
-```text
-SHA256 74615b39bd1644ebc251b0d845de942acd0ee42435d5adc7e7dbb99761449be3
-```
+RC6.14.10 已通过电脑端验证，以预发布提供。RC6.14.9 的相机测试结果和本版软件验证边界见交接文档。
 
 ## 能力与研究边界
 
@@ -31,7 +23,7 @@ SHA256 74615b39bd1644ebc251b0d845de942acd0ee42435d5adc7e7dbb99761449be3
 
 ## 安装与使用
 
-下载 Release 的完整 ZIP，核对 SHA256 后按包内说明覆盖所需安装文件；Git 源码目录不是可直接复制到卡上的安装包。先保留媒体、原固件、完整备份和历史日志。断 USB、关机待写卡灯熄灭，取出电池约30秒后安装；完成后关机再开机，确认 VID 页 RC5。
+下载 Release 的完整 ZIP，核对 SHA256 后按包内说明覆盖所需安装文件；Git 源码目录不是可直接复制到卡上的安装包。先保留媒体、原固件、完整备份和历史日志。断 USB、关机待写卡灯熄灭，取出电池约30秒后安装；完成后关机再开机，确认 VID 页 RC6.14.10。
 
 进行 SRW 前先还原 V‑Log、手动关闭影片 LUT，沿用既有初始化并重显影流程。不格式化、清理或修复 SD 文件系统，不重复码率对照。
 
@@ -39,10 +31,10 @@ SHA256 74615b39bd1644ebc251b0d845de942acd0ee42435d5adc7e7dbb99761449be3
 
 | 路径 | 内容 |
 | --- | --- |
-| `work/r10k-ep-flow/` | 当前组件源码；目录名是历史名称，内容已更新到 RC5 路线 |
+| `work/r10k-ep-flow/` | 当前组件源码；目录名是历史名称，本版菜单、Wi-Fi 入口、安装器和研究源码 |
 | `docs/` | 更新说明、当前状态、交接续篇和各轮研究记录 |
-| `reports/validation/RC5/` | 本次软件验证与包身份记录；实机覆盖边界单独标注 |
-| Release ZIP 的 `SOURCE/`、`EVIDENCE/` | 对应发布源码、历史支持和完整验证材料 |
+| `reports/releases/RC61410/` | 本次软件验证与包身份记录；实机覆盖边界单独标注 |
+| Release ZIP 的 `SOURCE/`、`EVIDENCE/` | 本次打包的前端源码和电脑端验证 |
 
 主机采用 Python 3、Zig 0.13.0、ARM soft-float musl；ARM 回放依赖 Unicorn、Capstone 和 pyelftools。工具链、开发者自行取得的完整固件／rootfs 不随 Git 正文提交。菜单和按键可用 `base/nx-lut-lite/tools/build_zig.py --keys-menu-only` 定向重建；参数、外部输入和身份绑定见交接，不批量运行历史生成脚本。
 

@@ -1,0 +1,34 @@
+{
+  "passed": true,
+  "hardware_tested": false,
+  "actual_production_arm_stream_code": true,
+  "socket_and_filesystem_endpoints_modeled": true,
+  "cases": {
+    "stream": {
+      "checks": [
+        "write backpressure",
+        "partial send",
+        "frame gaps",
+        "short TCP_INFO",
+        "reconnect",
+        "invalid counter interval",
+        "end-of-stream flush",
+        "USB blocks SD write"
+      ],
+      "dumped_windows": 8,
+      "header": "NXL_RVF_TCP_V1 version=0.4.0-RC6.14.10 session=120_77 mhz=2437 primary=6 width_mhz=0 window_ms=500 rows=8 overwritten=0",
+      "footer": "NXL_RVF_TCP_END1 session=120_77 rows=8"
+    },
+    "ring": {
+      "checks": [
+        "bounded ring space",
+        "overwrites oldest windows",
+        "ordered append",
+        "complete end marker"
+      ],
+      "dumped_windows": 512,
+      "header": "NXL_RVF_TCP_V1 version=0.4.0-RC6.14.10 session=121_77 mhz=2437 primary=6 width_mhz=0 window_ms=500 rows=512 overwritten=3",
+      "footer": "NXL_RVF_TCP_END1 session=121_77 rows=512"
+    }
+  }
+}

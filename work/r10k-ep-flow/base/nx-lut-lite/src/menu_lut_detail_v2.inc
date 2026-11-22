@@ -51,12 +51,12 @@ static const char*detail_short_name(const char*id){
 static void detail_reset_inputs(void){memset(down,0,sizeof down);combo_block=pointer_down=0;pointer_cell=-1;detail_drag=0;detail_cell=-1;}
 static const char*detail_name(int i){int n=detail_view[ld_wrap(i,detail.count)];return n<0?"off":names[n];}
 static void detail_queue(int mixture){detail_dirty=1;detail_queued_mix=mixture&&detail.prepared;detail_due=ticks()+280UL;}
-static void detail_dialog_close(void){if(detail_dialog){XDestroyWindow(dpy,detail_dialog);detail_dialog=0;canvas=win;if(!detail_hidden)XSetInputFocus(dpy,win,RevertToPointerRoot,CurrentTime);}}
+static void detail_dialog_close(void){if(detail_dialog){nxl_window_forget(detail_dialog);XDestroyWindow(dpy,detail_dialog);detail_dialog=0;canvas=win;if(!detail_hidden)XSetInputFocus(dpy,win,RevertToPointerRoot,CurrentTime);}}
 static void detail_dialog_open(void){
- if(detail_dialog)return;XSetWindowAttributes a;memset(&a,0,sizeof a);a.override_redirect=True;a.background_pixel=bg;
+ if(detail_dialog)return;XSetWindowAttributes a;memset(&a,0,sizeof a);a.override_redirect=False;a.background_pixel=bg;
  a.event_mask=ExposureMask|KeyPressMask|KeyReleaseMask|ButtonPressMask|ButtonReleaseMask|ButtonMotionMask|FocusChangeMask;
  detail_dialog=XCreateWindow(dpy,RootWindow(dpy,DefaultScreen(dpy)),80,248,560,224,0,CopyFromParent,InputOutput,CopyFromParent,CWOverrideRedirect|CWBackPixel|CWEventMask,&a);
- XStoreName(dpy,detail_dialog,"NX LUT B");if(!detail_hidden){XMapRaised(dpy,detail_dialog);XSetInputFocus(dpy,detail_dialog,RevertToPointerRoot,CurrentTime);}
+ XStoreName(dpy,detail_dialog,"NX LUT B");nxl_window_prepare(dpy,detail_dialog,win,1);nxl_window_place(dpy,detail_dialog,80,248,560,224,ticks());if(!detail_hidden){XMapRaised(dpy,detail_dialog);XSetInputFocus(dpy,detail_dialog,RevertToPointerRoot,CurrentTime);}
 }
 static void detail_b_rebuild(void){
  detail.b_count=0;for(int pass=0;pass<(detail.b_category==0?2:1);pass++)for(int i=0;i<total_count;i++){
@@ -110,7 +110,7 @@ static void detail_close(int where){
  (void)detail_cache_save();
  detail_return=where;if(detail_child||detail_dirty)return;
  detail_dialog_close();detail_visible=0;if(!detail_log_scope)selected=detail.cursor;detail_reset_inputs();notice[0]=0;
- if(where==1){snprintf(notice,sizeof notice,"%s",detail_message);XMoveResizeWindow(dpy,win,0,0,720,480);XMapRaised(dpy,win);XSetInputFocus(dpy,win,RevertToPointerRoot,CurrentTime);detail_hidden=0;}
+ if(where==1){snprintf(notice,sizeof notice,"%s",detail_message);nxl_window_place(dpy,win,0,0,720,480,ticks());XMapRaised(dpy,win);XSetInputFocus(dpy,win,RevertToPointerRoot,CurrentTime);detail_hidden=0;}
  else{action=0;quitting=1;}
 }
 static int detail_params_valid(const int*p){return p[0]>=0&&p[0]<=100&&p[0]%5==0&&p[1]>=-10&&p[1]<=10&&p[2]>=-10&&p[2]<=10&&p[3]>=-10&&p[3]<=10;}
@@ -119,7 +119,7 @@ static int detail_open(void){
  if(selected>count||rearm_child>0)return 0;if(access("/tmp/nx-lut-lite/clean-log.policy",F_OK)==0){strcpy(notice,"請先還原V‑Log，再編輯普通LUT");return 1;}detail_log_scope=0;
  if(count<0||count>=512)return 1;if(!menu_modal_input_take())return 1;detail_view[0]=-1;memcpy(detail_view+1,view,(size_t)count*sizeof *view);ld_begin(&detail,count+1,selected,selected?effective_strength():0,category);
  detail_visible=1;detail_return=detail_dirty=detail_done=detail_eof=0;detail_committed_b[0]=detail_message[0]=0;detail_reset_inputs();
- XMoveResizeWindow(dpy,win,0,240,720,240);nxl_help_close(&help);if(!detail_load_parameters())strcpy(detail_message,"調整參數或按OK套用");return 1;
+ nxl_window_place(dpy,win,0,240,720,240,ticks());nxl_help_close(&help);if(!detail_load_parameters())strcpy(detail_message,"調整參數或按OK套用");return 1;
 }
 
 static int detail_open_log(void){
@@ -130,7 +130,7 @@ static int detail_open_log(void){
  if(!menu_modal_input_take())return 1;
  detail_log_scope=1;ld_begin(&detail,n,at,at?100:0,0);
  detail_visible=1;detail_return=detail_dirty=detail_done=detail_eof=0;detail_committed_b[0]=detail_message[0]=0;detail_reset_inputs();
- XMoveResizeWindow(dpy,win,0,240,720,240);nxl_help_close(&help);if(!detail_load_parameters())strcpy(detail_message,"調整參數或按OK套用");return 1;
+ nxl_window_place(dpy,win,0,240,720,240,ticks());nxl_help_close(&help);if(!detail_load_parameters())strcpy(detail_message,"調整參數或按OK套用");return 1;
 }
 
 static void detail_result_action(int result){

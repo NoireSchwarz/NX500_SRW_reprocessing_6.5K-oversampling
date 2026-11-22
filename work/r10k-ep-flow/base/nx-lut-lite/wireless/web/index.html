@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NX500 無線圖傳</title>
+<link rel="icon" href="data:,">
+<style>
+:root{font-family:system-ui,sans-serif;color:#233036;background:#e8e9e8}body{margin:0}header{background:#14a5ba;color:white;padding:16px 5%;display:flex;justify-content:space-between;align-items:center}h1{font-size:22px;margin:0}small{font-size:12px}nav{display:flex;gap:8px;padding:16px 5% 8px}button,a{touch-action:manipulation}button{border:1px solid #a6b0b3;border-radius:4px;background:#f9faf9;padding:12px 18px;font:inherit;color:inherit;cursor:pointer}button.active,button.primary{background:#14a5ba;border-color:#14a5ba;color:white}main{max-width:1100px;margin:auto;padding:12px 5% 30px}#status{padding:10px 0;color:#476069;min-height:24px}canvas{display:block;background:#111;max-width:100%;height:auto;margin:auto}#live{background:#fff;padding:16px;border-radius:6px}.tools{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:12px}.hint{color:#5b686c;font-size:14px;line-height:1.6}#gallery[hidden],#live[hidden],#info[hidden]{display:none}#cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:12px}.card{display:flex;flex-direction:column;background:white;border:1px solid #ccd1d2;border-radius:6px;padding:10px;gap:8px;min-width:0}.card img{width:100%;aspect-ratio:3/2;object-fit:contain;background:#e9eceb}.card span{font-size:13px;overflow-wrap:anywhere}.card a{font-size:14px;color:#087e91}.folder{padding:24px 12px;text-align:left}select{font:inherit;padding:10px;max-width:90%}footer{font-size:12px;padding:12px 5%;color:#637278}a{color:#087e91}#empty{padding:25px 0}
+table{border-collapse:collapse;width:100%;background:#fff}th,td{text-align:left;padding:12px;border-bottom:1px solid #d3d9da;overflow-wrap:anywhere}th{width:36%;font-weight:500}#info{background:#fff;padding:16px;border-radius:6px}[hidden]{display:none!important}
+#live{padding:10px}
+#viewPlayer{position:relative;display:grid;place-items:center;overflow:hidden;background:#111;border-radius:4px}
+#viewPlayer canvas{width:100%;height:auto;object-fit:contain}
+#viewFullscreen{position:absolute;top:max(8px,env(safe-area-inset-top));right:max(8px,env(safe-area-inset-right));padding:8px 12px;background:rgba(15,22,24,.86);color:#fff;border-color:#b8c6ca}
+#viewFullscreen:focus-visible{outline:2px solid #60dbe9;outline-offset:2px}
+#viewPlayer:fullscreen{width:100%;height:100%;border-radius:0}
+#viewPlayer:-webkit-full-screen{width:100%;height:100%;border-radius:0}
+#viewPlayer.view-expanded{position:fixed;inset:0;z-index:10;border-radius:0}
+body.view-fixed{overflow:hidden}
+#viewPlayer:fullscreen canvas{width:100%;height:100%}
+#viewPlayer:-webkit-full-screen canvas{width:100%;height:100%}
+#viewPlayer.view-expanded canvas{width:100%;height:100%}
+@media(max-width:600px){
+ body.rvf-page main{padding-right:0;padding-left:0}
+ body.rvf-page #status,body.rvf-page #metrics,body.rvf-page .tools{padding-left:10px;padding-right:10px}
+ body.rvf-page #live{padding:0}
+ body.rvf-page #viewPlayer{border-radius:0}
+}
+</style>
+<header><h1 id="title">NX500 無線圖傳</h1><small id="version">NX500</small></header>
+<nav id="pageTabs" hidden><button id="galleryTab">無線相簿</button><button id="infoTab">相機資訊</button></nav>
+<main><div id="status" role="status">正在連線…</div>
+<section id="live" hidden>
+<div id="viewPlayer">
+<canvas id="view" width="720" height="480" aria-label="即時取景"></canvas>
+<button id="viewFullscreen" type="button" aria-pressed="false">全螢幕</button>
+</div>
+<p id="metrics" class="hint" aria-live="off">原廠 RVF · 等候取景</p>
+<div class="tools"><button id="pause">停止圖傳</button><button id="downloadStats">下載圖傳記錄</button></div>
+</section>
+<section id="gallery" hidden><div class="tools"><button id="folders">資料夾</button><button id="refresh">重新整理</button><span id="folderName"></span></div><div id="cards"></div><p id="empty" hidden>這個資料夾沒有可顯示的檔案。</p><button id="more" hidden>載入更多</button><p class="hint">點預覽可開啟 JPEG 原圖；下載連結保留原檔。SRW 與 MP4 以檔名顯示，照片不經重新壓縮。</p></section>
+<section id="info" hidden><div class="tools"><button id="infoRefresh">重新整理資訊</button></div><table><tbody id="infoRows"></tbody></table><p id="infoNote" class="hint"></p></section>
+</main><footer>按相機的 Wi-Fi 鍵可停止服務並關閉熱點。</footer>
+<script src="app.js"></script><script src="extra.js"></script></html>

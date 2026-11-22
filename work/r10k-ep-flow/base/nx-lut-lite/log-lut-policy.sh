@@ -9,6 +9,7 @@ clean_log_factory_status(){
  clean_log_gamma_status && grep -qx 'mode=FACTORY' "$ST/log-status.txt" && grep -Eq '^phase=(OFF|FACTORY_QUEUED)$' "$ST/log-status.txt"
 }
 lut_current_mode(){
+ [ ! -e "$RUN/gamma-life.pending" ] && [ ! -L "$RUN/gamma-life.pending" ] || die GAMMA_LIFECYCLE_RESTORE_REQUIRED
  LUT_MODE=STD
  if [ -e "$CLEAN_LOG" ] || [ -L "$CLEAN_LOG" ];then
   [ -f "$CLEAN_LOG" ] && [ ! -L "$CLEAN_LOG" ] && [ "$(cat "$CLEAN_LOG")" = 'NXL_CLEAN_LOG1 READY' ] || die LOG_TRANSITION_PENDING
@@ -39,6 +40,7 @@ log_neutral(){
  video_enable
 }
 clean_log_prepare(){
+ [ ! -e "$RUN/gamma-life.pending" ] && [ ! -L "$RUN/gamma-life.pending" ] || die GAMMA_LIFECYCLE_RESTORE_REQUIRED
  [ ! -e "$CLEAN_LOG" ] && [ ! -L "$CLEAN_LOG" ] || die LOG_RESTORE_FIRST
  lut_idle
  clean_log_factory_status || die GAMMA_RESTORE_REQUIRED

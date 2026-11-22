@@ -118,7 +118,7 @@ static void video_confirm(void){
 }
 static void draw_video(void){
  help.visible=0;help.suppressed=1;fill(0,0,720,480,bg);XSetForeground(dpy,gc,ink);text(24,20,"影片設定");text(552,20,"MENU 返回");
- XSetForeground(dpy,gc,muted);text(24,60,"NX LUT Lite 0.4.0 RC5");frame(18,96,684,298,line_color);draw_sidebar();
+ XSetForeground(dpy,gc,muted);text(24,60,"NX LUT Lite 0.4.0 RC6.14.10");frame(18,96,684,298,line_color);draw_sidebar();
  int cursor=release_video_index(),first=cursor/5*5;
  for(int row=0;row<5&&first+row<release_video_count();row++){
   int index=first+row,id=release_video_rows[index],y=104+row*56;

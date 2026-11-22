@@ -67,8 +67,9 @@ else:
     nm = subprocess.check_output(["nm", "-u", *([str(keys)] if keys else []), str(menu), str(crt)], text=True)
     symbols = set(re.findall(r"\bU\s+(\w+)", nm))
 symbols -= {"main", "__aeabi_uidiv", "__aeabi_idiv", "__aeabi_idivmod"}
-x11 = {s for s in symbols if s.startswith("X")}
-libc = symbols - x11
+xtst = {s for s in symbols if s.startswith("XTest")}
+x11 = {s for s in symbols if s.startswith("X")} - xtst
+libc = symbols - x11 - xtst
 
 def stub(name, symbols, soname):
     src = build / (name + ".c")
@@ -82,7 +83,10 @@ def stub(name, symbols, soname):
 
 cstub = stub("libc_imports", libc, "libc.so.6")
 xstub = stub("x11_imports", x11, "libX11.so.6")
-for name, ob, libraries in (([] if a.menu_only else [("nxl-keys", keys, [cstub])])+[("nxl-menu", menu, [cstub, xstub])]):
+key_libs = [cstub, xstub]
+if xtst:
+    key_libs.append(stub("xtst_imports", xtst, "libXtst.so.6"))
+for name, ob, libraries in (([] if a.menu_only else [("nxl-keys", keys, key_libs)])+[("nxl-menu", menu, [cstub, xstub])]):
     run(zig, "ld.lld", "-m", "armelf_linux_eabi", "-e", "_start", "--strip-all",
         "--dynamic-linker", "/lib/ld-linux.so.3", "-z", "noexecstack", "-o",
         ROOT / "bin" / name, crt, ob, div, *libraries)

@@ -4,6 +4,8 @@ set -u
 umask 077
 D=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd) || exit 1
 LOGPOLICY=$D/srw-log-policy.sh
+JPEG_ALBUM=$D/jpeg-album.sh
+JPEG_ALBUM_SHA=e610ffaa64281f0d115d0347fc4e4bcc70ea5624c005c2d4ae7edc139caabbc8
 SRW_LOG_POLICY_SHA=ea30b428f6a607c304b3a1400f2263a89f5e32bdb770dece39512c30efaf1093
 RUN=/tmp/nx-lut-lite
 OUT=/mnt/mmc/NXDEMO51
@@ -18,8 +20,8 @@ HWCTL=$D/bin/nxl-hw-controller.arm
 HWWORK=$D/bin/nxl-hw-worker.arm
 INIT_PIPELINE=$D/bin/nxl-init-pipeline.arm
 OWNED_EP=$D/bin/nxl-owned-ep.arm
-INIT_PIPELINE_SHA=dd70a2cd84aed091a2b2004430cc4d4c3400d89c60fd069f041a6864d9058e74
-OWNED_EP_SHA=15f24175e1f4d1e246ce3333a2eb0a384a4d07660c380625fdced88cf5d6b95f
+INIT_PIPELINE_SHA=c139a8bff8c95c943b37e13523e817a6b22d2151149ea07b5902c08c6ef4a984
+OWNED_EP_SHA=8b89e45f16eda5dca2d9bd29bd5641efa024ac0be9451bb4d8134bb28041e2f1
 OPS=$D/bin/nxl-fileops
 CV=$D/bin/cube2lut.arm
 CV_SHA=1fee2e50896dd044025022a2fb3e968a857a7b1c5d1426630d899f5cf286d34d
@@ -30,9 +32,9 @@ HANDOFF_WATCH=$D/bin/nxl-handoff-watch.arm
 HANDOFF_WATCH_SHA=91b4520d2a4df5b8af805657f94f940e8c28d56964ae7faba20687233164c3bd
 RESTORE_SHA=1f4beb372bcdc7557ececfc89257361d283ae7487e4b364ef33ff330f75fa996
 RESTORE_SCRIPT=$D/restore-camera.sh
-RESTORE_SCRIPT_SHA=8e78506c58274d8f6faaaca754e197f60bf5d9952d6bc1c0b024100b3b7de8da
+RESTORE_SCRIPT_SHA=009c2ad7bd15ca3e19d5b437daa6ec1f9d6f3d4a02dbfb0bfab086e3f4277fdc
 REARM_SCRIPT=$D/rearm-session.sh
-REARM_SCRIPT_SHA=e9f507eee90522530688e243c787ab307be4f561846a466bd6497ba91b58c39e
+REARM_SCRIPT_SHA=2d9d609862c3abe45cac246b8f45f8f5e63cfa68e3570ba1c833b8d273ce0b1f
 FRONT_GRANT=$D/state/p49-experiment.state
 RETIRE_MANIFEST=$D/data/prior-front-retire.sha256
 RETIRE_MANIFEST_SHA=8af1064169dcdc3f1f89bedd84bdd53ace6bf476177f4d338ded8f3b0746d2f4
@@ -41,13 +43,13 @@ RETIRE_REPORT=front_1/front
 RETIRE_FALSE_REASON=FRONT_RESTART_OR_PATH_INVALID
 PREPARE_PROC=/proc
 prepare_full=0
-SESSION_SHA=7c2e2a0e60652c16116b4b9250bad164e543c85cf3ddffc72846cae754b44659
-FRONT_SHA=714bb6a9608ef849d716ef4716d65db7d392fe464d90ecbe0fb882815700b232
+SESSION_SHA=4abfc845c917beccb42171c1ceade84101ec5f06cd205c5717db59c2dcd73208
+FRONT_SHA=869ead68a8164058f5b170107695824674ce06062fc1730d090debdcaad7e62e
 POST_SHA=c8d178c4802a917433ae38264eb56e896b3d90b879ec691ad6a3d9b4f49d433f
 HWCTL_SHA=60e5833761547c3ac1c1b9165fdda87f97592ccfc2de766c1d9471ac081d8973
 HWWORK_SHA=74642c4d9729062004246ae9bcee9a12c659db4e1efd240350a2e66b72eba719
-MENU_SHA=2b7cc2a68bb0c34eae4271c1ba151353a9eab4cf6ac4789d2bcb97375ec4220d
-ENGINE_SHA=2d5c5d0c64242691413e41c8d4c833dbf864695e0d9c9c03a164337aff3345d2
+MENU_SHA=fafb7acac5a340602047e27771a800bef378fbf576ea1f070f95ed12e7b1fe39
+ENGINE_SHA=c579e7ccaeace90da7a7cadc3041c5494a8b4d2921ea131234c348c4fb5b61cc
 OPS_SHA=c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d
 OLD_FRONT_SHA=07f64d2ab1a3bc073a49a2b45fffa4ec4ae41fc5ad7dfddfb6384563be9c7a14
 SOURCE_SHA=dfd6608e4ee05f0d5b4b402fedd3c928aee509595e6964efa4c1ce87f1d9715c
@@ -86,6 +88,7 @@ if [ -f "$D/progress.sh" ] && [ ! -L "$D/progress.sh" ];then . "$D/progress.sh";
 regular "$OPS" && [ -x "$OPS" ] && [ "$(hash "$OPS")" = "$OPS_SHA" ] || { bootstrap_log FILE_UTILITY_IDENTITY_FAILED "$OPS";nxl_progress RAW_COMPONENT_CHECK FAILED FILE_UTILITY_IDENTITY_FAILED;exit 1; }
 case "${1:-}" in --status|--new) :;;*)
  absent "$RUN/auto-init-held" || { bootstrap_log AUTO_INIT_UNCONFIRMED "$RUN/auto-init-held";nxl_progress RAW_RESOURCE_CHECK HELD AUTO_INIT_RETURN_UNCONFIRMED;exit 1; }
+ absent "$RUN/lutload.pending" || { bootstrap_log LUT_RELOAD_UNCONFIRMED "$RUN/lutload.pending";nxl_progress RAW_RESOURCE_CHECK HELD LUT_RELOAD_RETURN_UNCONFIRMED;exit 1; }
 ;;esac
 case "${1:-}" in
 --rearm)
@@ -179,6 +182,10 @@ timing_end(){
     # Keep the full uint64 clock decimal intact on32-bit camera shells. The
     # PC analyzer computes END-BEGIN without relying on shell integer width.
     printf 'NX_R6_PHASE phase=%s event=END monotonic_ms=%s begin_monotonic_ms=%s result_code=%s\n' "$1" "$nxlt_ms" "$timing_start" "$2"
+    # One compact per-job timing file; no optional snapshots or new recorder.
+    if [ -n "${job:-}" ] && [ -d "$job" ] && [ ! -L "$job" ] && [ ! -L "$job/srw-timing.txt" ];then
+     printf 'phase=%s begin_ms=%s end_ms=%s exit=%s\n' "$1" "$timing_start" "$nxlt_ms" "$2" >> "$job/srw-timing.txt" || :
+    fi
     timing_phase=;timing_start=UNAVAILABLE
     return 0
 }
@@ -429,13 +436,16 @@ reset_live_lut(){
 }
 front_grant_ready(){
     phase=PREPARE_FRONT
-    regular "$FRONT_GRANT" || fail FRONT_REINSTALL_REQUIRED
+    regular "$FRONT_GRANT" || { printf 'FRONT_GRANT_CHECK state=MISSING_OR_UNSAFE path=%s native_started=0\n' "$FRONT_GRANT";fail FRONT_REINSTALL_REQUIRED; }
     grant_head= grant_ready= grant_extra= good=0
     {
         IFS= read -r grant_head && IFS= read -r grant_ready && ! IFS= read -r grant_extra && [ -z "$grant_extra" ] &&
         [ "$grant_head" = NXP33INSTALL1 ] && [ "$grant_ready" = READY=0.3.6-demo50 ] && good=1
     } < "$FRONT_GRANT"
-    [ "$good" = 1 ] || fail FRONT_REINSTALL_REQUIRED
+    if [ "$good" != 1 ];then
+        printf 'FRONT_GRANT_CHECK state=NOT_READY path=%s bytes=%s sha256=%s native_started=0\n' "$FRONT_GRANT" "$(wc -c < "$FRONT_GRANT")" "$(hash "$FRONT_GRANT")"
+        fail FRONT_REINSTALL_REQUIRED
+    fi
 }
 restore_receipt(){
     regular "$1/restore-complete.txt" && regular "$1/result.json" || return 1
@@ -559,6 +569,9 @@ run_pipeline(){
     record FRONT_RUNNING || fail RESULT_SAVE_FAILED
     notice --demo-ready
     # No continuous initialization recorder in the compact production path.
+    # Keep the native JPEG private until CPU metadata/MPF finalization.
+    NX51_ALBUM_OUTPUT=0;export NX51_ALBUM_OUTPUT
+    unset NX51_FINAL_PENDING NX51_FINAL_JPEG
     timing_begin NATIVE_SINGLE_PIPELINE
     "$FRONT" --pipeline "$report" "$jpeg" "$pipeline_lut" > "$job/pipeline-$front_attempt.stdout.txt" 2>> "$job/collector.log" & child=$!
     rc=0;wait "$child" || rc=$?;child=
@@ -584,9 +597,23 @@ run_pipeline(){
     verify_jpeg
     restore_after_pipeline
     cold_restart_required=0
+    phase=JPEG_ALBUM_METADATA
+    nxl_progress "$phase" RUNNING "Creating a new album thumbnail and preserving the native JPEG stream"
+    regular "$JPEG_ALBUM" && [ "$(hash "$JPEG_ALBUM")" = "$JPEG_ALBUM_SHA" ] || fail JPEG_ALBUM_COMPONENT_IDENTITY_FAILED
+    timing_begin JPEG_ALBUM_FINALIZATION
+    /bin/sh "$JPEG_ALBUM" "${NX51_SOURCE_SRW:-$PAYLOAD/assets/SAM_0183.SRW}" "$SOURCE_SHA" "$jpeg" >> "$job/collector.log" 2>&1 & child=$!
+    rc=0;wait "$child" || rc=$?;child=
+    timing_end JPEG_ALBUM_FINALIZATION "$rc"
+    # A returned ISP workspace cannot prove a later native helper returned.
+    # Preserve an unknown-operation hold and publish RESTART_REQUIRED.
+    if [ -e "$RUN/auto-init-held" ] || [ -L "$RUN/auto-init-held" ];then
+        disposition=UNKNOWN_REQUIRE_RESTART;cold_restart_required=1
+        fail JPEG_ALBUM_NATIVE_OPERATION_HELD_RESTART_REQUIRED
+    fi
+    [ "$rc" = 0 ] || fail JPEG_ALBUM_FINALIZATION_FAILED_NATIVE_ALREADY_RETURNED
     terminal=PIPELINE_COMPLETE;reason=SINGLE_SRW_LUT_JPEG_SHARED192_VERIFIED
     final_image=;extra=
-    regular "$jpeg/output-path.txt" && { IFS= read -r final_image && ! IFS= read -r extra && [ -z "$extra" ]; } < "$jpeg/output-path.txt" || fail OUTPUT_PATH_SAVE_FAILED
+    regular "$jpeg/album-output-path.txt" && { IFS= read -r final_image && ! IFS= read -r extra && [ -z "$extra" ]; } < "$jpeg/album-output-path.txt" || fail OUTPUT_PATH_SAVE_FAILED
     case "$final_image" in /mnt/mmc/DCIM/*/NXLI????.JPG) :;;*) fail OUTPUT_PATH_SAVE_FAILED;;esac
     printf 'native=%s\nsampling=422\nLUT=NATIVE_ISP_SHARED192\nentry=ONE_PROCESS_FOUR_STAGES\n' "$final_image" > "$job/output-files.txt" || fail OUTPUT_PATH_SAVE_FAILED
     exit 0

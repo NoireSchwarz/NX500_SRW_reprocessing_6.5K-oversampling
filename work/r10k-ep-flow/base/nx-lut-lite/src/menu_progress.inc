@@ -31,14 +31,14 @@ static int task_progress_open(int check){
  }
  dpy=XOpenDisplay(NULL);if(!dpy){launch_event("PROGRESS_XOPEN_FAILED","passive task overlay",-1,0);return 0;}
  XSetErrorHandler(ignore_error);XSynchronize(dpy,False);xerror=0;int connection_flags=fcntl(ConnectionNumber(dpy),F_GETFD);if(connection_flags<0||fcntl(ConnectionNumber(dpy),F_SETFD,connection_flags|FD_CLOEXEC)){XCloseDisplay(dpy);dpy=NULL;return 0;}palette();task_progress_issue_color=color("#EF8178",ink);int screen=DefaultScreen(dpy);
- XSetWindowAttributes attr;memset(&attr,0,sizeof attr);attr.override_redirect=True;attr.background_pixel=bg;attr.event_mask=ExposureMask;
+ XSetWindowAttributes attr;memset(&attr,0,sizeof attr);attr.override_redirect=False;attr.background_pixel=bg;attr.event_mask=ExposureMask;
  win=XCreateWindow(dpy,RootWindow(dpy,screen),0,288,720,192,0,CopyFromParent,InputOutput,CopyFromParent,CWOverrideRedirect|CWBackPixel|CWEventMask,&attr);
  XStoreName(dpy,win,"NX LUT Task Progress");unsigned long opaque=0xffffffffUL,hints[9]={1,0,0,0,0,0,0,0,0};
  XChangeProperty(dpy,win,XInternAtom(dpy,"_NET_WM_WINDOW_OPACITY",False),6,32,PropModeReplace,(unsigned char*)&opaque,1);
  Atom wm_hints=XInternAtom(dpy,"WM_HINTS",False);XChangeProperty(dpy,win,wm_hints,wm_hints,32,PropModeReplace,(unsigned char*)hints,9);
  canvas=win;gc=XCreateGC(dpy,win,0,NULL);XSetGraphicsExposures(dpy,gc,False);task_progress_visible=1;
  /* Match the existing menu: ordinary opaque window, map before drawing. */
- XMapRaised(dpy,win);XSync(dpy,False);
+ nxl_window_prepare(dpy,win,None,0);XMapRaised(dpy,win);XSync(dpy,False);
  task_progress.changed=1;task_progress_drawn=0;return 1;
 }
 static void task_progress_paint(void);

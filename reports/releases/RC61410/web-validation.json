@@ -1,0 +1,106 @@
+{
+  "passed": true,
+  "hardware_tested": false,
+  "browser": "Edge Chromium",
+  "checks": [
+    {
+      "api": "enabled",
+      "before": {
+        "width": 1080,
+        "height": 720,
+        "top": 126,
+        "left": 100,
+        "canvas_width": 720,
+        "canvas_height": 480,
+        "fit": "contain",
+        "full_api": false,
+        "expanded": false,
+        "viewport": [
+          1280,
+          850
+        ]
+      },
+      "full": {
+        "width": 1280,
+        "height": 850,
+        "top": 0,
+        "left": 0,
+        "canvas_width": 720,
+        "canvas_height": 480,
+        "fit": "contain",
+        "full_api": true,
+        "expanded": false,
+        "viewport": [
+          1280,
+          850
+        ]
+      }
+    },
+    {
+      "api": "absent",
+      "before": {
+        "width": 390,
+        "height": 260,
+        "top": 116,
+        "left": 0,
+        "canvas_width": 720,
+        "canvas_height": 480,
+        "fit": "contain",
+        "full_api": false,
+        "expanded": false,
+        "viewport": [
+          390,
+          844
+        ]
+      },
+      "full": {
+        "width": 390,
+        "height": 844,
+        "top": 0,
+        "left": 0,
+        "canvas_width": 720,
+        "canvas_height": 480,
+        "fit": "contain",
+        "full_api": false,
+        "expanded": true,
+        "viewport": [
+          390,
+          844
+        ]
+      }
+    },
+    {
+      "api": "denied",
+      "before": {
+        "width": 739.625,
+        "height": 493.078125,
+        "top": 126,
+        "left": 52.1875,
+        "canvas_width": 720,
+        "canvas_height": 480,
+        "fit": "contain",
+        "full_api": false,
+        "expanded": false,
+        "viewport": [
+          844,
+          390
+        ]
+      },
+      "full": {
+        "width": 844,
+        "height": 390,
+        "top": 0,
+        "left": 0,
+        "canvas_width": 720,
+        "canvas_height": 480,
+        "fit": "contain",
+        "full_api": false,
+        "expanded": true,
+        "viewport": [
+          844,
+          390
+        ]
+      }
+    }
+  ]
+}

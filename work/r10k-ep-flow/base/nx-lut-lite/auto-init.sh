@@ -14,9 +14,9 @@ LENS_EVIDENCE=0
 SAP_GUARD=$D/srw-sap-service.sh
 SAP_GUARD_SHA=25fe4b65714ff03d5c4ce2fe4ff66aa54b7f00f95ac4b1a9964c4646538de1f3
 OPS_SHA=c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d
-INIT_TEST_SHA=7706a4667e6d71e6288a5e6e853680e83c4d854b9d8ed4487ed40fa700e1d074
+INIT_TEST_SHA=3b3f6fcf87234b5a7e4692ce2ce87e21ef1e9ceb2b956b61aac26711b1598718
 LENS_CAPTURE_SHA=583dd0eab1984f1154f09128daa35e630d0b808e1e973f5eb38f3250578bbea3
-RUNNER_SHA=137487a71c660c37e11d31e0e59d4dcf2408f2cbd75664f1c6c7742f5e7d46c7
+RUNNER_SHA=b39229d3b0e9c4d14e4e5b1c926c6fe1a62e033086828b1be548ed62c19c29df
 regular(){ [ -f "$1" ] && [ ! -L "$1" ]; }
 absent(){ [ ! -e "$1" ] && [ ! -L "$1" ]; }
 hash(){ "$OPS" sha256 "$1"; }
@@ -65,11 +65,17 @@ regular "$D/process.sh" || fail PROCESS_HELPER_MISSING
 . "$D/process.sh"
 nxl_require_normal_mode || fail FACTORY_MODE_OR_PROCESS_VIEW_UNAVAILABLE
 absent /tmp/nx-lut-lite/auto-init-held || fail PREVIOUS_INIT_RETURN_UNCONFIRMED
+absent /tmp/nx-lut-lite/lutload.pending || fail LUT_RELOAD_RETURN_UNCONFIRMED
 [ -d "$OUT" ] && [ ! -L "$OUT" ] || fail REPORT_ROOT_UNAVAILABLE
 root=$OUT/INIT_AUTO_$token
 absent "$root" && mkdir "$root" || fail REPORT_ALREADY_EXISTS
 /bin/sh "$LOGPOLICY" mark "$root" "$token" || fail LOG_POLICY_OWNER_FAILED
 exec >> "$root/runner.log" 2>&1
+# Preserve the last bounded LUT handoff proof in this existing operation;
+# optional evidence cannot prevent or change original rendering.
+if regular /tmp/nx-lut-lite/session/reload.log;then
+ head -c 8192 /tmp/nx-lut-lite/session/reload.log > "$root/lut-reload-before.txt" || :
+fi
 sap_cleanup(){
  sap_exit=$?
  trap - 0
@@ -98,7 +104,21 @@ original_job=$(sed -n 's/^job_dir=//p' "$root/session-before.txt")
 rearmed=0
 case "$state" in
  COMPLETE|RESTART_REQUIRED) /bin/sh "$RUNNER" --rearm > "$root/session-rearm.txt" 2>&1 || fail PREVIOUS_TASK_RESOURCE_CHECK_FAILED;rearmed=1;;
- NEED_STILL_INIT|RETRYABLE) :;;
+ RETRYABLE)
+  # A consumed one-shot grant is not renewed by --new. In particular,
+  # a file-only EXIF failure happens after the native request has returned.
+  # Audit that round (or the recorded prior round for a zero-attempt retry)
+  # before the existing supervisor may renew its allocation permission.
+  prior_front=$(sed -n 's/^front_attempt=//p' "$root/session-before.txt")
+  prior_back=$(sed -n 's/^backend_attempt=//p' "$root/session-before.txt")
+  grant_ready=0
+  if regular "$D/state/p49-experiment.state" && [ "$(hash "$D/state/p49-experiment.state")" = 78412039b6f52f39910799837f72ea30ee86171a5c1ab5ddd03dc6c3a3d6bc1a ];then grant_ready=1;fi
+  if [ "$prior_front:$prior_back:$grant_ready" != 0:0:1 ];then
+   nxl_progress RAW_RESOURCE_CHECK RUNNING 'Checking resources for initialization'
+   /bin/sh "$RUNNER" --rearm > "$root/session-rearm.txt" 2>&1 || fail PREVIOUS_TASK_RESOURCE_CHECK_FAILED
+   rearmed=1
+  fi;;
+ NEED_STILL_INIT) :;;
  *) fail CURRENT_TASK_NOT_ELIGIBLE;;
 esac
 # A single explicit button owns resource verification and a fresh round.

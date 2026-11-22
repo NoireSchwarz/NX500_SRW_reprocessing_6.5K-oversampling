@@ -26,6 +26,7 @@ static const struct nxl_progress_stage nxl_progress_stages[]={
  {"CHECK_BACKEND2","Checking DMA / queues 5 of 16",73},{"CHECK_BACKEND3","Checking DMA / queues 9 of 16",78},
  {"CHECK_BACKEND4","Checking DMA / queues 13 of 16",83},{"CHECK_FINAL","Rechecking the allocator",90},
  {"CHECK_LOCKS","Renewing round locks",94},{"CHECK_GRANT","Renewing front permission",97},
+ {"JPEG_ALBUM_METADATA","Creating the new album preview",98},
  {"CHECK_COMMIT","Creating the fresh task",99}
 };
 /* AUTO INIT contains a resource-check subtransaction followed by the pipeline.
@@ -55,6 +56,7 @@ static const struct nxl_progress_stage nxl_auto_progress_stages[]={
  {"AUTO_EP_RETURN","Verifying code and reference return",92},
  {"PIPE_VERIFY","Verifying the saved JPEG",94},{"PIPE_RESTORE","Restoring the camera",96},
  {"PIPE_IDLE_VERIFY","Checking native idle state",97},{"AUTO_FINAL","Checking final Still readiness",98},
+ {"JPEG_ALBUM_METADATA","Creating the new album preview",98},
  {"AUTO_STOP_RECORD","Saving initialization evidence",99},
  {"AUTO_READY","Initialization complete",100},{"AUTO_STILL_COLD","Test saved - Still is not ready",100}
 };

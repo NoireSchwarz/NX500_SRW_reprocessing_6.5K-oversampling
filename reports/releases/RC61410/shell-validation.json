@@ -1,0 +1,140 @@
+{
+  "passed": true,
+  "hardware_tested": false,
+  "process_and_filesystem_endpoints_modeled": true,
+  "menu_scenarios": [
+    {
+      "case": "album5",
+      "calls": [
+        "server --web-stop",
+        "radio --prepare",
+        "server --hotspot-start",
+        "radio --confirm-profile",
+        "server --status",
+        "server --serve",
+        "server --status"
+      ],
+      "exit": 0
+    },
+    {
+      "case": "album24",
+      "calls": [
+        "radio --stock-album-ready",
+        "server --web-stop",
+        "server --hotspot-start-24",
+        "server --status",
+        "server --serve",
+        "server --status"
+      ],
+      "exit": 0
+    },
+    {
+      "case": "rvf24",
+      "calls": [
+        "server --rvf-serve",
+        "server --rvf-status"
+      ],
+      "exit": 0
+    },
+    {
+      "case": "rvf5_removed",
+      "calls": [],
+      "exit": 2
+    },
+    {
+      "case": "dirty_radio",
+      "calls": [
+        "radio --stock-album-ready"
+      ],
+      "exit": 1
+    },
+    {
+      "case": "wrong_band",
+      "calls": [
+        "radio --stock-album-ready",
+        "server --web-stop",
+        "server --hotspot-start-24",
+        "server --stop"
+      ],
+      "exit": 1
+    },
+    {
+      "case": "bad_width",
+      "calls": [
+        "server --web-stop",
+        "radio --prepare",
+        "server --hotspot-start",
+        "radio --confirm-profile",
+        "radio --stop"
+      ],
+      "exit": 1
+    },
+    {
+      "case": "fail_web5",
+      "calls": [
+        "server --web-stop",
+        "radio --prepare",
+        "server --hotspot-start",
+        "radio --confirm-profile",
+        "server --status",
+        "server --serve",
+        "server --status",
+        "radio --stop",
+        "server --stop",
+        "server --status"
+      ],
+      "exit": 1
+    },
+    {
+      "case": "fail_web24",
+      "calls": [
+        "radio --stock-album-ready",
+        "server --web-stop",
+        "server --hotspot-start-24",
+        "server --status",
+        "server --serve",
+        "server --status",
+        "server --stop",
+        "server --status"
+      ],
+      "exit": 1
+    },
+    {
+      "case": "stop_unconfirmed",
+      "calls": [
+        "radio --stock-album-ready",
+        "server --web-stop",
+        "server --hotspot-start-24",
+        "server --status",
+        "server --serve",
+        "server --status",
+        "server --stop"
+      ],
+      "exit": 1
+    },
+    {
+      "case": "stop_album",
+      "calls": [
+        "server --web-stop",
+        "radio --stop",
+        "server --stop"
+      ],
+      "exit": 0
+    },
+    {
+      "case": "stop_rvf",
+      "calls": [
+        "server --rvf-stop"
+      ],
+      "exit": 0
+    }
+  ],
+  "installer": {
+    "from_module": "RC6.14.9",
+    "to_revision": "release-0.4.0-rc6.14.10-wifi-three-modes",
+    "production_deploy_sha256": "d19c905156806b71f81786ace7a283dd2b2cc15e2d82c482ae13a26d3176fdd9",
+    "firmware_unmodified": true,
+    "media_backup_and_history_preserved": true,
+    "opt_remounted_read_only": true
+  }
+}

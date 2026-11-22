@@ -1,0 +1,40 @@
+{
+  "passed": true,
+  "actual_arm": true,
+  "hardware_tested": false,
+  "case_count": 25,
+  "cases": [
+    "CASE_OK 0 register=1 bye=1 jpeg_frames=2 heartbeat=1",
+    "CASE_OK 1 register=1 bye=0 jpeg_frames=0 heartbeat=0",
+    "CASE_OK 2 register=1 bye=1 jpeg_frames=0 heartbeat=0",
+    "CASE_OK 3 register=0 bye=0 jpeg_frames=0 heartbeat=0",
+    "CASE_OK 4 register=1 bye=1 jpeg_frames=0 heartbeat=0",
+    "CASE_OK 5 register=0 bye=0 jpeg_frames=0 heartbeat=0",
+    "CASE_OK 6 register=0 bye=0 jpeg_frames=0 heartbeat=0",
+    "CASE_OK 7 register=0 bye=0 jpeg_frames=0 heartbeat=0",
+    "CASE_OK 8 register=0 bye=0 jpeg_frames=0 heartbeat=0",
+    "CASE_OK 9 register=0 bye=0 jpeg_frames=0 heartbeat=0",
+    "CASE_OK 10 register=1 bye=1 jpeg_frames=2 heartbeat=1",
+    "CASE_OK 11 register=1 bye=1 jpeg_frames=0 heartbeat=0",
+    "CASE_OK 12 register=1 bye=1 jpeg_frames=0 heartbeat=0",
+    "CASE_OK 13 register=1 bye=1 jpeg_frames=0 heartbeat=0",
+    "CASE_OK 14 register=0 bye=0 jpeg_frames=21 heartbeat=0",
+    "CASE_OK 15 register=0 bye=0 jpeg_frames=0 heartbeat=0",
+    "CASE_OK 16 register=0 bye=0 jpeg_frames=0 heartbeat=0",
+    "CASE_OK 17 register=0 bye=0 jpeg_frames=0 heartbeat=0",
+    "CASE_OK 18 register=0 bye=0 jpeg_frames=0 heartbeat=0",
+    "CASE_OK 19 register=0 bye=0 jpeg_frames=0 heartbeat=0",
+    "CASE_OK 20 register=0 bye=0 jpeg_frames=0 heartbeat=0",
+    "CASE_OK 21 register=0 bye=0 jpeg_frames=0 heartbeat=0",
+    "CASE_OK 22 register=0 bye=0 jpeg_frames=0 heartbeat=0",
+    "CASE_OK 23 register=0 bye=0 jpeg_frames=0 heartbeat=0",
+    "CASE_OK 24 register=0 bye=0 jpeg_frames=0 heartbeat=0"
+  ],
+  "coverage": [
+    "stock 2.4 GHz",
+    "5 GHz rejected",
+    "dirty radio refused",
+    "unavailable QR identity",
+    "browser close and Wi-Fi stop"
+  ]
+}

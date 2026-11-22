@@ -8,11 +8,13 @@ ENGINE=$D/lut.sh
 REFRESH=$D/bin/nxl-native-refresh.arm
 NATIVE_REFRESH_SHA=3a7b272e3be9ad81996c823f17f33d84e990a85eff0f252785db7d575a0ceac7
 IDLE=$D/bin/nxl-lutidle.arm
-LUT_IDLE_SHA=295fb39359b29739801fd69f71aaaa12c731efd1ee25d64c07c71c91fd94ffb3
+LIFE=$D/bin/nxl-gamma-life.arm
+GAMMA_LIFE_SHA=71c8e4c25e6f266491418929bd7767cba87bea67434d20b6cd9fa5fcaedbda19
+LUT_IDLE_SHA=ca3d0c2e4ca05a45f5f6b145d7ce5a709bc48e854f02519e361123810f985f42
 OPS_SHA=c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d
-GAMMA_RELOAD_SHA=5edf35e0ba839f198d18049e61f4b843d49507a59758e527a25204708dae9d6b
+GAMMA_RELOAD_SHA=8ba4e7ae871445003e4624adb32a5116186d1c961f7c112c8a2ed7616b4b709e
 USB_GUARD_SHA=61bf59b3bf4ccba775525e40024d0a42b86cffd22a1b94d9a431a8102f266918
-ENGINE_SHA=2d5c5d0c64242691413e41c8d4c833dbf864695e0d9c9c03a164337aff3345d2
+ENGINE_SHA=c579e7ccaeace90da7a7cadc3041c5494a8b4d2921ea131234c348c4fb5b61cc
 fail(){ printf 'NXL_GAMMA_RELOAD1\nmode=FACTORY\nphase=FAILED\nreason=%s\nepoch=0\nqueued_epoch=0\nqualified=0\napplies=0\ninvalidations=0\nqueues=0\nfault=0\nend=NXL_GAMMA_RELOAD_END1\n' "$1";exit 1; }
 case "${1:-}" in status|lift|log|restore|toggle) :;;*) exit 2;;esac
 [ -f "$OPS" ] && [ ! -L "$OPS" ] && [ -x "$OPS" ] && [ "$("$OPS" sha256 "$OPS")" = "$OPS_SHA" ] || fail GAMMA_COMPONENT_IDENTITY_FAILED
@@ -64,6 +66,24 @@ gamma_confirm(){
  /bin/sh "$ENGINE" reload > "$RUN/gamma-lut-reload.log" 2>&1 || fail GAMMA_LUT_RELOAD_UNCONFIRMED
  cat "$RUN/gamma-confirm.txt"
 }
+# Reconcile only on an explicit user control request, never on status/startup.
+# A pending retirement must finish a native factory transaction and LUT cleanup
+# before any subsequent Log request. Preserve all failures for the next retry.
+[ -f "$LIFE" ] && [ ! -L "$LIFE" ] && [ -x "$LIFE" ] && [ "$("$OPS" sha256 "$LIFE")" = "$GAMMA_LIFE_SHA" ] || fail GAMMA_LIFECYCLE_IDENTITY_FAILED
+"$LIFE" reconcile > "$RUN/gamma-life-reconcile.txt" 2>&1 || fail GAMMA_LIFECYCLE_RECONCILE_BLOCKED
+if grep -qx 'outcome=RESTORE_FRESH_REQUIRED' "$RUN/gamma-life-reconcile.txt" || grep -qx 'outcome=RESTORE_REQUIRED' "$RUN/gamma-life-reconcile.txt";then
+ if grep -qx 'outcome=RESTORE_FRESH_REQUIRED' "$RUN/gamma-life-reconcile.txt";then recover=restore-fresh;else recover=restore;fi
+ "$GAMMA" "$recover" > "$RUN/gamma-life-factory-request.txt" || { cat "$RUN/gamma-life-factory-request.txt";exit 1; }
+ gamma_queue_confirm FACTORY FACTORY_QUEUED
+ engine_ok || fail GAMMA_LIFECYCLE_FACTORY_RESTORED_LOOK_CLEANUP_REQUIRED
+ NXL_LUT_DEFER_RELOAD=0 /bin/sh "$ENGINE" clean-log-release > "$RUN/gamma-life-look-cleanup.txt" 2>&1 || fail GAMMA_LIFECYCLE_LOOK_CLEANUP_UNCONFIRMED
+ gamma_queue_confirm FACTORY FACTORY_QUEUED
+ cat "$RUN/gamma-confirm.txt" > "$RUN/gamma-life-confirm.txt"
+ "$LIFE" complete > "$RUN/gamma-life-complete.txt" 2>&1 || fail GAMMA_LIFECYCLE_FACTORY_VERIFICATION_FAILED
+ # A toggle from an unknown stale state ends safely at Factory. A second
+ # deliberate toggle enables Log; explicit 'log' may continue immediately.
+ if [ "$1" != log ];then cat "$RUN/gamma-life-confirm.txt";exit 0;fi
+fi
 if [ "$1" = toggle ];then
  if [ -e "$RUN/clean-log.policy" ] || [ -L "$RUN/clean-log.policy" ];then set -- restore
  else

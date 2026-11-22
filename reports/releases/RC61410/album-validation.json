@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "hardware_tested": false,
+  "actual_arm": true,
+  "cases": [
+    "delayed 2437 MHz",
+    "5240 MHz refused",
+    "native start failure",
+    "USB interruption"
+  ]
+}

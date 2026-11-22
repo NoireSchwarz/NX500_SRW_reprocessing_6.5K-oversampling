@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "hardware_tested": false,
+  "version": "0.4.0-RC6.14.10",
+  "archive": "NX_LUT_Lite_0.4.0_RC6.14.10_full.zip",
+  "sha256": "6cdd2626d570a68994e04af3b3fc5b4fa9d31a744b5ed01d888c8cf0ce311175",
+  "bytes": 33704596,
+  "archive_entries_verified": 460,
+  "module_manifest_sha256": "71e00a551e3ac16f26869c0af8f01af0d936aa6689ae44006090043764292242"
+}

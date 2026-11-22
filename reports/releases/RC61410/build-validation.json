@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "hardware_tested": false,
+  "version": "0.4.0-RC6.14.10",
+  "revision": "release-0.4.0-rc6.14.10-wifi-three-modes",
+  "prior_archive_sha256": "179eeb67354f1339f01840676bb7ab704fa5649528e61af7f49b3f342777ffd7",
+  "module_manifest_sha256": "71e00a551e3ac16f26869c0af8f01af0d936aa6689ae44006090043764292242",
+  "modes": [
+    "5ghz_gallery_48_40",
+    "stock_24ghz_gallery",
+    "stock_24ghz_rvf"
+  ],
+  "identity_checks": 91,
+  "mod_changes": [
+    "auto-init.sh",
+    "bin/nxl-menu",
+    "bin/nxl-wifi-radio",
+    "bin/nxl-wifi-server",
+    "data/wifi.manifest",
+    "finish-srw.sh",
+    "memory-test.sh",
+    "rearm-session.sh",
+    "restore-camera.sh",
+    "wifi.sh"
+  ]
+}

@@ -11,6 +11,7 @@
 #include "ui_i18n.h"
 #include <time.h>
 #include <X11/Xlib.h>
+#include "menu_window_policy.h"
 #include "menu_child_watch.h"
 static Display *dpy;
 static Window win, previous;
@@ -35,6 +36,9 @@ static int video_picker_open;
 static int detail_open_log(void);
 static int detail_open_current(void);
 static int detail_visible;
+static int wifi_visible;
+static int wifi_open(void),wifi_poll(void),wifi_key(unsigned,int),wifi_pointer(XEvent*);
+static void draw_wifi(void),wifi_cleanup(void);
 static pid_t video_child;static int video_command;static void video_menu_start(int);
 static unsigned long bg, ink, accent, dark, button_bg;
 static unsigned long line_color,muted,panel,color_tab,selection_colors[8];
@@ -394,12 +398,14 @@ static void draw_srw(void){
 /* X focus notifications are not confirmation/cancel input in a modal.
  * Refreshes and native updates must not dismiss an open selector. */
 static void menu_focus_out(const XFocusChangeEvent*e){
- if(detail_visible||lut_picker_open||video_picker_open||video_child>0)return;
+ if(e->window!=win)return; /* Child-dialog focus events do not close the parent. */
+ if(wifi_visible||detail_visible||lut_picker_open||video_picker_open||video_child>0)return;
  if(e->mode!=NotifyNormal||e->detail==NotifyInferior)return;
  launch_event("MENU_FOCUS_OUT","external top-level focus",e->mode,e->detail);action=0;quitting=1;
 }
 static void draw(void) {
-    if(!detail_visible&&!lut_picker_open&&!video_picker_open)menu_modal_input_release();
+    if(!wifi_visible&&!detail_visible&&!lut_picker_open&&!video_picker_open)menu_modal_input_release();
+    if(wifi_visible){draw_wifi();return;}
     if(detail_visible){detail_draw();return;}
 
     if(left_panel==2){draw_video();return;}
@@ -509,6 +515,7 @@ static void key_direct(unsigned code,int value){
 }
 
 
+#include "menu_wifi.inc"
 #include "ev_triple.h"
 static struct nxl_ev_taps menu_ev_taps;
 static struct nxl_shortcut menu_shortcut;
@@ -525,11 +532,12 @@ static void key(unsigned code,int value){
   if(value!=2)down[code]=value!=0;
   memset(&menu_ev_taps,0,sizeof menu_ev_taps);combo_block=menu_shortcut.chord.ev||menu_shortcut.chord.ael||menu_shortcut.wifi;
   if(command==NXL_TOGGLE_VLOG){
-   if(detail_child||detail_dirty||rearm_child||video_child)strcpy(notice,"設定更新中，請稍候");
+   if(wifi_visible||wifi_child||detail_child||detail_dirty||rearm_child||video_child)strcpy(notice,"設定更新中，請稍候");
    else video_menu_start(24);
-  }
+  }else if(command==NXL_OPEN_WIFI){if(wifi_visible)wifi_close();else wifi_open();}
   return;
  }
+ if(wifi_key(code,value))return;
  if(code==NXL_EV){
   if(value==1)down[code]=1;
   if(down[NXL_AEL]||down[NXL_WIFI]||combo_block){memset(&menu_ev_taps,0,sizeof menu_ev_taps);if(!value)down[code]=0;return;}
@@ -562,7 +570,7 @@ static void toast_timed(const char *message, int success, unsigned long duration
     XSetErrorHandler(ignore_error); palette();
     XSetWindowAttributes attr; memset(&attr, 0, sizeof attr);
     int screen = DefaultScreen(dpy);
-    attr.override_redirect = True; attr.background_pixel = bg;
+    attr.override_redirect = False; attr.background_pixel = bg;
     attr.event_mask=ExposureMask;
     win = XCreateWindow(dpy, RootWindow(dpy, screen), 0, 408, 720, 72, 0,
         CopyFromParent, InputOutput, CopyFromParent, CWOverrideRedirect|CWBackPixel|CWEventMask, &attr);
@@ -572,7 +580,7 @@ static void toast_timed(const char *message, int success, unsigned long duration
     XChangeProperty(dpy,win,XInternAtom(dpy,"_NET_WM_WINDOW_OPACITY",False),6,32,PropModeReplace,(unsigned char *)&opaque,1);
     XChangeProperty(dpy,win,wm_hints,wm_hints,32,PropModeReplace,(unsigned char *)hints,9);
     canvas=win;gc=XCreateGC(dpy,canvas,0,NULL);XSetGraphicsExposures(dpy,gc,False);
-    XMapRaised(dpy,win);XSync(dpy,False);
+    nxl_window_prepare(dpy,win,None,0);XMapRaised(dpy,win);XSync(dpy,False);
     fill(0,0,720,72,bg); XSetForeground(dpy,gc,success ? accent : ink);
     text(24,24,message);XSync(dpy,False);
     unsigned long start=ticks();
@@ -768,7 +776,7 @@ static int inspect(void) {
 int main(int argc,char **argv) {
     /* Installer probe: no firmware, X11, input, lock or backend access. */
     if(argc>1 && !strcmp(argv[1],"--version")) {
-        puts("NX_LUT_MENU_VERSION=" NXL_DEMO_VERSION);puts("NX_LUT_RELEASE=0.4.0-RC5; TRADITIONAL_CHINESE; R8F_M3_PARAMS; VLOG_LIBRARY_VID_ONLY");
+        puts("NX_LUT_MENU_VERSION=" NXL_DEMO_VERSION);puts("NX_LUT_RELEASE=0.4.0-RC6.14.10; TRADITIONAL_CHINESE; R8F_M3_PARAMS; VLOG_LIBRARY_VID_ONLY");
         puts("MENU_STATUS_REVISION=STDOUT_STATUS_ONLY_R3");
         puts("MENU_TEST_REVISION=MENU_FRESH_FULL_TEST_R4");
         puts("MENU_CAMERA_RECOVERY=CAMERA_RECOVERY_R5");
@@ -780,6 +788,9 @@ int main(int argc,char **argv) {
     }
     if (!nxl_supported()) { fputs("NX500 1.12 required\n",stderr); return 1; }
     if (!getenv("DISPLAY")) setenv("DISPLAY",":0",0);
+    if(argc>1&&!strcmp(argv[1],"--fast-start-backup")){toast_timed("BACKING UP BOOT IMAGE - KEEP POWER",1,9000);return 0;}
+    if(argc>1&&!strcmp(argv[1],"--fast-start-capture")){toast_timed("FAST START: WAIT 5 MINUTES / KEEP POWER",1,10000);return 0;}
+    if(argc>1&&!strcmp(argv[1],"--fast-start-ready")){toast_timed("NX LUT FAST START READY",1,4000);return 0;}
     if(argc>1 && !strcmp(argv[1],"--demo-camera-restoring")){toast_timed("RESTORING OEM CAMERA - PLEASE WAIT",1,5000);return 0;}
     if(argc>1 && !strcmp(argv[1],"--demo-camera-restored")){toast_timed("REAL OEM LIVEVIEW RESTORED",1,10000);return 0;}
     if(argc>1 && !strcmp(argv[1],"--demo-camera-restore-failed")){toast_timed("RECOVERY UNCONFIRMED - CHECK LOGS",0,12000);return 0;}
@@ -798,6 +809,7 @@ int main(int argc,char **argv) {
     if(argc>1 && !strcmp(argv[1],"--demo-busy")){toast_timed("DEMO51 SESSION BUSY",0,5000);return 0;}
     if (argc>1 && !strcmp(argv[1],"--inspect")) return inspect();
     int quick_lut=argc>1&&!strcmp(argv[1],"--quick-lut");
+    int wifi_shortcut=argc>1&&!strcmp(argv[1],"--wifi");
     int vlog_shortcut=argc>1&&!strcmp(argv[1],"--vlog-toggle");
     int video_shortcut=argc>1 && !strcmp(argv[1],"--video-toggle");
     int lock=nxl_lock("/tmp/nx-lut-lite/menu.lock");
@@ -865,7 +877,7 @@ int main(int argc,char **argv) {
     if (DisplayWidth(dpy,screen)<720 || DisplayHeight(dpy,screen)<480) { XCloseDisplay(dpy); return 3; }
     palette();
     XSetWindowAttributes attr; memset(&attr,0,sizeof attr);
-    attr.override_redirect=True; attr.background_pixel=bg;
+    attr.override_redirect=False; attr.background_pixel=bg;
     attr.event_mask=ExposureMask|KeyPressMask|KeyReleaseMask|ButtonPressMask|ButtonReleaseMask|ButtonMotionMask|FocusChangeMask;
     win=XCreateWindow(dpy,RootWindow(dpy,screen),0,0,720,480,0,CopyFromParent,InputOutput,CopyFromParent,
         CWOverrideRedirect|CWBackPixel|CWEventMask,&attr);
@@ -873,12 +885,15 @@ int main(int argc,char **argv) {
     unsigned long opaque=0xffffffffUL;
     XChangeProperty(dpy,win,XInternAtom(dpy,"_NET_WM_WINDOW_OPACITY",False),6,32,PropModeReplace,(unsigned char *)&opaque,1);
     canvas=win;gc=XCreateGC(dpy,win,0,NULL); XSetGraphicsExposures(dpy,gc,False);
+    nxl_window_prepare(dpy,win,None,1);nxl_window_place(dpy,win,0,0,720,480,ticks());
     XMapRaised(dpy,win); XSync(dpy,False); XSetInputFocus(dpy,win,RevertToPointerRoot,CurrentTime);
-    fds[0].fd=ConnectionNumber(dpy); nxl_help_reset(&help,ticks());if(quick_lut)detail_open_current();draw();launch_event("MENU_WINDOW_SHOWN",argc>1?argv[1]:"open",0,0);
+    fds[0].fd=ConnectionNumber(dpy); nxl_help_reset(&help,ticks());if(quick_lut)detail_open_current();if(wifi_shortcut)wifi_open();draw();launch_event("MENU_WINDOW_SHOWN",argc>1?argv[1]:"open",0,0);
     for(;;){while (!quitting) {
+        nxl_window_tick(dpy,ticks());
         while (XPending(dpy) && !quitting) {
             XEvent ev; XNextEvent(dpy,&ev);
             if (ev.type==Expose) draw();
+            if(wifi_pointer(&ev)){if(!quitting)draw();continue;}
             if(detail_pointer(&ev)){if(!quitting)draw();continue;}
             if(video_picker_pointer(&ev)){if(!quitting)draw();continue;}
             if(lut_picker_pointer(&ev)){if(!quitting)draw();continue;}
@@ -938,6 +953,7 @@ int main(int argc,char **argv) {
             }
         }
         if (quitting) break;
+        if(wifi_poll())draw();
         if(menu_ev_tick())draw();
         if(detail_poll())draw();
         if(poll_menu_rearm())draw();
@@ -971,10 +987,13 @@ int main(int argc,char **argv) {
         for(unsigned n=0;n<512&&XPending(dpy);n++){XEvent old;XNextEvent(dpy,&old);}
         load_raw_status();draw();launch_event("TASK_RETURNED_TO_EXISTING_MENU","same window and focus retained",0,0);continue;
     }break;}
+    wifi_cleanup();
     menu_modal_input_release();
     for (int i=1;i<=2;++i) if (fds[i].fd>=0) close(fds[i].fd);
     if(!browser_save())fputs("UI_STATE_SAVE_FAILED\n",stderr);
     restore_and_close();
+    if(wifi_exit_unconfirmed)toast_timed("圖傳停止未確認，請重新開機",0,3500UL);
+    else if(wifi_native_start_failed)toast_timed("原廠圖傳未就緒",0,2600UL);
     int rc=action==3 ? trace_background(lock) : action==6 ? memory_background(lock,0) : action==7 ? memory_background(lock,1) : action==9 ? memory_background(lock,2) : action==10 ? memory_background(lock,3) : action==11 ? memory_background(lock,4) : action ? run_action() : 0;
     unlink("/tmp/nx-lut-lite/menu.pid"); close(lock); return rc;
 }
