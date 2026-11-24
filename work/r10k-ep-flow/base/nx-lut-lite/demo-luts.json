@@ -1,0 +1,35 @@
+{
+  "format": "NXDEMO49_KNOWN_LUTS1",
+  "space": "CrCbY-BT601-full-v1",
+  "source_bytes": 19712,
+  "strength_policy": "existing live effective_strength and validated cache; no global cache installation",
+  "looks": {
+    "fuji_provia100f": {
+      "source_sha256": "efa7b4a4620b7f11371e585871ec99d5406b850996285d0ffc2cea3644a1e928",
+      "effective_sha256": {
+        "25": "230826945d3d9813e09a37670744909f9869922556a005bc5f6b90ddb7389f98",
+        "50": "7fe9a03f832a7c62c748059bfb3d953307d08ceed5d267fc47cb27fca580c041",
+        "75": "715fe1e96631ae5d2a00a335108ab55445e24737ea60215a8aa0042cb9279d47",
+        "100": "efa7b4a4620b7f11371e585871ec99d5406b850996285d0ffc2cea3644a1e928"
+      }
+    },
+    "kodak_portra400": {
+      "source_sha256": "5ea7bfd6367ce4830ab9104e976040ab6ff163fe07bd38aa8620bf252b34d7db",
+      "effective_sha256": {
+        "25": "1823069f74633bc7096862881eb8b39f9a15a7dc207016f863c18c4788a683c2",
+        "50": "bc974bf0d1adf85eaa207e1c12131eb962fef43f4eb40fd7b2ddbc70cb93a47a",
+        "75": "7808133ca596d061f4a61c4fb42f758ca7fdbb28ef6f65ffd0a4cc5489c58de9",
+        "100": "5ea7bfd6367ce4830ab9104e976040ab6ff163fe07bd38aa8620bf252b34d7db"
+      }
+    },
+    "mono_hp5": {
+      "source_sha256": "f773afdf8f5e22329df2a3ac29ceddd7ae41b831f87457de03a1ff923920b874",
+      "effective_sha256": {
+        "25": "8a1acb5315531358a29c16a1b06629672ce58f41e9dbe54c53def94b2b16e997",
+        "50": "f09f72032570dd5b0c4d2cb8a746cdf1ac51ffc5f263218de7af68cdd23b1d87",
+        "75": "b954cc5d05231c20e6df656f966273439d9e27c342832026fe51dbeb0e522aac",
+        "100": "f773afdf8f5e22329df2a3ac29ceddd7ae41b831f87457de03a1ff923920b874"
+      }
+    }
+  }
+}

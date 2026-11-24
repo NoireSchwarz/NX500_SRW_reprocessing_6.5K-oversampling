@@ -22,7 +22,7 @@ static const struct{const char*path;unsigned size;uint32_t hash;}trial_files[]={
 {"/usr/bin/wlan.sh",7916u,0xf753e40du},
 {"/usr/bin/iwlist",26532u,0x0d39984eu},
 {"/usr/bin/mlanutl",183816u,0x03796f40u},
-{"/opt/usr/nx-lut-lite/bin/nxl-wifi-server",169076u,0x985c03e1u},
+{"/opt/usr/nx-lut-lite/bin/nxl-wifi-server",148188u,0xe513e9c6u},
 {NXL_AP_DAEMON,AP_STOCK_BYTES,AP_STOCK_FNV},
 };
 

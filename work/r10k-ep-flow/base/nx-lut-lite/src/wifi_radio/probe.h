@@ -27,12 +27,6 @@ static char error_reason[96];
 static void note(const char*event){printf("WIFI5G t=%llu phase=%d %s\n",monotime(),trial.phase,event);fflush(stdout);}
 static int failed(const char*s){snprintf(error_reason,sizeof error_reason,"%s",s);note(s);return 0;}
 /* stdout stays in RAM, including early USB insertion and native helper output. */
-static void export_log(void){
- if(physical_usb()!=0||!trial.report[0])return;
- int src=open("/tmp/nx-lut-lite/wifi-radio/controller.log",O_RDONLY|O_CLOEXEC|O_NOFOLLOW);if(src<0)return;
- char path[640];snprintf(path,sizeof path,"%s/probe.log",trial.report);int out=open(path,O_WRONLY|O_CREAT|O_TRUNC|O_CLOEXEC|O_NOFOLLOW,0600);if(out<0){close(src);return;}
- char b[4096];size_t total=0;ssize_t n;while(total<262144&&physical_usb()==0&&(n=read(src,b,sizeof b))>0){if(write(out,b,(size_t)n)!=n)break;total+=(size_t)n;}if(physical_usb()==0)fsync(out);close(out);close(src);
-}
 static int state_save(void){
  trial.magic=0x35475064;trial.heartbeat=monotime();trial.checksum=0;uint32_t h=2166136261u;const unsigned char*b=(const unsigned char*)&trial;for(unsigned i=0;i<sizeof trial;i++)h=(h^b[i])*16777619u;trial.checksum=h;
  char p[160];snprintf(p,sizeof p,TRIAL_STATE ".%ld",(long)getpid());int f=open(p,O_WRONLY|O_CREAT|O_EXCL|O_CLOEXEC|O_NOFOLLOW,0600);if(f<0)return 0;

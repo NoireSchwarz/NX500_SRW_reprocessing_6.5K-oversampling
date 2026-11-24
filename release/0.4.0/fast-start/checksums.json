@@ -1,0 +1,20 @@
+{
+  "nxl-full040/activation/info.tg": "84d6fd76e45d5bca43e62816bdf4173d677f4860fbe507372ee4a11f608c4098",
+  "nxl-full040/activation/install.sh": "39a96611bb618956558e3c2ddea85f82a9a1ce9d13c8eb3db0f2bbbad2723c60",
+  "nxl-full040/activation/nx_cs.adj": "fd4a6c44a1c15fb4fdc4d5bd393841689f82f37ff78fc14b59d25bb9b56a4ca2",
+  "nxl-full040/capture.conf": "3c2a29985fe89416c29b45ee425464e46a181c798c3eb3a45a6d23b70f004bf8",
+  "nxl-full040/claim.arm": "f5702a02ae73f2b375f3ee8ff30417e2c952631ff8c9f8fd3a5d9a78acc79036",
+  "nxl-full040/dispatch.sh": "3fa3edf734664df4a038438321b95668a6fbf95d74877bdccdd99302eae6baed",
+  "nxl-full040/fileops.arm": "c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d",
+  "nxl-full040/full-menu.sh": "0655ae8a221a71e8a684de78a9df12c59bc7ae301b090bb1c145e95fa53563c4",
+  "nxl-full040/launch.sh": "172c7eda83ba6f3e137b97b205b98f8c7eb101244580c41d4b1c8da4505854a6",
+  "nxl-full040/lcd-observe.arm": "fafbce9b63da331e62a47bd3952a11fbe9638dd37f8305647f3297755ff7cd93",
+  "nxl-full040/loader-observe.sh": "2481e6baf564393ed4eb91f4043ca266572ce81de6451a85aad10ec4cfef3dd7",
+  "nxl-full040/nxl-eye-af.so": "e167e84a6be88b2fc21da13a5952a923ec7a032cb37612a11e047e60dc6c2e6e",
+  "nxl-full040/nxl-menu": "493010e458d81073e69f8634ec88ea1f03ba0ee910da17a90fae70bb82abbe57",
+  "nxl-full040/readout": "bded257edb584f914f0dc2a0d9ea5f84949e2cc89b19ce31d2975ba5e9342bc0",
+  "nxl-full040/wake-entry": "9b3154abf884f18b4e3b7009b2a00385b01c9ed8cbab6ead4a517f5b5bb61a18",
+  "nxl-full040/wake-master": "80fe8ac29bca0e4a2e9f180137b0dad1b71e9f9f4971ee6743740bbc3f85bb66",
+  "nxl-full040/wake-unit": "af9f1ae1cae3fc18a1cb36145fed59ccf1930f37edb1e2d0e3de54da15472774",
+  "nxl-full040/worker.sh": "690c3e78b06d9437c96678f4c8afd1dc2e3ecaadce6a719a40b854d39da02748"
+}

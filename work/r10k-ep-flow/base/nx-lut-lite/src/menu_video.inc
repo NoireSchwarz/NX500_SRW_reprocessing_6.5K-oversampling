@@ -9,7 +9,7 @@ static struct nxl_probe_status probe_status;
 static void video_menu_start(int command){
  if(video_child>0){strcpy(notice,"VIDEO UPDATE RUNNING - PLEASE WAIT");return;}
  if(command&&(rearm_child>0||lens_child>0)){strcpy(notice,"WAIT FOR CURRENT MENU ACTION");return;}
- const char*mode=command==40?"video-toggle":command==30?"color-observe-toggle":command==31?"color-observe-status":command==20?"gamma-lift":command==21?"gamma-log":command==22?"gamma-restore":command==23?"gamma-status":command==24?"gamma-toggle":command==1?"video-2k":command==2?"video-uhd":command==3?"video-full":command==4?"video-crop80":command==10?"video-probe-start":command==11?"video-probe-stop":command==12?"video-probe-mark":command==13?"video-probe-status":"video-status";int fd;pid_t p=backend(mode,"",&fd);if(p<0){strcpy(notice,"VIDEO CONTROL COULD NOT START");return;}
+ const char*mode=command==30?"color-observe-toggle":command==31?"color-observe-status":command==20?"gamma-lift":command==21?"gamma-log":command==22?"gamma-restore":command==23?"gamma-status":command==24?"gamma-toggle":command==1?"video-2k":command==2?"video-uhd":command==3?"video-full":command==4?"video-crop80":command==10?"video-probe-start":command==11?"video-probe-stop":command==12?"video-probe-mark":command==13?"video-probe-status":"video-status";int fd;pid_t p=backend(mode,"",&fd);if(p<0){strcpy(notice,"VIDEO CONTROL COULD NOT START");return;}
  video_child=p;video_fd=fd;video_command=command;video_used=0;video_output[0]=0;video_timeout_sent=0;video_started=ticks();int flags=fcntl(fd,F_GETFL);if(flags<0||fcntl(fd,F_SETFL,flags|O_NONBLOCK)<0){close(fd);video_fd=-1;kill(p,SIGTERM);}
  strcpy(notice,command>=30?"READING COLOR PARAMETERS":command>=20?"UPDATING NATIVE ISP GAMMA":command>=10?"UPDATING STAGE COUNTERS":command?"CHANGING VIDEO OUTPUT":"READING VIDEO OUTPUT");
 }
@@ -17,10 +17,6 @@ static void video_menu_read(void){for(unsigned i=0;video_fd>=0&&i<16;i++){char b
 static int video_menu_poll(void){
  if(video_child<=0)return 0;video_menu_read();if(!video_timeout_sent&&ticks()-video_started>42000UL){kill(video_child,SIGTERM);video_timeout_sent=1;}
  int status;pid_t got=waitpid(video_child,&status,WNOHANG);if(!got||(got<0&&errno==EINTR))return 0;video_menu_read();if(video_fd>=0)close(video_fd);video_fd=-1;video_child=0;
- if(video_command==40){
-  int ok=got>0&&WIFEXITED(status)&&!WEXITSTATUS(status)&&strstr(video_output,"NXL_LUT_RELOAD_CONFIRMED1 EOF14 DMA7 ACCESS_CLEAR");
-  refresh_lut_runtime();strcpy(notice,ok?"視頻LUT已裝載，半按快門返回":"裝載未確認，請查看運行記錄");return 1;
- }
  if(video_command>=30){
   struct nxl_color_status parsed_status;int parsed=nxl_color_parse(video_output,&parsed_status),ok=got>0&&WIFEXITED(status)&&!WEXITSTATUS(status)&&parsed;
   if(!parsed){strcpy(notice,"COLOR RESPONSE FAILED - CHECK STATUS");return 1;}
@@ -40,7 +36,9 @@ static int video_menu_poll(void){
   gamma_command_failed=!ok;
   if(video_command==21||video_command==22||video_command==24)refresh_lut_runtime();
   if(ok&&detail_visible&&(video_command==21||video_command==22||video_command==24))detail_open_current();
-  if(!parsed)strcpy(notice,"GAMMA RESPONSE INVALID - CHECK GAMMA LOG");
+  if(!ok&&strstr(video_output,"NXL_GAMMA_CONFIGURED1\n"))strcpy(notice,
+     strstr(video_output,"ERR LUT_RELOAD_RESTART_REQUIRED\n")?"曲線已切換，請重新開機":"曲線已切換，LUT重載未確認");
+  else if(!parsed)strcpy(notice,"GAMMA RESPONSE INVALID - CHECK GAMMA LOG");
   else if(!ok)snprintf(notice,sizeof notice,"%s",gamma_status.reason);
   else if(gamma_status.phase==5)strcpy(notice,"GAMMA NATIVE FAILURE - SELECT TO RESTORE");
   else if(gamma_status.phase==2||gamma_status.phase==1)strcpy(notice,"GAMMA WAIT: ENTER VIDEO; OK REQUESTS FACTORY");
@@ -118,7 +116,7 @@ static void video_confirm(void){
 }
 static void draw_video(void){
  help.visible=0;help.suppressed=1;fill(0,0,720,480,bg);XSetForeground(dpy,gc,ink);text(24,20,"影片設定");text(552,20,"MENU 返回");
- XSetForeground(dpy,gc,muted);text(24,60,"NX LUT Lite 0.4.0 RC6.14.10");frame(18,96,684,298,line_color);draw_sidebar();
+ XSetForeground(dpy,gc,muted);text(24,60,"NX LUT Lite 0.4.0 RC6.14.11");frame(18,96,684,298,line_color);draw_sidebar();
  int cursor=release_video_index(),first=cursor/5*5;
  for(int row=0;row<5&&first+row<release_video_count();row++){
   int index=first+row,id=release_video_rows[index],y=104+row*56;

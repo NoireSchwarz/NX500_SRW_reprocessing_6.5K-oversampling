@@ -1,0 +1,4 @@
+#!/bin/sh
+# Leave the card-backed script before observing the camera. The observer runs on root.
+cd / || exit 1
+exec /bin/sh /usr/local/lib/nxl-full040/readout

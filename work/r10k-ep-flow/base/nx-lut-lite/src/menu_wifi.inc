@@ -148,8 +148,6 @@ static int wifi_poll(void){
   if(wifi_is_rvf()&&!wifi_close_requested&&!wifi_native_released)wifi_native_focus(0);
   wifi_qr_valid=0;wifi_flow_ready=wifi_native_released;strcpy(notice,strstr(wifi_output,"SRW_BUSY")?"顯影中，請稍後再連線":strstr(wifi_output,"USB_")?"請先安全斷開 USB":strstr(wifi_output,"CHECKSUM_TOOL_")?"圖傳校驗工具無法使用":strstr(wifi_output,"MISMATCH")?"圖傳檔案校驗失敗，請重新安裝":strstr(wifi_output,"HOTSPOT_ORIGINAL_NETWORK_BUSY")?"原廠無線功能使用中，請先關閉":"熱點未啟動，請按 Wi-Fi 停止");
  }
- if(!result_valid&&wifi_used)launch_output("WIFI_STDERR",wifi_output,wifi_used);
- char event[128];snprintf(event,sizeof event,"%s ap=%d owned=%d security=%s",result_valid?wifi_status.reason:"INVALID_RESULT",result_valid?wifi_status.ap_state:-1,result_valid?wifi_status.owned:-1,result_valid?(wifi_status.security==0?"none":wifi_status.security==1?"wpa2":"unknown"):"unknown");launch_event("WIFI_BACKEND",event,wifi_exit,0);
  if(wifi_close_requested){if(command==3){if(!wifi_exit&&result_valid&&!wifi_status.running&&!wifi_status.owned){action=0;quitting=1;}else if(wifi_is_rvf()){wifi_exit_unconfirmed=1;action=0;quitting=1;}else{wifi_close_requested=0;wifi_close_failed=1;strcpy(notice,"停止未確認，再按 Wi-Fi 關閉畫面");}}else wifi_stop_start();}
  return 1;
 }

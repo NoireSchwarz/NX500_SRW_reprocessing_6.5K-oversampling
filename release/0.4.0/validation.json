@@ -1,0 +1,82 @@
+{
+  "scope": "PC replay. Suspended hardware and storage modeled. Combined on-camera activation requires the generation-specific resume receipts.",
+  "snapshot_worker_cases": [
+    "stock-check",
+    "original-check",
+    "v28-upgrade",
+    "inspect",
+    "clear",
+    "foreign",
+    "busy",
+    "missing",
+    "bad-file",
+    "bad-revision",
+    "low-battery",
+    "reject-loader",
+    "reject-notice"
+  ],
+  "menu_cases": [
+    "fresh",
+    "already-live",
+    "usb",
+    "capture",
+    "no-resume",
+    "swap",
+    "disabled",
+    "bad-manifest",
+    "start-failed",
+    "wrong-process"
+  ],
+  "same_resume": "same resume yielded the eye, process and menu receipts",
+  "reader_cases": [
+    "valid",
+    "repeat",
+    "legacy-map",
+    "wrong-inode",
+    "different-boot",
+    "early-mount",
+    "usb",
+    "capture-active",
+    "sequence",
+    "old-status"
+  ],
+  "installer_upgrade": {
+    "from_module": "0.4.0-RC6.14.11-log117-aelmali",
+    "to_revision": "release-0.4.0-rc6.14.12-log117",
+    "production_deploy_sha256": "f127e8fc2a2177b3c1386ec62ec4ad800195f338c8e273d4af777fc549636514",
+    "firmware_unmodified": true,
+    "media_backup_and_history_preserved": true,
+    "opt_remounted_read_only": true
+  },
+  "standard_entry_cases": [
+    "old-pin",
+    "fixed",
+    "bad-entry",
+    "bad-helper"
+  ],
+  "original_camera_and_public_module_manifests": [
+    "e3520acc8a3adf788cf6bf1a5a9a927ee55ab5fd6cf296ffc35ca79286baa167",
+    "a9c5391ec02b77943a494f68d929ec6fbfe8b5d51ac36fe648ca5f49f1e606c3"
+  ],
+  "capture_software": "Eye AF v2.8",
+  "registered_eye_arm_sha256": "e167e84a6be88b2fc21da13a5952a923ec7a032cb37612a11e047e60dc6c2e6e",
+  "producer_paths_removed": {
+    "nxl-menu": ".rodata assertion path only",
+    "nxl-sharp.arm": ".dynstr library names only",
+    "arm_text_unchanged": true,
+    "checked_required_symbols": [
+      "SetVariableDataMCB",
+      "mcb_init",
+      "mcb_set_ignore_init_checking"
+    ],
+    "checked_oem_library_sha256": {
+      "libcapture-fw-prod.so": "a07867292610ac6376e29e3cd64bc79a274452412387fb7853c5a3fb3f96bba5",
+      "libmulticore-bridge.so": "f14a12e4d9172989d73c8dff0fd59580c65ccd1972264c9d94c8d1a736820390"
+    }
+  },
+  "immutable_module_files": 133,
+  "release_inputs": {
+    "log117": "a09885ff7ae1ac5942ea0b83550cfb8e1a794fbeb3011f7a37a6f5f30b0b1576",
+    "standalone_eye": "bcbcdda8ad222a109f77f5d4d63a78ad14ca71b465795c390705e305fae90659"
+  }
+}

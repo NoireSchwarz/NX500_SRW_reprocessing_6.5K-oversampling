@@ -24,13 +24,13 @@ LUT_MODE=STD
 LOAD=$D/bin/nxl-lutload.arm
 LUT_LOAD_SHA=e1cc784e405e849c11fa99ee5f1fbd19616ac595c7c3ed722cf7fbda619cf401
 OPS_SHA=c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d
-LUT_IDLE_SHA=ca3d0c2e4ca05a45f5f6b145d7ce5a709bc48e854f02519e361123810f985f42
-LOG_LUT_POLICY_SHA=44187b8cda988b73971ab9adfbb6fb2ea29c7be2cdb9acb3e6cd556a223a40e6
-LUT_CATALOG_SHA=599013808495ffe34f53135bbf92deb742254fd8b63866147396bbcffc8f2be4
+LUT_IDLE_SHA=da2ba4416c36dbf1fa823edf70d019ef79f838df6e48da427ea5ed708ce327b7
+LOG_LUT_POLICY_SHA=ce526682cb48f41fe98b89e0af180e2c5fc4e08502d4b12049059aeb725f8586
+LUT_CATALOG_SHA=419ae486255df15850284e19eb9c25e2b3d2580d2b221ae01ab18ab13b262518
 BLEND=$D/bin/nxl-lutblend.arm
 BLEND_SHA=acb74f412adf89da4008fc58ac209120d72e940d29a703a0f8d7fd5c4754e0f4
 SHARP=$D/bin/nxl-sharp.arm
-SHARP_SHA=480d0b66a0b706ae5217a5a8ca06ca6fc1ccb99857a70bbfd5e85aba2bf1ed1a
+SHARP_SHA=f4207bc4ac86c338aabebfafccfbffe7420d5003b2d53677960a347a8c42949d
 die() { echo "ERR $*" >&2; exit 1; }
 busy() { echo 'ERR backend busy' >&2; exit 75; }
 valid_name() { case "$1" in ''|*[!A-Za-z0-9_-]*) return 1;; esac; [ ${#1} -le 80 ]; }
@@ -183,16 +183,29 @@ reload_pending(){
  [ "${NXL_SRW_LUT_RESET:-0}" = 1 ] && return 0
  printf 'NXL_LUT_RELOAD_PENDING1\n' > "$ST/reload.pending" || die LUT_RELOAD_MARKER_FAILED
 }
+require_reload_clear(){
+ [ ! -e "$RUN/lutload.pending" ] && [ ! -L "$RUN/lutload.pending" ] || die LUT_RELOAD_RESTART_REQUIRED
+}
 live_reload(){
  # SRW cleanup restores its original tables only. It must never open EP here.
  if [ "${NXL_SRW_LUT_RESET:-0}" = 1 ];then rm -f "$ST/reload.pending";return 0;fi
  [ "${NXL_LUT_DEFER_RELOAD:-0}" != 1 ] || return 0
- reload_tools;lut_idle;reload_pending
+ require_reload_clear;reload_tools;lut_idle;reload_pending
  if [ -f "$ST/ready" ];then target=$SLOT
  elif [ -r "$ST/factory-slot" ];then IFS= read -r target < "$ST/factory-slot" || die LUT_FACTORY_SLOT_UNAVAILABLE
  else target=current;fi
- if [ "$target" = current ];then "$LOAD" current > "$ST/reload.log" 2>&1 || die LUT_DMA_RELOAD_UNCONFIRMED
- else "$LOAD" once "$target" > "$ST/reload.log" 2>&1 || die LUT_DMA_RELOAD_UNCONFIRMED;fi
+ if [ "$target" = current ];then set -- current;else set -- once "$target";fi
+ for reload_attempt in 1 2 3;do
+  if "$LOAD" "$@" > "$ST/reload.log" 2>&1;then break;else reload_rc=$?;fi
+  require_reload_clear
+  # Exit 9 is before the DMA trigger. Require the original IRQ state back
+  # before trying the next photo frame. Never retry a possibly active DMA.
+  [ "$reload_attempt" -lt 3 ] && [ "$reload_rc" -eq 9 ] &&
+   grep -qx 'REFUSE preview frame sync failed' "$ST/reload.log" &&
+   grep -qx 'IRQ_RETURN EOF14=RETURNED DMA7=RETURNED baseline_restored=1 dma_confirmed=0' "$ST/reload.log" || die LUT_DMA_RELOAD_UNCONFIRMED
+  sleep 0.15
+  lut_idle
+ done
  rm -f "$ST/reload.pending" || die LUT_RELOAD_RECEIPT_FAILED
  echo 'NXL_LUT_RELOAD_CONFIRMED1 EOF14 DMA7 ACCESS_CLEAR'
 }
@@ -201,6 +214,7 @@ restore_factory() {
     sharp_restore || return 1
     # Restore dynamic consumers before changing the shared A18 slot.
     video_restore || return 1
+    photo_log_restore || return 1
     [ -f "$ST/ready" ] || return 0
     rc=0
     # Restore pointers first. Never reload a slot while replacing its bytes.
@@ -215,6 +229,8 @@ restore_factory() {
     if ! session_supported; then oled_restore || rc=1; fi
     if [ "$rc" -eq 0 ]; then
         if ! session_supported; then rm -f "$PD/oled_orig"; fi
+        # A retry retains the original photo bytes until both selectors are restored.
+        rm -f "$PHOTO_INTENT" || return 1
         rm -f "$ST/current" "$ST/strength" "$ST/ready" "$ST/pipeline" "$ST/expected.bin" "$ST/detail-parameters"
         return 0
     fi
@@ -225,7 +241,7 @@ cleanup() {
     code=$?
     trap - 0 HUP INT TERM
     if [ "$rollback" -eq 1 ]; then
-        restore || code=1
+        (restore) || code=1
     fi
     rm -f "$ST/expected.new" "$ST/base.new" "$ST/pipeline.new" "$ST/current.new" "$ST/strength.new" "$ST/detail-parameters.new"
     rm -f "$lock/pid"
@@ -293,6 +309,10 @@ detail_source() {
 restore(){
  if [ "$LUT_MODE" = VLOG ];then rollback=0;log_neutral;else restore_factory;fi
 }
+detail_receipt(){
+ printf 'NX_LUT_DETAIL_APPLIED2 A=%s %s %s %s %s B=%s %s %s %s %s\n' "$request_a" "$as" "$ah" "$ap" "$ac" "$request_b" "$bs" "$bh" "$bp" "$bc" > "$ST/detail-parameters.new" || die DETAIL_RECEIPT_FAILED
+ mv "$ST/detail-parameters.new" "$ST/detail-parameters" || die DETAIL_RECEIPT_FAILED
+}
 apply_detail(){
  entry=$1;shift
  [ "$#" = 10 ] || die INVALID_DETAIL_REQUEST
@@ -330,12 +350,14 @@ apply_detail(){
  build=$(cat "$ST/detail-build.log") || die LUT_PLAN_UNAVAILABLE
  case "$build" in 'NXLUTBLEND2 bytes=19712 sharp_offset='*) sharpness=${build##*sharp_offset=};;*) die LUT_PLAN_INVALID;;esac
  case "$sharpness" in 0|1|2|3|4|5|6|7|8|9|10|-1|-2|-3|-4|-5|-6|-7|-8|-9|-10) :;;*) die SHARPNESS_PLAN_INVALID;;esac
+ # Save request identity before the baseline-restore function reuses name.
+ request_a=$name;request_b=$other
+ require_reload_clear
  [ ! -f "$ST/param-sharp.pending" ] || die SHARPNESS_PENDING_RESTORE_FIRST
  sharp_prepare
  lut_idle
- # Save request identity before the baseline-restore function reuses name.
- request_a=$name;request_b=$other
- if [ "$as" = 0 ] && [ "$bs" = 0 ];then restore
+ if [ "$as" = 0 ] && [ "$bs" = 0 ];then
+  restore
  else
   video_restore || die VIDEO_RESTORE_UNCONFIRMED
   strength=$as;commit_staged
@@ -343,9 +365,9 @@ apply_detail(){
   # A confirmed ordinary or Log LUT also applies to new video recordings.
   video_enable
  fi
+ detail_receipt
+ echo 'NXL_LUT_CONFIGURED1'
  live_reload
- printf 'NX_LUT_DETAIL_APPLIED2 A=%s %s %s %s %s B=%s %s %s %s %s\n' "$request_a" "$as" "$ah" "$ap" "$ac" "$request_b" "$bs" "$bh" "$bp" "$bc" > "$ST/detail-parameters.new" || die DETAIL_RECEIPT_FAILED
- mv "$ST/detail-parameters.new" "$ST/detail-parameters" || die DETAIL_RECEIPT_FAILED
  cat "$ST/detail-parameters"
 }
 case "${1:-status}" in
@@ -354,17 +376,14 @@ clean-log-release) clean_log_release;;
 detail|log-detail) verb=$1;shift;apply_detail "$verb" "$@";;
 apply) [ "$#" = 3 ] || die INVALID_APPLY_REQUEST;apply_detail detail "$2" "$3" 0 0 0 "$2" 0 0 0 0;;
 off)
- lut_current_mode;lut_idle;restore || exit 1
+ lut_current_mode;lut_idle
+ [ "${NXL_SRW_LUT_RESET:-0}" = 1 ] || require_reload_clear
+ restore || exit 1
  live_reload
  printf 'NX_LUT_BASELINE_APPLIED3 mode=%s\n' "$LUT_MODE";;
-reload) lut_current_mode;lut_idle;live_reload;;
-video-on|video-off|video-toggle)
- . "$D/process.sh";nxl_require_normal_mode || die FACTORY_MODE_NOT_SUPPORTED
- lut_current_mode;lut_idle
- if [ "$LUT_MODE" = VLOG ];then
-  case "$1" in video-on) video_enable;;*) log_neutral;;esac
- elif [ "$1" = video-off ] || { [ "$1" = video-toggle ] && { [ -f "$ST/video_enabled" ] || [ -f "$ST/video_pending" ]; }; };then video_restore
- else video_enable;fi
+reload)
+ lut_current_mode
+ if [ "${NXL_LUT_DEFER_RELOAD:-0}" = 1 ] || [ "${NXL_SRW_LUT_RESET:-0}" = 1 ];then lut_idle;fi
  live_reload;;
 recover-oled)
  lut_current_mode;[ "$LUT_MODE" = STD ] || die RESTORE_LOG_FIRST

@@ -313,12 +313,10 @@ static void limited_text(int x,int y,const char *s,int width) {
 }
 static const struct nxl_look_info *selected_info(void) {
     if(!selected) return &nxl_restore_info;
-    if(selected==count+1)return &nxl_video_info;
     return info_for(selected_id());
 }
 static const char *row_title(int index) {
     if(!index)return nxl_restore_info.name;
-    if(index==count+1)return access("/tmp/nx-lut-lite/clean-log.policy",F_OK)==0?"Log LUT：請至VID設定":video_enabled?"影片LUT：開啟":"影片LUT：關閉";
     const struct nxl_look_info *info=info_for(names[view[index-1]]);
     return info==&nxl_unknown_info?names[view[index-1]]:info->name;
 }
@@ -352,6 +350,10 @@ static void srw_navigate(int value) {
 }
 #include "menu_lut_picker.inc"
 #include "menu_lens.inc"
+static const char *lut_reload_notice(int configured,int held){
+    if(held)return configured?"LUT 已寫入，請重新開機":"LUT 重載需重新開機";
+    return configured?"LUT 已寫入，重載未確認":NULL;
+}
 #include "menu_video.inc"
 static void srw_confirm(void){
  if(video_child>0&&video_command){strcpy(notice,"影片設定更新中，請稍候");return;}
@@ -372,7 +374,7 @@ static void srw_confirm(void){
   load_raw_status();
   if(!raw_status.valid){strcpy(notice,"無法讀取工作階段狀態");return;}
   if(raw_status.state==NXL_RAW_FRONT_RUNNING||raw_status.state==NXL_RAW_BACKEND_RUNNING){strcpy(notice,"重顯影執行中，請稍候");return;}
-  if(video_enabled){strcpy(notice,"請先關閉影片LUT");return;}
+  if(video_enabled){strcpy(notice,"請先在 LUT 頁還原，再執行重顯影");return;}
   srw_gamma_mode=1;action=12;quitting=1;
  }
 }
@@ -420,7 +422,7 @@ static void draw(void) {
     frame(18,96,684,298,line_color);
     draw_sidebar();
     int first=(selected/5)*5;
-    for(int row=0;row<5 && first+row<count+2;++row) {
+    for(int row=0;row<5 && first+row<=count;++row) {
         int i=first+row,y=104+row*56;
         if(i==selected)for(int k=0;k<8;++k)fill(96,y+k*7,588,7,sidebar_focus?button_bg:selection_colors[k]);
         if(i!=selected)fill(108,y+55,568,1,line_color);
@@ -433,7 +435,7 @@ static void draw(void) {
         }
     }
     fill(687,103,5,281,button_bg);
-    int total=count+2,thumb=total<=5?281:(281*5/total);if(thumb<18)thumb=18;
+    int total=count+1,thumb=total<=5?281:(281*5/total);if(thumb<18)thumb=18;
     int ty=103+(total>1?(281-thumb)*selected/(total-1):0);
     fill(687,ty,5,thumb,muted);
     char page[40];snprintf(page,sizeof page,"%d / %d",selected+1,total);
@@ -456,11 +458,10 @@ static void draw(void) {
     publish_ui();
 }
 static void navigate(int value) {
-    selected=(value+count+2)%(count+2);notice[0]=0;nxl_help_reset(&help,ticks());
+    int total=count+1;
+    selected=(value+total)%total;notice[0]=0;nxl_help_reset(&help,ticks());
 }
 static int confirm_action(void) {
-    if(selected==count+1)return 4;
-    if(selected && video_enabled)return 5;
     apply_strength=effective_strength();return selected?1:2;
 }
 static void ui_control(int command) {
@@ -483,7 +484,6 @@ static void release_confirm(void){
  else if(left_panel==1)srw_confirm();
  else if(video_child>0&&video_command)strcpy(notice,"影片設定更新中，請稍候");
  else if(rearm_child>0)strcpy(notice,"工作階段更新中，請稍候");
- else if(selected==count+1)video_menu_start(40);
  else if(!detail_open()){action=confirm_action();quitting=1;}
 }
 static void key_direct(unsigned code,int value){
@@ -568,6 +568,9 @@ static void toast_timed(const char *message, int success, unsigned long duration
     dpy = XOpenDisplay(NULL);
     if (!dpy) return;
     XSetErrorHandler(ignore_error); palette();
+    Window previous_focus=None;
+    int previous_revert=RevertToParent;
+    XGetInputFocus(dpy,&previous_focus,&previous_revert);
     XSetWindowAttributes attr; memset(&attr, 0, sizeof attr);
     int screen = DefaultScreen(dpy);
     attr.override_redirect = False; attr.background_pixel = bg;
@@ -586,6 +589,9 @@ static void toast_timed(const char *message, int success, unsigned long duration
     unsigned long start=ticks();
     struct pollfd socket={ConnectionNumber(dpy),POLLIN,0};
     while(ticks()-start<duration) {
+        Window focus=None;int revert;
+        if(previous_focus>PointerRoot&&XGetInputFocus(dpy,&focus,&revert)&&focus==win)
+            XSetInputFocus(dpy,previous_focus,previous_revert,CurrentTime);
         while(XPending(dpy)) {
             XEvent e;XNextEvent(dpy,&e);
             if(e.type==Expose){canvas=win;fill(0,0,720,72,bg);XSetForeground(dpy,gc,success?accent:ink);text(24,24,message);}
@@ -604,34 +610,27 @@ static void toast(const char *message, int success) {
     toast_timed(message,success,success?900:1800);
 }
 static int run_action(void) {
-    if(action!=3 && action!=2 && action!=4 && access("/tmp/nx-lut-lite/clean-log.policy",F_OK)==0) {toast("LOG MODE - RESTORE GAMMA TO USE LOOKS",0);return 1;}
-    if(action==5) {toast("VIDEO LUT ON - DISABLE IT FIRST",0);return 0;}
-    if(action==4 && !video_enabled && !active_name[0]) {
-        toast("APPLY A LUT FIRST",0);return 1;
-    }
+    if(action==1 && access("/tmp/nx-lut-lite/clean-log.policy",F_OK)==0) {toast("LOG MODE - RESTORE GAMMA TO USE LOOKS",0);return 1;}
     int tracing = action == 3;
     if (tracing) toast("TRACE 20S - NORMAL CAMERA VIEW",1);
-    int fd; pid_t c = backend(action == 1 ? "apply" : tracing ? "trace" : action==4 ? "video-toggle" : "off", action == 1 ? selected_id() : "", &fd);
+    int fd; pid_t c = backend(action == 1 ? "apply" : tracing ? "trace" : "off", action == 1 ? selected_id() : "", &fd);
     if (c < 0) return 1;
     /* This process has no menu window/X connection during the transaction. */
     FILE *log = fopen(tracing ? "/tmp/nx-lut-lite/trace-action.log" : "/tmp/nx-lut-lite/last-action.log", "w");
-    char b[256]; ssize_t n;
-    while ((n = read(fd, b, sizeof b)) != 0) {
-        if (n < 0) { if (errno == EINTR) continue; break; }
-        if (log) fwrite(b,1,(unsigned)n,log);
-    }
-    close(fd);
+    FILE *output=fdopen(fd,"r");
+    if(output){
+        char line[256];
+        while(fgets(line,sizeof line,output)){
+            if(log)fputs(line,log);
+        }
+        fclose(output);
+    }else close(fd);
     int status=0; pid_t done;
     do { done=waitpid(c,&status,0); } while (done<0 && errno==EINTR);
     int rc=done==c && WIFEXITED(status) ? WEXITSTATUS(status) : 1;
     if (log) {
-        fputs(tracing ? "\nMENU: trace finished; previous LUT action log preserved.\n" : rc==0 ? (action==4 ? "\nMENU: video trial toggled; start a NEW recording to test.\n" : action==2 ? "\nMENU: saved LUT state restored; mod remains installed. Physical half-press reloads it.\n" : "\nMENU: finished; physical half-press loads live preview and JPEG LUT.\n") :
+        fputs(tracing ? "\nMENU: trace finished; previous LUT action log preserved.\n" : rc==0 ? (action==2 ? "\nMENU: saved LUT state restored; mod remains installed. Physical half-press reloads it.\n" : "\nMENU: finished; physical half-press loads live preview and JPEG LUT.\n") :
             "\nMENU: backend failed; see messages above.\n",log); fclose(log);
-    }
-    if(action==4 && rc==0) {
-        video_enabled=access("/tmp/nx-lut-lite/session/video_enabled",F_OK)==0;
-        toast(video_enabled?"VIDEO LUT ON - START NEW RECORDING":"VIDEO LUT OFF - PHOTO LUT KEPT",1);
-        return 0;
     }
     toast(tracing ? (rc==0 ? "TRACE SAVED - SD AF-TRACE FOLDER" : rc==10 ? "CSV SAVED - SNAPSHOT INCOMPLETE" : "TRACE FAILED - SD AF-TRACE FOLDER") :
         (rc==0 ? (action==2 ? "LUT OFF - SAVED STATE RESTORED" : "READY - HALF-PRESS THEN SHOOT") : "FAILED - CHECK LAST-ACTION.LOG"),rc==0);
@@ -776,7 +775,7 @@ static int inspect(void) {
 int main(int argc,char **argv) {
     /* Installer probe: no firmware, X11, input, lock or backend access. */
     if(argc>1 && !strcmp(argv[1],"--version")) {
-        puts("NX_LUT_MENU_VERSION=" NXL_DEMO_VERSION);puts("NX_LUT_RELEASE=0.4.0-RC6.14.10; TRADITIONAL_CHINESE; R8F_M3_PARAMS; VLOG_LIBRARY_VID_ONLY");
+        puts("NX_LUT_MENU_VERSION=" NXL_DEMO_VERSION);puts("NX_LUT_RELEASE=0.4.0-RC6.14.11; TRADITIONAL_CHINESE; R8F_M3_PARAMS; VLOG_LIBRARY_VID_ONLY");
         puts("MENU_STATUS_REVISION=STDOUT_STATUS_ONLY_R3");
         puts("MENU_TEST_REVISION=MENU_FRESH_FULL_TEST_R4");
         puts("MENU_CAMERA_RECOVERY=CAMERA_RECOVERY_R5");
@@ -811,10 +810,9 @@ int main(int argc,char **argv) {
     int quick_lut=argc>1&&!strcmp(argv[1],"--quick-lut");
     int wifi_shortcut=argc>1&&!strcmp(argv[1],"--wifi");
     int vlog_shortcut=argc>1&&!strcmp(argv[1],"--vlog-toggle");
-    int video_shortcut=argc>1 && !strcmp(argv[1],"--video-toggle");
     int lock=nxl_lock("/tmp/nx-lut-lite/menu.lock");
     if (lock<0) {launch_event("MENU_LOCK_BUSY",argc>1?argv[1]:"open",0,errno);
-        if(video_shortcut||vlog_shortcut) {toast("EXIT LUT MENU FIRST",0);return 1;}
+        if(vlog_shortcut) {toast("EXIT LUT MENU FIRST",0);return 1;}
         if (argc>1 && !strcmp(argv[1],"--toggle")) {
             /* A tracked operation owns the menu lease until exec reopens it.
              * Shortcut presses must not terminate its passive progress UI. */
@@ -835,13 +833,6 @@ int main(int argc,char **argv) {
         if(video_child<=0){toast(notice,0);close(lock);return 1;}
         while(video_child>0){if(quitting)kill(video_child,SIGTERM);video_menu_poll();if(video_child>0)poll(NULL,0,50);}
         toast(gamma_command_failed?notice:gamma_status.mode==2?"V‑Log已開啟":"V‑Log已關閉",!gamma_command_failed);close(lock);return gamma_command_failed?1:0;
-    }
-    if(video_shortcut) {
-        video_enabled=access("/tmp/nx-lut-lite/session/video_enabled",F_OK)==0 ||
-                      access("/tmp/nx-lut-lite/session/video_pending",F_OK)==0;
-        FILE *current=fopen("/tmp/nx-lut-lite/session/current","r");
-        if(current) {if(!fgets(active_name,sizeof active_name,current))active_name[0]=0;fclose(current);}
-        action=4;int rc=run_action();close(lock);return rc;
     }
     FILE *p=fopen("/tmp/nx-lut-lite/menu.pid","w");
     if (p) { fprintf(p,"%ld\n",(long)getpid()); fclose(p); }
@@ -921,7 +912,7 @@ int main(int argc,char **argv) {
                         sidebar_focus=0;int i=(cursor/5)*5+(y-104)/56;
                         if(left_panel==2){if(i<release_video_count())video_navigate(i);}
                         else if(left_panel==1){if(srw_file_mode){if(i<srw_count)srw_navigate(i);}else{int hit=nxl_srw_ui_touch(cursor,y);if(hit>=0)srw_navigate(hit);}}
-                        else if(i<count+2)navigate(i);
+                        else if(i<=count)navigate(i);
                     } else if(!left_panel && y>=395 && y<433 && x<150)pointer_cell=20;
                     else if(!left_panel && y>=395 && y<433 && x<330)pointer_cell=21;
                     else if(!left_panel && y>=395 && y<433 && x<590)pointer_cell=22;

@@ -1,0 +1,20 @@
+{
+  "units": "full-range 8-bit encoded luma in the center 10 percent of frame width and height",
+  "input_green_14bit": 2965,
+  "metol_reference": {
+    "upstream_commit": "28eb16986d7e08636310b3bcd4ff315da378ea5c",
+    "file": "scripts/gamma-install.sh",
+    "rc5_gamma_arm_sha256": "5edf35e0ba839f198d18049e61f4b843d49507a59758e527a25204708dae9d6b",
+    "rc5_target": 132,
+    "rc5_replay": 131.9565005078721
+  },
+  "log117_target": 117,
+  "log117_replay": 116.64924538906897,
+  "factory_still": "unfiltered, 26 mm, ISO 200, f/4, 1/60 s",
+  "video": "26 mm, JJC transmission diffuser fitted, creative LUT off, 1080p50",
+  "stable_frames": 327,
+  "mean_full8_Y": 116.15794083536264,
+  "older_diffused_raw_prediction": 116.61123510224948,
+  "current_undiffused_raw_transmission_estimate": 116.90617446063844,
+  "limitations": "Separate RAW and video exposures. The 16 mm comparison had vignetting. This tests relative gray reproduction on one NX500. Physical reflectance and gamut require independent references."
+}

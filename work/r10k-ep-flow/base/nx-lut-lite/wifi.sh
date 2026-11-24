@@ -7,11 +7,11 @@ export NX_LUT_ROOT=$D
 nxl_require_normal_mode || exit 1
 OPS=$D/bin/nxl-fileops
 OPS_SHA=c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d
-WIFI_SERVER_SHA=3be9431de8f700025acbbd1d99b60942605c4c541c49ab1e65538af5ca12d58b
+WIFI_SERVER_SHA=006a8415eae6f4bc8762e4e954fd5074f2973565b896c4057dc0d4e71ae409f0
 RADIO=$D/bin/nxl-wifi-radio
-RADIO_SHA=4b10b8bddc31562c43977de41e64d1d6cf7e9780088281b7fe0156918f71d5ac
+RADIO_SHA=0b6ef6b97fbc87f74fa13226c2d45093c53e04bfde219d582bc2163d0e399c04
 RADIO_TABLE_SHA=2c8ef0dd538d667af281312a8f6f2241de566bde59b97759f51f177c788789fe
-WIFI_MANIFEST_SHA=c691b1796fe74c08fe9f26709683176d525d906b9399bed68d6c6e9e685bf436
+WIFI_MANIFEST_SHA=859f7be631beffcd88a3a77616af1afdb2d6b281bc1452b77eebdfe2e3271c88
 BIN=$D/bin/nxl-wifi-server
 fail() {
  printf 'NXL_WIFI_ERROR1\nphase=%s\nreason=%s\nfile=%s\nexpected=%s\nactual=%s\nend=NXL_WIFI_ERROR_END1\n' "$1" "$2" "$3" "${4:-}" "${5:-}" >&2
@@ -27,8 +27,7 @@ check_file() {
  [ "$actual" = "$expected" ] || fail "$phase" WIFI_COMPONENT_MISMATCH "$leaf" "$expected" "$actual"
 }
 stop_radio() {
- if "$RADIO" --stop >> /tmp/nx-lut-lite/wifi-radio-control.log 2>&1;then return;fi
- cat /tmp/nx-lut-lite/wifi-radio-control.log >&2
+ if "$RADIO" --stop;then return;fi
  fail RADIO_STOP RADIO_RESTORE_UNCONFIRMED bin/nxl-wifi-radio
 }
 # Verified stopping never depends on the webpage's state.
@@ -48,7 +47,7 @@ if [ "${1:-status}" = status ];then exec "$BIN" --status;fi
 manifest=$D/data/wifi.manifest
 [ -f "$manifest" ] && [ ! -L "$manifest" ] || fail MANIFEST WIFI_MANIFEST_INVALID data/wifi.manifest
 check_file MANIFEST "$WIFI_MANIFEST_SHA" data/wifi.manifest
-seen_server=0;seen_process=0;seen_index=0;seen_app=0;seen_radio=0;seen_table=0;seen_aba=0;seen_extra=0
+seen_server=0;seen_process=0;seen_index=0;seen_app=0;seen_radio=0;seen_table=0;seen_extra=0
 while IFS=' ' read -r expected leaf extra;do
  [ -z "$extra" ] && [ "${#expected}" = 64 ] || fail MANIFEST WIFI_MANIFEST_INVALID data/wifi.manifest
  case "$expected" in *[!0-9a-f]*) fail MANIFEST WIFI_MANIFEST_INVALID data/wifi.manifest;;esac
@@ -59,18 +58,16 @@ while IFS=' ' read -r expected leaf extra;do
   process.sh) [ "$seen_process" = 0 ] || fail MANIFEST WIFI_MANIFEST_INVALID "$leaf";seen_process=1;;
   wireless/web/index.html) [ "$seen_index" = 0 ] || fail MANIFEST WIFI_MANIFEST_INVALID "$leaf";seen_index=1;;
   wireless/web/app.js) [ "$seen_app" = 0 ] || fail MANIFEST WIFI_MANIFEST_INVALID "$leaf";seen_app=1;;
-  wireless/web/aba.js) [ "$seen_aba" = 0 ] || fail MANIFEST WIFI_MANIFEST_INVALID "$leaf";seen_aba=1;;
   wireless/web/extra.js) [ "$seen_extra" = 0 ] || fail MANIFEST WIFI_MANIFEST_INVALID "$leaf";seen_extra=1;;
   *) fail MANIFEST WIFI_MANIFEST_INVALID "$leaf";;
  esac
  check_file RESOURCE "$expected" "$leaf"
 done < "$manifest"
-[ "$seen_server$seen_process$seen_index$seen_app$seen_radio$seen_table$seen_aba$seen_extra" = 11111111 ] || fail MANIFEST WIFI_MANIFEST_INVALID data/wifi.manifest
+[ "$seen_server$seen_process$seen_index$seen_app$seen_radio$seen_table$seen_extra" = 1111111 ] || fail MANIFEST WIFI_MANIFEST_INVALID data/wifi.manifest
 case "${1:-status}" in
  rvf)
   case "${2:-}" in ''|*[!0-9]*) echo RVF_WINDOW_UNAVAILABLE >&2;exit 1;;esac
-  log=/tmp/nx-lut-lite/wifi-rvf-rc614-service.log
-  "$BIN" --rvf-serve "$D/wireless/web" "$2" </dev/null > "$log" 2>&1 &
+  "$BIN" --rvf-serve "$D/wireless/web" "$2" </dev/null >/dev/null 2>&1 &
   child=$!;i=0
   while [ "$i" -lt 50 ];do
    if current=$("$BIN" --rvf-status "$child");then printf '%s\n' "$current";exit 0;fi
@@ -78,7 +75,7 @@ case "${1:-status}" in
    sleep 0.1;i=$((i+1))
   done
   kill "$child" 2>/dev/null || :
-  cat "$log" >&2
+  echo RVF_START_FAILED >&2
   exit 1
   ;;
  status) exec "$BIN" --status;;
@@ -94,8 +91,7 @@ case "${1:-status}" in
    fi
   elif [ "$1" = hotspot ];then
    "$BIN" --web-stop >/dev/null || exit 1
-   if "$RADIO" --prepare > /tmp/nx-lut-lite/wifi-radio-control.log 2>&1;then :;else
-    cat /tmp/nx-lut-lite/wifi-radio-control.log >&2
+   if "$RADIO" --prepare;then :;else
     fail RADIO_PREPARE FIVE_GHZ_PREPARE_FAILED bin/nxl-wifi-radio
    fi
    if current=$("$BIN" --hotspot-start);then :;else
@@ -112,7 +108,7 @@ case "${1:-status}" in
   case "$old" in *'running=1'*) printf '%s\n' "$old";exit 0;;esac
   case "$old" in
    *'connected=1'*)
-    "$BIN" --serve "$D/wireless/web" </dev/null > /tmp/nx-lut-lite/wifi-service.log 2>&1 &
+    "$BIN" --serve "$D/wireless/web" </dev/null >/dev/null 2>&1 &
     child=$!;i=0
     while [ "$i" -lt 20 ];do
      current=$("$BIN" --status) || break

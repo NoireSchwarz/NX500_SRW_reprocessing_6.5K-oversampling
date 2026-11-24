@@ -5,14 +5,7 @@
 const rvfView=byId('view'),rvfContext=rvfView.getContext('2d');
 const packetHeaderBytes=24,maxJPEGBytes=512*1024;
 let token='',wanted=false,started=false,request=null,retryTimer=0,retries=0;
-let newest=null,drawing=false,displayEpoch=0,lastReceived=0,nextMetrics=0;
-let firstReceived=0,lastReceivedAt=0,firstDrawn=0,lastDrawnAt=0;
-const receiveTimes=[],drawTimes=[];
-const measurements={
- kind:'NX500_STOCK_RVF_PUSH1',started:new Date().toISOString(),frequency_mhz:0,
- native_fps:0,received:0,drawn:0,jpeg_bytes:0,missing_frame_ids:0,
- skipped_before_draw:0,stream_connections:0,dropped:0,rows:[]
-};
+let newest=null,drawing=false,displayEpoch=0,lastReceived=0,lastFrequency=0;
 
 function rvfHeaders(value=token){return value?{'X-NX-Session':value}:{};}
 function rvfCommand(command,session=''){
@@ -54,33 +47,12 @@ async function decodeJPEG(blob){
  });}finally{URL.revokeObjectURL(url);}
 }
 
-function frameRate(count,first,last){
- return count>1&&last>first?(count-1)*1000/(last-first):0;
-}
-
-function liveRate(times,now){
- while(times.length&&now-times[0]>3000)times.shift();
- const fps=frameRate(times.length,times[0],times[times.length-1]);
- return fps?fps.toFixed(1):'—';
-}
-
-function showRates(now){
- if(now<nextMetrics)return;
- nextMetrics=now+250;
- const mhz=measurements.frequency_mhz;
- const band=mhz?mhz+' MHz':'頻率未知';
- const source=measurements.native_fps?measurements.native_fps.toFixed(1):'—';
- byId('metrics').textContent='720 × 480 · '+band+' · 原廠 '+source+
-  ' / 接收 '+liveRate(receiveTimes,now)+' / 繪製 '+liveRate(drawTimes,now)+' fps';
-}
-
 async function drawNewest(){
  if(drawing)return;
  drawing=true;
  try{
   while(wanted&&newest){
    const frame=newest;newest=null;
-   const begin=performance.now();
    const image=await decodeJPEG(new Blob([frame.jpeg],{type:'image/jpeg'}));
    try{
     if(!wanted||document.hidden||frame.epoch!==displayEpoch)continue;
@@ -88,14 +60,6 @@ async function drawNewest(){
      throw Error('原廠 JPEG 尺寸不符。');
     rvfContext.drawImage(image,0,0);
    }finally{if(image.close)image.close();}
-   const now=performance.now();
-   if(!measurements.drawn)firstDrawn=now;
-   measurements.drawn++;lastDrawnAt=now;drawTimes.push(now);
-   measurements.rows.push({id:frame.id,t:now,received_t:frame.received,bytes:frame.jpeg.length,
-    width:720,height:480,source_age_ms:frame.age,frequency_mhz:frame.mhz,
-    native_fps:frame.fps,draw_ms:now-begin});
-   if(measurements.rows.length>1800){measurements.rows.shift();measurements.dropped++;}
-   showRates(now);
   }
  }catch{
   stopNative('無法解碼原廠畫面，圖傳正在停止。');
@@ -104,16 +68,13 @@ async function drawNewest(){
 
 function queueFrame(frame){
  if(frame.id<=lastReceived)return;
- if(lastReceived)measurements.missing_frame_ids+=frame.id-lastReceived-1;
- const now=performance.now();
- if(!measurements.received){firstReceived=now;say('即時圖傳中');}
- lastReceived=frame.id;lastReceivedAt=now;retries=0;
- measurements.received++;measurements.jpeg_bytes+=frame.jpeg.length;
- measurements.frequency_mhz=frame.mhz;measurements.native_fps=frame.fps;
- receiveTimes.push(now);
- if(newest)measurements.skipped_before_draw++;
- newest={...frame,received:now,epoch:displayEpoch};
- showRates(now);
+ if(!lastReceived)say('即時圖傳中');
+ lastReceived=frame.id;retries=0;
+ if(frame.mhz&&frame.mhz!==lastFrequency){
+  lastFrequency=frame.mhz;
+  byId('metrics').textContent='720 × 480 · '+frame.mhz+' MHz';
+ }
+ newest={jpeg:frame.jpeg,epoch:displayEpoch};
  drawNewest();
 }
 
@@ -166,7 +127,6 @@ async function openPush(){
   if(!r.body||typeof r.body.getReader!=='function'){
    stopNative('此瀏覽器無法接收即時圖傳。');return;
   }
-  measurements.stream_connections++;
   reader=r.body.getReader();
   await readPackets(reader,session,ctrl.signal,()=>{progress=performance.now();});
   if(wanted&&session===token&&!ctrl.signal.aborted)stopNative('相機已停止圖傳。');
@@ -183,19 +143,10 @@ async function openPush(){
  }
 }
 byId('pause').onclick=()=>stopNative('正在停止圖傳與相機熱點…');
-byId('downloadStats').onclick=()=>{
- const report={...measurements,
-  browser_receive_fps:frameRate(measurements.received,firstReceived,lastReceivedAt),
-  browser_draw_fps:frameRate(measurements.drawn,firstDrawn,lastDrawnAt)};
- const url=URL.createObjectURL(new Blob([JSON.stringify(report,null,2)],{type:'application/json'}));
- const link=document.createElement('a');link.href=url;link.download='NX500-stock-rvf-'+Date.now()+'.json';
- link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
-};
 window.addEventListener('pagehide',()=>stopNative());
 document.addEventListener('visibilitychange',()=>{
  if(document.hidden){
   clearTimeout(retryTimer);newest=null;displayEpoch++;
-  receiveTimes.length=drawTimes.length=0;
   if(request)request.abort();
  }else if(wanted&&token)openPush();
 });

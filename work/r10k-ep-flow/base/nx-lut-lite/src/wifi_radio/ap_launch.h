@@ -132,11 +132,7 @@ static int ap_write_config(const char *path)
 
 static int ap_launch_error(const char *reason)
 {
-    int fd = open(TRIAL_TMP "/controller.log", O_WRONLY | O_APPEND | O_CLOEXEC | O_NOFOLLOW);
-    if (fd >= 0) {
-        dprintf(fd, "AP_LAUNCH_FAILED reason=%s\n", reason);
-        close(fd);
-    }
+    fprintf(stderr, "AP_LAUNCH_FAILED reason=%s\n", reason);
     return 1;
 }
 

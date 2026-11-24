@@ -1,0 +1,11 @@
+RC6.9 無線圖傳來源與範圍
+
+Metol：WApaperplane/metol，固定提交2d060e7dd7056d27aed975198f9cbdfa67ae121d，AGPL-3.0。
+https://github.com/WApaperplane/metol/tree/2d060e7dd7056d27aed975198f9cbdfa67ae121d/scripts/nx-rc
+上游：mewlips/nx-remote-controller-mod，固定提交1a931e2569e11154415bdf4685af06dfbcc268cf，AGPL-3.0。
+https://github.com/mewlips/nx-remote-controller-mod/tree/1a931e2569e11154415bdf4685af06dfbcc268cf
+本包沿用其NX500 LCD NV12四緩衝地址、變化判斷、錄像期尺寸及瀏覽器YUV重建方式；移植為獨立只讀服務。JPEG內嵌預覽沿用Metol直接切片思路，新增有界IFD1解析並保留直拍方向。HTTP、菜單、服務所有權與退出由本項目實作；沒有直接啟用其上傳、原廠控制指令、Telnet/FTP或固件操作入口。
+QR Code generator：Project Nayuki，MIT，固定提交9a217d443937f60cc56c1458c39a211d7f2d3af5。
+https://github.com/nayuki/QR-Code-generator/tree/9a217d443937f60cc56c1458c39a211d7f2d3af5/c
+使用C版編碼器；原始MIT許可與版權保留於同包SOURCE/RC69_WIFI/base/nx-lut-lite/src/qrcodegen.c和qrcodegen.h。
+Noto Sans CJK Medium字形沿用既有字庫與許可。

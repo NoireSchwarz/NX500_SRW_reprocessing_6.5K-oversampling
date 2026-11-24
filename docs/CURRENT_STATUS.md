@@ -1,4 +1,12 @@
-# 当前状态 · 2026-11-22 · NX LUT Lite 0.4.0 RC6.14.10
+# 当前状态 · 2026-11-24 · NX LUT Lite 0.4.0
+
+当前交付为 Log117（菜单内部版本 RC6.14.12）、Eye AF v2.8 和原厂快启恢复后的菜单监听。合并镜像使用机身本身的休眠生成流程。下一次验收应在同一次开机核对原厂 MENU、EV+AEL、取景眼框、`resume/runtime.log` 与 `resume/full-menu.txt`。
+
+开发机的 26 mm 实拍验证了 117 工作灰点。旧 Metol 引擎来自 RC5，原目标 132。灰点结果与色域、物理反射率需分别验证。最后一次关闭 Log 的原厂 Gamma 请求已提交，后续 LUT 重载有一次未确认。请保留该错误回执供定位。
+
+[版本说明、风险、恢复与短测](../release/0.4.0/README.md) · [灰点数据](../release/0.4.0/gray-calibration.json) · [上游人眼 PR](https://github.com/WApaperplane/NX500-metol/pull/2)
+
+## 历史状态 · RC6.14.10
 
 RC6.14.10 以 RC6.14.9 实机测试版为基线。电脑端验证已通过，实机验收待完成。
 

@@ -143,55 +143,97 @@
       "id": "vlog_ejay_5207_n",
       "name": "VLog 5207 Noritsu",
       "tone": "諾日士沖掃方向的日光電影配色。",
-      "scene": "作者原版V‑Log LUT；僅從VID的Log入口選擇。",
+      "scene": "本機117灰點專用；保留標準版配色。僅從VID的Log入口選擇。",
       "group": "loglut",
       "input": "VLOG",
-      "source": "vlog+5207n（66位后期不用导入）.cube",
-      "source_sha256": "b2bc3270a746527cf42e7b05aee44d5665bec92fad3e5b2d196978627ed63563",
+      "source": "NX500_117_vlog_ejay_5207_n.cube",
+      "source_sha256": "5ad944516a6635a47595443dc4736ac1e21390f29014b3bfbbd260f7ce2829ef",
       "source_grid": 65,
       "filename_grid_claim_is_not_used": true,
-      "native_sha256": "fa9c3820cb1db285fbc2d404f30624cbf0af790abe040e553667ad0d6772d91c",
+      "native_sha256": "92b6beffa647df58e1cc1cbe9a98acdeb54bcb8dd36ec92d042c6dfeaaa82ac2",
       "native_grid": 17,
       "native_encoding": "CrCbY-BT601-full-v1",
-      "approximation": false,
+      "approximation": true,
       "numeric_resampling": true,
-      "physical_colour_matching_certified": false
+      "physical_colour_matching_certified": false,
+      "input_mapping": "NX500_LOG117_TO_FACTORY_STANDARD_TC1",
+      "superseded_author_log": {
+        "source": "vlog+5207n（66位后期不用导入）.cube",
+        "source_sha256": "b2bc3270a746527cf42e7b05aee44d5665bec92fad3e5b2d196978627ed63563",
+        "source_grid": 65,
+        "native_sha256": "fa9c3820cb1db285fbc2d404f30624cbf0af790abe040e553667ad0d6772d91c"
+      },
+      "original_standard_sha256": "6823c974e7bb9e54ee81bb9b867014cc41834bd722abc37f5867afa31bf645f0",
+      "native_fit": {
+        "method": "reachable_ycbcr_interpolation_fit",
+        "grid": 17,
+        "preserves_neutral_nodes": true,
+        "source_grid": 65
+      }
     },
     {
       "id": "vlog_ejay_5207_n_fx",
       "name": "VLog 5207 Noritsu FX",
       "tone": "諾日士配色加FX藍色增強。",
-      "scene": "作者原版V‑Log LUT；僅從VID的Log入口選擇。",
+      "scene": "本機117灰點專用；保留標準版配色。僅從VID的Log入口選擇。",
       "group": "loglut",
       "input": "VLOG",
-      "source": "vlog+5207n+fx（66位后期不用导入）.cube",
-      "source_sha256": "9bd60b47363d8b4aabadeffea2f615f95369fe992940802c9fb653be6f81ee2d",
+      "source": "NX500_117_vlog_ejay_5207_n_fx.cube",
+      "source_sha256": "926e9ecbb261ff28f95f16acd6ff0e978edca24ea0bcbdb53582989e567b8f24",
       "source_grid": 65,
       "filename_grid_claim_is_not_used": true,
-      "native_sha256": "f6c51f320208c111677046f6c8d8cc75595872b646714dd80ab612e1263b0d7f",
+      "native_sha256": "3472dea95b9a003cb8b0983b12446b236bd3a40fb2bf7afbc6ce5a3e47f41a20",
       "native_grid": 17,
       "native_encoding": "CrCbY-BT601-full-v1",
-      "approximation": false,
+      "approximation": true,
       "numeric_resampling": true,
-      "physical_colour_matching_certified": false
+      "physical_colour_matching_certified": false,
+      "input_mapping": "NX500_LOG117_TO_FACTORY_STANDARD_TC1",
+      "superseded_author_log": {
+        "source": "vlog+5207n+fx（66位后期不用导入）.cube",
+        "source_sha256": "9bd60b47363d8b4aabadeffea2f615f95369fe992940802c9fb653be6f81ee2d",
+        "source_grid": 65,
+        "native_sha256": "f6c51f320208c111677046f6c8d8cc75595872b646714dd80ab612e1263b0d7f"
+      },
+      "original_standard_sha256": "61251ebca7f832dc55585121dbfdbe04ac223594a37251852940713e0d4c428a",
+      "native_fit": {
+        "method": "reachable_ycbcr_interpolation_fit",
+        "grid": 17,
+        "preserves_neutral_nodes": true,
+        "source_grid": 65
+      }
     },
     {
       "id": "vlog_ejay_5207_s",
       "name": "VLog 5207 SP3000",
       "tone": "SP3000沖掃方向的5207配色。",
-      "scene": "作者原版V‑Log LUT；僅從VID的Log入口選擇。",
+      "scene": "本機117灰點專用；保留標準版配色。僅從VID的Log入口選擇。",
       "group": "loglut",
       "input": "VLOG",
-      "source": "vlog+5207s+（66位电脑后期用）.cube",
-      "source_sha256": "78d812c8b3577abb4a0925be7ac8151ac0a969449e7dbf8f1b9f37927c451caa",
+      "source": "NX500_117_vlog_ejay_5207_s.cube",
+      "source_sha256": "d677877c22df1ec2e1d03441c72d5e3946e111eaa67d8216f452e331e11ca4bc",
       "source_grid": 65,
       "filename_grid_claim_is_not_used": true,
-      "native_sha256": "9f508e2f3908f26af6e6d6cc71cd0f9d01d5972e121673ec9189346c81561ecd",
+      "native_sha256": "7a174c83724c4e0764727af312d47fff8085bd2d6fbaf70d675e4e1175566dfb",
       "native_grid": 17,
       "native_encoding": "CrCbY-BT601-full-v1",
-      "approximation": false,
+      "approximation": true,
       "numeric_resampling": true,
-      "physical_colour_matching_certified": false
+      "physical_colour_matching_certified": false,
+      "input_mapping": "NX500_LOG117_TO_FACTORY_STANDARD_TC1",
+      "superseded_author_log": {
+        "source": "vlog+5207s+（66位电脑后期用）.cube",
+        "source_sha256": "78d812c8b3577abb4a0925be7ac8151ac0a969449e7dbf8f1b9f37927c451caa",
+        "source_grid": 65,
+        "native_sha256": "9f508e2f3908f26af6e6d6cc71cd0f9d01d5972e121673ec9189346c81561ecd"
+      },
+      "original_standard_sha256": "f2d4822d032c0cca94d76dafb0787c87d85a629e6d9869b1f11dd619175a0b56",
+      "native_fit": {
+        "method": "reachable_ycbcr_interpolation_fit",
+        "grid": 17,
+        "preserves_neutral_nodes": true,
+        "source_grid": 65
+      }
     },
     {
       "id": "vlog_ejay_g200_n_fx_l",
@@ -559,6 +601,42 @@
       "copyright_header": "XH Copyright",
       "original_PC_source": "PC_LUT_SOURCES/XH-5219/XH_5219_7.cube",
       "physical_colour_matching_certified": false
+    },
+    {
+      "id": "vlog_xh_5219_bright",
+      "name": "VLog 5219 明亮",
+      "tone": "作者3號：明亮方向的5219配色。",
+      "scene": "V‑Log／V‑Gamut專用；僅從VID的Log入口選擇。",
+      "group": "loglut",
+      "input": "VLOG",
+      "source": "XH-5219-3.cube",
+      "source_sha256": "437ea4eff4b700aa6d3a1b0577c9e811fdba9d5622d77d4ff6c1c6186e43dd54",
+      "source_grid": 33,
+      "native_sha256": "a142546fb318755837069c0fe520ed22531fa75ef36e378c19f77408232fb0a9",
+      "native_grid": 17,
+      "native_encoding": "CrCbY-BT601-full-v1",
+      "native_fit": "reachable_ycbcr_interpolation_fit",
+      "input_confirmed_by_user": "V-Log",
+      "approximation": true,
+      "copyright_header": "XH Copyright"
+    },
+    {
+      "id": "vlog_xh_5219_hasselblad",
+      "name": "VLog 5219 哈蘇",
+      "tone": "作者7號：哈蘇風格方向的5219配色。",
+      "scene": "V‑Log／V‑Gamut專用；可與明亮版對照。",
+      "group": "loglut",
+      "input": "VLOG",
+      "source": "XH-5219-7.cube",
+      "source_sha256": "168374d18b4595ba4afecaa6a6ccd1b7ba962bf050ffc1bc0853751fab3f5712",
+      "source_grid": 33,
+      "native_sha256": "7b5a3f7442b826c6bd7694777f5a2816501a00dbd04be3f24e2ad0305b62de6a",
+      "native_grid": 17,
+      "native_encoding": "CrCbY-BT601-full-v1",
+      "native_fit": "reachable_ycbcr_interpolation_fit",
+      "input_confirmed_by_user": "V-Log",
+      "approximation": true,
+      "copyright_header": "XH Copyright"
     }
   ]
 }

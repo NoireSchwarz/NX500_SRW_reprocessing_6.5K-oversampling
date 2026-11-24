@@ -5,7 +5,6 @@
 struct nxl_look_info {const char*id,*name,*tone,*scene,*group;};
 static const struct nxl_look_info nxl_restore_info={"","還原LUT","關閉目前LUT，回到本模式基準。","普通模式還原原廠；Log保留原曲線。","other"};
 static const struct nxl_look_info nxl_unknown_info={"?","自訂濾鏡","自訂LUT，請核對輸入曲線與色域。","按OK開啟詳情，MENU逐級返回。","other"};
-static const struct nxl_look_info nxl_video_info={"@video","影片LUT","將目前LUT用於影片輸出。","停止錄影後再切換或調整。","other"};
 static const struct nxl_look_info nxl_look_infos[]={
 {"fuji_provia100f","Fuji Provia 100F","自然均衡，色彩清晰。","適合旅行、風景與日常記錄。","landscape"},
 {"kodak_portra400","Kodak Portra 400","柔和暖調，色彩較為克制。","適合人像、生活與柔和光線。","portrait"},
@@ -21,6 +20,8 @@ static const struct nxl_look_info nxl_look_infos[]={
 {"vlog_ejay_5207_s","VLog 5207 SP3000","SP3000沖掃方向的5207配色。","作者原版V‑Log LUT；僅從VID的Log入口選擇。","loglut"},
 {"vlog_ejay_g200_n_fx_l","VLog Gold 200 FX 冷","Gold 200諾日士配色，FX藍色增強與冷調。","作者原版V‑Log LUT；僅從VID的Log入口選擇。","loglut"},
 {"vlog_ejay_g200_fx_n","VLog Gold 200 FX 暖","Gold 200配色，FX藍色增強與暖調。","作者原版V‑Log LUT；僅從VID的Log入口選擇。","loglut"},
+{"vlog_xh_5219_bright","VLog 5219 明亮","作者3號：明亮方向的5219配色。","V‑Log／V‑Gamut專用；僅從VID的Log入口選擇。","loglut"},
+{"vlog_xh_5219_hasselblad","VLog 5219 哈蘇","作者7號：哈蘇風格方向的5219配色。","V‑Log／V‑Gamut專用；可與明亮版對照。","loglut"},
 {"vlog_v709","V‑Log → V709","松下官方V709還原，輸出展開為滿範圍。","V‑Log／V‑Gamut專用；17點機內重採樣版本。","loglut"},
 {"pan_backlight_n","Backlight-N","自然暖調、柔化暗部對比，適合逆光人像。","原表基於松下Natural；本機普通畫面試用。","portrait"},
 {"pan_smoky_s","Smoky Color-S","抑制亮部與暖色，呈現低飽和的煙霧質感。","原表基於Standard；適合建築、街景與藍天。","cinema"},

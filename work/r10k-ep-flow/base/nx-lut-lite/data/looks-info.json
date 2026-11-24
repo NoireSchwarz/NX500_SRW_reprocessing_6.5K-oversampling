@@ -66,21 +66,21 @@
     "id": "vlog_ejay_5207_n",
     "name": "VLog 5207 Noritsu",
     "tone": "諾日士沖掃方向的日光電影配色。",
-    "scene": "作者原版V‑Log LUT；僅從VID的Log入口選擇。",
+    "scene": "本機117灰點專用；保留標準版配色。僅從VID的Log入口選擇。",
     "group": "loglut"
   },
   {
     "id": "vlog_ejay_5207_n_fx",
     "name": "VLog 5207 Noritsu FX",
     "tone": "諾日士配色加FX藍色增強。",
-    "scene": "作者原版V‑Log LUT；僅從VID的Log入口選擇。",
+    "scene": "本機117灰點專用；保留標準版配色。僅從VID的Log入口選擇。",
     "group": "loglut"
   },
   {
     "id": "vlog_ejay_5207_s",
     "name": "VLog 5207 SP3000",
     "tone": "SP3000沖掃方向的5207配色。",
-    "scene": "作者原版V‑Log LUT；僅從VID的Log入口選擇。",
+    "scene": "本機117灰點專用；保留標準版配色。僅從VID的Log入口選擇。",
     "group": "loglut"
   },
   {
@@ -222,5 +222,19 @@
     "tone": "作者7號：哈蘇風格方向的5219配色。",
     "scene": "適合人像與生活記錄；可與明亮版對照。",
     "group": "portrait"
+  },
+  {
+    "id": "vlog_xh_5219_bright",
+    "name": "VLog 5219 明亮",
+    "tone": "作者3號：明亮方向的5219配色。",
+    "scene": "V‑Log／V‑Gamut專用；僅從VID的Log入口選擇。",
+    "group": "loglut"
+  },
+  {
+    "id": "vlog_xh_5219_hasselblad",
+    "name": "VLog 5219 哈蘇",
+    "tone": "作者7號：哈蘇風格方向的5219配色。",
+    "scene": "V‑Log／V‑Gamut專用；可與明亮版對照。",
+    "group": "loglut"
   }
 ]

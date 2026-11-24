@@ -66,7 +66,7 @@ static volatile sig_atomic_t stopping;
 static void stop(int sig) { (void)sig; stopping = 1; }
 static int debug;
 static void event_log(const char *kind, int a, int b) {
-    if (!debug && strncmp(kind,"WIFI_NATIVE_",12)) return;
+    if (!debug || !strncmp(kind,"WIFI_",5)) return;
     fprintf(stderr,"%s %d %d\n",kind,a,b); fflush(stderr);
     if (access("/mnt/mmc/NXDEMO51/logs",R_OK)==0) {
         FILE *f=fopen("/mnt/mmc/NXDEMO51/logs/startup.log","a");

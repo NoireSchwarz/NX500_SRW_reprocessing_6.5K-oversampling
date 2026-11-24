@@ -27,6 +27,7 @@ static int gamma_process_start(uint32_t out[2]){
  for(unsigned field=3;field<22;field++){q=strchr(q,' ');if(!q)return 0;while(*q==' ')q++;}
  if(*q<'0'||*q>'9')return 0;errno=0;char*end;unsigned long long ticks=strtoull(q,&end,10);if(errno||!ticks||(*end!=' '&&*end!='\n'&&*end))return 0;out[0]=(uint32_t)ticks;out[1]=(uint32_t)(ticks>>32);return 1;
 }
+#include "gamma_lifecycle_contract.h"
 static int gamma_load_lease(void){
  int f=open("/tmp/nx-lut-lite/gamma-r11h.lease",O_RDONLY|O_NOFOLLOW|O_CLOEXEC);
  if(f<0){uint32_t callbacks[4];return errno==ENOENT&&gamma_callback_words(callbacks)&&callbacks[0]==NG_CALCULATE&&callbacks[1]==NG_PARENT_UPDATE&&callbacks[2]==NG_PARENT_UPDATE&&callbacks[3]==NG_COLOR_CALCULATE;}
@@ -81,12 +82,12 @@ static int gamma_dump(const char*dir,const char*tag){
  if(n<0||(unsigned)n>=sizeof scope){s->stage="FORMAT_SCOPE";s->error=EOVERFLOW;goto finish;}
  GS_WRITE("WRITE_VIDEO_SCOPE","video-scope.json",scope,(unsigned)n);
  char technical[2048];n=snprintf(technical,sizeof technical,
-  "{\"format\":\"NXL_VLOG8_REFERENCE1\",\"release\":\"R11q\",\"profile\":%u,\"encoding_bits\":8,\"signal_range\":\"full\",\"target_primaries\":\"V_GAMUT_D65\",\"native_black\":%u,\"native_white\":%u,\"scene_white_q16\":%u,\"physical_reflectance_calibrated\":false,\"reference_basis\":\"NX500_R11N_WORKING_EXPOSURE_NOT_PHYSICAL_GRAY\",\"native_working_anchor\":2965,\"working_anchor_target_code8\":132,\"explicit_working_anchor_node\":true,\"fixed_output_gain\":1.0408323021957888,\"fixed_output_offset_code8\":-0.8793405230977542,\"linear_input_gain\":2.5203589432187403,\"offline_input_scale_required\":false,\"factory_gamma_input_raw\":%u,\"factory_gamma_x_scale_raw\":%u,\"color_object\":%u,\"color_epoch\":%u,\"color_applies\":%u,\"color_reuses\":%u,\"color_failures\":%u,\"color_bank1_same\":%u,\"video_color_epoch\":%u,\"video_color_object\":%u,\"video_color_hash\":%u,\"video_queues_this_epoch\":%u,\"rollback_count\":%u,\"rollback_failed\":%u,\"transaction_fault\":%u,\"live_color_callback\":%u,\"actual_new_video_consumption_verified\":false}\n",
+  "{\"format\":\"NXL_VLOG8_REFERENCE1\",\"release\":\"RC6.14.11-log117\",\"profile\":%u,\"encoding_bits\":8,\"signal_range\":\"full\",\"target_primaries\":\"V_GAMUT_D65\",\"native_black\":%u,\"native_white\":%u,\"scene_white_q16\":%u,\"physical_reflectance_calibrated\":false,\"reference_basis\":\"NX500_S5II_RELATIVE_117_NOT_PHYSICAL_GRAY\",\"native_working_anchor\":2965,\"working_anchor_target_code8\":117,\"explicit_working_anchor_node\":true,\"fixed_output_gain\":1.0408323021957888,\"fixed_output_offset_code8\":-0.8793405230977542,\"linear_input_gain\":1.4023949099130855,\"offline_input_scale_required\":false,\"factory_gamma_input_raw\":%u,\"factory_gamma_x_scale_raw\":%u,\"color_object\":%u,\"color_epoch\":%u,\"color_applies\":%u,\"color_reuses\":%u,\"color_failures\":%u,\"color_bank1_same\":%u,\"video_color_epoch\":%u,\"video_color_object\":%u,\"video_color_hash\":%u,\"video_queues_this_epoch\":%u,\"rollback_count\":%u,\"rollback_failed\":%u,\"transaction_fault\":%u,\"live_color_callback\":%u,\"actual_new_video_consumption_verified\":false}\n",
   g.profile,g.native_black,g.native_white,g.scene_white_q16,g.last_input,(g.last_input>>7)&8191u,g.color_object,g.color_epoch,g.color_applies,g.color_reuses,g.color_failures,g.color_bank1_same,g.video_color_epoch,g.video_color_object,g.video_color_hash,g.video_queues,g.rollback_count,g.rollback_failed,g.transaction_fault,g.live_color_callback);
  if(n<0||(unsigned)n>=sizeof technical){s->stage="FORMAT_VLOG8_SCOPE";s->error=EOVERFLOW;goto finish;}
  GS_WRITE("WRITE_VLOG8_SCOPE","vlog8-reference.json",technical,(unsigned)n);
  char binding[1200];n=snprintf(binding,sizeof binding,
-  "{\"format\":\"NXL_VLOG8_BINDING1\",\"release\":\"R11q\",\"fault\":%u,\"reason\":%u,\"parent_calls\":%u,\"ignored_parents\":%u,\"ignored_parent_last\":%u,\"ignored_input_raw\":%u,\"parent\":%u,\"parent_vptr\":%u,\"input_raw\":%u,\"input_resolved\":%u,\"gamma\":%u,\"color\":%u,\"gamma_context_before\":%u,\"color_context_before\":%u,\"getter\":%u,\"getter_calls\":%u,\"native_queue_is_hardware_completion\":false}\n",
+  "{\"format\":\"NXL_VLOG8_BINDING1\",\"release\":\"RC6.14.11-log117\",\"fault\":%u,\"reason\":%u,\"parent_calls\":%u,\"ignored_parents\":%u,\"ignored_parent_last\":%u,\"ignored_input_raw\":%u,\"parent\":%u,\"parent_vptr\":%u,\"input_raw\":%u,\"input_resolved\":%u,\"gamma\":%u,\"color\":%u,\"gamma_context_before\":%u,\"color_context_before\":%u,\"getter\":%u,\"getter_calls\":%u,\"native_queue_is_hardware_completion\":false}\n",
   g.fault,g.binding_reason,g.parent_calls,g.parent_ignored,g.ignored_parent_last,g.ignored_parent_input_raw,g.binding_parent,g.binding_parent_vptr,g.binding_input_raw,g.binding_input_resolved,g.binding_gamma,g.binding_color,g.binding_gamma_context_before,g.binding_color_context_before,g.binding_getter,g.binding_getter_calls);
  if(n<0||(unsigned)n>=sizeof binding){s->stage="FORMAT_BINDING";s->error=EOVERFLOW;goto finish;}
  GS_WRITE("WRITE_BINDING","binding.json",binding,(unsigned)n);
@@ -115,6 +116,8 @@ static int gamma_before_ready(const char*dir,int read_only){
 }
 static int gamma_result(int ok,int state,const char*dir){
  (void)state;if(dir&&*dir)(void)gamma_dump(dir,"after");struct ng_state g;memset(&g,0,sizeof g);int valid=gamma_lease_exists&&gamma_read_state(&g);const char*phase=!gamma_lease_exists?"OFF":!valid?"PREPARED":g.fault?"FAILED":g.queued_epoch!=g.epoch?"WAIT_NATIVE":g.detached?"FACTORY_QUEUED":"NATIVE_QUEUED";
+ int lifecycle_pending=gamma_life_pending_state();
+ if(lifecycle_pending<0||(lifecycle_pending>0&&(!valid||g.mode!=NG_FACTORY||!g.detached||g.queued_epoch!=g.epoch))){ok=0;phase="FAILED";reason=lifecycle_pending<0?"GAMMA_LIFECYCLE_PENDING_INVALID":"GAMMA_LIFECYCLE_RESTORE_REQUIRED";}
  const char*mode=valid&&g.mode==NG_LOG?"LOG":valid&&g.mode==NG_LIFT?"LIFT":"FACTORY";
  if(valid&&g.fault)ok=0;
  const char*why=!ok?(valid&&g.fault?"GAMMA_NATIVE_FAILURE":reason):!gamma_lease_exists?"GAMMA_FACTORY_NO_LEASE":!valid?"GAMMA_PREPARED_NOT_ENTERED":g.fault?"GAMMA_NATIVE_FAILURE":g.queued_epoch!=g.epoch?"GAMMA_WAIT_NATIVE_UPDATE":g.detached?"GAMMA_FACTORY_NATIVE_QUEUED":"GAMMA_NATIVE_QUEUED_HARDWARE_PENDING";

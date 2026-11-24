@@ -89,7 +89,7 @@ static __attribute__((noinline)) int take(volatile uint32_t*p,uint32_t value){ui
 static __attribute__((noinline)) void release(volatile uint32_t*p){uint32_t saved=irq_save();*p=0;irq_restore(saved);}
 static __attribute__((noinline)) void count_one(volatile uint32_t*p){uint32_t saved=irq_save();*p=*p+1u;irq_restore(saved);}
 static const uint32_t log_x[19]={0u,24u,48u,65u,95u,148u,209u,296u,516u,953u,1804u,2965u,4578u,5995u,7991u,10461u,13464u,15000u,16383u};
-static const uint32_t log_y[19]={126u,147u,167u,181u,204u,235u,262u,291u,341u,399u,462u,512u,556u,584u,613u,641u,667u,678u,687u};
+static const uint32_t log_y[19]={126u,138u,149u,157u,171u,195u,218u,243u,288u,343u,404u,453u,497u,524u,554u,581u,607u,618u,627u};
 __attribute__((used,visibility("default")))
 int32_t nxl_gamma_compute(uint32_t object,uint32_t input,uint32_t unused){
  volatile struct ng_state*g=own_state();

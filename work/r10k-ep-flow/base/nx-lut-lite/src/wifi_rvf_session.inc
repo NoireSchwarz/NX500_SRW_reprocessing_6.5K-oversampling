@@ -6,7 +6,6 @@
 #define RVF_IDLE_MS 12000ull
 #define RVF_JOIN_MS 60000ull
 #define RVF_STOP_MS 125000ull
-#define RVF_LOG "/mnt/mmc/NXDEMO51/logs/wifi-rvf-rc614.log"
 
 enum { RVF_ENTERING=1,RVF_READY,RVF_EXITING,RVF_EXITED,RVF_UNCONFIRMED,RVF_RADIO_RESTORE };
 struct rvf_owner {
@@ -21,7 +20,6 @@ static unsigned long long native_ready_at,native_viewer_seen,native_close_at;
 static char native_token[33];
 static int rvf_update_read=-1,rvf_update_write=-1;
 static unsigned long long rvf_update_event;
-static unsigned long long rvf_push_connections,rvf_push_frames,rvf_push_bytes,rvf_push_skipped;
 static struct rvf_record rvf_stream_record;
 static int rvf_frequency_mhz,rvf_verified_frequency;
 
@@ -30,16 +28,6 @@ static double rvf_rate(const struct rvf_record *r){
         (r->frames-1)*1000.0/(r->last_frame-r->first_frame):0;
 }
 
-static void rvf_stage(const char *name,int a,int b,int c){
-    if(physical_usb()!=0)return;
-    int fd=open(RVF_LOG,O_WRONLY|O_APPEND|O_CREAT|O_CLOEXEC|O_NOFOLLOW,0600);
-    if(fd<0)return;
-    char line[180];
-    int n=snprintf(line,sizeof line,WIFI_VERSION " session=%ld_%llu ms=%llu stage=%s a=%d b=%d c=%d\n",
-        (long)native.pid,native.tick,monotime(),name,a,b,c);
-    if(n>0&&(size_t)n<sizeof line)(void)write(fd,line,(size_t)n);
-    close(fd);
-}
 
 static int rvf_owner_read(struct rvf_owner *owner){
     return wire_read(RVF_OWNER,owner,sizeof *owner,RVF_OWNER_MAGIC)&&
@@ -135,15 +123,6 @@ static int rvf_soap_local(const struct rvf_url *u,const struct identity *id,unsi
     return r.fd<0?0:r.http;
 }
 
-static int rvf_mime_observation(const unsigned char *buf,size_t header_bytes){
-    if(!header_bytes||header_bytes>HEADER_CAP)return 0;
-    char head[HEADER_CAP+1],type[80];
-    memcpy(head,buf,header_bytes);head[header_bytes]=0;
-    if(!rvf_header(head,"Content-Type",type,sizeof type))return 0;
-    if(!strcasecmp(type,"video/x-avi"))return 1;
-    if(!strcasecmp(type,"video/x-avi \n"))return 2;
-    return 3;
-}
 
 static const char *rvf_consume(const struct rvf_url *url,const struct rvf_url *control,
         const struct identity *id,unsigned char *buf){
@@ -151,7 +130,6 @@ static const char *rvf_consume(const struct rvf_url *url,const struct rvf_url *c
     snprintf(request,sizeof request,"GET %s HTTP/1.1\r\nHost: %s:%u\r\nUser-Agent: SEC_RVF_ML_%s\r\nAccess-Method: manual\r\nConnection: close\r\n\r\n",url->path,url->ip,url->port,id->mac);
     phase="stream";
     struct reply r=open_http(url,request,buf,monotime()+8000);
-    rvf_stage("STREAM_HTTP_MIME_SOCKET",r.http,rvf_mime_observation(buf,r.body),r.fd>=0);
     if(r.fd<0)return "STOCK_STREAM_UNAVAILABLE";
     const char *result="STOCK_STREAM_HTTP_UNSUPPORTED";
     if(r.http==401||r.http==403)result="STOCK_STREAM_DENIED";
@@ -258,7 +236,6 @@ static int rvf_receive(const struct identity *id){
     check_peer();
     if(!stopping&&!outside_peer&&!peer_check_error&&original_active()&&stock_ports()==1&&start_callback(id)){
         struct confirmation ack=mode_request(id,0,buffer);
-        rvf_stage("REGISTER",ack.status,ack.server,!strcasecmp(ack.operation,"RVF"));
         reason=ack.status==401||ack.status==403?"STOCK_REGISTRATION_DENIED":"STOCK_REGISTRATION_UNCONFIRMED";
         if(ack.status==200&&ack.server&&*ack.operation){
             rvf.dirty=1;rvf.requests=1;
@@ -319,17 +296,14 @@ static int rvf_preflight(uint32_t window){
 
 static int rvf_wait_receiver(void){
     unsigned long long began=monotime(),deadline=began+42000,registered=0;
-    int old_mode=-2,old_ports=-2,old_ip=-2;
+    int last_mode=-2;
     while(!stopping&&physical_usb()==0&&monotime()<deadline){
         if(!receiver){
             uint32_t mode;struct identity id;
             int active=rvf_native_state(native.camera,native.camera_tick,&mode)?(int)mode:-1;
             int ports=active==2?stock_ports():0;
             int ap=active==2&&identity_for("uap0",&id);
-            if(active!=old_mode||ports!=old_ports||ap!=old_ip){
-                rvf_stage("ORIGINAL_MODE_LISTENERS_IP",active,ports,ap);
-                old_mode=active;old_ports=ports;old_ip=ap;
-            }
+            last_mode=active;
             if(active==2&&ports==1&&ap){
                 int updates[2];
                 if(pipe2(updates,O_NONBLOCK|O_CLOEXEC)){why="RVF_FRAME_NOTIFY_UNAVAILABLE";return 0;}
@@ -351,7 +325,7 @@ static int rvf_wait_receiver(void){
                current.server_tick==native.tick&&current.started>=registered-50){
                 if(current.state==RVF_STREAMING&&current.frames&&current.updated+3000>=monotime()&&
                    wire_process(receiver,current.tick,RVF_EXE)){
-                    rvf_stage("FIRST_JPEG",(int)current.width,(int)current.height,1);return 1;
+                    return 1;
                 }
                 if(current.state==RVF_FAILED){rvf=current;why=rvf.reason;return 0;}
             }
@@ -360,25 +334,11 @@ static int rvf_wait_receiver(void){
         }
         poll(NULL,0,160);
     }
-    why=stopping?"RVF_STOP_REQUESTED":old_mode!=2?"ORIGINAL_RVF_MODE_NOT_ENTERED":
+    why=stopping?"RVF_STOP_REQUESTED":last_mode!=2?"ORIGINAL_RVF_MODE_NOT_ENTERED":
         !registered?"ORIGINAL_RVF_PORT_OR_IP_NOT_READY":"RVF_READY_TIMEOUT";
     return 0;
 }
 
-static void rvf_log_result(const char *reason,int restored,int radio_restored){
-    if(physical_usb()!=0)return;
-    int fd=open(RVF_LOG,O_WRONLY|O_APPEND|O_CREAT|O_CLOEXEC|O_NOFOLLOW,0600);
-    if(fd<0)return;
-    struct rvf_record current={0};
-    if(!rvf_record_read(&current)||current.server!=native.pid||current.server_tick!=native.tick)memset(&current,0,sizeof current);
-    char line[680];
-    int n=snprintf(line,sizeof line,WIFI_VERSION " session=%ld_%llu epoch=%lld reason=%s stream=%s frames=%llu size=%ux%u codec=%s byebye=%d original_ports_hotspot_restored=%d radio_restored=%d frequency_mhz=%d native_fps=%.3f web_connections=%llu web_frames=%llu web_jpeg_bytes=%llu web_frame_id_gaps=%llu\n",
-        (long)native.pid,native.tick,(long long)time(NULL),reason,current.reason,current.frames,current.width,current.height,current.codec,
-        (current.requests&2)!=0,restored,radio_restored,rvf_verified_frequency,rvf_rate(&current),
-        rvf_push_connections,rvf_push_frames,rvf_push_bytes,rvf_push_skipped);
-    if(n>0&&(size_t)n<sizeof line)(void)write(fd,line,(size_t)n);
-    close(fd);
-}
 
 static int rvf_restore_native(void){
     (void)rvf_owner_write(RVF_EXITING,"RVF_RESTORING");
@@ -395,18 +355,12 @@ static int rvf_restore_native(void){
     unlink(RVF_FRAME);
     unsigned long long since=0,end=monotime()+30000;
     int exit_sent=0,restored=0;
-    int last_gui=-2,last_mode=-2,last_ports=-2,last_ip=-2,last_up=-2;
     while(monotime()<end){
         uint32_t gui,mode;char ip[32];
         if(physical_usb()==0&&nxl_rvf_ui_observe(native.camera,native.camera_tick,&gui,&mode)){
             int ports=rvf_listeners(1),has_ip=interface_ip("uap0",ip),up=rvf_ap_up();
-            if(last_gui!=(int)gui||last_mode!=(int)mode||last_ports!=ports){
-                rvf_stage("RESTORE_GUI_MODE_PORTS",(int)gui,(int)mode,ports);
-                last_gui=(int)gui;last_mode=(int)mode;last_ports=ports;
-            }
-            if(last_ip!=has_ip||last_up!=up){rvf_stage("RESTORE_AP_IP_UP_BASELINE",has_ip,up,native.ap_up);last_ip=has_ip;last_up=up;}
             int camera_menu=gui==NXL_RVF_GUI_MOBILE||gui==NXL_RVF_GUI_VIEWFINDER;
-            if(camera_menu&&!exit_sent){exit_sent=rvf_ui_command(NXL_RVF_UI_EXIT);if(exit_sent)rvf_stage("RESTORE_MENU_REQUEST",(int)gui,(int)mode,1);}
+            if(camera_menu&&!exit_sent)exit_sent=rvf_ui_command(NXL_RVF_UI_EXIT);
             /* The radio lease may have brought uap0 up before the menu opened.
              * A down interface also confirms native release in that case. */
             if(!mode&&!camera_menu&&ports==0&&!has_ip&&up>=0&&
@@ -416,7 +370,6 @@ static int rvf_restore_native(void){
             }else since=0;
         }else{
             since=0;
-            if(last_gui!=-1){rvf_stage("RESTORE_STATE_UNAVAILABLE",-1,-1,-1);last_gui=-1;}
         }
         poll(NULL,0,180);
     }

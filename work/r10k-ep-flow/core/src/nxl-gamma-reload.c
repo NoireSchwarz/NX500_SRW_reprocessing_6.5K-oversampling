@@ -200,27 +200,50 @@ static int clean_log_ready(void){
  ssize_t n=ok?read(fd,text,sizeof text):-1;if(close(fd))ok=0;
  return ok&&n==(ssize_t)(sizeof wanted-1)&&!memcmp(text,wanted,sizeof wanted-1);
 }
+/* The controller holds the Gamma command lock across rotation and reports.
+ * Standalone service diagnostics can still use the original report location. */
+static int gamma_audit_directory(char *dir,size_t size,const char *kind,uint32_t cookie){
+ static const char active[]="/mnt/mmc/NXDEMO51/logs/vlog-switch/run-1";
+ const char *base=getenv("NXL_GAMMA_AUDIT_DIR");
+ struct stat st;
+ if(base){
+  if(strcmp(base,active)||lstat(active,&st)||!S_ISDIR(st.st_mode))return 0;
+ }else base="/mnt/mmc/NXDEMO51";
+ int length=snprintf(dir,size,"%s/%s_%llu_%u_%08x",base,kind,
+                     (unsigned long long)time(NULL),(unsigned)getpid(),cookie);
+ if(length<0||(size_t)length>=size||mkdir(dir,0700)){
+  dir[0]=0;
+  return 0;
+ }
+ return 1;
+}
 int main(int argc,char**argv){
- if(argc==2&&!strcmp(argv[1],"--version")){puts("NXL_GAMMA_RELOAD=R11q; VLOG8_VGAMUT_R11N_WORKING_GAIN2_520; PHYSICAL_GRAY_CALIBRATED=0; GAMMA_SCHEMA=3; TEXT_SCHEMA=1; NATIVE_COLOR_GAMMA_PREQUEUE_TRANSACTION; OWNED_CAP_BOOT_LEASE; ORIGINAL_BANK0_PARAMETER_QUEUE; NO_EXTRA_SRAM_LOAD; NO_CORE_LIBRARY_CHANGE");return 0;}
- if(argc!=2||(strcmp(argv[1],"status")&&strcmp(argv[1],"lift")&&strcmp(argv[1],"log")&&strcmp(argv[1],"restore")&&strcmp(argv[1],"preflight")))return 2;
+ if(argc==2&&!strcmp(argv[1],"--version")){puts("NXL_GAMMA_RELOAD=RC6; LIFECYCLE_GUARDED_FACTORY_REBUILD; VLOG8_VGAMUT_WORKING_GRAY117; PHYSICAL_GRAY_CALIBRATED=0; GAMMA_SCHEMA=3; TEXT_SCHEMA=1; NATIVE_COLOR_GAMMA_PREQUEUE_TRANSACTION; OWNED_CAP_BOOT_LEASE; ORIGINAL_BANK0_PARAMETER_QUEUE; NO_EXTRA_SRAM_LOAD; NO_CORE_LIBRARY_CHANGE");return 0;}
+ if(argc!=2||(strcmp(argv[1],"status")&&strcmp(argv[1],"lift")&&strcmp(argv[1],"log")&&strcmp(argv[1],"restore")&&strcmp(argv[1],"preflight")&&strcmp(argv[1],"restore-fresh")))return 2;
  gamma_requested=!strcmp(argv[1],"lift")?NG_LIFT:!strcmp(argv[1],"log")?NG_LOG:NG_OFF;
+ int force_factory_rebuild=!strcmp(argv[1],"restore-fresh");
  int ok=0,queue=-1,mode_lock=-1,run_lock=-1,command_queued=0,request_started=0,pending_owned=0,worker_stable=0,operation=VFW_TRACE,read_only=!strcmp(argv[1],"status")||!strcmp(argv[1],"preflight");char dir[1024]={0},path[1200];struct alloc_regs regs;struct alloc_message message;started=ns();nonce=(uint32_t)started^(uint32_t)getpid()^VFW_MAGIC;if(!nonce)nonce=1;
  signal(SIGINT,stop);signal(SIGTERM,stop);signal(SIGHUP,stop);signal(SIGPIPE,SIG_IGN);signal(SIGALRM,stop);alarm(35);
 #define REQUIRE(c,m) do{if(!(c)){reason=(m);goto done;}}while(0)
  reason="NX500_FIRMWARE_IDENTITY_FAILED";REQUIRE(firmware()&&fingerprint("/usr/apps/com.samsung.di-camera-app/bin/di-camera-app",MEM_APP_BYTES,MEM_APP_FNV),reason);
  pid=find_camera();REQUIRE(pid>1,"CAMERA_PROCESS_UNAVAILABLE");snprintf(path,sizeof path,"/proc/%d/mem",pid);procfd=open(path,(read_only?O_RDONLY:O_RDWR)|O_CLOEXEC);REQUIRE(procfd>=0,"CAMERA_PROCESS_READ_FAILED");
- /* Use a unique SD directory for immutable native trace / rollback evidence. */
- snprintf(dir,sizeof dir,"/mnt/mmc/NXDEMO51/GAMMA_R11Q_%llu_%d_%08x",(unsigned long long)time(NULL),getpid(),nonce);REQUIRE(!mkdir(dir,0700),"VIDEO_AUDIT_DIRECTORY_FAILED");
- snprintf(path,sizeof path,"%s/probe.log",dir);log_file=fopen(path,"wx");snprintf(path,sizeof path,"%s/trace_events.txt",dir);trace_file=fopen(path,"wx");snprintf(path,sizeof path,"%s/native-commands.log",dir);command_log=fopen(path,"wx");REQUIRE(log_file&&trace_file&&command_log,"VIDEO_AUDIT_OPEN_FAILED");fprintf(log_file,"GAMMA_RELOAD_RUNTIME=R11q command=%s native_protocol=3 text_protocol=1 core_library_replaced=0\n",argv[1]);fflush(log_file);
+ REQUIRE(gamma_audit_directory(dir,sizeof dir,"GAMMA_R11Q",nonce),"VIDEO_AUDIT_DIRECTORY_FAILED");
+ snprintf(path,sizeof path,"%s/probe.log",dir);log_file=fopen(path,"wx");snprintf(path,sizeof path,"%s/trace_events.txt",dir);trace_file=fopen(path,"wx");snprintf(path,sizeof path,"%s/native-commands.log",dir);command_log=fopen(path,"wx");REQUIRE(log_file&&trace_file&&command_log,"VIDEO_AUDIT_OPEN_FAILED");fprintf(log_file,"GAMMA_RELOAD_RUNTIME=RC6.14.11-log117 command=%s native_protocol=3 text_protocol=1 core_library_replaced=0\n",argv[1]);fflush(log_file);
  REQUIRE(load_maps(dir,"begin")&&app_guards()&&constructor(),"CAMERA_CONTEXT_OR_OUTPUT_UNKNOWN");devfd=open("/dev/mem",O_RDONLY|O_SYNC|O_CLOEXEC);REQUIRE(devfd>=0&&code_guards()&&vfw_capture_route(physical_read,NULL,&observed,&observed_route),"FULLWIDTH_ORIGINAL_CODE_OR_PROFILE_UNREADABLE");
  REQUIRE(snapshot_file(dir,"before-profile.bin"),"FULLWIDTH_PROFILE_AUDIT_SAVE_FAILED");
  if(!read_only&&gamma_requested==NG_LOG){REQUIRE(clean_log_ready(),"CLEAN_LOG_PREPARE_REQUIRED");REQUIRE(slog8_neutral_slot(),"CLEAN_LOG_NEUTRAL_TABLE_CHANGED");}
- REQUIRE(gamma_code_guards(),"GAMMA_NATIVE_CODE_IDENTITY_FAILED");REQUIRE(gamma_load_lease(),"GAMMA_LEASE_IDENTITY_OR_OWNERSHIP_FAILED");REQUIRE(gamma_before_ready(dir,read_only),"GAMMA_BEFORE_SNAPSHOT_FAILED");
+ REQUIRE(gamma_code_guards(),"GAMMA_NATIVE_CODE_IDENTITY_FAILED");
+ int life_pending=gamma_life_pending_state();
+ REQUIRE(life_pending>=0,"GAMMA_LIFECYCLE_PENDING_INVALID");
+ REQUIRE(!life_pending||read_only||gamma_requested==NG_OFF,"GAMMA_LIFECYCLE_RESTORE_REQUIRED");
+ REQUIRE(!force_factory_rebuild||life_pending==1,"GAMMA_LIFECYCLE_REBUILD_WITHOUT_RETIREMENT");
+ REQUIRE(gamma_load_lease(),"GAMMA_LEASE_IDENTITY_OR_OWNERSHIP_FAILED");
+ REQUIRE(!force_factory_rebuild||!gamma_lease_exists,"GAMMA_LIFECYCLE_NEW_LEASE_ALREADY_EXISTS");REQUIRE(gamma_before_ready(dir,read_only),"GAMMA_BEFORE_SNAPSHOT_FAILED");
  if(gamma_restore_audit_bypass){fprintf(log_file,"GAMMA_RESTORE_WITH_INCOMPLETE_BEFORE_SNAPSHOT stage=%s errno=%d\n",gamma_before_snapshot.stage,gamma_before_snapshot.error);fflush(log_file);}
  if(!read_only)REQUIRE(tmc_snapshot_file(dir),"NATIVE_TIMING_PREFLIGHT_SAVE_FAILED");
  int initial=vfw_route_mode(&observed,&observed_route);REQUIRE(initial&&vfw_budget(&observed),"FULLWIDTH_PROFILE_OR_NATIVE_BUDGET_UNKNOWN");
  if(!strcmp(argv[1],"preflight"))REQUIRE(quiet_source(),idle_reason);
- if(read_only||(!gamma_lease_exists&&gamma_requested==NG_OFF)){ok=1;reason="GAMMA_READ_ONLY_STATUS";goto done;}
+ if(read_only||(!gamma_lease_exists&&gamma_requested==NG_OFF&&!force_factory_rebuild)){ok=1;reason="GAMMA_READ_ONLY_STATUS";goto done;}
  (void)mkdir("/tmp/nx-lut-lite",0700);mode_lock=lockfile("/tmp/nx-lut-lite/video-mode.fd");run_lock=lockfile("/mnt/mmc/NXDEMO51/run.lock");struct stat st;REQUIRE(mode_lock>=0&&run_lock>=0&&lstat("/tmp/nx-lut-lite/engine.lock",&st)<0&&errno==ENOENT,"VIDEO_MODE_OR_SRW_TASK_BUSY");
  REQUIRE(lstat("/tmp/nx-lut-lite/video-fullwidth.pending",&st)<0&&errno==ENOENT,"PREVIOUS_VIDEO_TRANSACTION_UNCONFIRMED_RESTART_REQUIRED");
  REQUIRE(operation!=VFW_APPLY||constructor()==VM_UHD,"RESTORE_3840_UHD_OUTPUT_FIRST");REQUIRE(quiet_source(),idle_reason);REQUIRE(slot_original(),"NATIVE_ATTRIBUTE_DISPATCH_BUSY");

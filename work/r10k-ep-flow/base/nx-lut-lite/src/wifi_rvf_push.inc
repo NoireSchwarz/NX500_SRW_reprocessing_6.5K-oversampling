@@ -30,7 +30,6 @@ static void rvf_push_response(struct client *c){
     c->head_len=sizeof response_header-1;
     c->rvf_push=1;
     c->push_event=ULLONG_MAX;
-    rvf_tcp_open(c->fd,++rvf_push_connections,monotime());
 }
 
 static void rvf_push_updates(short events){
@@ -78,11 +77,7 @@ static void rvf_push_fill(struct client *c,unsigned long long now){
     memcpy(body+payload,"\r\n",2);
     c->length=(size_t)prefix+payload+2;
     c->sent=0;
-    uint32_t skipped=c->push_id?(uint32_t)(h.id-c->push_id-1):0;
-    rvf_push_skipped+=skipped;
-    rvf_tcp_select(now,(uint32_t)h.id,skipped);
     c->push_id=h.id;
-    c->push_payload=h.size;
 }
 
 static void rvf_push_send(struct client *c){
@@ -92,21 +87,15 @@ static void rvf_push_send(struct client *c){
     const void *p=header?(const void *)(c->header+c->head_sent):c->data+c->sent;
     ssize_t n=send(c->fd,p,left,MSG_NOSIGNAL);
     if(n<=0){
-        if(n<0&&errno==EAGAIN)rvf_tcp.window.eagain++;
-        else if(!n||errno!=EINTR)client_close_with_status(c,"STREAM_SEND_ERROR",n<0?errno:0);
+        if(!n||(errno!=EAGAIN&&errno!=EINTR))client_close(c);
         return;
     }
     c->activity=monotime();
     if(header)c->head_sent+=(size_t)n;
     else{
-        if((size_t)n<left)rvf_tcp.window.partial++;
-        transfer.body+=(unsigned long long)n;
         c->sent+=(size_t)n;
         if(c->sent==c->length){
             native_viewer_seen=c->activity;
-            rvf_tcp_queued(c->activity);
-            rvf_push_frames++;
-            rvf_push_bytes+=c->push_payload;
         }
     }
 }

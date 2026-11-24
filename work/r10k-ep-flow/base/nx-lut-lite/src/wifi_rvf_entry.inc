@@ -72,13 +72,10 @@ static int rvf_finish(const char *reason,int srw,int radio_requested){
     if(srw>=0)close(srw);
     if(original_restored&&radio_requested&&rvf_owner_write(RVF_RADIO_RESTORE,"RVF_RESTORING")){
         radio_restored=rvf_radio_command("--stop-rvf",32000);
-        rvf_stage("RADIO_RESTORE",radio_restored,0,0);
     }
     int restored=original_restored&&radio_restored;
     int journal=rvf_owner_write(restored?RVF_EXITED:RVF_UNCONFIRMED,
         restored?reason:"RVF_RESTORE_UNCONFIRMED");
-    rvf_log_result(reason,original_restored,radio_restored);
-    rvf_tcp_save((long)native.pid,native.tick,rvf_verified_frequency);
     return restored&&journal?0:1;
 }
 
@@ -89,9 +86,7 @@ static int rvf_confirm_frequency(void){
         if(wifi_frequency_is_24ghz(rvf_frequency_mhz))break;
         poll(NULL,0,180);
     }while(!stopping&&physical_usb()==0&&monotime()<until);
-    rvf_stage("ACTIVE_FREQUENCY",rvf_frequency_mhz,2400,0);
     if(!wifi_frequency_is_24ghz(rvf_frequency_mhz))return 0;
-    rvf_stage("ACTIVE_PROFILE_STOCK_24",1,rvf_frequency_mhz,0);
     rvf_verified_frequency=rvf_frequency_mhz;
     return 1;
 }
@@ -105,17 +100,14 @@ static int rvf_serve(const char *root,const char *window){
     int srw=run_guard();
     if(srw<0){close(lock);fputs("SRW_BUSY\n",stderr);return 1;}
     if(!rvf_preflight((uint32_t)value)){
-        rvf_stage(why,0,0,0);
         fprintf(stderr,"RVF_PREFLIGHT %s\n",why);close(srw);close(lock);return 1;
     }
     int prepared=!stopping&&rvf_radio_command("--stock-ready",2500);
-    rvf_stage("STOCK_RADIO_READY",prepared,stopping,0);
     native.ap_up=rvf_ap_up();
     int camera_ready=prepared&&native.ap_up>=0&&rvf_native_idle(&native)&&
         rvf_owner_write(RVF_ENTERING,"RVF_OPENING_ORIGINAL_GUI");
     if(!prepared)why="RVF_STOCK_RADIO_UNCONFIRMED";
     else if(!camera_ready)why="ORIGINAL_GUI_NOT_READY";
-    if(camera_ready)rvf_stage("OPEN_UI",1,0,0);
     int ready=0;
     if(!stopping&&camera_ready&&rvf_ui_command(NXL_RVF_UI_OPEN)&&rvf_wait_receiver()){
         if(!rvf_confirm_frequency())why="RVF_STOCK_24_UNCONFIRMED";
@@ -126,12 +118,7 @@ static int rvf_serve(const char *root,const char *window){
                 if(rvf_credentials(&native,&ap)){ready=1;break;}
                 poll(NULL,0,180);
             }
-            rvf_stage("HOTSPOT_QR_INPUT",ready,ready?ap.security:-1,0);
             if(!ready)why="RVF_HOTSPOT_IDENTITY_UNCONFIRMED";
-        }
-        if(ready&&!stopping){
-            int probed=rvf_radio_command("--read-rvf-power",2200);
-            rvf_stage("RF_POWER_PROBE",probed,rvf_verified_frequency,0);
         }
         if(ready&&!stopping){
             if(rvf_owner_write(RVF_READY,"RVF_RUNNING"))serve(root);

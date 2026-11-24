@@ -1,5 +1,34 @@
 # Loaded under the existing engine lock plus the video-mode flock and the original engine.lock SRW handoff.
 CLEAN_LOG=$RUN/clean-log.policy
+LOG_NEUTRAL_SHA=a0692509fba710a54cf47c9ce4eb05c3ef2c9a7e514b3948468b3d415f99b056
+PHOTO_SLOT=0x8111EC00
+PHOTO_SAFE_SLOT=0x81115200
+PHOTO_INTENT=$ST/still-flat.intent
+PHOTO_BACKUP=$ST/a19_orig.bin
+
+photo_log_owned(){
+ [ -f "$PHOTO_INTENT" ] && [ ! -L "$PHOTO_INTENT" ] &&
+ [ -f "$PHOTO_BACKUP" ] && [ ! -L "$PHOTO_BACKUP" ] || return 1
+ photo_backup_sha=$("$OPS" sha256 "$PHOTO_BACKUP") || return 1
+ [ "$(cat "$PHOTO_INTENT")" = "NXL_STILL_FLAT1171 $photo_backup_sha" ]
+}
+photo_log_matches(){
+ "$SW" dry "$PHOTO_SLOT" "$1" > "$ST/still-flat-check.log" 2>&1 &&
+ grep -qx 'SOURCE differs from current slot bytes = 0' "$ST/still-flat-check.log"
+}
+photo_log_select(){
+ "$RW" still-write "$1" > "$ST/still-flat-still.log" 2>&1 &&
+ "$RW" bv-write "$1" > "$ST/still-flat-bv.log" 2>&1
+}
+# Restore the previous test's leased A19 only when its original bytes are available.
+photo_log_restore(){
+ [ -e "$PHOTO_INTENT" ] || [ -L "$PHOTO_INTENT" ] || return 0
+ [ -f "$ST/ready" ] && photo_log_owned || return 1
+ photo_log_matches "$PHOTO_BACKUP" && return 0
+ photo_log_select "$PHOTO_SAFE_SLOT" &&
+ "$SW" restore "$PHOTO_SLOT" "$PHOTO_BACKUP" > "$ST/still-flat-restore.log" 2>&1 &&
+ photo_log_matches "$PHOTO_BACKUP"
+}
 clean_log_gamma_status(){
  [ -f "$IDLE" ] && [ ! -L "$IDLE" ] && [ -x "$IDLE" ] && [ "$("$OPS" sha256 "$IDLE")" = "$LUT_IDLE_SHA" ] || return 1
  "$IDLE" --gamma-state > "$ST/log-status.txt" 2>&1 || return 1
@@ -10,6 +39,7 @@ clean_log_factory_status(){
 }
 lut_current_mode(){
  [ ! -e "$RUN/gamma-life.pending" ] && [ ! -L "$RUN/gamma-life.pending" ] || die GAMMA_LIFECYCLE_RESTORE_REQUIRED
+ [ ! -e "$PHOTO_INTENT" ] && [ ! -L "$PHOTO_INTENT" ] || die ORIGINAL_STILL_LUT_RESTORE_REQUIRED
  LUT_MODE=STD
  if [ -e "$CLEAN_LOG" ] || [ -L "$CLEAN_LOG" ];then
   [ -f "$CLEAN_LOG" ] && [ ! -L "$CLEAN_LOG" ] && [ "$(cat "$CLEAN_LOG")" = 'NXL_CLEAN_LOG1 READY' ] || die LOG_TRANSITION_PENDING
@@ -32,7 +62,7 @@ lut_check_source(){
  [ -f "$LAB/$id.bin" ] && [ ! -L "$LAB/$id.bin" ] && [ "$("$OPS" sha256 "$LAB/$id.bin")" = "$2" ] || die LUT_SOURCE_IDENTITY_FAILED
 }
 log_neutral(){
- [ "$("$OPS" sha256 "$D/data/clean-log/NXLOG_REF_V1.bin")" = a0692509fba710a54cf47c9ce4eb05c3ef2c9a7e514b3948468b3d415f99b056 ] || die LOG_NEUTRAL_IDENTITY_FAILED
+ [ "$("$OPS" sha256 "$D/data/clean-log/NXLOG_REF_V1.bin")" = "$LOG_NEUTRAL_SHA" ] || die LOG_NEUTRAL_IDENTITY_FAILED
  sharp_restore || die LOG_SHARPNESS_RESTORE_UNCONFIRMED
  video_restore || die LOG_VIDEO_RESTORE_UNCONFIRMED
  cp "$D/data/clean-log/NXLOG_REF_V1.bin" "$ST/expected.new" || die LOG_NEUTRAL_COPY_FAILED

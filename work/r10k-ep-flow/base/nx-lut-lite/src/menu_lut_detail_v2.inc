@@ -44,6 +44,8 @@ static const char*detail_short_name(const char*id){
  if(strstr(id,"5207_s"))return "5207 S";
  if(strstr(id,"g200_n_fx_l"))return "G200 冷";
  if(strstr(id,"g200_fx_n"))return "G200 暖";
+ if(!strcmp(id,"vlog_xh_5219_bright"))return "5219亮";
+ if(!strcmp(id,"vlog_xh_5219_hasselblad"))return "5219哈蘇";
  if(!strcmp(id,"vlog_v709"))return "V709 還原";
  const struct nxl_look_info*i=info_for(id);return i==&nxl_unknown_info?id:i->name;
 }
@@ -205,7 +207,11 @@ static int detail_poll(void){
  if(!detail_visible)return 0;if(detail_child){detail_drain();if(!detail_done){pid_t p=waitpid(detail_child,&detail_status,WNOHANG);if(p==detail_child)detail_done=1;}
   if(detail_done){detail_drain();if(detail_eof){char*r=strstr(detail_output,detail_expected);int ok=!detail_overflow&&!detail_read_error&&WIFEXITED(detail_status)&&!WEXITSTATUS(detail_status)&&r&&!strcmp(r,detail_expected);
    FILE*f=fopen("/tmp/nx-lut-lite/detail-action.log","w");if(f){fwrite(detail_output,1,detail_used,f);fclose(f);}
-   if(ok){(void)detail_cache_save();refresh_lut_runtime();strcpy(detail_message,"已裝載，半按快門返回取景");}else{detail_dirty=0;strcpy(detail_message,"應用失敗，請檢查運行記錄");}
+   int configured=!detail_overflow&&!detail_read_error&&strstr(detail_output,"NXL_LUT_CONFIGURED1\n")!=NULL;
+   const char *reload=lut_reload_notice(configured,strstr(detail_output,"ERR LUT_RELOAD_RESTART_REQUIRED\n")!=NULL);
+   if(ok||configured){(void)detail_cache_save();refresh_lut_runtime();}
+   if(ok)strcpy(detail_message,"已裝載，半按快門返回取景");
+   else{detail_dirty=0;strcpy(detail_message,reload?reload:"應用失敗，請檢查運行記錄");}
    detail_message_until=ticks()+1800UL;detail_child=0;if(detail_return&&!detail_dirty){detail_close(detail_return);return 1;}detail_hidden=0;return 1;
   }}
  }else if(detail_message[0]&&!detail.prepared&&detail_message_until&&ticks()>=detail_message_until){detail_message[0]=0;detail_message_until=0;return 1;}else if(detail_dirty&&(detail_return||ticks()>=detail_due)){detail_start();return 1;}else if(detail_return){detail_close(detail_return);return 1;}return 0;

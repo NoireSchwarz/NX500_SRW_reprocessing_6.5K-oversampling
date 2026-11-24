@@ -1,0 +1,160 @@
+#!/bin/sh
+trap '' HUP
+umask 077
+task_root=
+SD=$task_root/mnt/mmc
+STATE=$task_root/opt/usr/nxl-full040
+LIB=/usr/local/lib/nxl-full040/nxl-eye-af.so
+USB=$task_root/sys/class/extcon/USB/state
+OPS=$STATE/fileops.arm
+
+normal_boot() {
+    [ "$(cat "$USB" 2>/dev/null)" = 0 ] && [ ! -e "$task_root/opt/etc/.hib_capturing" ] || return 1
+    case "$(cat "$task_root/sys/power/bootmode" 2>/dev/null)" in 2|3) ;; *) return 1;; esac
+    awk 'NR==1 {ok=($1=="Filename")} $1=="/dev/mmcblk0p9" {busy=1} END {exit !(ok && !busy)}' "$task_root/proc/swaps"
+}
+
+card_ready() {
+    [ "$(cat "$USB" 2>/dev/null)" = 0 ] &&
+        awk '$1=="/dev/mmcblk1p1" && ($2=="/opt/storage/sdcard" || $2=="/mnt/mmc") {ok=1} END {exit !ok}' "$task_root/proc/mounts"
+}
+
+note() {
+    card_ready && printf '%s\n' "$1" > "$report/last-state.txt"
+}
+
+# One bounded observer per reconstruction. Keep the complete trace in RAM
+# across a USB interruption. The camera never replaces its wake entry here.
+lcd_trace() (
+    work=$run/eye-lcd28-$stamp-$pid
+    out=$report/lcd-trace
+    bin=$SD/nxl-full040/lcd-observe.arm
+    pin=fafbce9b63da331e62a47bd3952a11fbe9638dd37f8305647f3297755ff7cd93
+    normal_boot && card_ready && [ ! -L "$out" ] && [ ! -L "$work" ] || exit 1
+    if [ -f "$out/complete.txt" ] && [ ! -L "$out/complete.txt" ] &&
+       [ -f "$out/result.txt" ] && [ ! -L "$out/result.txt" ] &&
+       IFS= read -r saved < "$out/complete.txt" && [ "${#saved}" = 64 ] &&
+       [ "$("$OPS" sha256 "$out/result.txt")" = "$saved" ]; then exit 0; fi
+    [ "${1:-}" = start ] || [ -f "$work/done" ] || exit 0
+    mkdir -p "$work" && mkdir "$work/active" || exit 0
+    trap 'rmdir "$work/active"' 0
+    if [ ! -f "$work/done" ]; then
+        [ "${1:-}" = start ] || exit 0
+        [ -f "$bin" ] && [ ! -L "$bin" ] && [ "$("$OPS" sha256 "$bin")" = "$pin" ] || exit 1
+        cp "$bin" "$work/observe" && [ "$("$OPS" sha256 "$work/observe")" = "$pin" ] &&
+            chmod 700 "$work/observe" && normal_boot && card_ready || exit 1
+        {
+            printf 'boot_id=%s\nbefore ' "$now"
+            cat "$run/eye-af.status"
+            "$work/observe"
+            printf 'reader_exit=%s\nafter ' "$?"
+            cat "$run/eye-af.status"
+        } > "$work/result.txt" 2>&1
+        grep -q '^result=' "$work/result.txt" && : > "$work/done" || exit 1
+    fi
+    normal_boot && card_ready && mkdir -p "$out" && [ ! -L "$out/result.txt" ] && [ ! -L "$out/complete.txt" ] || exit 1
+    cp "$work/result.txt" "$out/result.txt" && card_ready && "$OPS" same "$work/result.txt" "$out/result.txt" &&
+        "$OPS" sha256 "$out/result.txt" > "$out/complete.txt"
+)
+
+collect() {
+    IFS= read -r now < "$task_root/proc/sys/kernel/random/boot_id" || return 1
+    { IFS= read -r before && IFS= read -r policy && IFS= read -r leaf; } < "$STATE/armed" || return 1
+    stamp=${leaf#FAST_START_EYE_AF_ROOTLIB_}
+    case "$stamp" in "$leaf"|''|*[!0-9_]*) return 1;; esac
+    parent=$SD/NXDEMO51/$leaf
+    report=$parent/resume
+    card_ready && [ -d "$parent" ] && [ ! -L "$parent" ] && [ ! -L "$report" ] && mkdir -p "$report" || return 1
+    mode=$(cat "$task_root/sys/power/bootmode") || return 1
+    printf 'boot_id=%s\nbootmode=%s\npolicy=%s\n' "$now" "$mode" "$policy" > "$report/runtime.log"
+    claim=$STATE/launch-claim
+    if [ -f "$claim" ] && [ ! -L "$claim" ]; then cp "$claim" "$report/launch-claim"; fi
+    if [ -r "$task_root/tmp/var/log/hib.txt" ]; then tail -n 60 "$task_root/tmp/var/log/hib.txt" > "$report/hib.txt"; fi
+    dmesg | grep -Ei 'kernel_resume start|hibernat|swsusp|PM: (Image|Writing|Error)' | tail -n 40 > "$report/hibernate-kernel.txt"
+    if [ -z "$now" ] || [ "$now" = "$before" ]; then note INSTALL_BOOT; return; fi
+    if ! grep -Fqx "boot_id=$now" "$claim"; then note RESTORED_DIFFERENT_BOOT; return; fi
+    if ! dmesg | grep -q 'kernel_resume start!'; then note NO_KERNEL_RESUME_EVIDENCE; return; fi
+    if [ ! -f "$task_root/tmp/.hib_post" ]; then note WAITING_FOR_HIB_POST; return; fi
+    pid=$(sed -n 's/^camera_pid=//p' "$claim")
+    case "$pid" in ''|*[!0-9]*) note INVALID_CAPTURE_PID; return;; esac
+    proc=$task_root/proc/$pid
+    if [ "$(readlink "$proc/exe" 2>/dev/null)" != /usr/apps/com.samsung.di-camera-app/bin/di-camera-app ]; then
+        note CAMERA_PROCESS_CHANGED; return
+    fi
+    if [ "$policy" = CONTROL ]; then note STOCK_CONTROL_RESTORED; return; fi
+    dev=$(sed -n 's/^mapped_dev=//p' "$claim")
+    ino=$(sed -n 's/^mapped_ino=//p' "$claim")
+    [ "$policy" = EYE ] && grep -Fqx "file=$LIB" "$claim" &&
+        awk -v path="$LIB" -v dev="$dev" -v ino="$ino" '$6==path && $4==dev && $5==ino && $2~/x/ && NF==6 {found=1; print} END {exit !found}' \
+        "$proc/maps" > "$report/eye-maps.txt" || { note ROOT_LIBRARY_NOT_MAPPED; return; }
+    run=$task_root/tmp/nx-lut-lite
+    normal_boot && card_ready && [ ! -L "$run" ] && mkdir -p "$run" || return 1
+    token=$run/eye-af.resume-ready
+    if [ -L "$token" ] || { [ -e "$token" ] && ! grep -Fqx "$pid" "$token"; }; then note TOKEN_CONFLICT; return; fi
+    if [ ! -e "$token" ]; then (set -C; printf '%s\n' "$pid" > "$token") || return 1; fi
+    printf 'same_capture_process=1\nresult=ADAPTER_ENABLED_AFTER_RESTORE\n' >> "$report/runtime.log"
+    note ADAPTER_ENABLED_AFTER_RESTORE
+    n=0
+    first_line=
+    last_line=
+    hit=0
+    first_n=0
+    initial_eyes=
+    trace_started=0
+    lcd_trace publish
+    while [ "$n" -lt 90 ] && card_ready && [ -d "$proc" ]; do
+        if [ -f "$run/eye-af.status" ] && [ ! -L "$run/eye-af.status" ]; then
+            line=$(cat "$run/eye-af.status")
+            case "$line" in "NXL_EYE_AF2 pid=$pid "*" discarded_publications="*" schema=28")
+                if [ "$line" != "$last_line" ]; then
+                    last_line=$line
+                    printf '%s\n' "$line" > "$report/eye-af.status"
+                    case "$line" in *' state=ACTIVE '*)
+                        if [ "$hit" = 0 ]; then
+                            printf '%s\n' "$line" > "$report/eye-hit.txt"; note EYE_DETECTION_REPORTED; hit=1
+                        fi;; esac
+                    case "$line" in *' state=ACTIVE '*|*' state=FACE_ONLY '*)
+                        eyes=${line#* eye_frames=}
+                        eyes=${eyes%% *}
+                        case "$eyes" in ''|*[!0-9]*) :;;
+                            *) if [ -z "$initial_eyes" ]; then
+                                   initial_eyes=$eyes
+                               elif [ "$trace_started" = 0 ] && [ "$eyes" -gt "$initial_eyes" ]; then
+                                   lcd_trace start </dev/null >/dev/null 2>&1 &
+                                   trace_started=1
+                               fi;;
+                        esac
+                        if [ -z "$first_line" ]; then
+                            first_line=$line; first_n=$n
+                        else
+                            { printf 'boot_id=%s\nseconds=%s\n' "$now" "$((n-first_n))"
+                              printf 'start %s\nend   %s\ncomplete=1\n' "$first_line" "$line"; } > "$report/eye-window.txt"
+                        fi;; esac
+                fi;;
+            esac
+        fi
+        if [ -n "$first_line" ] && [ "$((n-first_n))" -ge 25 ]; then break; fi
+        n=$((n+1)); sleep 1
+    done
+    if [ "$hit" = 0 ]; then note NO_EYE_HIT_IN_THIS_WINDOW; fi
+}
+
+# An early mount may precede hib_post/swapoff. The wait runs entirely from root
+# with no SD or /opt stream open. A later remount can run the check again.
+case "$(cat "$task_root/sys/power/bootmode" 2>/dev/null)" in 2|3) ;; *) exit 0;; esac
+(
+    n=0
+    while [ "$n" -lt 30 ]; do
+        [ "$(cat "$USB" 2>/dev/null)" = 0 ] || exit 0
+        if normal_boot && [ -f "$task_root/tmp/.hib_post" ]; then break; fi
+        n=$((n+1)); sleep 1
+    done
+    normal_boot && card_ready || exit 0
+    collect &
+    menu=$task_root/usr/local/lib/nxl-full040/full-menu.sh
+    if [ -f "$task_root/tmp/.hib_post" ] && [ -f "$menu" ] && [ ! -L "$menu" ] &&
+        [ "$("$OPS" sha256 "$menu")" = 0655ae8a221a71e8a684de78a9df12c59bc7ae301b090bb1c145e95fa53563c4 ]; then
+        exec /bin/sh "$menu"
+    fi
+) </dev/null >/dev/null 2>&1 &
+exit 0
