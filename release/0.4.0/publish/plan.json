@@ -1,0 +1,16 @@
+{
+  "repository": "NoireSchwarz/NX500_SRW_reprocessing_6.5K-oversampling",
+  "release_id": 457339623,
+  "tag": "v0.4.0",
+  "base_main": "23f2c6019419d5bde131476244441141933c5a87",
+  "unified_blob_sha": "1809cca90db016660451cee0026a10b1b4b2afa7",
+  "unified_zip_sha256": "e5060e01c12d0a44aa81e0fff9d124fff6a078c057855c896a6ab45f3f3b15cc",
+  "baseline_zip_sha256": "c13582e96444968e5d75b2d276ab2ac6ce173f054cc0971bd15a12b78250f3ec",
+  "maintainer_confirmation": {
+    "same_ordinary_cold_start": true,
+    "eye_box_normal": true,
+    "EV_AEL_menu_normal": true,
+    "date": "2026-11-25"
+  },
+  "previous_assets": "rename for rollback; replace canonical package and checksum"
+}

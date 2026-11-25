@@ -3,6 +3,7 @@
 import argparse
 import ctypes
 import hashlib
+from importlib.util import module_from_spec, spec_from_file_location
 import json
 import os
 from pathlib import Path
@@ -120,7 +121,41 @@ def resume_v26_wake(card, pkg, serial):
 
 def stage(card, serial, policy):
     identity(card, serial)
+    if policy in ("REBUILD", "REBUILD-PLAN", "REBUILD-STATUS"):
+        bundle = ROOT / "unified-rebuild"
+        host = bundle / "coexist_rebuild.py"
+        if not host.is_file():
+            raise SystemExit("Use the complete Unified R1 release ZIP, which includes unified-rebuild/.")
+        spec = spec_from_file_location("nx500_unified_card", host)
+        manager = module_from_spec(spec)
+        spec.loader.exec_module(manager)
+        manager.identity = identity
+        result = (manager.prepare(bundle, card, serial) if policy == "REBUILD" else
+                  manager.plan(card, serial) if policy == "REBUILD-PLAN" else manager.status(card, serial))
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+        return
+    if policy in ("SIMPLE-WAKE", "SIMPLE-STATUS", "SIMPLE-RESTORE"):
+        from simple_wake import manage
+        result = manage(card, policy, lambda: identity(card, serial))
+        print(json.dumps(result, indent=2))
+        return
     pins = json.loads((ROOT / "checksums.json").read_text("utf-8"))
+    wake_dir = card / "nx-on-wake"
+    active = wake_dir / "on-wake"
+    known_wake = pins[FOLDER + "/wake-entry"]
+    existing_eye = (policy == "EYE" and not wake_dir.is_symlink() and
+                    active.is_file() and not active.is_symlink() and sha(active) == known_wake)
+    if policy == "REBUILD-CHECK" or existing_eye:
+        from rebuild_evidence import snapshot_evidence
+        try:
+            result = snapshot_evidence(card, known_wake)
+        except (OSError, ValueError) as problem:
+            raise SystemExit(f"Existing snapshot evidence unavailable: {problem}") from problem
+        identity(card, serial)
+        print(json.dumps(result, indent=2))
+        # Inspection can succeed even when permission to dispatch the writer
+        # is absent. A caller checking only the exit status must also stop.
+        raise SystemExit(3)
     for name, digest in pins.items():
         assert name.startswith(FOLDER + "/") and ".." not in Path(name).parts
         assert sha(ROOT / name) == digest
@@ -128,7 +163,6 @@ def stage(card, serial, policy):
     for name in (*stock_entries, "nx-lut-demo/eye-af-bt-request"):
         assert not (card / name).exists() and not (card / name).is_symlink(), f"Existing entry: {name}"
     pkg = card / FOLDER
-    wake_dir = card / "nx-on-wake"
     assert not pkg.is_symlink() and not wake_dir.is_symlink()
     pkg.mkdir(exist_ok=True)
     for name, digest in pins.items():
@@ -144,7 +178,6 @@ def stage(card, serial, policy):
         resume_v26_wake(card, pkg, serial)
     wake_dir.mkdir(exist_ok=True)
     assert len(wake_entries(wake_dir)) == len({name.casefold() for name, _, _ in wake_entries(wake_dir)}), "Ambiguous wake directory"
-    active = wake_dir / "on-wake"
     # Keep a working entry in place until the camera has verified the new library.
     keep_live = {V22_WAKE, V23_WAKE, V24_WAKE, V25_WAKE, V26_WAKE, V27_WAKE, "d3e7e697640056ee02fea543ebfb26a53c5d607530b83ea064fac19776e1e4f0"}
     if policy == "CLEAR":
@@ -187,10 +220,28 @@ def stage(card, serial, policy):
 
 if __name__ == "__main__":
     cli = argparse.ArgumentParser(description=__doc__)
-    cli.add_argument("policy", choices=("CHECK", "CONTROL", "EYE", "CLEAR", "INSPECT"))
-    cli.add_argument("--drive", required=True, help="For example, H:")
-    cli.add_argument("--serial", required=True, help="Expected eight-digit exFAT volume serial")
+    cli.add_argument("policy", choices=("CHECK", "CONTROL", "EYE", "CLEAR", "INSPECT", "REBUILD-CHECK", "REBUILD", "REBUILD-PLAN", "REBUILD-STATUS",
+                                       "SIMPLE-WAKE", "SIMPLE-STATUS", "SIMPLE-RESTORE", "BUILD-RESUME-IMAGE"))
+    cli.add_argument("--drive", help="For example, H:")
+    cli.add_argument("--serial", help="Expected eight-digit exFAT volume serial")
+    cli.add_argument("--image-partitions", type=Path, nargs=2, metavar=("PLATFORM_TAR", "OPT_USR_TAR"),
+                     help="Existing filesystem archives of the combined release")
+    cli.add_argument("--image-output", type=Path, help="New local directory for the two prepared filesystem archives")
     args = cli.parse_args()
+    if args.policy == "BUILD-RESUME-IMAGE":
+        if not args.image_partitions or not args.image_output or args.drive or args.serial:
+            cli.error("BUILD-RESUME-IMAGE requires --image-partitions and --image-output")
+        source = ROOT.parent if ROOT.name == "fast-start" and not (ROOT / "resume_profile.py").is_file() else ROOT
+        spec = spec_from_file_location("nx500_resume_profile", source / "resume_profile.py")
+        profile = module_from_spec(spec)
+        spec.loader.exec_module(profile)
+        data = profile.compose_images(source, *args.image_partitions, args.image_output)
+        print(json.dumps({"prepared_images": ["platform.tar", "opt-usr.tar"],
+                          "profile_sha256": hashlib.sha256(data).hexdigest(),
+                          "physical_camera_installation": "not_performed"}, indent=2))
+        raise SystemExit(0)
+    if not args.drive or not args.serial or args.image_partitions or args.image_output:
+        cli.error("The selected card operation requires --drive and --serial")
     if re.fullmatch(r"[0-9a-fA-F]{4}-[0-9a-fA-F]{4}", args.serial):
         args.serial = args.serial.replace("-", "")
     assert os.name == "nt" and args.drive[:2].casefold() != os.environ.get("SystemDrive", "").casefold()

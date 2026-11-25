@@ -1,0 +1,27 @@
+name: Publish Unified R1 replacement
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - release/0.4.0/publish/plan.json
+      - .github/workflows/publish-unified-r1.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nx500-v040-release-replacement
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Build, replace and verify release assets
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 release/0.4.0/publish/build_and_replace.py --publish release/0.4.0/publish/plan.json --output "$RUNNER_TEMP/nx500-r1-publication"

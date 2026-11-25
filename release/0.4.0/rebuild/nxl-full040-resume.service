@@ -1,0 +1,13 @@
+[Unit]
+Description=NX500 unified full mod and Eye AF resume
+DefaultDependencies=no
+After=hib_post.service
+Before=shutdown.target
+Conflicts=shutdown.target
+ConditionPathExists=/tmp/.hib_post
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+TimeoutSec=90
+ExecStart=/bin/sh /usr/local/lib/nxl-full040/wake.sh

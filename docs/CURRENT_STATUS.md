@@ -1,30 +1,17 @@
-# 当前状态 · 2026-11-24 · NX LUT Lite 0.4.0
+# 当前状态 · 2026-11-25 · 0.4.0 Unified R1
 
-当前交付为 Log117（菜单内部版本 RC6.14.12）、Eye AF v2.8 和原厂快启恢复后的菜单监听。合并镜像使用机身本身的休眠生成流程。下一次验收应在同一次开机核对原厂 MENU、EV+AEL、取景眼框、`resume/runtime.log` 与 `resume/full-menu.txt`。
+**合并测试成功。** 维护者已确认：在相机同一次普通冷启动中，人眼框和 EV+AEL 主菜单均正常。该结论来源于维护者实机反馈；30 组电脑用例和 8 组原厂 ARM 服务管理器回放另有独立记录。
 
-开发机的 26 mm 实拍验证了 117 工作灰点。旧 Metol 引擎来自 RC5，原目标 132。灰点结果与色域、物理反射率需分别验证。最后一次关闭 Log 的原厂 Gamma 请求已提交，后续 LUT 重载有一次未确认。请保留该错误回执供定位。
+完整发布包保留 Log117 主模块、Eye AF v2.8、原首次安装载荷和源码，新增统一唤醒及已有 0.4.0 的同代快照重建入口。原厂 `hib_post.service` 触发一个根分区程序，顺序启用人眼和菜单；旧 SD 主监听自动启动链接归档。
 
-[版本说明、风险、恢复与短测](../release/0.4.0/README.md) · [灰点数据](../release/0.4.0/gray-calibration.json) · [上游人眼 PR](https://github.com/WApaperplane/NX500-metol/pull/2)
+重建先完整备份本机 150 MiB 快照并逐字节比较，保存旧状态与原配置。制作那次启动及原厂首次覆盖镜像头前都查询实际运行的服务图，缺少联合依赖则停止。人眼算法、菜单、LUT／Log 引擎保持已验证字节。不同机身仍应各自完成普通冷启动验收。
 
-## 历史状态 · RC6.14.10
+[发布更新](RELEASE_0.4.0_UNIFIED_R1_zh.md) · [完整安装及恢复](../release/0.4.0/README.md) · [统一重建流程](../release/0.4.0/rebuild/README_zh.md)
 
-RC6.14.10 以 RC6.14.9 实机测试版为基线。电脑端验证已通过，实机验收待完成。
+## 已有 0.4.0 的入口
 
-| 范围 | 当前状态 |
-| --- | --- |
-| Wi-Fi | 5 GHz 相簿、2.4 GHz 相簿、2.4 GHz 原厂图传。双码、全屏和 Wi-Fi 停止 |
-| 菜单／LUT | 繁体中文、半屏详细页、四项参数、M3 A/B；OK 才装载并保持菜单，半按回取景 |
-| 快捷键 | EV+AEL 菜单；EV+WiFi 开关 V‑Log；双击 EV 打开当前已应用 LUT／Log LUT |
-| 视频 LUT | 普通 LUT 非零提交默认开启，仍可手动关闭；冷启动不自动套用 |
-| LUT 目录 | Log LUT 仅 VID 专用入口，普通 A/B 和 SRW 不可选 |
-| 即时重载 | RC4 完整 EOF／DMA 确认流程保留；SRW 自己的清理不打开新硬件加载器 |
-| 视频规格 | 原厂命令重新提交，保留全宽 UHD24、UHD转2.5K、原厂UHD 三路线 |
-| 全宽帧率 | 优先原生24p可用路线；真实稳定30p未实现，RSZ2／WDMA2／HEVC／DDR因果拆分仍未完成 |
-| Log | 8bit V‑Log／V‑Gamut兼容路线；不宣称官方认证、Main10或独立物理灰卡标定 |
-| SRW | 保持已恢复原生流程；正式菜单无测试Gamma及AUTO+COMPARE；先还原Log、关闭影片LUT再进入 |
+完整 ZIP 解压目录使用 `stage-postflash.py REBUILD-PLAN` 核对，`REBUILD` 准备同代重建，`REBUILD-STATUS` 读取机身回执；均指定自己的盘符及 exFAT 序列号。准备过程整项归档旧测试目录和日志，保留照片、原厂目录、looks 和未知个人文件，不永久删除或修复文件系统。
 
-MP4 原厂颜色标签没有自动重写；原色视频监看与 Log 写卡未实现独立分流。源原色、白点及部分颜色残差仍有证据边界。不要重启已控制的事务104、OLED、WB或重复码率主线。
+旧恢复图中磁盘服务与链接存在、管理器 Wants 为空的问题，已由制作阶段的登记核验和统一启动入口处理。旧的首次 EYE 操作对已有状态的保护仍保留，已有安装改用 REBUILD。普通冷启动双功能结果以维护者本轮实机确认作为当前状态。
 
-[完整安装包](https://github.com/NoireSchwarz/NX500_SRW_reprocessing_6.5K-oversampling/releases/tag/v0.4.0-rc6.14.10) · [更新说明](RELEASE_0.4.0_RC6.14.10_zh.md) · [交接](HANDOFF_20261122_RC61410.md) · [短测](RC61410_WIFI_TEST_STEPS_zh.md)
-
-[历史状态](history/CURRENT_STATUS_20261110_R10k.md) · [RC5 交接](HANDOFF_20261119_RC5.md)
+SD 卡操作、设备备份及原始照片录像不随 Git 正文发布。源码路径与历史研究说明见主 README。

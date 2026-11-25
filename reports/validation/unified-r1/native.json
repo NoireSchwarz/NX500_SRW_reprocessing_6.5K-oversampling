@@ -1,0 +1,70 @@
+{
+  "service_profile_sha256": "01b8375c84bc1a79832e0fbc126adb3f045e27f9c5a36f7244f515b50f0a47e5",
+  "original_ARM": {
+    "/usr/lib/systemd/systemd": "240d910b3c8ef7824b864f7c19a57b9bf456cb4500b710502135a2b0f0c1333d",
+    "/usr/lib/systemd/system/hib_post.path": "59c9006b53597a0f8ce17fe3068e390fdc00472c7529160f15ddeb3c77530027",
+    "/usr/lib/systemd/system/hib_post.service": "9fc3e5aa13b282b63a68c45bb7277497b61195aac0a8c585dd9d189553cfe4f8"
+  },
+  "cases": {
+    "old-graph": {
+      "pre_event_jobs_run": 0,
+      "stock_resume_ran": true,
+      "packaged_helper_returned": false
+    },
+    "stale-manager": {
+      "pre_event_jobs_run": 0,
+      "stock_resume_ran": true,
+      "packaged_helper_returned": false
+    },
+    "combined": {
+      "pre_event_jobs_run": 0,
+      "stock_resume_ran": true,
+      "packaged_helper_returned": true
+    },
+    "missing-helper": {
+      "pre_event_jobs_run": 0,
+      "stock_resume_ran": true,
+      "packaged_helper_returned": false
+    },
+    "capture-old-graph": {
+      "service_before_capture_passed": false,
+      "writer_guard_passed": false,
+      "simulated_header_permitted": false,
+      "hardware_writes": 0,
+      "reasons": [
+        "ON_DISK_LINK_MISMATCH"
+      ]
+    },
+    "capture-stale-manager": {
+      "service_before_capture_passed": false,
+      "writer_guard_passed": false,
+      "simulated_header_permitted": false,
+      "hardware_writes": 0,
+      "reasons": [
+        "NOT_IN_CAPTURE_MANAGER_nxl-full040-resume.service"
+      ]
+    },
+    "capture-old-master": {
+      "service_before_capture_passed": false,
+      "writer_guard_passed": false,
+      "simulated_header_permitted": false,
+      "hardware_writes": 0,
+      "reasons": [
+        "OLD_WAKE_MASTER_STILL_ENABLED"
+      ]
+    },
+    "capture-combined": {
+      "service_before_capture_passed": true,
+      "writer_guard_passed": true,
+      "simulated_header_permitted": true,
+      "hardware_writes": 0,
+      "reasons": [
+        "CAPTURE_MANAGER_REFERENCES_INSTALLED_WAKE",
+        "CAPTURE_MANAGER_REFERENCES_INSTALLED_WAKE"
+      ]
+    }
+  },
+  "environment": "Diskless ARM guest. Original manager as PID 1, stock path and service, packaged helper. Swap operation modeled in RAM. Camera AF, keys and physical image capture are not exercised.",
+  "interface": "full040-unified-1",
+  "scope": "Original ARM systemd and real Linux symlinks, new production service and capture checker. Image writes are RAM markers. Runtime camera and AF acceptance are covered by PC fixtures and still require the camera."
+}

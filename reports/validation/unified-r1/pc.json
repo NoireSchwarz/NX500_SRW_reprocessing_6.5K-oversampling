@@ -1,0 +1,181 @@
+{
+  "worker": {
+    "success": {
+      "exit": 0,
+      "receipt": "exit=DISPATCHING\nreason=OEM_RESCUE_REQUEST",
+      "snapshot_unchanged": true,
+      "rescue_calls": 1
+    },
+    "existing-link": {
+      "exit": 0,
+      "receipt": "exit=DISPATCHING\nreason=OEM_RESCUE_REQUEST",
+      "snapshot_unchanged": true,
+      "rescue_calls": 1
+    },
+    "existing-master": {
+      "exit": 0,
+      "receipt": "exit=DISPATCHING\nreason=OEM_RESCUE_REQUEST",
+      "snapshot_unchanged": true,
+      "rescue_calls": 1
+    },
+    "missing-state": {
+      "exit": 1,
+      "receipt": "exit=1\nreason=SAME_GENERATION_REQUIRED",
+      "snapshot_unchanged": true,
+      "rescue_calls": 0
+    },
+    "foreign-runtime": {
+      "exit": 1,
+      "receipt": "exit=1\nreason=INSTALLED_GENERATION_MISMATCH",
+      "snapshot_unchanged": true,
+      "rescue_calls": 0
+    },
+    "bad-module": {
+      "exit": 1,
+      "receipt": "exit=1\nreason=FULL_MODULE_FILE_MISMATCH",
+      "snapshot_unchanged": true,
+      "rescue_calls": 0
+    },
+    "low-battery": {
+      "exit": 1,
+      "receipt": "exit=1\nreason=FULL_BATTERY_REQUIRED",
+      "snapshot_unchanged": true,
+      "rescue_calls": 0
+    },
+    "busy": {
+      "exit": 1,
+      "receipt": "exit=1\nreason=NOT_IDLE",
+      "snapshot_unchanged": true,
+      "rescue_calls": 0
+    },
+    "foreign-override": {
+      "exit": 1,
+      "receipt": "exit=1\nreason=FOREIGN_CAMERA_OVERRIDE",
+      "snapshot_unchanged": true,
+      "rescue_calls": 0
+    },
+    "foreign-gate": {
+      "exit": 1,
+      "receipt": "exit=1\nreason=FOREIGN_CAPTURE_OR_RESUME_DROPIN",
+      "snapshot_unchanged": true,
+      "rescue_calls": 0
+    },
+    "foreign-unit": {
+      "exit": 1,
+      "receipt": "exit=1\nreason=FOREIGN_STOCK_UNIT_SHADOW",
+      "snapshot_unchanged": true,
+      "rescue_calls": 0
+    },
+    "bad-payload": {
+      "exit": 1,
+      "receipt": "exit=1\nreason=PAYLOAD_IDENTITY",
+      "snapshot_unchanged": true,
+      "rescue_calls": 0
+    },
+    "backup-failure": {
+      "exit": 1,
+      "receipt": "exit=1\nreason=SNAPSHOT_BACKUP_READ",
+      "snapshot_unchanged": true,
+      "rescue_calls": 0
+    },
+    "reject-graph": {
+      "exit": 1,
+      "receipt": "exit=1\nreason=RESUME_DEPENDENCY_NOT_LOADED",
+      "snapshot_unchanged": true,
+      "rescue_calls": 0
+    },
+    "reject-notice": {
+      "exit": 1,
+      "receipt": "exit=1\nreason=NOTICE_NOT_SHOWN",
+      "snapshot_unchanged": true,
+      "rescue_calls": 0
+    },
+    "reject-notice-existing": {
+      "exit": 1,
+      "receipt": "exit=1\nreason=NOTICE_NOT_SHOWN",
+      "snapshot_unchanged": true,
+      "rescue_calls": 0
+    },
+    "reject-notice-master": {
+      "exit": 1,
+      "receipt": "exit=1\nreason=NOTICE_NOT_SHOWN",
+      "snapshot_unchanged": true,
+      "rescue_calls": 0
+    }
+  },
+  "wake": {
+    "success": {
+      "exit": 0,
+      "eye_and_menu_ready": true,
+      "menu_calls": 1
+    },
+    "no-sd": {
+      "exit": 0,
+      "eye_and_menu_ready": true,
+      "menu_calls": 1
+    },
+    "usb": {
+      "exit": 0,
+      "eye_and_menu_ready": false,
+      "menu_calls": 0
+    },
+    "capturing": {
+      "exit": 0,
+      "eye_and_menu_ready": false,
+      "menu_calls": 0
+    },
+    "wrong-generation": {
+      "exit": 1,
+      "eye_and_menu_ready": false,
+      "menu_calls": 0
+    },
+    "wrong-map": {
+      "exit": 1,
+      "eye_and_menu_ready": false,
+      "menu_calls": 0
+    },
+    "disabled": {
+      "exit": 1,
+      "eye_and_menu_ready": false,
+      "menu_calls": 0
+    },
+    "reject-menu": {
+      "exit": 1,
+      "eye_and_menu_ready": false,
+      "menu_calls": 1
+    },
+    "foreign-token": {
+      "exit": 1,
+      "eye_and_menu_ready": false,
+      "menu_calls": 0
+    }
+  },
+  "host": {
+    "clean-root": {
+      "archived_entries": [
+        "nx-old",
+        "NXDEMO51",
+        "ROLLBACK"
+      ],
+      "all_original_bytes_retained": true,
+      "delete_count": 0
+    },
+    "old-trigger": {
+      "archived_entries": [
+        "info.tg",
+        "nx-old",
+        "NXDEMO51",
+        "ROLLBACK"
+      ],
+      "all_original_bytes_retained": true,
+      "delete_count": 0
+    },
+    "bad-package": {
+      "invalid_payload_rejected_before_changes": true
+    },
+    "failed-camera-preflight": {
+      "preflight_refusal_reported_without_capture_marker": true
+    }
+  },
+  "scope": "PC filesystem execution only. Storage reads, rescue, camera readiness and key inputs are fixtures. No physical snapshot or camera behavior is claimed."
+}

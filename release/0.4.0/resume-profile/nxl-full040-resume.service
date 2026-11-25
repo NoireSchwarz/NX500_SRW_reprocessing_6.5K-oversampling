@@ -1,0 +1,13 @@
+[Unit]
+Description=NX500 full mod after stock camera resume
+DefaultDependencies=no
+After=hib_post.service
+Before=shutdown.target
+Conflicts=shutdown.target
+ConditionPathExists=/tmp/.hib_post
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+TimeoutSec=90
+ExecStart=/bin/sh /opt/usr/nxl-full040/resume-after-stock.sh

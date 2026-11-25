@@ -1,6 +1,7 @@
 """Assemble the combined release from the verified Log117 and public Eye AF v2.8 ZIPs."""
 import argparse
 import hashlib
+from importlib.util import module_from_spec, spec_from_file_location
 import json
 from pathlib import Path, PurePosixPath
 import re
@@ -168,12 +169,10 @@ if [ "$policy" = CHECK ]; then""" % (MODULE, portable_manifest))
     worker = worker.replace("v28_wake_sha=" + digest(data["wake-entry"]), "v28_wake_sha=" + digest(old["wake-entry"]))
     data["worker.sh"] = worker.encode()
     data["activation/install.sh"] = replace_once(data["activation/install.sh"].decode(), digest(old["worker.sh"]), digest(data["worker.sh"])).encode()
-    stage = source.read("stage-postflash.py").decode().replace('FOLDER = "' + OLD + '"', 'FOLDER = "' + NEW + '"')
-    stage = replace_once(stage, 'V26_WAKE, V27_WAKE}', 'V26_WAKE, V27_WAKE, "' + digest(old["wake-entry"]) + '"}')
-    return data, stage.encode()
+    return data
 
 
-def assemble(full, eye, out):
+def assemble(full, eye, out, *, stock_reader=None, image_partitions=None):
     if digest(full.read_bytes()) != FULL_ZIP:
         raise ValueError("Full module ZIP is not the hardware-tested version")
     if digest(eye.read_bytes()) != (HERE / "eye-package.sha256").read_text().split()[0]:
@@ -190,17 +189,34 @@ def assemble(full, eye, out):
     with zipfile.ZipFile(eye) as f:
         if f.testzip():
             raise ValueError("Eye ZIP CRC mismatch")
-        data, stage = combined_eye(f,digest(module[MANIFEST]))
+        data = combined_eye(f,digest(module[MANIFEST]))
         for name, value in data.items():
             put(out, NEW + "/" + name, value)
-        put(out, "stage-postflash.py", stage)
+        # The checkout keeps the installer in fast-start. An extracted release
+        # has the same installer at its root and can also be used to rebuild.
+        host_tools = HERE / "fast-start" if (HERE / "fast-start").is_dir() else HERE
+        for name in ("stage-postflash.py", "rebuild_evidence.py", "simple_wake.py", "simple-wake-body.sh"):
+            put(out, name, (host_tools / name).read_bytes())
         pins = {NEW + "/" + n: digest(v) for n,v in sorted(data.items())}
         put(out, "checksums.json", (json.dumps(pins, indent=2) + "\n").encode())
         for name in f.namelist():
             if name.startswith(("source/", "licenses/")) or name in ("INSTALL.md", "NOTICE.md"):
                 put(out, "eye-v2.8/" + name, f.read(name))
-    for name in ("README.md", "compose.py", "verify.py", "full-menu.sh", "eye-package.sha256", "gray-calibration.json", "validation.json"):
+    for name in ("README.md", "compose.py", "verify.py", "resume_profile.py", "full-menu.sh", "eye-package.sha256", "gray-calibration.json", "validation.json"):
         put(out, name, (HERE / name).read_bytes())
+    for name in ("capture-profile.conf", "verify-before-capture.sh", "protected_writers.py"):
+        put(out, "capture-check/" + name, (HERE / "capture-check" / name).read_bytes())
+    spec = spec_from_file_location("nx500_resume_profile", HERE / "resume_profile.py")
+    profile = module_from_spec(spec)
+    spec.loader.exec_module(profile)
+    for name in (profile.SERVICE, "resume-after-stock.sh"):
+        put(out, "resume-profile/" + name, (HERE / "resume-profile" / name).read_bytes())
+    if image_partitions:
+        guarded = profile.compose_images(HERE, *image_partitions, out / "image-partitions")
+        put(out, "resume-profile/rootfs.tar", guarded)
+    else:
+        filename = "rootfs.tar" if stock_reader else "services.tar"
+        put(out, "resume-profile/" + filename, profile.build(HERE, stock_reader=stock_reader))
 
 
 def archive(folder, output):
@@ -208,6 +224,9 @@ def archive(folder, output):
         for path in sorted(folder.rglob("*")):
             if path.is_file():
                 name = path.relative_to(folder).as_posix()
+                if name.startswith("image-partitions/"):
+                    # The owner's rebuilt partitions can include personal device records.
+                    continue
                 data = path.read_bytes()
                 info = zipfile.ZipInfo(name, (2026,11,24,0,0,0))
                 info.create_system = 3
@@ -228,7 +247,12 @@ if __name__ == "__main__":
     for key in ("full", "eye", "out"):
         parser.add_argument(key, type=Path)
     parser.add_argument("--zip", type=Path, help="Write a reproducible release ZIP and SHA-256 file")
+    image = parser.add_mutually_exclusive_group()
+    image.add_argument("--stock-root", type=Path, help="Use the owner's original NX500 1.12 scripts for the protected image profile")
+    image.add_argument("--image-partitions", type=Path, nargs=2, metavar=("PLATFORM_TAR", "OPT_USR_TAR"),
+                       help="Merge the registered recovery service and safeguards into two existing 0.4.0 filesystem trees")
     args = parser.parse_args()
-    assemble(args.full, args.eye, args.out)
+    reader = (lambda filename: (args.stock_root / filename.lstrip("/")).read_bytes()) if args.stock_root else None
+    assemble(args.full, args.eye, args.out, stock_reader=reader, image_partitions=args.image_partitions)
     if args.zip:
         archive(args.out,args.zip)

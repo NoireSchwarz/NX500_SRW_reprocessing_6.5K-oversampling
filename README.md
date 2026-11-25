@@ -4,7 +4,7 @@
 
 ## 当前版本 · NX LUT Lite 0.4.0
 
-首个正式版合并 Log117 完整 mod 和 Eye AF v2.8。用户可单独安装完整 mod，也可让自己的 NX500 通过原厂流程重建兼有人眼与菜单的快启镜像。
+0.4.0 Unified R1 合并 Log117 完整 mod 和 Eye AF v2.8，统一重建启动接口。**开发机合并测试成功：维护者确认同一次普通冷启动中，人眼框与 EV+AEL 菜单均正常。** 完整发布包保留首次安装内容，已有 0.4.0 使用新增 REBUILD 入口。
 
 [完整包与 SHA-256](https://github.com/NoireSchwarz/NX500_SRW_reprocessing_6.5K-oversampling/releases/tag/v0.4.0) · [安装、恢复与合并短测](release/0.4.0/README.md) · [交接](docs/CURRENT_STATUS.md)
 
@@ -15,7 +15,7 @@
 - **LUT 与视频** · 繁体中文半屏菜单、四项参数及 M3 A/B 混合。OK 装载，半按返回取景。支持全宽 UHD24、UHD 转 2.5K 和恢复原厂 UHD。
 - **SRW** · 一键初始化并重显影，输出相册用 JPEG 与缩略图并更新相册列表。
 
-首次合并发布时，原厂快启恢复结果需从目标机身读回。当前实机证据、已知的关闭 V-Log 后 LUT 重载提示和验证边界见安装说明。
+本轮通过 30 组电脑用例和 8 组原厂 ARM 回放；不同机身仍需各自验证普通冷启动。已知的关闭 V-Log 后 LUT 重载提示和验证范围见安装说明。
 
 ## 能力与研究边界
 
@@ -27,7 +27,7 @@
 
 ## 安装与使用
 
-完整包中，`module/` 用原有安装器部署 Log117，`stage-postflash.py` 用于单独核对、重建或撤下快启入口。已有 RC6.14.12 Log117 的机身可直接做快启核验。按包内说明分阶段进行。[安装说明](release/0.4.0/README.md)
+完整包中，`module/` 用原有安装器部署 Log117，`stage-postflash.py` 用于单独核对、重建或撤下快启入口；已有本代合并快照使用新增的 `REBUILD`，统一重建更新目录在 `unified-rebuild/`。已有 RC6.14.12 Log117 的机身可直接做快启核验。按包内说明分阶段进行。[安装说明](release/0.4.0/README.md)
 
 进行 SRW 前先还原 V‑Log、手动关闭影片 LUT，沿用既有初始化并重显影流程。不格式化、清理或修复 SD 文件系统，不重复码率对照。
 

@@ -2,7 +2,21 @@
 
 本包合并了 Log117 完整 mod（内部版本 RC6.14.12）与 Eye AF v2.8。完整 mod 提供 LUT、V-Log、SRW 重显影、无线相簿和原厂即时图传。快启恢复后调用原有菜单监听。EV+AEL 打开主菜单，双击 EV 打开 LUT 详细页，EV+Wi-Fi 切换 V-Log。眼部对焦随原厂一般人脸检测启用。
 
-公开包去除了菜单断言中的编译机目录，锐度助手通过原厂库名查找依赖，两项的 ARM 指令与相机已用的版本相同。快启入口同时识别实测版本和公开版本各自的完整清单。已有实测版的机身可直接重建。
+公开包去除了菜单断言中的编译机目录，锐度助手通过原厂库名查找依赖，两项的 ARM 指令与相机已用的版本相同。快启入口同时识别实测版本和公开版本各自的完整清单。已有合并快照的机身见下文的恢复依赖和制作端核验。
+
+## Unified R1 · 合并测试成功
+
+维护者确认：开发机同一次普通冷启动中，人眼框和 EV+AEL 主菜单均正常。电脑端另通过 30 组用例与 8 组原厂 ARM 回放。当前附件为完整安装包，新增 `unified-rebuild/` 同代重建目录，并保留原主模块与首次安装内容。
+
+已有本代 0.4.0 合并快照的机身，在完整 ZIP 解压目录使用自己的盘符及 exFAT 序列号：
+
+```powershell
+python .\stage-postflash.py REBUILD-PLAN --drive X: --serial ABCD-1234
+python .\stage-postflash.py REBUILD --drive X: --serial ABCD-1234
+python .\stage-postflash.py REBUILD-STATUS --drive X: --serial ABCD-1234
+```
+
+REBUILD 先归档旧 SD 测试目录和日志，再准备本机原厂快照重建。详细步骤见 [统一重建流程](rebuild/README_zh.md)。已有状态不再反复执行首次 EYE。首次安装先按下方原流程安装主模块和首次 Eye 快照，形成 0.4.0 状态后，再使用 REBUILD 纳入统一唤醒入口。不要只复制重建更新目录给未安装主模块的机身。
 
 ## 两步安装
 
@@ -22,6 +36,44 @@
    ```
 
 5. 安全弹出并拔线。若正常取景超过 60 秒、未提示且卡灯已灭，正常关机，灯灭后取电池 30 秒，再装回开机一次。看到 **FAST START: WAIT 5 MINUTES / KEEP POWER** 后至少等 5 分钟，且写卡灯熄灭，再取电池 10 秒并装回。静置至少 4 分钟且灯灭，拨到 OFF，取电池 5 秒，装回开机。**若持续闪灯或黑屏，保留供电和卡，停止后续拔电池步骤。** 写入时断电可能导致机身无法正常启动。
+
+## 已安装 0.4.0 的机身，检查 SD 挂载入口
+
+这是针对已安装 0.4.0 合并快照和联合唤醒程序的诊断。Windows 工具保存原件，在项目卡上写入 `nx-on-wake/on-wake` 并核对读回内容。要让这个文件执行，机身必须已经在运行 SD 挂载监听。独立版与整包带有相同的监听程序，只能证明文件版本相同。已在机身观察到监听停止的情况下，重复写入这个文件无法启动监听。
+
+电脑上的 `SIMPLE-WAKE` 只写卡，`SIMPLE-STATUS` 读取本轮回执，`SIMPLE-RESTORE` 恢复卡上原件并保留记录。这三项操作的 `camera_install_requested` 均为 `false`。状态里的 `sd_callback=trial` 只表示卡上选中了试验脚本。只有机身写回与本轮标识吻合的 `entry=sd_mount`，工具才报告 `camera_callback_receipt=entry_recorded`。这项回执也只证明机身执行了回调。
+
+```powershell
+python .\stage-postflash.py SIMPLE-WAKE --drive X: --serial ABCD-1234
+python .\stage-postflash.py SIMPLE-STATUS --drive X: --serial ABCD-1234
+python .\stage-postflash.py SIMPLE-RESTORE --drive X: --serial ABCD-1234
+```
+
+每轮最多保留三次机身调用记录，包含相机时间和开机秒数，可用于分辨拔 USB 后的重新挂载。验收眼框与菜单时，使用安装入口已经撤下的普通冷启动。若没有本轮回执，请先回查原挂载监听的机身记录。
+
+## 已有合并快照的核对
+
+开发版 Windows 安装器增加了只读的 `REBUILD-CHECK`。将盘符和序列号换成项目卡的实际值。它只读取卡上的回执，可在相机使用 USB 存储连接时运行。
+
+```powershell
+python .\stage-postflash.py REBUILD-CHECK --drive X: --serial ABCD-1234
+```
+
+输出包含已有快照的启动标识、登记时和恢复后的 `Wants`，以及卡上还存在的安装入口。退出码 3 表示已识别已有快照，所读回执不足以许可新一次写入。已有合并快照走首次安装的 EYE 操作时，也会在改动卡上的包或请求前报告这个状态。
+
+此次修正把人眼与菜单使用的同一个恢复服务纳入 0.4.0 构建。原厂 `hib_post.path` 触发 `hib_post.service` 后，服务管理器按依赖顺序调用 `nxl-full040-resume.service`。它使用已经安装的人眼与菜单程序。磁盘上存在依赖文件和已经恢复的服务管理器实际引用此服务是两项独立的检查。
+
+制作 NX500 1.12 文件系统时，`compose.py --image-partitions PLATFORM_TAR OPT_USR_TAR` 在现有三个位置参数之后接收两个已包含 0.4.0 的分区归档。它在输出目录 `image-partitions/` 生成新的一对归档。系统分区保存恢复依赖、写入前核对程序和受保护的原厂写入脚本。`opt-usr.tar` 对应独立挂载的 `/opt/usr`，保存联合唤醒程序。构建会校验原厂版本及已有组件，保留旧快照记录，并在两个输出都通过读回后发布。只有服务文件的 `services.tar` 和包含原厂写入保护的 `rootfs.tar` 有不同的文件名。
+
+解压包里的原有电脑安装器也能完成这项制作。两个输入分别以系统根和 `/opt/usr` 为归档根。输出目录须为新目录。
+
+```powershell
+python .\stage-postflash.py BUILD-RESUME-IMAGE --image-partitions .\platform.tar .\opt-usr.tar --image-output .\prepared
+```
+
+写镜像前与写镜像头前都查询当次开机的服务管理器。独立的原厂维护命令在已有镜像时会先擦除再重新开机，受保护的流程在这次擦除前停止。上述分区归档是镜像制作者的输入。相机通过 USB 暴露的是 SD 卡，现行 SD 安装器对已有合并快照执行 EYE 时会返回检查状态。把归档存入 SD 卡不会安装它。
+
+正式重建的验收需要制作该代镜像时的写入前回执。旧安装成功和旧镜像的恢复记录都不能替代它。获得新镜像和同代回执后，先核对卡上没有安装入口，再正常关机，等灯灭后取电池约 30 秒，装回普通开机。用 A-AF 和一般人脸检测对准一张正脸，松开快门、半按快门各观察 10 秒，再按住 EV 点按 AEL，实际打开补丁主菜单。退出、灯灭后接回 USB，核对这一次产生的人眼计数增长、菜单监听和原厂恢复事件回执。
 
 ## 合并短测
 
