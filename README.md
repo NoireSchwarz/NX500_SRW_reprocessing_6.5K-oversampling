@@ -5,11 +5,11 @@
 > [!CAUTION]
 > **Unified R1 快启安装已收到软砖反馈。请暂缓使用 R1 的 `EYE`／`REBUILD`，也不要叠装社区版 `nx-on-wake`。** 如果开机后原厂 UI 消失、USB 无法连接或卡灯持续闪烁，先看 [NX500 原厂按键恢复](release/0.4.0/RECOVERY_zh.md)。社区已在 NX500 上实测，可用官方 1.12 固件和一张独立的 FAT32 卡恢复。
 
-## 当前版本 · NX LUT Lite 0.4.0
+## NX LUT Lite 0.4.0 · Unified R1.1 验证包
 
-0.4.0 Unified R1 合并 Log117 完整 mod 和 Eye AF v2.8，统一重建启动接口。**开发机合并测试成功：维护者确认同一次普通冷启动中，人眼框与 EV+AEL 菜单均正常。** 完整发布包保留首次安装内容，已有 0.4.0 使用新增 REBUILD 入口。
+R1.1 把首装和已核验的 R1 更新接入同一套写入前核验。完整包可仅安装 Log117 主模块，也可择一安装 Eye AF v2.8 或上次实测的 YuNet Focus2。新安装流程已通过电脑和原厂 ARM 回放，实机冷启动及快门行为待验收。
 
-[完整包与 SHA-256](https://github.com/NoireSchwarz/NX500_SRW_reprocessing_6.5K-oversampling/releases/tag/v0.4.0) · [安装、恢复与合并短测](release/0.4.0/README.md) · [交接](docs/CURRENT_STATUS.md)
+[R1.1 预览包与 SHA-256](https://github.com/NoireSchwarz/NX500_SRW_reprocessing_6.5K-oversampling/releases/tag/v0.4.0-r1.1-preview) · [安装与短测](release/0.4.0/rebuild/repair/README_zh.md) · [软砖调查](release/0.4.0/rebuild/repair/AUDIT_zh.md) · [交接](docs/CURRENT_STATUS.md)
 
 - **眼部对焦** · 在原厂一般人脸检测中优先选眼。三张照片的机内 AF 区域覆盖一只眼睛。录像、多人、侧脸与暗光的稳定程度仍需实测。
 - **Log117** · 同一工作输入 2965 的目标从 132 降至 117；26 mm 透射镜对照录像的稳定段亮度均值为 116.16（全范围 8 bit）。
@@ -18,7 +18,7 @@
 - **LUT 与视频** · 繁体中文半屏菜单、四项参数及 M3 A/B 混合。OK 装载，半按返回取景。支持全宽 UHD24、UHD 转 2.5K 和恢复原厂 UHD。
 - **SRW** · 一键初始化并重显影，输出相册用 JPEG 与缩略图并更新相册列表。
 
-本轮通过 30 组电脑用例和 8 组原厂 ARM 回放；不同机身仍需各自验证普通冷启动。已知的关闭 V-Log 后 LUT 重载提示和验证范围见安装说明。
+旧 R1 在开发机上曾通过同一次普通冷启动的人眼框和 EV+AEL 测试。已知的关闭 V-Log 后 LUT 重载提示见[历史使用说明](release/0.4.0/README.md)。
 
 ## 能力与研究边界
 
@@ -30,7 +30,7 @@
 
 ## 安装与使用
 
-完整包中，`module/` 用原有安装器部署 Log117，`stage-postflash.py` 用于单独核对、重建或撤下快启入口；已有本代合并快照使用新增的 `REBUILD`，统一重建更新目录在 `unified-rebuild/`。已有 RC6.14.12 Log117 的机身可直接做快启核验。按包内说明分阶段进行。[安装说明](release/0.4.0/README.md)
+R1.1 中，`module/` 部署 Log117。`install-fast-start.py` 可准备或核对一个快启版本，启动前会检查旧 R1 的真实状态及独立唤醒入口。用包内 `README_zh.md` 的顺序安装。出现软砖时优先使用独立恢复卡。[安装说明](release/0.4.0/rebuild/repair/README_zh.md) · [原厂恢复](release/0.4.0/RECOVERY_zh.md)
 
 进行 SRW 前先还原 V‑Log、手动关闭影片 LUT，沿用既有初始化并重显影流程。不格式化、清理或修复 SD 文件系统，不重复码率对照。
 

@@ -1,0 +1,353 @@
+{
+  "release": "0.4.0 Unified R1.1 Preview",
+  "profile_scope": "Recognized stock 1.12 + Log117 or exact Unified R1",
+  "host_passed": true,
+  "arm_manager_passed": true,
+  "hardware_installation": "Not performed for the R1.1 installer",
+  "profiles": {
+    "nxl-full040-r11-eye28": {
+      "allowed-overrides.txt": "947a8437e73385559c5be21f28f72ef4723bec14533bcdecb0b347d529e13764",
+      "nxl-menu": "493010e458d81073e69f8634ec88ea1f03ba0ee910da17a90fae70bb82abbe57",
+      "lcd-observe.arm": "fafbce9b63da331e62a47bd3952a11fbe9638dd37f8305647f3297755ff7cd93",
+      "fileops.arm": "c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d",
+      "claim.arm": "f5702a02ae73f2b375f3ee8ff30417e2c952631ff8c9f8fd3a5d9a78acc79036",
+      "nxl-full040-resume.service": "45213f954453e2df68ae8144eaa8ec26390b62a954b2c5c1e3512f5ef7453e9f",
+      "make_snapshot.sh": "27809d848e870e1b8b40edaf8ce60142ed33c5312cecfcd77856258d7b6aaba6",
+      "activation/info.tg": "84d6fd76e45d5bca43e62816bdf4173d677f4860fbe507372ee4a11f608c4098",
+      "activation/nx_cs.adj": "fd4a6c44a1c15fb4fdc4d5bd393841689f82f37ff78fc14b59d25bb9b56a4ca2",
+      "nxl-eye-af.so": "e167e84a6be88b2fc21da13a5952a923ec7a032cb37612a11e047e60dc6c2e6e",
+      "capture.conf": "3c2a29985fe89416c29b45ee425464e46a181c798c3eb3a45a6d23b70f004bf8",
+      "capture-profile.conf": "9cf518fa9e095e81ce9cf2ce7d1d881858bfa6b7565f5247a34160e10df8a537",
+      "hibernation.sh": "8fe03c13ac161dd9d491bb1ad554ed0832fc5bdbfa3c536707e760a448c09af7",
+      "launch.sh": "932686b19b01cb43d6014d4a8c5565935980f2e54d9264a8a771499e9683102f",
+      "dispatch.sh": "243f35fa1183838e3a60da028f2bb7fb3a859c5c0b0bd2bfff9edc16f9aee618",
+      "full-menu.sh": "113766507690f48c61c819014907679b3f3e31c1bf0b2325a666e4ab936622c0",
+      "collect-resume.sh": "0c13c67234775a43875f020b96e1fcabaa9343de18c59a075adb690c0d777237",
+      "loader-observe.sh": "b28f66ece82f0a287595449ba359b6f001c12e7ab828ac2bf88cd4ef60999a0c",
+      "launch-select.sh": "85587e9227a686d2a60e22b6942a9dd38824690865d19d6e5817ca3f04499ae8",
+      "wake-select.sh": "edbc2d7f170c90eba70055e17c4179aa2ca32098a6cb3abf21f87bfcfb2faa8f",
+      "wake.sh": "4b3973ab88d4167f3f90a27c12bf0a37af4b1749d6209fb8988d03a2fe2c0ee9",
+      "verify-before-capture.sh": "3ae371f305f5178ef50425b4324bd3b137c7f2f3dae5b7743bd1db277e812b43",
+      "worker.sh": "7dac4a3d11400909feda96a4b59aff7c9f70931dac31fe33196b119e2d564413",
+      "activation/install.sh": "efd067fd0e2a2f3c9428db3b0fa2c513bcb94a8e6134739e08d0fabe07a6ce1f"
+    },
+    "nxl-full040-r11-yunet": {
+      "allowed-overrides.txt": "947a8437e73385559c5be21f28f72ef4723bec14533bcdecb0b347d529e13764",
+      "nxl-menu": "493010e458d81073e69f8634ec88ea1f03ba0ee910da17a90fae70bb82abbe57",
+      "lcd-observe.arm": "fafbce9b63da331e62a47bd3952a11fbe9638dd37f8305647f3297755ff7cd93",
+      "fileops.arm": "c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d",
+      "claim.arm": "f5702a02ae73f2b375f3ee8ff30417e2c952631ff8c9f8fd3a5d9a78acc79036",
+      "nxl-full040-resume.service": "45213f954453e2df68ae8144eaa8ec26390b62a954b2c5c1e3512f5ef7453e9f",
+      "make_snapshot.sh": "27809d848e870e1b8b40edaf8ce60142ed33c5312cecfcd77856258d7b6aaba6",
+      "activation/info.tg": "84d6fd76e45d5bca43e62816bdf4173d677f4860fbe507372ee4a11f608c4098",
+      "activation/nx_cs.adj": "fd4a6c44a1c15fb4fdc4d5bd393841689f82f37ff78fc14b59d25bb9b56a4ca2",
+      "nxl-eye-af.so": "0955e5d90a61d33740c4fa18150e7499db4e959a536cd4c84a1eb04b3e587cbb",
+      "capture.conf": "3c2a29985fe89416c29b45ee425464e46a181c798c3eb3a45a6d23b70f004bf8",
+      "capture-profile.conf": "9cf518fa9e095e81ce9cf2ce7d1d881858bfa6b7565f5247a34160e10df8a537",
+      "hibernation.sh": "8fe03c13ac161dd9d491bb1ad554ed0832fc5bdbfa3c536707e760a448c09af7",
+      "launch.sh": "753411e275cae8a9c0e98f8d929fbec5b4a5561a080c2e426fa315ee3128701b",
+      "dispatch.sh": "f091b103d2396c877580d3f7809d5c132c2fbfef119605441f8300d0984e849d",
+      "full-menu.sh": "65f4b10975de8bbb692d11c2324f84fd2ffd21364f855260599c1faf5093ea68",
+      "collect-resume.sh": "d57769c11f6d8b14d112f4d5cab42a400b528b8baf4f29c7cf72cfcec626618b",
+      "loader-observe.sh": "40a9a4fbeee4a05fb69abb56a24dea5b71bf8cbf46442c5cf8a5cceb843de2a9",
+      "launch-select.sh": "00455b65c376054a8190b148acd75d6f09b1f08ff716ed2829f00770f0e196c9",
+      "wake-select.sh": "43a741c0556c06ad15d9e2593a51c4d9700805148d0365291c1e3b0324fbd6a3",
+      "wake.sh": "d7e9d4d124ef52a63b4b84df2d5539ee3b6779ad88c51c7512a8e4b093afc622",
+      "verify-before-capture.sh": "315a417c45d7816be34685cf921c150eb87c137ea66cc6b311115fcfc0606c78",
+      "worker.sh": "4b2dc7210b67ac50cb280ce444132287a1c32e779518a1cf14a416b1d14f45c7",
+      "activation/install.sh": "7ef155fbf16b15b2b00acdb2be035f996d741349228b1a6f0d4a614ea39311fc"
+    }
+  },
+  "host": {
+    "nxl-full040-r11-eye28": {
+      "payload": {
+        "allowed-overrides.txt": "947a8437e73385559c5be21f28f72ef4723bec14533bcdecb0b347d529e13764",
+        "nxl-menu": "493010e458d81073e69f8634ec88ea1f03ba0ee910da17a90fae70bb82abbe57",
+        "lcd-observe.arm": "fafbce9b63da331e62a47bd3952a11fbe9638dd37f8305647f3297755ff7cd93",
+        "fileops.arm": "c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d",
+        "claim.arm": "f5702a02ae73f2b375f3ee8ff30417e2c952631ff8c9f8fd3a5d9a78acc79036",
+        "nxl-full040-resume.service": "45213f954453e2df68ae8144eaa8ec26390b62a954b2c5c1e3512f5ef7453e9f",
+        "make_snapshot.sh": "27809d848e870e1b8b40edaf8ce60142ed33c5312cecfcd77856258d7b6aaba6",
+        "activation/info.tg": "84d6fd76e45d5bca43e62816bdf4173d677f4860fbe507372ee4a11f608c4098",
+        "activation/nx_cs.adj": "fd4a6c44a1c15fb4fdc4d5bd393841689f82f37ff78fc14b59d25bb9b56a4ca2",
+        "nxl-eye-af.so": "e167e84a6be88b2fc21da13a5952a923ec7a032cb37612a11e047e60dc6c2e6e",
+        "capture.conf": "3c2a29985fe89416c29b45ee425464e46a181c798c3eb3a45a6d23b70f004bf8",
+        "capture-profile.conf": "9cf518fa9e095e81ce9cf2ce7d1d881858bfa6b7565f5247a34160e10df8a537",
+        "hibernation.sh": "8fe03c13ac161dd9d491bb1ad554ed0832fc5bdbfa3c536707e760a448c09af7",
+        "launch.sh": "932686b19b01cb43d6014d4a8c5565935980f2e54d9264a8a771499e9683102f",
+        "dispatch.sh": "243f35fa1183838e3a60da028f2bb7fb3a859c5c0b0bd2bfff9edc16f9aee618",
+        "full-menu.sh": "113766507690f48c61c819014907679b3f3e31c1bf0b2325a666e4ab936622c0",
+        "collect-resume.sh": "0c13c67234775a43875f020b96e1fcabaa9343de18c59a075adb690c0d777237",
+        "loader-observe.sh": "b28f66ece82f0a287595449ba359b6f001c12e7ab828ac2bf88cd4ef60999a0c",
+        "launch-select.sh": "85587e9227a686d2a60e22b6942a9dd38824690865d19d6e5817ca3f04499ae8",
+        "wake-select.sh": "edbc2d7f170c90eba70055e17c4179aa2ca32098a6cb3abf21f87bfcfb2faa8f",
+        "wake.sh": "4b3973ab88d4167f3f90a27c12bf0a37af4b1749d6209fb8988d03a2fe2c0ee9",
+        "verify-before-capture.sh": "3ae371f305f5178ef50425b4324bd3b137c7f2f3dae5b7743bd1db277e812b43",
+        "worker.sh": "7dac4a3d11400909feda96a4b59aff7c9f70931dac31fe33196b119e2d564413",
+        "activation/install.sh": "efd067fd0e2a2f3c9428db3b0fa2c513bcb94a8e6134739e08d0fabe07a6ce1f"
+      },
+      "shell_worker": {
+        "stock": {
+          "expected_reason": "OEM_RESCUE_REQUEST",
+          "rescue_calls": 1,
+          "previous_image_bytes_preserved": true
+        },
+        "r1-stock": {
+          "expected_reason": "OEM_RESCUE_REQUEST",
+          "rescue_calls": 1,
+          "previous_image_bytes_preserved": true
+        },
+        "check": {
+          "expected_reason": "CHECKED_READY",
+          "rescue_calls": 0,
+          "previous_image_bytes_preserved": true
+        },
+        "stock-graph-reject": {
+          "expected_reason": "RESUME_DEPENDENCY_NOT_LOADED",
+          "rescue_calls": 0,
+          "previous_image_bytes_preserved": true
+        },
+        "r1-graph-reject": {
+          "expected_reason": "RESUME_DEPENDENCY_NOT_LOADED",
+          "rescue_calls": 0,
+          "previous_image_bytes_preserved": true
+        },
+        "old-bootstrap": {
+          "expected_reason": "PARTIAL_OR_FOREIGN_INSTALL",
+          "rescue_calls": 0,
+          "previous_image_bytes_preserved": true
+        },
+        "foreign-master": {
+          "expected_reason": "LEGACY_WAKE_ENABLED",
+          "rescue_calls": 0,
+          "previous_image_bytes_preserved": true
+        },
+        "foreign-sd": {
+          "expected_reason": "FOREIGN_SD_BOOT_ENTRY",
+          "rescue_calls": 0,
+          "previous_image_bytes_preserved": true
+        },
+        "corrupt-eye": {
+          "expected_reason": "PAYLOAD_IDENTITY",
+          "rescue_calls": 0,
+          "previous_image_bytes_preserved": true
+        },
+        "loader-reject": {
+          "expected_reason": "ARM_LIBRARY_LOAD_FAILED",
+          "rescue_calls": 0,
+          "previous_image_bytes_preserved": true
+        },
+        "rescue-reject": {
+          "expected_reason": "OEM_RESCUE_REQUEST",
+          "rescue_calls": 1,
+          "previous_image_bytes_preserved": true
+        }
+      },
+      "selectors": {
+        "stock_and_previous_fallback": true,
+        "current_generation_proof_and_process_required": true
+      },
+      "sd": {
+        "foreign_callback_preserved": true,
+        "check_then_rebuild": true,
+        "media_and_logs_preserved": true
+      }
+    },
+    "nxl-full040-r11-yunet": {
+      "payload": {
+        "allowed-overrides.txt": "947a8437e73385559c5be21f28f72ef4723bec14533bcdecb0b347d529e13764",
+        "nxl-menu": "493010e458d81073e69f8634ec88ea1f03ba0ee910da17a90fae70bb82abbe57",
+        "lcd-observe.arm": "fafbce9b63da331e62a47bd3952a11fbe9638dd37f8305647f3297755ff7cd93",
+        "fileops.arm": "c5ab4fad18a3908f2c90058665b158c925267d88dd9c2e01c349fa9b149d759d",
+        "claim.arm": "f5702a02ae73f2b375f3ee8ff30417e2c952631ff8c9f8fd3a5d9a78acc79036",
+        "nxl-full040-resume.service": "45213f954453e2df68ae8144eaa8ec26390b62a954b2c5c1e3512f5ef7453e9f",
+        "make_snapshot.sh": "27809d848e870e1b8b40edaf8ce60142ed33c5312cecfcd77856258d7b6aaba6",
+        "activation/info.tg": "84d6fd76e45d5bca43e62816bdf4173d677f4860fbe507372ee4a11f608c4098",
+        "activation/nx_cs.adj": "fd4a6c44a1c15fb4fdc4d5bd393841689f82f37ff78fc14b59d25bb9b56a4ca2",
+        "nxl-eye-af.so": "0955e5d90a61d33740c4fa18150e7499db4e959a536cd4c84a1eb04b3e587cbb",
+        "capture.conf": "3c2a29985fe89416c29b45ee425464e46a181c798c3eb3a45a6d23b70f004bf8",
+        "capture-profile.conf": "9cf518fa9e095e81ce9cf2ce7d1d881858bfa6b7565f5247a34160e10df8a537",
+        "hibernation.sh": "8fe03c13ac161dd9d491bb1ad554ed0832fc5bdbfa3c536707e760a448c09af7",
+        "launch.sh": "753411e275cae8a9c0e98f8d929fbec5b4a5561a080c2e426fa315ee3128701b",
+        "dispatch.sh": "f091b103d2396c877580d3f7809d5c132c2fbfef119605441f8300d0984e849d",
+        "full-menu.sh": "65f4b10975de8bbb692d11c2324f84fd2ffd21364f855260599c1faf5093ea68",
+        "collect-resume.sh": "d57769c11f6d8b14d112f4d5cab42a400b528b8baf4f29c7cf72cfcec626618b",
+        "loader-observe.sh": "40a9a4fbeee4a05fb69abb56a24dea5b71bf8cbf46442c5cf8a5cceb843de2a9",
+        "launch-select.sh": "00455b65c376054a8190b148acd75d6f09b1f08ff716ed2829f00770f0e196c9",
+        "wake-select.sh": "43a741c0556c06ad15d9e2593a51c4d9700805148d0365291c1e3b0324fbd6a3",
+        "wake.sh": "d7e9d4d124ef52a63b4b84df2d5539ee3b6779ad88c51c7512a8e4b093afc622",
+        "verify-before-capture.sh": "315a417c45d7816be34685cf921c150eb87c137ea66cc6b311115fcfc0606c78",
+        "worker.sh": "4b2dc7210b67ac50cb280ce444132287a1c32e779518a1cf14a416b1d14f45c7",
+        "activation/install.sh": "7ef155fbf16b15b2b00acdb2be035f996d741349228b1a6f0d4a614ea39311fc"
+      },
+      "shell_worker": {
+        "stock": {
+          "expected_reason": "OEM_RESCUE_REQUEST",
+          "rescue_calls": 1,
+          "previous_image_bytes_preserved": true
+        },
+        "r1-stock": {
+          "expected_reason": "OEM_RESCUE_REQUEST",
+          "rescue_calls": 1,
+          "previous_image_bytes_preserved": true
+        },
+        "check": {
+          "expected_reason": "CHECKED_READY",
+          "rescue_calls": 0,
+          "previous_image_bytes_preserved": true
+        },
+        "stock-graph-reject": {
+          "expected_reason": "RESUME_DEPENDENCY_NOT_LOADED",
+          "rescue_calls": 0,
+          "previous_image_bytes_preserved": true
+        },
+        "r1-graph-reject": {
+          "expected_reason": "RESUME_DEPENDENCY_NOT_LOADED",
+          "rescue_calls": 0,
+          "previous_image_bytes_preserved": true
+        },
+        "old-bootstrap": {
+          "expected_reason": "PARTIAL_OR_FOREIGN_INSTALL",
+          "rescue_calls": 0,
+          "previous_image_bytes_preserved": true
+        },
+        "foreign-master": {
+          "expected_reason": "LEGACY_WAKE_ENABLED",
+          "rescue_calls": 0,
+          "previous_image_bytes_preserved": true
+        },
+        "foreign-sd": {
+          "expected_reason": "FOREIGN_SD_BOOT_ENTRY",
+          "rescue_calls": 0,
+          "previous_image_bytes_preserved": true
+        },
+        "corrupt-eye": {
+          "expected_reason": "PAYLOAD_IDENTITY",
+          "rescue_calls": 0,
+          "previous_image_bytes_preserved": true
+        },
+        "loader-reject": {
+          "expected_reason": "ARM_LIBRARY_LOAD_FAILED",
+          "rescue_calls": 0,
+          "previous_image_bytes_preserved": true
+        },
+        "rescue-reject": {
+          "expected_reason": "OEM_RESCUE_REQUEST",
+          "rescue_calls": 1,
+          "previous_image_bytes_preserved": true
+        }
+      },
+      "selectors": {
+        "stock_and_previous_fallback": true,
+        "current_generation_proof_and_process_required": true
+      },
+      "sd": {
+        "foreign_callback_preserved": true,
+        "check_then_rebuild": true,
+        "media_and_logs_preserved": true
+      }
+    }
+  },
+  "arm_manager": {
+    "original_ARM": {
+      "/usr/lib/systemd/systemd": "240d910b3c8ef7824b864f7c19a57b9bf456cb4500b710502135a2b0f0c1333d",
+      "/usr/lib/systemd/system/hib_post.path": "59c9006b53597a0f8ce17fe3068e390fdc00472c7529160f15ddeb3c77530027",
+      "/usr/lib/systemd/system/hib_post.service": "9fc3e5aa13b282b63a68c45bb7277497b61195aac0a8c585dd9d189553cfe4f8"
+    },
+    "profiles": {
+      "nxl-full040-r11-eye28": {
+        "service_profile_sha256": "646a8b5cdb727acaabbc8a0b2ed05b06d098f023e4d363e008f9f86d6088d56d",
+        "cases": {
+          "capture-combined": {
+            "observation": "gates=3,0 header=1 ready=1 led=1 zram=1 cleanup=0",
+            "manager_reasons": [
+              "CAPTURE_MANAGER_REFERENCES_INSTALLED_WAKE",
+              "CAPTURE_MANAGER_REFERENCES_INSTALLED_WAKE",
+              "CAPTURE_MANAGER_REFERENCES_INSTALLED_WAKE"
+            ],
+            "hardware_writes": 0
+          },
+          "capture-stale-manager": {
+            "observation": "gates=0,2 header=0 ready=1 led=0 zram=0 cleanup=0",
+            "manager_reasons": [
+              "NOT_IN_CAPTURE_MANAGER_nxl-full040-resume.service",
+              "NOT_IN_CAPTURE_MANAGER_nxl-full040-resume.service"
+            ],
+            "hardware_writes": 0
+          },
+          "capture-candidate-changed": {
+            "observation": "gates=0,2 header=0 ready=1 led=0 zram=0 cleanup=0",
+            "manager_reasons": [
+              "UNIFIED_PAYLOAD_MISMATCH",
+              "UNIFIED_PAYLOAD_MISMATCH"
+            ],
+            "hardware_writes": 0
+          },
+          "capture-late-changed": {
+            "observation": "gates=2,1 header=0 ready=1 led=0 zram=1 cleanup=1",
+            "manager_reasons": [
+              "UNIFIED_PAYLOAD_MISMATCH",
+              "CAPTURE_MANAGER_REFERENCES_INSTALLED_WAKE",
+              "CAPTURE_MANAGER_REFERENCES_INSTALLED_WAKE"
+            ],
+            "hardware_writes": 0
+          }
+        }
+      },
+      "nxl-full040-r11-yunet": {
+        "service_profile_sha256": "7570a1e21fa7084cf6869dceb513d02d493c344cec0bbee5be53863c39813b1f",
+        "cases": {
+          "capture-combined": {
+            "observation": "gates=3,0 header=1 ready=1 led=1 zram=1 cleanup=0",
+            "manager_reasons": [
+              "CAPTURE_MANAGER_REFERENCES_INSTALLED_WAKE",
+              "CAPTURE_MANAGER_REFERENCES_INSTALLED_WAKE",
+              "CAPTURE_MANAGER_REFERENCES_INSTALLED_WAKE"
+            ],
+            "hardware_writes": 0
+          },
+          "capture-stale-manager": {
+            "observation": "gates=0,2 header=0 ready=1 led=0 zram=0 cleanup=0",
+            "manager_reasons": [
+              "NOT_IN_CAPTURE_MANAGER_nxl-full040-resume.service",
+              "NOT_IN_CAPTURE_MANAGER_nxl-full040-resume.service"
+            ],
+            "hardware_writes": 0
+          },
+          "capture-candidate-changed": {
+            "observation": "gates=0,2 header=0 ready=1 led=0 zram=0 cleanup=0",
+            "manager_reasons": [
+              "UNIFIED_PAYLOAD_MISMATCH",
+              "UNIFIED_PAYLOAD_MISMATCH"
+            ],
+            "hardware_writes": 0
+          },
+          "capture-late-changed": {
+            "observation": "gates=2,1 header=0 ready=1 led=0 zram=1 cleanup=1",
+            "manager_reasons": [
+              "UNIFIED_PAYLOAD_MISMATCH",
+              "CAPTURE_MANAGER_REFERENCES_INSTALLED_WAKE",
+              "CAPTURE_MANAGER_REFERENCES_INSTALLED_WAKE"
+            ],
+            "hardware_writes": 0
+          }
+        }
+      }
+    },
+    "published_r1_baseline": {
+      "service_profile_sha256": "71b2f33b631ecec96b4c1c2052b675b6b493107bfa486fc8f9ecccd5c73e1f91",
+      "cases": {
+        "capture-late-changed": {
+          "observation": "gates=1,1 header=0 ready=0 led=1 zram=1 cleanup=0",
+          "manager_reasons": [
+            "UNIFIED_PAYLOAD_MISMATCH",
+            "CAPTURE_MANAGER_REFERENCES_INSTALLED_WAKE"
+          ],
+          "hardware_writes": 0
+        }
+      }
+    },
+    "scope": "Samsung ARM systemd as PID 1. zram, LED and snapshot writes are represented by RAM markers."
+  },
+  "previous_focus2_library_test_sha256": "0955e5d90a61d33740c4fa18150e7499db4e959a536cd4c84a1eb04b3e587cbb"
+}
