@@ -3,13 +3,25 @@
 /* The real ARM adapter runs here with deterministic camera and clock endpoints. */
 static _Alignas(unsigned) unsigned char data[0x494];
 static _Alignas(unsigned) unsigned char object[0x4c0];
+#ifndef NXL_EYE_YUNET
 static unsigned char image;
+#endif
 static uint64_t time_ns;
 static int face_mode = 1, af_mode = 0, face_count = 1, has_eye = 1, native_eye = 0;
 static unsigned elapsed_us = 2300;
 static int damaged_history;
 struct eye_box published_result;
+#ifdef NXL_EYE_YUNET
+struct eye_box ordinary;
+static unsigned stock_eye_queries;
+static unsigned stock_main_face, replay_wall_us, replay_wall_reads;
+static int32_t ordinary_angle, secondary_angle;
+static struct eye_box secondary, previous_ordinary, previous_secondary;
+static bool have_previous_ordinary, have_previous_secondary;
+static const unsigned stock_face_word = 0x12345678, stock_meters[3] = {75, 119, 131};
+#else
 static const struct eye_box ordinary = {120, 94, 92, 102};
+#endif
 static const struct eye_box found = {140, 120, 16, 12};
 
 void *memcpy(void *out, const void *in, size_t bytes)
@@ -60,6 +72,10 @@ int strcmp(const char *a, const char *b)
 int clock_gettime(clockid_t id, struct timespec *time)
 {
     (void)id;
+#ifdef NXL_EYE_YUNET
+    if (++replay_wall_reads == 2)
+        time_ns += replay_wall_us * 1000ULL;
+#endif
     time->tv_sec = time_ns / 1000000000ULL;
     time->tv_nsec = time_ns % 1000000000ULL;
     return 0;
@@ -74,7 +90,12 @@ void *dlsym(void *handle, const char *name)
 {
     if (handle == RTLD_NEXT && !strcmp(name, face_symbol)) return (void *)camera_face;
     if (!resume_token) return NULL;
-    if (!strcmp(name, "SDIC_EyeDetection")) return (void *)camera_eye;
+    if (!strcmp(name, "SDIC_EyeDetection")) {
+#ifdef NXL_EYE_YUNET
+        stock_eye_queries++;
+#endif
+        return (void *)camera_eye;
+    }
     if (!strcmp(name, "_Z12UI_Get_Value14eUI_VALUE_ITEM")) return (void *)camera_setting;
     return NULL;
 }
@@ -121,8 +142,26 @@ static void set_count(unsigned offset, unsigned value)
 static int camera_face(void *self, unsigned char *video, int w, int h, int mode, int orientation)
 {
     unsigned char *out = face_result(self); (void)video; (void)w; (void)h; (void)mode; (void)orientation;
+#ifdef NXL_EYE_YUNET
+    if ((have_previous_ordinary && memcmp(out, &previous_ordinary, sizeof(previous_ordinary))) ||
+        (have_previous_secondary && memcmp(out + FD_FACE_STRIDE, &previous_secondary, sizeof(previous_secondary))))
+        damaged_history = 1;
+    memcpy(out + FD_MAIN, &stock_main_face, sizeof(stock_main_face));
+    memcpy(out + FD_ANGLE, &ordinary_angle, sizeof(ordinary_angle));
+    memcpy(out + FD_METER_Y, stock_meters, sizeof(stock_meters));
+    have_previous_ordinary = true;
+    previous_ordinary = ordinary;
+    have_previous_secondary = face_count > 1;
+    if (have_previous_secondary) {
+        previous_secondary = secondary;
+        memcpy(out + FD_FACE_STRIDE, &secondary, sizeof(secondary));
+        memcpy(out + FD_FACE_STRIDE + sizeof(secondary), &stock_face_word, sizeof(stock_face_word));
+        memcpy(out + FD_ANGLE + sizeof(ordinary_angle), &secondary_angle, sizeof(secondary_angle));
+    }
+#else
     if (memcmp(out, &ordinary, sizeof(ordinary)))
         damaged_history = 1;
+#endif
     memcpy(out, &ordinary, sizeof(ordinary));
     memcpy(out + FD_COUNT, &face_count, sizeof(face_count));
     out[FD_VALID] = 1;
@@ -130,6 +169,9 @@ static int camera_face(void *self, unsigned char *video, int w, int h, int mode,
         memcpy(out + 0xc8, &found, sizeof(found));
         out[0xd8] = 1;
     }
+#ifdef NXL_EYE_YUNET
+    memcpy((unsigned char *)self + FD_HISTORY, out, FD_RESULT_BYTES);
+#endif
     return 0;
 }
 
@@ -153,16 +195,17 @@ static int camera_setting(int item)
     return item == UI_FACE_DETECTION ? face_mode : af_mode;
 }
 
+static int original_face(void)
+{
+    return !memcmp(data, &ordinary, sizeof(ordinary));
+}
+
+#ifndef NXL_EYE_YUNET
 static void frame(unsigned ms)
 {
     time_ns += ms * 1000000ULL;
     nxl_stock_face(object, &image, 528, 352, 0, 0);
     set_count(FD_FRAME, read_value(data, FD_FRAME) + 1);
-}
-
-static int original_face(void)
-{
-    return !memcmp(data, &ordinary, sizeof(ordinary));
 }
 
 int verify(void)
@@ -244,3 +287,4 @@ int verify(void)
 #define TEST_MOTION_COUNTERS 1
 #define TEST_GAP_COUNTERS 1
 #include "dropout-replay.inc"
+#endif

@@ -1,4 +1,4 @@
-# NX500 Eye AF v2.8
+# NX500 Eye AF
 
 An optional, experimental autofocus module for the Samsung NX500 running stock firmware 1.12. In photo mode, select **Face Detection → Normal**. With one eligible face the adapter uses the camera's eye detector to place the primary focus region over an eye. The stock camera controls the lens. The adapter uses the native face callback and keeps full-face tracking and metering history in private storage until the final region is ready. With zero faces the stock empty result is published immediately. NX1 and other firmware builds have not been validated.
 
@@ -16,10 +16,28 @@ Use Python 3.9+ and Zig 0.13.0. The replay additionally needs the Python package
 python build.py --zig zig --test
 ```
 
-The camera library is `out/nxl-eye-af.so`. Only the native face method is exported. The module wraps that method in the existing camera process and binds the original face, eye and UI functions. A desktop build of the release source matched the deployed module byte for byte. Its SHA-256 is `e167e84a6be88b2fc21da13a5952a923ec7a032cb37612a11e047e60dc6c2e6e`.
+The camera library is `out/nxl-eye-af.so`. Only the native face method is exported. The module wraps that method in the existing camera process and binds the original face, eye and UI functions. A desktop build from the v2.8 release source matched that deployed module byte for byte. Its SHA-256 is `e167e84a6be88b2fc21da13a5952a923ec7a032cb37612a11e047e60dc6c2e6e`.
 
 ## Installation and recovery
 
 **Rebuilding fast start changes persistent boot state. A failed rebuild can leave the screen black with the card lamp flashing.** Read the [installation and recovery notes](INSTALL.md) first. The [standalone release](https://github.com/NoireSchwarz/NX500-metol/releases/tag/nx500-eye-af-v2.8) includes the ARM module and the optional, explicitly staged installer. Personal pictures, Samsung firmware and anyone else's hibernation image are excluded. The regular Metol installer and menus are independent of this contribution.
 
 The autofocus sources are licensed under AGPL-3.0-only. The release archive carries separate notices for its installation helpers.
+
+## Optional YuNet 32 backend
+
+The optional **YuNet 32** backend uses the eye landmarks from a crop of the camera-selected primary face, including when multiple faces are present. The selected eye is converted to a bounded AF region, while the native face tracker keeps full-face history and metering data. Lost detections fall back to the camera's face region after the tracking timeout.
+
+In the 528 × 352 AF coordinate system the region starts at a minimum of 18 pixels per side and grows with the face. For 54-, 90- and 144-pixel square face regions, the stock ARM replay drew 26-, 34- and 42-pixel regions in the 720 × 480 main display coordinates. The upright eye centre is shifted slightly outward and upward. A two-pixel deadband absorbs small changes to the same eye's frame.
+
+Use Python 3.10+, NumPy and ONNX 1.17 for this backend. The ARM replays also use Unicorn 2.x and pyelftools.
+
+```sh
+python build.py --zig zig --yunet --test
+```
+
+The output is `out/nxl-eye-af-yunet.so`. The scalar and Cortex-A9 NEON replays exercise face priority, focus geometry, eye loss and inference rate recovery. The maintainer reported a substantial improvement after testing this version on one NX500. That observation is qualitative.
+
+[YuNet model, pinned upstream revision, citation and MIT notice](model/YUNET.md)
+
+[繁體中文建置及快啟步驟](README_YuNet_zh.md)

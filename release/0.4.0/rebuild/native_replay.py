@@ -8,6 +8,7 @@ import stat
 import sys
 import tarfile
 import tempfile
+from test_rebuild import payload_folder
 
 HERE = Path(__file__).resolve().parent
 RELEASE = HERE.parents[3]
@@ -15,13 +16,22 @@ sys.path.insert(0, str(RELEASE / "snapshot-graph/native-test"))
 import dispatch as native
 
 
-def profile(bundle):
-    pkg = bundle / "nxl-full040-rebuild1"
+def profile(bundle, isolated_runtime=()):
+    pkg = bundle / payload_folder(bundle)
     files = {"etc/systemd/system/nxl-full040-resume.service": (0o644, (pkg / "nxl-full040-resume.service").read_bytes()),
              "etc/systemd/system/hibernation.service.d/75-nxl-full040-prewrite.conf": (0o644, (pkg / "capture-profile.conf").read_bytes())}
     for name in ("wake.sh", "fileops.arm", "full-menu.sh", "nxl-eye-af.so", "launch.sh", "verify-before-capture.sh"):
         files["usr/local/lib/nxl-full040/" + name] = (0o755, (pkg / name).read_bytes())
-    files["usr/local/lib/nxl-full040/capture-origin"] = (0o600, b"11111111-1111-4111-8111-111111111111\nEYE\nFAST_START_EYE_AF_ROOTLIB_100_300\n")
+    origin = (0o600, b"11111111-1111-4111-8111-111111111111\nEYE\nFAST_START_EYE_AF_ROOTLIB_100_300\n")
+    if isolated_runtime:
+        candidate = f"usr/local/lib/{pkg.name}/"
+        for name in isolated_runtime:
+            files[candidate + name] = (0o755, (pkg / name).read_bytes())
+        files[candidate + "capture-origin"] = origin
+        for action in ("wake", "launch"):
+            files[f"usr/local/lib/nxl-full040/{action}.sh"] = (0o755, (pkg / f"{action}-select.sh").read_bytes())
+    else:
+        files["usr/local/lib/nxl-full040/capture-origin"] = origin
     for name in ("hibernation.sh", "make_snapshot.sh"):
         files["usr/bin/" + name] = (0o755, (pkg / name).read_bytes())
     output = io.BytesIO()
@@ -40,8 +50,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("bundle", type=Path)
     parser.add_argument("report", type=Path)
+    parser.add_argument("--cache", type=Path, default=Path(tempfile.gettempdir()) / "nx500-stock-unit-test-0924")
     args = parser.parse_args()
-    cache = Path(tempfile.gettempdir()) / "nx500-stock-unit-test-0924"
     data = profile(args.bundle)
     profile_file = args.report.with_suffix('.tar')
     profile_file.write_bytes(data)
@@ -55,7 +65,7 @@ def main():
                      b'/etc/systemd/system/nx-on-wake.service')
         return disk
     native.guest = guest
-    native.run(profile_file, cache, args.report, ["old-graph", "stale-manager", "combined", "missing-helper",
+    native.run(profile_file, args.cache, args.report, ["old-graph", "stale-manager", "combined", "missing-helper",
         "capture-old-graph", "capture-stale-manager", 'capture-old-master', "capture-combined"])
     report = json.loads(args.report.read_text('utf-8'))
     report['interface'] = 'full040-unified-1'
